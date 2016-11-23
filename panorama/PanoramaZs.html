@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+	<title>四季田景</title>
+    <link type="text/css" rel="stylesheet" href="../style/commons/commons.css" />
+    <link type="text/css" rel="stylesheet" href="../style/panorama/PanoramaZs.css" />
+</head>
+
+<body>
+
+<i class="bg_mark"></i>
+
+<!-- 服务预订 -->
+<div class="modal_block modal_service" style="display:none;">
+<div class="modal_header">
+	<h3 class="m_title"><img src="../images/panorama/icon_modal_gz.png" />服务预订</h3>
+    <i class="m_close" onClick="CloseModal('.modal_service')"></i>
+</div>
+<div class="modal_body">
+    <p class="p_tip">
+    您可以拨打<span class="color_y">15828286245</span>与我们联系，<br />
+    也可在下面留下您的联系方式，<br />
+    我们的客服会与您联系！
+    </p>
+    <input class="input_txt" type="text" value="请输入手机号" />
+    <button class="input_btn" type="button">提交</button>
+</div>
+</div>
+
+<!-- 会员加入 -->
+<div class="modal_block modal_member" style="display:none;">
+<div class="modal_header">
+	<h3 class="m_title"><img src="../images/panorama/icon_modal_hy.png" />会员加入</h3>
+    <i class="m_close" onClick="CloseModal('.modal_member')"></i>
+</div>
+<div class="modal_body">
+    <p class="p_tip">成为农场会员，可享受更多优惠服务！</p>
+    <input class="input_txt" type="text" value="请输入手机号" />
+    <button class="input_btn" type="button">提交</button>
+</div>
+</div>
+
+<!-- 更多设置 -->
+<div class="modal_block modal_moreset" style="display:none-;">
+<div class="modal_header">
+    <i class="m_close" onClick="CloseModal('.modal_moreset')"></i>
+</div>
+<div class="modal_body">
+    <ol class="moreset_list">
+    	<li class="clear">
+        	<img class="i_icon" src="../images/panorama/icon_pano_zdxz.png" />自动旋转
+            <div class="switch_block fr" onClick="OnoffFn(this)"><i></i></div>
+        </li>
+    	<li class="clear">
+        	<img class="i_icon" src="../images/panorama/icon_pano_tly.png" />陀螺仪
+            <div class="switch_block onoff fr" onClick="OnoffFn(this)"><i></i></div>
+        </li>
+    	<li class="clear">
+        	<img class="i_icon" src="../images/panorama/icon_pano_qycard.png" />企业名片
+            <img class="arrow_rt" src="../images/panorama/icon_pano_arrow.png" />
+        </li>
+    </ol>
+</div>
+</div>
+
+
+
+</body>
+
+<script type="text/javascript" src="../js/commons/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="../js/panorama/PanoramaZs.js"></script>
+</html>

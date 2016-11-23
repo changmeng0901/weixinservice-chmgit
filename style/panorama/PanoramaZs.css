@@ -1,0 +1,291 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{ 
+	box-sizing:border-box;
+	} 
+a{
+	text-decoration:none;
+	}
+
+.fl{ 
+	float:left;
+	}
+.fr{ 
+	float:right;
+	}
+.clear{ 
+	clear:both;
+	}
+.clear:after,.clear:before{ 
+	clear:both; 
+	content:""; 
+	display:block; 
+	visibility:hidden; 
+	height:0;
+	}
+body{
+	min-width:300px;
+	max-width:640px;
+	margin:0 auto;
+	color:#525252;
+	}
+.pos_bg{
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	z-index:-1;
+	}
+.pos_bg img{
+	width:100%;
+	height:100%;
+	}
+.half12, .half13, .half14,
+.one12, .one13, .one14,
+.two12, .two13, .two14{
+	display:inline-block;
+	}
+
+	
+/* 320屏幕样式 */	
+body{
+	font-size:12px;
+	}
+.font13{
+	font-size:13px;
+	}
+.font14{
+	font-size:14px;
+	}
+.font16{
+	font-size:16px;
+	}
+.font18{
+	font-size:18px;
+	}
+.font20{
+	font-size:20px;
+	}
+.half12{
+	width:6px;
+	}
+.one12{
+	width: 12px;
+	}
+.two12{
+	width: 24px;
+	}
+.one13{
+	width: 13px;
+	}
+.two13{
+	width: 26px;
+	}
+.half14{
+	width:7px;
+	}
+.one14{
+	width: 14px;
+	}
+.two14{
+	width: 28px;
+	}
+.wechat_wapper{
+	width:320px;
+	margin:0 auto;
+	}
+.con_box{
+	padding:0 8px;
+	}
+
+/*开关按钮样式*/
+.switch_block{
+	position:relative;
+	width:44px;
+	height:26px;
+	border:1px solid #ddd;
+	border-radius:13px;
+	box-sizing:border-box;
+	background-color:#fff;
+	cursor:pointer;
+	}
+.switch_block i{
+	position:absolute;
+	left:-1px;
+	right:inherit;
+	top:0;
+	width:24px;
+	height:24px;
+	border:1px solid #e4e4e4;
+	border-radius:12px;
+	box-sizing:border-box;
+	background-color:#fff;
+	}
+.switch_block.onoff{
+	border:1px solid #43d15c;
+	background-color:#43d15c;
+	}
+.switch_block.onoff i{
+	left:inherit;
+	right:-1px;
+	border:1px solid #43d15c;
+	}
+	
+	
+/* 全景样式 */
+html{
+	min-height:100%;
+	background:url(../../images/panorama/bg_panoZs1.jpg); 
+	background-size:100% 100%;
+	}
+/*通用模态框*/
+.bg_mark{
+	position:fixed;
+	left:0;
+	top:0;
+	z-index:100;
+	width:100%;
+	height:100%;
+	background:url(../../images/commons/opacity_b50.png);
+	}
+.modal_block{
+	position:fixed;
+	left:50%;
+	top:50%;
+	z-index:101;
+	background: #fff;
+    border-radius: 5px;
+	}
+.modal_header{
+	padding:10px;
+	border-bottom:1px solid #ddd;
+	overflow:hidden;
+	}
+.modal_header .m_title{
+	float:left;
+	height:20px;
+	line-height:20px;
+	font-size:15px;
+	}
+.modal_header .m_title img{
+	width:14px;
+	height:14px;
+	margin:3px 5px 0 0;
+	vertical-align:top;
+	}
+.modal_header .m_close{
+	float:right;
+	width:14px;
+	height:14px;
+	margin:3px 0 0 0;
+	background:url(../../images/panorama/icon_modal_close.png) no-repeat center center;
+	cursor:pointer;
+	}
+.modal_block .modal_body{ 
+	position:relative; 
+	width:100%; 
+	height:100%; 
+	padding:10px 15px; 
+	box-sizing:border-box;
+	}
+.modal_block .p_tip{ 
+	line-height:22px; 
+	margin:5px 0 15px 0; 
+	font-size:14px; 
+	font-weight:bold;
+	text-align:center; 
+	color:#959595;
+	}
+.modal_block .p_tip .color_y{
+	color:#ffae00;
+	}
+.modal_block .input_txt{ 
+	width:100%; 
+	height:40px; 
+	margin-bottom:10px;
+	padding:0 20px; 
+	border:1px solid #efefef; 
+	border-radius:5px; 
+	box-shadow:inset 0 2px 2px #e2e2e2; 
+	box-sizing:border-box; 
+	background-color:#f7f7f7; 
+	font-size:16px; 
+	color:#aaa;
+	}
+.modal_block .input_btn{ 
+	width:100%; 
+	height:40px; 
+	padding:0 20px; 
+	border:none; 
+	border-radius:5px; 
+	box-shadow:inset 0 -2px 2px #3ba33b; 
+	box-sizing:border-box; 
+	background-color:#1c9fe7; 
+	font-size:18px; 
+	color:#fff; 
+	cursor:pointer;
+	}
+.modal_block .input_btn:hover,
+.modal_block .input_btn:focus{ 
+	background-color:#1591d5;
+	}
+/*服务预订模态框*/
+.modal_service{	
+	background: #fff;
+    border-radius: 5px;
+    height: 220px-;
+    margin-left: -145px;
+    margin-top: -120px;
+    width: 290px;
+	}
+
+/*会员加入模态框*/
+.modal_member{	
+    height: 220px-;
+    margin-left: -145px;
+    margin-top: -100px;
+    width: 290px;
+	}
+/*更多设置模态框*/
+.modal_moreset{
+    height: 220px-;
+    margin-left: -145px;
+    margin-top: -100px;
+    width: 290px;
+	}
+.modal_moreset .modal_body{
+	height:160px;
+	padding:0;
+	}
+.moreset_list{
+	padding-left:10px;
+	border-bottom:1px solid #ddd;
+	}
+.moreset_list li{
+	line-height:26px;
+	padding:7px 0;
+	border-bottom:1px solid #ddd;
+	margin-bottom:-1px;
+	}
+.moreset_list .i_icon{
+	float:left;
+	width:16px;
+	height:16px;
+	margin:5px 5px 0 0;
+	vertical-align:top;
+	}
+.moreset_list .switch_block{
+	margin-right:15px;
+	}
+.moreset_list .arrow_rt{
+	float:right;
+	width:6px;
+	height:12px;
+	margin:7px 15px 0 0;
+	cursor:pointer;
+	}
+	
+	
+
