@@ -1,0 +1,211 @@
+@charset "utf-8";
+
+
+/*横屏样式*/
+@media all and (orientation : landscape){
+html,body{
+	min-width: 100%;
+	min-height: 100%;
+}
+body{
+	height: 19.38462rem;
+}
+}
+/*竖屏样式*/
+@media all and (orientation : portrait){
+html,body{
+	width: 100%;
+	height: 100%;
+	min-width: 100%;
+	min-height: 100%;
+	overflow: hidden;
+}
+}
+body{
+	position: relative;
+}
+/*去除谷歌自带的橘色边框*/
+input:focus{
+	outline:none
+}
+.logo_wap{
+	width: 3.03846rem;
+	height: 3.03846rem;
+	margin: 1.42308rem auto;
+	padding: 0.15385rem;
+	background: url(../../images/commons/opacity_b30.png);
+	border-radius: 0.30769rem;
+	box-sizing: border-box;
+}
+.logo_wap img{
+	width: 100%;
+	height: 100%;
+	border-radius: 0.23077rem;
+}
+.verify_wap{
+	padding: 0 0.96154rem;
+}
+.verify_hd{
+	border: 1px solid #e0e0e0;
+	border-radius: 0.15385rem;
+	background-color: #fff;
+	overflow: hidden;
+}
+.verify_hd .line{
+	height: 1px;
+	background-color: #e0e0e0;
+	overflow: hidden;
+}
+.verify_hd .items{
+	height: 1.46154rem;
+	padding: 0.26923rem 0.38462rem;
+	box-sizing: border-box;
+}
+.verify_hd .items .v_icon{
+	float: left;
+	width: 0.53846rem;
+	height: 0.76923rem;
+	vertical-align: top;
+	margin: 0.11538rem 0.46154rem 0 0;
+}
+.verify_hd .items_phone .area_num{
+	float: left;
+	width: 1.38462rem;
+	line-height: 1rem;
+	font-size: 0.46154rem;
+	color: #6ab74b;
+}
+.verify_hd .items_phone input{
+	float: left;
+	width: 6.81538rem;
+	height: 1rem;
+	line-height: 1rem;
+	padding: 0;
+	border: 0;
+	font-size: 0.46154rem;
+	color: #ccc;
+}
+.verify_hd .items_yan{
+	height: 1.5rem;
+	border-top: 1px solid #e0e0e0;
+}
+.verify_hd .items_yan input{
+	float: left;
+	width: 3.65385rem;
+	height: 1rem;
+	line-height: 1rem;
+	padding: 0;
+	border: 0;
+	font-size: 0.46154rem;
+	color: #ccc;
+}
+.verify_hd .items_yan .yan_num{
+	float: right;
+	margin-right: 0.19231rem;
+	height: 1rem;
+	line-height: 1rem;
+	padding: 0 0.38462rem;
+	border-radius: 0.15385rem;
+	box-sizing:border-box;
+	background-color: #6ab74b;
+	font-size: 0.42308rem;
+	color: #fff;
+}
+.verify_loginbtn{
+	display: block;
+	width: 100%;
+	height: 1.38462rem;
+	line-height: 1.38462rem;
+	margin-top: 0.92308rem;
+	padding: 0;
+	font-size: 0.61538rem; 
+	text-align: center;
+	color: #fff;
+	border: 0;
+	border-radius: 0.15385rem;
+	box-sizing: border-box;
+	background-color: #6ab74b;
+}
+.company_wap{
+	position: absolute;
+	left: 50%;
+	bottom: 0.53846rem;
+	width: 7.23077rem;
+	height: 0.92308rem;
+	margin-left: -3.80769rem;
+}
+.company_wap img{
+	width: 100%;
+	height: 100%;
+}
+/*大田*/
+.bg_field{
+	background: url(../../images/MemberFarm/Login_bg1.jpg) no-repeat center top;
+	background-size: 100% 100%;
+}
+.bg_field .verify_wap{
+	margin-top: 3.46154rem;
+}
+.bg_field2{
+	background: url(../../images/MemberFarm/Login_bg2.jpg) no-repeat center top;
+	background-size: 100% 100%;
+}
+.bg_field2 .verify_wap{
+	margin-top: 0.96154rem;
+}
+/*果树*/
+.bg_fruittrees{
+	background: url(../../images/MemberFarm/Login_bg3.jpg) no-repeat center top;
+	background-size: 100% 100%;
+}
+.bg_fruittrees .verify_wap{
+	margin-top: 3.46154rem;
+}
+.bg_fruittrees2{
+	background: url(../../images/MemberFarm/Login_bg4.jpg) no-repeat center top;
+	background-size: 100% 100%;
+}
+.bg_fruittrees2 .verify_wap{
+	margin-top: 0.96154rem;
+}
+/*温室*/
+.bg_greenhouse{
+	background: url(../../images/MemberFarm/Login_bg5.jpg) no-repeat center top;
+	background-size: 100% 100%;
+}
+.bg_greenhouse .verify_wap{
+	margin-top: 3.46154rem;
+}
+.bg_greenhouse2{
+	background: url(../../images/MemberFarm/Login_bg6.jpg) no-repeat center top;
+	background-size: 100% 100%;
+}
+.bg_greenhouse2 .verify_wap{
+	margin-top: 0.96154rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
