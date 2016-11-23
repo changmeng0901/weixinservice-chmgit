@@ -10,10 +10,10 @@
     <link type="text/css" rel="stylesheet" href="../style/bootstrap/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="../js/videojsPlug/video-js.css" />
     <link type="text/css" rel="stylesheet" href="../style/aerial/AerialvideoView.css" />
-	<title>手机航拍</title>
+	<title></title>
 </head>
 
-<body>
+<body class="portrait_body">
 
 <div class="aerialvideo_body">
     <!--(1)航拍头部-->
@@ -64,13 +64,43 @@
             <div id="video_block"></div>
         </div>
         <!--航拍地图-->
+        <div class="Opt_block clear">
+        	<div class="plays_count fl">
+            	<img class="icon_fx fl" src="../images/aerial/AerialvideoView_play.png" /><span id="plays_count"></span><span>次播放</span>
+            </div>
+            <div class="fr">
+            	<img class="icon_fx fl" id="WeChat_shareBtn" src="../images/aerial/AerialvideoView_share.png" />
+            	<p class="Opt_count fl"><img class="icon_fx fl" id="Opt_btn" onoff="true" src="../images/aerial/AerialvideoView_opt.png" /><span id="Opt_count"></span></p>
+                <i class="bigbtn_map"><img src="../images/aerial/bigbtn_map.png" /></i>
+            </div>
+        </div>
         <div class="aerial_map">
             <div class="google_map">
                 <i class="smallbtn_map"><img src="../images/aerial/smallbtn_map.png" /></i>
+                <ul class="LangLat_area clear">
+                    <li class="item">
+                        <p class="p_text" title="经度">
+                            <img class="sm_icon" src="../images/aerial/AerialvideoView_E.png" />
+                            <span class="jd_cor" id="longitude_pos"></span>
+                        </p>
+                    </li>
+                    <li class="item">
+                        <p class="p_text" title="纬度">
+                            <img class="sm_icon" src="../images/aerial/AerialvideoView_N.png" />
+                            <span class="wd_cor" id="latitude_pos"></span>
+                        </p>
+                    </li>
+                    <li class="item">
+                        <p class="p_text" title="海拔">
+                            <img class="km_icon" src="../images/aerial/AerialvideoView_G.png" />
+                            <span class="gd_cor" id="altitude_pos"></span>
+                        </p>
+                    </li>
+                </ul>
                 <div id="map-canvas" style="width:100%-;height:100%"></div>
             </div>
         </div>
-        <i class="bigbtn_map"><img src="../images/aerial/bigbtn_map.png" /></i>
+        <!--<i class="bigbtn_map"><img src="../images/aerial/bigbtn_map.png" /></i>-->
         <!-- 弹幕 -->
         <div id="danmuarea" style="display:none;">
             <div id="danmu"></div>
@@ -115,7 +145,7 @@
     
         <dl class="card_dl">
             <dt class="card_dt">
-                <img src="../images/aerial/card_logo.png" />
+                <img id="qycard_logo" src="" />
             </dt>
             <dd class="card_dd">
                 <p class="qycard_name" id="qycard_name">北京北菜园农业科技发展有限公司</p>
@@ -126,7 +156,7 @@
             </dd>
         </dl>
         <strong class="title_intro">企业介绍</strong>
-        <p class="text_intro" id="qycard_intro">北菜园有机蔬菜基地位于北京的上风上水之地延庆，拥有有机认证基地470亩，实行“六统一”原则进行管</p>
+        <div class="text_intro" id="qycard_intro">北菜园有机蔬菜基地位于北京的上风上水之地延庆，拥有有机认证基地470亩，实行“六统一”原则进行管</div>
         
     </div>
 </div>
@@ -163,6 +193,14 @@
 </div>
 </div>
 <!--（0-3）分享模态框-->
+<!--（0-4）微信分享-->
+<div class="WeChat_share">
+    <div class="share_pos">
+        <img class="WeChat_img1" src="../images/aerial/WeChat_share.png" />
+        <img class="WeChat_img2" src="../images/aerial/WeChat_iknow.png" />
+    </div>
+</div>
+<!--（0-4）微信分享-->
 
 </div>
 

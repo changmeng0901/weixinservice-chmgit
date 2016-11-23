@@ -1,3 +1,64 @@
+var WGS84_to_GCJ02 = function() {}
+
+WGS84_to_GCJ02.prototype.a = 6378245.0;
+WGS84_to_GCJ02.prototype.ee = 0.00669342162296594323;
+WGS84_to_GCJ02.prototype.transform = function(wgLat, wgLon) {
+
+    if (this.outOfChina(wgLat, wgLon)) {
+        return [wgLat, wgLon];
+    }
+
+    dLat = this.transformLat(wgLon - 105.0, wgLat - 35.0);
+    dLon = this.transformLon(wgLon - 105.0, wgLat - 35.0);
+    radLat = wgLat / 180.0 * Math.PI;
+    magic = Math.sin(radLat);
+    magic = 1 - this.ee * magic * magic;
+    sqrtMagic = Math.sqrt(magic);
+    dLat = (dLat * 180.0) / ((this.a * (1 - this.ee)) / (magic * sqrtMagic) * Math.PI);
+    dLon = (dLon * 180.0) / (this.a / sqrtMagic * Math.cos(radLat) * Math.PI);
+    mgLat = wgLat + dLat;
+    mgLon = wgLon + dLon;
+
+    return [mgLat, mgLon];
+
+};
+
+WGS84_to_GCJ02.prototype.outOfChina = function(lat, lon) {
+
+    if (lon < 72.004 || lon > 137.8347)
+        return true;
+    if (lat < 0.8293 || lat > 55.8271)
+        return true;
+
+    return false;
+
+};
+
+WGS84_to_GCJ02.prototype.transformLat = function(x, y) {
+
+    var ret = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * Math.sqrt(Math.abs(x));
+    ret += (20.0 * Math.sin(6.0 * x * Math.PI) + 20.0 * Math.sin(2.0 * x * Math.PI)) * 2.0 / 3.0;
+    ret += (20.0 * Math.sin(y * Math.PI) + 40.0 * Math.sin(y / 3.0 * Math.PI)) * 2.0 / 3.0;
+    ret += (160.0 * Math.sin(y / 12.0 * Math.PI) + 320 * Math.sin(y * Math.PI / 30.0)) * 2.0 / 3.0;
+
+    return ret;
+
+};
+
+WGS84_to_GCJ02.prototype.transformLon = function(x, y) {
+
+    var ret = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * Math.sqrt(Math.abs(x));
+    ret += (20.0 * Math.sin(6.0 * x * Math.PI) + 20.0 * Math.sin(2.0 * x * Math.PI)) * 2.0 / 3.0;
+    ret += (20.0 * Math.sin(x * Math.PI) + 40.0 * Math.sin(x / 3.0 * Math.PI)) * 2.0 / 3.0;
+    ret += (150.0 * Math.sin(x / 12.0 * Math.PI) + 300.0 * Math.sin(x / 30.0 * Math.PI)) * 2.0 / 3.0;
+
+    return ret;
+
+};
+
+
+
+
 xc_zoomSet = true;
 var zyghOnoff = true;	
 var map;
@@ -120,6 +181,12 @@ var onoffBtn = true;
 						description : groupstr.list[0].description,
 						file_url : groupstr.list[0].file_url,
 						id :  groupstr.list[0].id,
+						aerial_name :  groupstr.list[0].aerial_name,
+						release_time : groupstr.release_time,
+						video_timer : groupstr.video_timer,
+						view_count : groupstr.list[0].view_count,//播放次数(浏览量)
+						good_count : groupstr.list[0].good_count,//点赞量(好评)
+						group_video_id:groupstr.list[0].group_video_id,//
 						base_id : groupstr.list[0].base_id,
 						video_list_show : groupstr.video_list_show,  //左侧视频列表展开或收缩
 						business_card_show : groupstr.business_card_show,  //头部企业名片显示隐藏
@@ -143,36 +210,61 @@ var onoffBtn = true;
 		},
 		sliderMapBar: function (data) {
 			var $playlistList = $('.playlist_list'),
-				sliderItemStr = '';
+				sliderItemStr = '',
+				style_time = '';
 			for (var item in data) {
-				
-				currentStyle = item == 0 ? 'icur' : '';
-				sliderItemStr  += "<dl class='item video-url "+currentStyle+
-								  "' data-video-url='"+ data[item].file_url +
+				if(data[item].view_count==''||typeof(data[item].view_count)=='undefined'){
+						//如果查看量没有值，则给0
+					  	data[item].view_count=0;
+					  }
+				if(data[item].good_count==''||typeof(data[item].good_count)=='undefined'){
+						//如果好评没有值，则给0
+					  	data[item].good_count=0;
+					  }
+				if(data[item].video_timer==''||typeof(data[item].video_timer)=='undefined'){
+						//如果视频时长没有值，则不显示
+					  	style_time='none';
+					  }else{
+						style_time='block';
+
+					  }
+				currentStyle = item == 0 ? ' icur' : '';
+				sliderItemStr  += "<dl class='item"+currentStyle+
+								  "' onoff='true' onoffTwo='true'><dt class='video-url' data-video-url='"+ data[item].file_url +
 								  "' data-id='"+ data[item].id +
 								  "' base-id='"+ data[item].base_id +
 								  "' data-description='"+ data[item].description +
-								  "'><dt><img src='"+data[item].thumbnail_image_url+
+								  "' aerial-name='"+ data[item].aerial_name +
+								  "' group-video-id='"+ data[item].group_video_id +
+								  "'><img src='"+data[item].thumbnail_image_url+
 								  "' /><p class='video_stro font12'><img src='../images/aerial/icon_mnplay.png' /><span>"+data[item].aerial_name+
-								  "</span></p><i class='v_mark'></i></dt><dd>"+data[item].description
-								  +"</dd></dl>"
+								  "</span></p><p class='play_time' style='display:"+style_time+";'>"+data[item].video_timer+
+								  "</p><i class='v_mark'></i></dt><dd><strong class='aerial_name'>"+ data[item].aerial_name +
+								  "</strong><p class='send_time'>发布时间<span>"+data[item].release_time+
+								  "</span></p><div class='description'>"+data[item].description+
+								  "</div><div class='dd_foot clear'><p class='sm_plays fl'><img src='../images/aerial/AerialvideoView_play.png' /><span id='sm_plays'>"+data[item].view_count+
+								  "</span>次播放</p><p class='sm_Opt fr'><img src='../images/aerial/AerialvideoView_opt.png' /><span id='sm_Opt'>"+data[item].good_count+
+								  "</span></p></div></dd></dl>";
+				/*if(data[item].video_timer==''||typeof(data[item].video_timer)=='undefined'){
+						//如果视频时长没有值，则不显示
+					  	$('.playlist_list .item').eq(item).find('.play_time').hide();
+					  }*/
+
 			}
 			$playlistList.append(sliderItemStr);
 
+				
+
 		},
-		enterpriseInfoModal : function(data){
-			
+		enterpriseInfoModal : function(data){			
 			//@@航拍页面弹框等基础数据初始化
-			$('#qy_logo').attr('src',data.logo_img);
 			if(data.logo_img!=""){
-				if(data.logo_img.indexOf("http://img4")!=-1){
-					$("#qy_logo_li").html("<img class=\"qy_logo\" id=\"qy_logo\" src=\""+data.logo_img+"@38h.src\" />");
-				}else{
-					$("#qy_logo_li").html("<img class=\"qy_logo\" id=\"qy_logo\" src=\""+data.logo_img+"\" />");
-				}	
+				$("#qy_logo_li").html("<img class=\"qy_logo\" id=\"qy_logo\" src=\""+data.logo_img+"@38h_132w_90q.jpg\" />");				
 			}else{
 				$('#qy_logo_li').html("<p style='font-size: 14px;font-weight: bold;color: #fff;word-break: break-all;overflow: hidden;'>"+data.business_name+"</p>");
 			}	
+			$('#qycard_logo').attr('src',data.logo_img);
+			
 			$('#qycard_name').html( data.business_name );
 			if(data.business_tel==""){
 				$('.qycard_phone').css("display","none");
@@ -209,6 +301,21 @@ var onoffBtn = true;
 			if( $('#evitude').html() == '' ){ $('#evitude').html('--') }
 			if( $('#gyitude').html() == '' ){ $('#gyitude').html('--') }
 			
+			if( $('#longitude_pos').html() == '' ){ $('#longitude_pos').html('--') }
+			if( $('#latitude_pos').html() == '' ){ $('#latitude_pos').html('--') }
+			if( $('#altitude_pos').html() == '' ){ $('#altitude_pos').html('--') }
+			$(document).attr("title",data.aerial_name);
+			if( data.view_count==''||typeof(data.view_count)=='undefined' ){
+				$('#plays_count').html(0);
+			}else{
+				$('#plays_count').html(data.view_count);
+			}
+			if( data.good_count==''||typeof(data.good_count)=='undefined' ){
+				$('#Opt_count').html(0);
+			}else{
+				$('#Opt_count').html(data.good_count);
+			}
+			
 			if( data.description != ''){
 				$('#scene_description').append(data.description);
 			}else{
@@ -218,7 +325,7 @@ var onoffBtn = true;
 				//如果企业、logo为true就显示
 				$('#qy_logo_li').show();
 			}else{
-				$('#qy_logo_li').hide();
+				//$('#qy_logo_li').hide();
 			}
 			if( data.business_card_show == "1"  ){
 				//如果头部企业名片为true就显示
@@ -243,6 +350,16 @@ var onoffBtn = true;
 					},500);
 				},700);
 			onoffBtn = true;
+
+
+			$('.WeChat_share .WeChat_img2').click(function(){
+				$('.WeChat_share').hide();
+				$('body').css('overflow','auto');
+			});
+			$('#WeChat_shareBtn').click(function(){
+				$('.WeChat_share').show();
+				$('body').css('overflow','hidden');
+			});
 			
 			//头部计算
 			var oWindowW = $(window).width();
@@ -254,8 +371,13 @@ var onoffBtn = true;
 				$(".item_EV").show();
 				$(".item_ISO").show();	
 			}
-			headerLen = $(".video_header_list2 li:visible").length;
-			$(".video_header_list2 li:visible").css("width", parseInt($(".video_header_list2").width()/headerLen) )
+			if($(window).width()>$(window).height()){
+				headerLen = $(".video_header_list2 li:visible").length;
+				$(".video_header_list2 li:visible").css("width", parseInt($(".video_header_list2").width()/headerLen) )
+			}else{
+				headerLen = $(".video_header_list2 li:visible").length;
+				$(".video_header_list2 li:visible").css("width", "inherit")
+			}
 
 			AerialVideoView.creatVideo(data.file_url);//初始化，创建视频插件
 
@@ -264,14 +386,41 @@ var onoffBtn = true;
 			
 			//左侧菜单选中状态
 			$('.playlist_list').on('click','.video-url',function () {
-				var that = $(this);				
-				that.addClass('icur').siblings().removeClass('icur');
+				zObj.pTimer = setTimeout(function() {
+					$(".aerial_playlist").stop().animate({
+						left: -210
+					}, 300)
+				}, 300);	
+				$('.aerial_map').stop().animate({
+					"left" : 20
+				},500);
+				$(".bigbtn_map").stop().animate({
+					"left" : 20
+				},500);
+				onoffBtn = true;
+
+				var that = $(this);	
+				that.parent().addClass('icur').siblings().removeClass('icur');				
+				$(document).attr("title",that.attr('aerial-name'));
+				
+				if($(".playlist_list .icur").attr("onoff")=="false"){
+					$('#Opt_count').html(parseInt($(".playlist_list .icur #sm_Opt").html()));
+				}else{
+					$('#Opt_count').html($(".playlist_list .icur #sm_Opt").html());
+				}
+				if($(".playlist_list .icur").attr("onofftwo")=="false"){
+					$('#plays_count').html(parseInt($(".playlist_list .icur #sm_plays").html()));
+				}else{
+					$('#plays_count').html($(".playlist_list .icur #sm_plays").html());
+				}
+
 				
 				ParameterMethod = AerialVideoView.makeParameterMethod("aerial.track.data"),
 				groupId = AerialVideoView.makeParameterField("aerial_video_id",that.attr('data-id'));
 				pageUrl = getTestUrl +"/rest/1.0/aerialVideo?v=1.0&format=json"+ ParameterMethod + groupId;
 
 				//var url = "http://192.168.21.55:8080/rest/1.0/aerialVideo?v=1.0&format=json"+ ParameterMethod + groupId;
+				
 	
 				$.ajax({
 					type: "GET",
@@ -298,6 +447,10 @@ var onoffBtn = true;
 							$('#evitude').html(list[item].EV);
 							$('#kmitude').html(list[item].Shutter);
 							$('#gyitude').html(list[item].Fnum);
+							
+							$('#longitude_pos').html(parseFloat(gps[0]));
+							$('#latitude_pos').html(parseFloat(gps[1]));
+							$('#altitude_pos').html(list[item].BAROMETER);
 						}else{
 							$('#longitude').html("--");
 							$('#latitude').html("--");
@@ -306,6 +459,10 @@ var onoffBtn = true;
 							$('#evitude').html("--");
 							$('#kmitude').html("--");
 							$('#gyitude').html("--");
+							
+							$('#longitude_pos').html("--");
+							$('#latitude_pos').html("--");
+							$('#altitude_pos').html("--");
 						}
 
 						if( zyghOnoff == false && list!="" ){
@@ -328,8 +485,13 @@ var onoffBtn = true;
 							$(".item_EV").show();
 							$(".item_ISO").show();	
 						}
-						headerLen = $(".video_header_list2 li:visible").length;
-						$(".video_header_list2 li:visible").css("width", parseInt($(".video_header_list2").width()/headerLen) )
+						if($(window).width()>$(window).height()){
+							headerLen = $(".video_header_list2 li:visible").length;
+							$(".video_header_list2 li:visible").css("width", parseInt($(".video_header_list2").width()/headerLen) )
+						}else{
+							headerLen = $(".video_header_list2 li:visible").length;
+							$(".video_header_list2 li:visible").css("width", "inherit")
+						}
 
 						AerialVideoView.creatVideo2(that.attr("data-video-url"));//左侧菜单点击时，每次都得重新创建一次视频插件，否则会出问题
 						
@@ -342,6 +504,30 @@ var onoffBtn = true;
 				 });
 				
 			});
+
+			//列表点赞(好评)
+			$("#Opt_btn").click(function(){
+				var seeAttr = $(".playlist_list .item.icur").attr("onoff");
+				if( seeAttr=="true"){//如果当前身上开关是true，说明未被点赞
+					$("#Opt_count").html(parseInt($(".playlist_list .item.icur #sm_Opt").html())+1);
+					$(".playlist_list .item.icur #sm_Opt").html(parseInt($(".playlist_list .item.icur #sm_Opt").html())+1);///////
+					ParameterMethod = AerialVideoView.makeParameterMethod("aerial.info.set"),
+					//operTypeUrl1:播放次数 2：好评（点赞）
+					groupId = AerialVideoView.makeTwoParameterField("group_video_id",$(".playlist_list .icur dt").attr("group-video-id"),"type",operTypeUrl);
+					pageUrl = getTestUrl +"/rest/1.0/aerialVideo?v=1.0&format=json"+ ParameterMethod + groupId;
+					$.ajax({
+						type: "GET",
+						timeout: 1000,
+						url: pageUrl,
+						dataType: "jsonp",
+						jsonp: 'callback'
+					});
+					$(".playlist_list .item.icur").attr("onoff","false")
+					
+				}
+				
+			});
+						
 			
 			// 文本域获取焦点和失去焦点状态
 		    $("input[type=text]").not(".ipt_link").focus(function(){
@@ -374,8 +560,13 @@ var onoffBtn = true;
 				if($(".aerial_map").css('left')=='20px'){
 					$(".bigbtn_map").css('left','20px');
 				}else{
-					$(".bigbtn_map").css('left','170px');
-				}	
+					if($(window).width()>$(window).height()){
+						$(".bigbtn_map").css('left','170px');
+					}else{
+						$(".bigbtn_map").css('left','20px');	
+					}
+					
+				}
 			});
 			$(".bigbtn_map").click(function(){
 				$(".aerial_map").show();
@@ -405,7 +596,7 @@ var onoffBtn = true;
 				});
 			}else{
 				$(".aerial_playlist").css({
-					"height" :  "6.52rem"
+					"height" :  "inherit"
 				});
 			}
 			if($(window).width()>$(window).height()){
@@ -417,7 +608,7 @@ var onoffBtn = true;
 				$("#video_block").css({
 					"height" : "8.08rem"
 				});
-				$(".bigbtn_map").hide();
+				//$(".bigbtn_map").hide();
 				$(".aerial_map").css({
 					"left" : "inhert"
 				})
@@ -426,9 +617,6 @@ var onoffBtn = true;
 				  "min-height" : 500 - oHeaderH -IESpace,
 					  "height" : oWindowH - oHeaderH  -IESpace
 			});
-			//$(".aerial_playlist").niceScroll({cursorcolor:"#919191",cursorwidth:6,cursoropacitymax:0.7,touchbehavior:false,autohidemode:false});
-			//$(".card_dialog .modal_body").niceScroll({cursorcolor:"#919191",cursorwidth:6,cursoropacitymax:0.7,touchbehavior:false,autohidemode:false});
-			//$(".scene_dialog .modal_body").niceScroll({cursorcolor:"#919191",cursorwidth:6,cursoropacitymax:0.7,touchbehavior:false,autohidemode:false});
 			oWindowH < 500 ? $(".pano_dialog").addClass("pano_top") : 	$(".pano_dialog").removeClass("pano_top")
 			
 			//头部计算
@@ -439,8 +627,13 @@ var onoffBtn = true;
 				$(".item_EV").show();
 				$(".item_ISO").show();	
 			}
-			headerLen = $(".video_header_list2 li:visible").length;
-			$(".video_header_list2 li:visible").css("width", parseInt($(".video_header_list2").width()/headerLen) )
+			if($(window).width()>$(window).height()){
+				headerLen = $(".video_header_list2 li:visible").length;
+				$(".video_header_list2 li:visible").css("width", parseInt($(".video_header_list2").width()/headerLen) )
+			}else{
+				headerLen = $(".video_header_list2 li:visible").length;
+				$(".video_header_list2 li:visible").css("width", "inherit")
+			}
 
 		},
 		initializeGoogelMaps: function (data,index_) {
@@ -466,9 +659,13 @@ var onoffBtn = true;
 					gps = gps.replace(/[()]/g, "");
 					gps = gps.split(",");
 					
-					var temp = new google.maps.LatLng( parseFloat(gps[1]), parseFloat(gps[0]) );
-					var tempLat =  parseFloat(gps[1]);
-					var tempLing = parseFloat(gps[0]);
+					// var temp = new google.maps.LatLng( parseFloat(gps[1]), parseFloat(gps[0]) );
+					// var tempLat =  parseFloat(gps[1]);
+					// var tempLing = parseFloat(gps[0]);
+					var GCJ02loc = new WGS84_to_GCJ02().transform(parseFloat(gps[1]), parseFloat(gps[0]));
+					var temp = new google.maps.LatLng(GCJ02loc[0], GCJ02loc[1]);					
+					var tempLat = GCJ02loc[1];
+					var tempLing =GCJ02loc[0];
 					var tempAlt = list[item].BAROMETER;
 					var tempISO = list[item].ISO.split(":")[1];
 					var tempEV = list[item].EV.split(":")[1];
@@ -614,6 +811,10 @@ var onoffBtn = true;
 								$("#evitude").html( EVPlanSite[index_] );
 								$("#kmitude").html( ShutterPlanSite[index_] );
 								$("#gyitude").html( FnumPlanSite[index_] );
+								
+								$("#longitude_pos").html( LingPlanSite[index_] );
+								$("#latitude_pos").html( LatPlanSite[index_] );
+								$('#altitude_pos').html( AltPlanSite[index_]+'米' );
 								index_++;
 							}else{
 								clearInterval( playTimer );
@@ -631,6 +832,23 @@ var onoffBtn = true;
 			
 				
 			player.on('play',function(){
+					if( $(".playlist_list .item.icur").attr("onofftwo")=="true" ){
+						$("#plays_count").html(parseInt($(".playlist_list .item.icur #sm_plays").html())+1);
+						$(".playlist_list .item.icur #sm_plays").html(parseInt($(".playlist_list .item.icur #sm_plays").html())+1);
+						ParameterMethod = AerialVideoView.makeParameterMethod("aerial.info.set"),
+						//operTypeUrl1:播放次数 2：好评（点赞）
+						groupId = AerialVideoView.makeTwoParameterField("group_video_id",$(".playlist_list .icur dt").attr("group-video-id"),"type",1);
+						pageUrl = getTestUrl +"/rest/1.0/aerialVideo?v=1.0&format=json"+ ParameterMethod + groupId;
+						$.ajax({
+							type: "GET",
+							timeout: 1000,
+							url: pageUrl,
+							dataType: "jsonp",
+							jsonp: 'callback'
+						});
+						$(".playlist_list .item.icur").attr("onofftwo","false")
+					}
+					
 				
 					playTimer = setInterval(function(){
 						timeout();
@@ -669,6 +887,10 @@ var onoffBtn = true;
 								$("#evitude").html( EVPlanSite[index_] );
 								$("#kmitude").html( ShutterPlanSite[index_] );
 								$("#gyitude").html( FnumPlanSite[index_] );
+								
+								$("#longitude_pos").html( LatPlanSite[index_] );
+								$("#latitude_pos").html( LingPlanSite[index_] );
+								$('#altitude_pos').html( AltPlanSite[index_]+'米' );
 								index_++;
 							}else{
 								clearInterval( playTimer );
@@ -686,8 +908,22 @@ var onoffBtn = true;
 			
 				
 			player.on('play',function(){
-				
-					
+					if( $(".playlist_list .item.icur").attr("onofftwo")=="true" ){
+						$("#plays_count").html(parseInt($(".playlist_list .item.icur #sm_plays").html())+1);
+						$(".playlist_list .item.icur #sm_plays").html(parseInt($(".playlist_list .item.icur #sm_plays").html())+1);
+						ParameterMethod = AerialVideoView.makeParameterMethod("aerial.info.set"),
+						//operTypeUrl1:播放次数 2：好评（点赞）
+						groupId = AerialVideoView.makeTwoParameterField("group_video_id",$(".playlist_list .icur dt").attr("group-video-id"),"type",1);
+						pageUrl = getTestUrl +"/rest/1.0/aerialVideo?v=1.0&format=json"+ ParameterMethod + groupId;
+						$.ajax({
+							type: "GET",
+							timeout: 1000,
+							url: pageUrl,
+							dataType: "jsonp",
+							jsonp: 'callback'
+						});
+						$(".playlist_list .item.icur").attr("onofftwo","false");
+					}
 					playTimer = setInterval(function(){
 						timeout();
 					},1000);
@@ -731,51 +967,51 @@ var onoffBtn = true;
 						onoffBtn = true;
 					}
 				});
-				$("#BarOnoff").mouseleave(function(){
-					clearTimeout( zObj.pTimer );
-					zObj.pTimer = setTimeout(function() {
-							$(".aerial_playlist").stop().animate({
-								left: -210
-							}, 300)
-						}, 1000);
-					$('.aerial_map').stop().animate({
-						"left" : 20
-					},500);
-					$(".bigbtn_map").stop().animate({
-						"left" : 20
-					},500);
-					onoffBtn = true;
-				});
-				$(".aerial_playlist").mousemove(function(){
-					clearTimeout( zObj.pTimer );
-					zObj.pTimer = setTimeout(function() {
-							$(".aerial_playlist").stop().animate({
-								left: 0
-							}, 300)
-						}, 300);
-					$('.aerial_map').stop().animate({
-						"left" :170
-					},500);
-					$(".bigbtn_map").stop().animate({
-						"left" :170
-					},500);
-					onoffBtn = false;
-				});
-				$(".aerial_playlist").mouseleave(function(){
-					clearTimeout( zObj.pTimer );
-					zObj.pTimer = setTimeout(function() {
-							$(".aerial_playlist").stop().animate({
-								left: -210
-							}, 300)
-						}, 300);
-					$('.aerial_map').stop().animate({
-						"left" : 20
-					},500);
-					$(".bigbtn_map").stop().animate({
-						"left" : 20
-					},500);
-					onoffBtn = true;
-				});
+				// $("#BarOnoff").mouseleave(function(){
+				// 	clearTimeout( zObj.pTimer );
+				// 	zObj.pTimer = setTimeout(function() {
+				// 			$(".aerial_playlist").stop().animate({
+				// 				left: -210
+				// 			}, 300)
+				// 		}, 1000);
+				// 	$('.aerial_map').stop().animate({
+				// 		"left" : 20
+				// 	},500);
+				// 	$(".bigbtn_map").stop().animate({
+				// 		"left" : 20
+				// 	},500);
+				// 	onoffBtn = true;
+				// });
+				// $(".aerial_playlist").mousemove(function(){
+				// 	clearTimeout( zObj.pTimer );
+				// 	zObj.pTimer = setTimeout(function() {
+				// 			$(".aerial_playlist").stop().animate({
+				// 				left: 0
+				// 			}, 300)
+				// 		}, 300);
+				// 	$('.aerial_map').stop().animate({
+				// 		"left" :170
+				// 	},500);
+				// 	$(".bigbtn_map").stop().animate({
+				// 		"left" :170
+				// 	},500);
+				// 	onoffBtn = false;
+				// });
+				// $(".aerial_playlist").mouseleave(function(){
+				// 	clearTimeout( zObj.pTimer );
+				// 	zObj.pTimer = setTimeout(function() {
+				// 			$(".aerial_playlist").stop().animate({
+				// 				left: -210
+				// 			}, 300)
+				// 		}, 300);
+				// 	$('.aerial_map').stop().animate({
+				// 		"left" : 20
+				// 	},500);
+				// 	$(".bigbtn_map").stop().animate({
+				// 		"left" : 20
+				// 	},500);
+				// 	onoffBtn = true;
+				// });
 		}
 	};
 	AerialVideoView.init();
