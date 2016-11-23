@@ -671,8 +671,8 @@ var onoffBtn = true;
 					var tempEV = list[item].EV.split(":")[1];
 					var tempShutter = list[item].Shutter.split(":")[1];
 					var tempFnum = list[item].Fnum.split(":")[1];
-					tempAlt = tempAlt.split(":");  
-					tempAlt = tempAlt[1]
+					//tempAlt = tempAlt.split(":");  
+					//tempAlt = tempAlt[1]
 					
 					bounds.extend(temp);
 					scrollZoom = getBoundsZoomLevel(bounds);

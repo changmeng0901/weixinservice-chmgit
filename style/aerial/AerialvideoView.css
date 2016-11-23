@@ -58,13 +58,14 @@
 	.video_header_wap{
 		position:relative;
 		padding-left:40px;
-		padding-right:36px;
+		padding-right:36px-;
 		width:100%;
 		height:34px;
 		background:url(../../images/commons/opacity_b50.png)-;
 		background:#3c3f44;
 		}
 	.video_header_wap .close_btn{
+		display:none;
 		position:absolute;
 		right:0;
 		top:0;
@@ -108,12 +109,16 @@
 		}
 	.video_header_list .jd_cor{
 		display:inline-block;
+		max-width:50px;
 		color:#6cceff;
+		word-break:break-all;
 		vertical-align: middle;
 		}
 	.video_header_list .wd_cor{
 		display:inline-block;
+		max-width:50px;
 		color:#7cff62;
+		word-break:break-all;
 		vertical-align: middle;
 		}
 	.video_header_list .gd_cor{
@@ -562,7 +567,7 @@
 		position: relative;
 		height: 1.4rem;
 		padding-left: 0;
-		padding-right: 1.5rem;
+		padding-right: 1.5rem-;
 		background-color: #393a3c;
 	}
 	.video_header_list1{
@@ -570,6 +575,7 @@
 	}
 
 	.close_btn{
+		display:none;
 		position: absolute;
 		right: 0;
 		top: 0;
@@ -907,6 +913,7 @@
 		margin-right:5px;
 		}
 	.playlist_list .video_stro{
+		display:none;
 		position: absolute;
 		left: 0;
 		bottom: 0;
@@ -952,6 +959,7 @@
 		border: 1px solid #83d542;
 	}
 	.playlist_list .icur .video_stro{
+		display:block;
 		background: url(../../images/commons/opacity_b50.png)-;
 	}
 	.playlist_list .icur .video_stro img{
