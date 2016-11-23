@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link href="video-js.css" rel="stylesheet" />
+	<!--[if lt IE 9]>
+	<script src="videojs-ie8.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<video id=example-video width=960 height=540 class="video-js vjs-default-skin" controls>
+	  <!--source src="http://farmeasy.cn/video/1030/1509/playlist.m3u8" type="application/x-mpegURL"/-->
+	  <source src="./hls/playlist.m3u8" type="application/x-mpegURL"/>
+	</video>
+	<a href="javascript:;" onclick="pause()">pause</a>
+	<a href="javascript:;" onclick="play()">play</a>
+	<!--script src="jquery.min.js"></script-->
+	<!--script src="jquery-1.10.2.min.js"></script-->
+	<script src="video.js"></script>
+	<script src="videojs-contrib-hls.js"></script>
+	<script src="m3u8-parser.js"></script>
+	<script>
+		//videojs.options.flash.swf = "video-js.swf";
+
+		var player = videojs("example-video");
+		//player.hls("http://farmeasy.cn/video/1030/1509/playlist.m3u8");
+		player.play(); 
+		//var hls = player.tech({ IWillNotUseThisInPlugins: true }).hls;
+
+		function pause(){
+			player.pause();
+		}
+
+		function play(){
+			player.play();
+		}
+
+		player.on('pause', function(event) {
+			alert(player.currentTime());
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+	<link type="text/css" rel="stylesheet" href="../style/commons/commons.css" />
+    <link type="text/css" rel="stylesheet" href="../style/bootstrap/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="../style/aerial/AerialvideoView.css" />
+	<title>航拍视频</title>
+</head>
+
+<body>
+
+<div class="aerial_wapper">
+    <!-- 头部 -->
+	<div class="video_header_wap clear">
+		<ul class="video_header_list fl">
+            <li class="item">
+                <img class="qy_logo" id="qy_logo" src="../images/aerial/AerialvideoView_logo.png" />
+            </li>
+        </ul>
+        <ul class="video_header_list video_info fr">
+            <li class="item" data-target="#CardModal" data-toggle="modal">
+                <img class="mp_icon" src="../images/aerial/AerialvideoView_mp.png" />
+            </li>
+            <li class="item" data-target="#SceneModal" data-toggle="modal">
+                <img class="cj_icon" src="../images/aerial/AerialvideoView_cj.png" />
+            </li>
+        </ul>
+        <i class="close_btn">
+        	<img src="../images/aerial/icon_closeL.png" />
+        </i>
+	</div>
+    <!-- 航拍视频 -->
+	<div class="video_main_wap">video</div>
+    <!-- 弹幕 -->
+	<div class="danmu_wap">danmu</div>
+    <!-- 航拍地图 -->
+	<div class="googlemap_wap">
+        <div class="aerial_map">
+            <div id="map-canvas" style="width:100%;height:100%"></div>
+        </div>   
+    </div>
+    <!-- 视频列表 -->
+	<div class="playlist_wap">
+		<div class="playlist_list">
+			<dl class="item icur">
+				<dt>
+					<img src="../images/aerial/test_pic1.jpg" />
+					<p class="video_stro font12"><img src="../images/aerial/icon_mnplay.png" /><span>视频介绍</span></p>
+					<i class="v_mark"></i>
+				</dt>
+				<dd>
+					<strong class="text_title font14">北菜园西区全景</strong>
+					<p class="text_cont font12">延庆区三面环山，一面临水，森林覆盖率达到71%以上，自然保护区面积占全区总面积的26%。空气质量在全市名列前茅，荣获国家生态县、国家园林县城、国家绿化规模县、ISO14000运行国家示范</p>
+				</dd>
+			</dl>
+			<dl class="item">
+				<dt>
+					<img src="../images/aerial/test_pic1.jpg" />
+					<p class="video_stro font12"><img src="../images/aerial/icon_mnplay.png" /><span>视频介绍</span></p>
+					<i class="v_mark"></i>
+				</dt>
+				<dd>
+					<strong class="text_title font14">北菜园西区全景</strong>
+					<p class="text_cont font12">延庆区三面环山，一面临水，森林覆盖率达到71%以上，自然保护区面积占全区总面积的26%。空气质量在全市名列前茅，荣获国家生态县、国家园林县城、国家绿化规模县、ISO14000运行国家示范</p>
+				</dd>
+			</dl>
+		</div>
+	</div>
+    <!-- 视频列表 -->
+</div>
+
+
+
+<!--（0-1）企业名片模态框-->
+<div class="modal fade" id="CardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog pano_dialog card_dialog">
+<div class="modal-content">
+	<div class="modal-header clear">
+        <h4 class="modal-title font14 fl"><img src="../images/aerial/icon_qycard.png" />企业名片</h4>
+        <i class="i_close" data-dismiss="modal">
+        	<img src="../images/bootstrap/farmingIco16.jpg" />
+        </i>
+    </div>
+    <div class="modal-body modal_body">
+    
+        <dl class="card_dl">
+        	<dt class="card_dt">
+            	<img src="../images/aerial/card_logo.png" />
+            </dt>
+            <dd class="card_dd">
+            	<p class="qycard_name mb5" id="qycard_name">北京北菜园农业科技发展有限公司</p>
+                <p class="qycard_phone"><img src="../images/aerial/icon_phone.png "/><span class="color_y" id="qycard_phone">400-8166-589</span></p>
+                <p class="qycard_mail"><img src="../images/aerial/icon_mail.png "/><span id="qycard_mail">1010001001@acsm.com</span></p>
+                <p class="qycard_weibo"><img src="../images/aerial/icon_come.png "/><span id="qycard_weibo">北菜园</span></p>
+                <p class="qycard_addr"><img src="../images/aerial/icon_addr.png "/><span id="qycard_addr">北京市延庆县康庄镇小丰营村委会办公楼西2000米</span></p>
+            </dd>
+        </dl>
+        <strong class="title_intro font13">企业介绍</strong>
+        <p class="text_intro" id="qycard_intro">北菜园有机蔬菜基地位于北京的上风上水之地延庆，拥有有机认证基地470亩，实行“六统一”原则进行管</p>
+        
+    </div>
+</div>
+</div>
+</div>
+<!--（0-2）场景介绍模态框-->
+<div class="modal fade" id="SceneModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog pano_dialog scene_dialog">
+<div class="modal-content">
+    <i class="i_close" data-dismiss="modal">
+        <img src="../images/bootstrap/farmingIco16.jpg" />
+    </i>
+    <div class="modal-body modal_body">
+
+       <p class="text_company" id="scene_description"></p>
+       
+    </div>
+</div>
+</div>
+</div>
+<!--（0-3）分享模态框-->
+<div class="modal fade" id="ShareModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog pano_dialog share_dialog">
+<div class="modal-content">
+	<i class="i_close" data-dismiss="modal"></i>
+    <div class="modal-body modal_body">
+    
+       <strong class="text_company">《北京北菜园种植基地》</strong>
+       <p class="text_tip">扫描二维码，将链接分享给好友</p>
+       <img class="code_pic" src="../images/aerial/code_pic1.jpg" />
+       <input class="ipt_link" type="text" value="http://app.farmeasy.cn/aerial/PropagandasShow." style="background-color:#fff;color:#f00;" />
+       <button class="btn_copy"><img src="../images/aerial/icon_copylink.png" />复制链接</button>
+       
+    </div>
+</div>
+</div>
+</div>
+<!--（0-3）分享模态框-->
+
+<script type="text/javascript" src="../js/commons/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap/icheck.js"></script>
+<script type="text/javascript" src="../js/nicescroll/jquery.nicescroll.min.js"></script>
+<!--<script type="text/javascript" src="http://ditu.google.cn/maps/api/js?sensor=false"></script>-->
+<script type="text/javascript" src="http://ditu.google.cn/maps/api/js?v=3.23&amp;key=AIzaSyB2mG9FLX3dYDFycXGkmidn-OZU-FL1rLM&amp;sensor=false&amp;libraries=drawing"></script>
+
+<script type="text/javascript" src="../js/aerial/map_base_functions.js"></script>
+<script type="text/javascript" src="../js/aerial/map_controller.js"></script>
+	<!--[if lt IE 9]>
+	<script src="../js/videojsPlugvideojs-ie8.js"></script>
+	<![endif]-->
+    <script src="../js/videojsPlug/video.js"></script>
+	<script src="../js/videojsPlug/videojs-contrib-hls.js"></script>
+	<script src="../js/videojsPlug/m3u8-parser.js"></script>
+<script type="text/javascript" src="../js/aerial/AerialvideoView.js"></script>
+
+</body>
+</html>
