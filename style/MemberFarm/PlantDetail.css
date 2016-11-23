@@ -155,11 +155,19 @@ input:focus{
 	width: 80%;
 	height: 100%;
 	border-radius: 0.15385rem;
+	overflow: hidden;
+	}
+.progress_block .progress_percent{
+	display: block;
+	width: 100%;
+	height: 100%;
 	background: -webkit-linear-gradient(left,#07ff01,#f4ff01,#ffbe01,#ff1900); /* Safari 5.1 - 6.0 */
 	background: -o-linear-gradient(left,#07ff01,#f4ff01,#ffbe01,#ff1900); /* Opera 11.1 - 12.0 */
 	background: -moz-linear-gradient(left,#07ff01,#f4ff01,#ffbe01,#ff1900); /* Firefox 3.6 - 15 */
 	background: linear-gradient(left,#07ff01,#f4ff01,#ffbe01,#ff1900); /* 标准的语法 */
-	}
+	background-size: 100%-;
+	background: url(../../images/MemberFarm/PlantDetail_gradient.jpg) no-repeat-;
+}
 .present_cycle{
 	margin-top: 0.19231rem;
 	text-align: right;	
@@ -387,17 +395,17 @@ input:focus{
 
 
 /*采收信息*/
-.harvest_information{
+.harvests_information{
 	margin-top: -1px;
 	padding: 0 0.38462rem;
 	background-color: #fff;
 }
-.harvest_information li{
+.harvests_information li{
 	padding: 0.38462rem 0;
 	border-top: 1px dashed #e0e0e0;
 	overflow: hidden;
 }
-.harvest_information .crop_pic{
+.harvests_information .crop_pic{
 	float: left;
 	width: 1.23077rem;
 	height: 1.23077rem;
@@ -407,29 +415,29 @@ input:focus{
 	border-radius: 50%;
 	overflow: hidden;
 }
-.harvest_information .crop_pic img{
+.harvests_information .crop_pic img{
 	width: 100%;
 	height: 100%;
 	border-radius: 50%;
 }
-.harvest_information .harvest_det{
+.harvests_information .harvest_det{
 	float: left;
 	width: 4.92308rem;
 }
-.harvest_information .harvest_det .text_name{
+.harvests_information .harvest_det .text_name{
 	height: 0.61538rem;
 	line-height: 0.61538rem;
 	font-size: 0.5rem;
 	color: #333;
 }
-.harvest_information .harvest_det .text_date{
+.harvests_information .harvest_det .text_date{
 	height: 0.53846rem;
 	line-height: 0.53846rem;
 	margin-top: 0.07692rem;
 	font-size: 0.42308rem;
 	color: #999;
 }
-.harvest_information .harvest_weight{
+.harvests_information .harvest_weight{
 	float: right;
 	width: 3.64615rem;
 	height: 1.23077rem;
@@ -438,7 +446,7 @@ input:focus{
 	text-align: right;
 	overflow: hidden;
 }
-.harvest_information .harvest_weight .num{
+.harvests_information .harvest_weight .num{
 	font-size: 0.76923rem;
 	font-style: normal;
 	color: #00a0e9;

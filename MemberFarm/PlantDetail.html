@@ -35,8 +35,12 @@
 </div>
 <div class="cropinfo_bd">
 	<p class="life_cycle"><span class="text_cycle" id="periodName">开花结果期</span><span class="text_day" id="alreayPlantDays">（第123天）</span></p>
-	<div class="progress_block"><span class="progress_bar"></span></div>
-	<p class="present_cycle">目前处于<span class="text_cyle">采收期</span><span class="color_bloack">，还有10天采收结束</span></p>
+	<div class="progress_block">
+		<div class="progress_bar" id="progress_bar">
+			<span class="progress_percent"></span>
+		</div>
+	</div>
+	<p class="present_cycle">目前处于<span class="text_cyle" id="text_cyle">采收期</span><span class="color_bloack">，还有<b id="remain">10</b>天采收结束</span></p>
 </div>
 <!-- 物联网设备-传感器数据 -->
 <div class="plant_title clear">
@@ -113,73 +117,21 @@
 <div class="plant_title clear">
 	<h3>农事信息</h3>
 </div>
-<div class="farm_information">
-	<dl class="dl_dl">
-		<dt class="dl_dt">
-			<p class="text_time">15:32</p>
-			<p class="text_date">08/03</p>
-			<i class="cPoint"></i>
-		</dt>
-		<dd class="dl_dd">
-			<p class="text_con white_nowrap">松土</p>
-			<p class="text_dec">平整土地，之后再平整后的地上摆放整的秧盘，然后覆盖上一部分与肥料混合浇透水，最后在覆盖上一层土壤，浇水，盖塑料薄膜完成对玉米的育苗工作</p>
-			<div class="farm_piclist clear" id="farm_piclist0">
-				<img src="../images/MemberFarm/PlantDetail_temp1.jpg" >
-				<img src="../images/MemberFarm/PlantDetail_temp2.jpg" >
-				<img src="../images/MemberFarm/PlantDetail_temp3.jpg" >
-			</div>
-		</dd>
-	</dl>
-	<dl class="dl_dl">
-		<dt class="dl_dt">
-			<p class="text_time">15:32</p>
-			<p class="text_date">08/03</p>
-			<i class="cPoint"></i>
-		</dt>
-		<dd class="dl_dd">
-			<p class="text_con white_nowrap">松土</p>
-			<p class="text_dec">平整土地，之后再平整后的地上摆放整的秧盘，然后覆盖上一部分与肥料混合浇透水，最后在覆盖上一层土壤，浇水，盖塑料薄膜完成对玉米的育苗工作</p>
-			<div class="farm_piclist clear" id="farm_piclist1">
-				<img src="../images/MemberFarm/PlantDetail_temp1.jpg" >
-				<img src="../images/MemberFarm/PlantDetail_temp2.jpg" >
-				<img src="../images/MemberFarm/PlantDetail_temp3.jpg" >
-			</div>
-		</dd>
-	</dl>
+<div class="farm_information" id="farm_information">
+	<!-- 农事信息 无信息 -->
+	<!-- <div class="no_information">
+		<img src="../images/MemberFarm/PlantDetail_icon4.png" class="no_icon">
+		<p class="no_tip">暂无农事信息</p>
+	</div> -->
 </div>
-<!-- 农事信息 无信息 -->
-<div class="no_information">
-	<img src="../images/MemberFarm/PlantDetail_icon4.png" class="no_icon">
-	<p class="no_tip">暂无农事信息</p>
-</div>
+
 <!-- 采收信息 -->
 <div class="plant_title clear">
 	<h3>采收信息</h3>
 </div>
-<ul class="harvest_information">
-	<li>
-		<div class="crop_pic">
-			<img src="../images/MemberFarm/PlantDetail_harvest.png" >
-		</div>
-		<div class="harvest_det">
-			<p class="text_name">张三</p>
-			<p class="text_date">07/22 10:01</p>
-		</div>
-		<p class="harvest_weight"><em class="num">300</em>kg</p>
-	</li>
-	<li>
-		<div class="crop_pic">
-			<img src="../images/MemberFarm/PlantDetail_harvest.png" >
-		</div>
-		<div class="harvest_det">
-			<p class="text_name">张三</p>
-			<p class="text_date">07/22 10:01</p>
-		</div>
-		<p class="harvest_weight"><em class="num">300</em>kg</p>
-	</li>
-</ul>
+<ul class="harvests_information" id="harvests_information"></ul>
 <!-- 采收信息 无信息 -->
-<div class="no_information">
+<div class="no_information" id="harvest_noinfor" style="display: none;">
 	<img src="../images/MemberFarm/PlantDetail_icon5.png" class="no_icon">
 	<p class="no_tip">暂无采收信息</p>
 </div>
