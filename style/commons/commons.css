@@ -1,0 +1,201 @@
+@charset "utf-8";
+/* CSS Document */
+/*农场云项目的公用板块样式 */
+
+
+/* margin-top */
+.mt5{ margin-top:5px;}
+.mt10{ margin-top:10px;}
+.mt15{ margin-top:15px;}
+.mt20{ margin-top:20px;}
+.mt25{ margin-top:25px;}
+.mt30{ margin-top:30px;}
+/* margin-right */
+.mr5{ margin-right:5px;}
+.mr10{ margin-right:10px;}
+.mr15{ margin-right:15px;}
+.mr20{ margin-right:20px;}
+.mr25{ margin-right:25px;}
+.mr30{ margin-right:30px;}
+/* margin-bottom */
+.mb5{ margin-bottom:5px;}
+.mb10{ margin-bottom:10px;}
+.mb15{ margin-bottom:15px;}
+.mb20{ margin-bottom:20px;}
+.mb25{ margin-bottom:25px;}
+.mb30{ margin-bottom:30px;}
+/* margin-left */
+.ml5{ margin-left:5px;}
+.ml10{ margin-left:10px;}
+.ml15{ margin-left:15px;}
+.ml20{ margin-left:20px;}
+.ml25{ margin-left:25px;}
+.ml30{ margin-left:30px;}
+
+/* padding-top */
+.pt5{ padding-top:5px;}
+.pt10{ padding-top:10px;}
+.pt15{ padding-top:15px;}
+.pt20{ padding-top:20px;}
+.pt25{ padding-top:25px;}
+.pt30{ padding-top:30px;}
+/* padding-right */
+.pr5{ padding-right:5px;}
+.pr10{ padding-right:10px;}
+.pr15{ padding-right:15px;}
+.pr20{ padding-right:20px;}
+.pr25{ padding-right:25px;}
+.pr30{ padding-right:30px;}
+/* padding-bottom */
+.pb5{ padding-bottom:5px;}
+.pb10{ padding-bottom:10px;}
+.pb15{ padding-bottom:15px;}
+.pb20{ padding-bottom:20px;}
+.pb25{ padding-bottom:25px;}
+.pb30{ padding-bottom:30px;}
+/* padding-left */
+.pl5{ padding-left:5px;}
+.pl10{ padding-left:10px;}
+.pl15{ padding-left:15px;}
+.pl20{ padding-left:20px;}
+.pl25{ padding-left:25px;}
+.pl30{ padding-left:30px;}
+
+/* 基础默认样式去重 */
+html,body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,div,p,strong,em,i,b,font,a,span{ margin: 0;padding: 0;}
+body{ min-width:1000px; font-family:'微软雅黑'; background:none; font-size:12px; color:#525252;}
+a:hover,a:active,a:visited,a:focus{ text-decoration:none;}
+a:focus{ outline:none none; outline-offset:inherit; color:inherit;}
+ul,ol,li{ list-style:none;}
+img{ border:0;}
+button{ outline:none;}
+.fl{ float:left;}
+.fr{ float:right;}
+.clear{ clear:both;}
+.clear:after,.clear:before{ clear:both; content:""; display:block; visibility:hidden; height:0;}
+.star_red{ line-height:34px; padding:0 5px; color:red; font-family:'宋体';}
+.star_red i{ padding-right:5px; font-family:'微软雅黑'; font-style:normal; color:#525252;}
+.inline_block{ display:inline-block;}
+.opacity_b30{ background:#000; opacity:0.3; filter:alpha(opacity=30);}
+.opacity_b50{ background:#000; opacity:0.5; filter:alpha(opacity=50);}
+.opacity_w30{ background:#fff; opacity:0.3; filter:alpha(opacity=30);}
+.opacity_w50{ background:#fff; opacity:0.5; filter:alpha(opacity=50);}
+.space6{ display:inline-block; width:6px;}
+.space12{ display:inline-block; width:12px;}
+.space24{ display:inline-block; width:24px;}
+
+/* bootstrap重置默认样式 */
+.btn { height:34px; line-height:20px; padding:6px 19px; box-sizing:border-box; font-family:'微软雅黑';}
+input[type=text].form-control{ height:34px; line-height:20px; padding:6px 10px; box-sizing:border-box; font-family:'微软雅黑';}
+/* 模态框图标 */
+.modal .modal-header .close, .modal .modal-header .close:link { background: url(../../images/order/farmingIco16.jpg) no-repeat; 
+margin-top:3px; border:none; opacity:1; filter:alpha(opacity=100); float:right; width:11px; height:11px;}
+.modal .modal-header .close:hover, .modal-header .close:focus { background:url(../../images/order/farmingIco17.jpg) no-repeat; opacity:1.0; filter:alpha(opacity=100);}
+/* 单选按钮 复选框 */
+.icheckbox_minimal-blue, 
+.iradio_minimal-blue { background:url(../../images/bootstrap/blue.png) no-repeat;}
+.iradio_minimal-blue { background-position: -100px 0;}
+.icheckbox_minimal-blue,
+.icheckbox_minimal-blue.checked { float:left; margin-top:1px;}
+.iradio_minimal-blue,
+.iradio_minimal-blue.checked { float:left; margin-top:1px;}
+.iRadioLable, 
+.iCheckLable{float:left; height:20px; line-height:20px; padding:0 15px 0 5px; margin-bottom:0; font-family:'微软雅黑'; font-weight:normal;}
+/* 日历小图标替换图标字体的样式和下拉菜单去除小图标 */
+.form_datetime{ position:relative; width:100%;}
+.form_datetime input{	width:100%;	height:34px; line-height:32px; padding:0 10px; border:1px solid #ccc; box-sizing:border-box;	}
+.form_datetime .add-on{	position:absolute;	right:5px;	top:10px;	width:14px;	height:14px;	}
+.form_datetime .add-on .icon-th{	display:block;	width:14px;	height:14px;	margin:0;	}
+[class*=" datetimepicker-dropdown"]{	margin:12px 0 0 6px;	}
+[class*=" datetimepicker-dropdown"]::before{ right:6px; top:-7px;}
+[class*=" datetimepicker-dropdown"]::after{ right:7px; top:-6px;}
+[class^="icon-"], [class*=" icon-"] { background-image: url("../../images/bootstrap/glyphicons-halflings.png");	background-position: 14px 14px;	background-repeat: no-repeat;	
+display: inline-block;	height: 14px;	line-height: 14px;	margin-top: 1px; vertical-align: text-top;	width: 14px;	}
+.icon-arrow-left {	background-position: -240px -96px;	}
+.icon-arrow-right {	background-position: -264px -96px;	}
+.icon-ok{	background-position: -288px 0px;	}
+.form_datetime .add-on .icon-th { background-position: -240px 0;	}
+.datetimepicker{ margin-left:8px;}
+.glyphicon-ok::before{ content:"";}
+
+/* 左侧导航重置 */
+.left_c { background:url(../../images/commons/lefbg.jpg);}
+.left_culi { background:url(../../images/commons/lefbg.jpg);}
+.left_culi .sidebarUl { display:none;}
+.left_culi:hover .sidebarUl { display:block;}
+.left_culi.on { background:url(../../images/commons/lef_hover.jpg);}
+.left_culi.on:hover { background:url(../../images/commons/lef_hover.jpg);}
+
+
+/* 通用的面包屑导航 */
+.breadNav_wap{ height:45px; border-bottom:1px solid #ddd;}
+.breadNav_lt{ float:left; line-height:42px;}
+.breadNav_lt > a{ font-size:14px; color:#323232;}
+.breadNav_lt > span{ padding:0 5px; font-size:16px;}
+.breadNav_lt > strong{ font-size:16px; font-weight:normal;}
+.breadNav_rt{ float:right;}
+.breadNav_rt .resumeList li{ float:left; line-height:42px;}
+.breadNav_rt .resumeList li a{ display:block; padding:0 10px; font-size:14px; color:#323232;}
+.breadNav_rt .resumeList li img{ float:left; margin:16px 5px 0 0;}
+.breadNav_rt .resumeList li.cur{ border-bottom:2px solid #33aedc;}
+/* 公用搜索 */
+.search-header{ height:34px; margin-top:20px;}
+.search-header-lt{ float:left;}
+.search-header-lt .public-search{ position:relative; float:left; margin-right:5px;}
+.search-header-lt .form-control{ width:264px; padding-left:25px; text-indent:0; color:#bababa;}
+.octicon-search02 { background:url(../images/commons/cjsearch_bg.png) no-repeat; display: block; float: left; height: 13px; left: 8px; position: absolute; top: 10px; width: 13px; z-index: 3;}
+
+/* 前面带下拉的搜索框 */
+.input_select .bootstrap-select{ margin-right:-1px;}
+.input_select .bootstrap-select .btn{ border-radius:4px 0 0 4px;}
+.input_select .form-control{ border-radius:0 4px 4px 0;}
+.input_select .input-block-level{ border-radius:4px;}
+/* 下拉菜单及各种尺寸的下拉菜单 */
+.inline_block .bootstrap-select{  width:220px;}
+.inline_block .bootstrap-select:not([class*="span"]):not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn){ width:220px;}
+.inline_block .bootstrap-select span{ font-size:12px; font-family:'微软雅黑';}
+.inline_block .bootstrap-select > .btn{ height:34px;}
+.inline_block .bootstrap-select.btn-group .dropdown-menu{ max-width:100%;}/* 下拉框最大宽度控制 */
+.bootSelt100 .bootstrap-select{  width:100px;}
+.bootSelt100 .bootstrap-select:not([class*="span"]):not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn){ width:100px;}
+.bootSelt220 .bootstrap-select{  width:220px;}
+.bootSelt220 .bootstrap-select:not([class*="span"]):not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn){ width:220px;}
+
+/* 表格模板 */
+.tableModel{ border-left:1px solid #e1e1e1; border-right:1px solid #e1e1e1; border-top:1px solid #e1e1e1; border-radius:10px 10px 0 0; border-collapse:separate; font-family:'微软雅黑'; color:#6c6a6b;}
+.tableModel thead{ border-radius:10px 10px 0 0;}
+.tableModel thead th ,.tableModel tbody td{ height:38px; text-align:center; border-bottom:1px solid #e1e1e1;}
+.tableModel thead th{ height:42px; background:#f0f5fb; font-size:14px; font-weight:normal;}
+.tableModel thead th:first-child{ border-radius:10px 0 0 0;}
+.tableModel thead th:last-child{ border-radius:0 10px 0 0;}
+.tableModel tbody tr td{ font-size:13px; background:#fcfcfc;}
+.tableModel tbody tr.odd td{ background:#fbfcfe;}
+.tableModel tbody tr.hover td{ background:#ecf7e6;}
+.tableModel .icheckbox_minimal-blue, .tableModel .icheckbox_minimal-blue.checked{ display:inline-block; float:none; margin:0;}
+.tableModel .iradio_minimal-blue, .tableModel .iradio_minimal-blue.checked{ display:inline-block; float:none; margin:0;}
+.zt_a2,.zt_a1,.zt_a3,.zt_a4,.zt_a5,.zt_a6,.zt_a7,.zt_a8,.zt_a9,.zt_a10,.zt_a11,.zt_a12,.zt_a13,.zt_a14,.zt_a15{line-height:22px; font-size:12px; display:inline-block; padding-left:3px;}
+.zt_a2 strong,.zt_a1 strong,.zt_a3 strong,.zt_a4 strong,.zt_a5 strong,.zt_a6 strong,.zt_a7 strong,.zt_a8 strong,
+.zt_a9 strong,.zt_a10 strong,.zt_a11 strong,.zt_a12 strong,.zt_a13 strong,.zt_a14 strong,.zt_a15 strong{ 
+	line-height:22px; display:inline-block; padding:0 10px 0 7px; font-weight:normal; margin-right:-3px; color:#6c6a6b;}
+
+/* 分页模板 */
+.pageModel_wap > table{ margin: auto;}
+.pageModel{ border:1px solid #e1e1e1; border-radius:5px; border-collapse:separate; font-size:12px;}
+.pageModel span{ float:left; height:32px; line-height:32px; border-right:1px solid #e1e1e1;}
+.pageModel span.page_first a{ border-radius:4px 0 0 4px;}
+.pageModel span.page_last{ border-right:0;}
+.pageModel a{ display:block; padding:0 13px; color:#9a9a9a; text-decoration:none;}
+.pageModel a:link ,.pageModel a:hover ,.pageModel a:focus ,.pageModel a:visited{ text-decoration:none;}
+.pageModel .page_Cur a{ background:#f6f6f8; color:#0088d2;}
+.pageModel .pageCount a:hover{ color:#9a9a9a;}
+.pageModel .current{ background:#f6f6f8; color:#9a9a9a; padding:0 13px;}
+/*  分页模板新增的跳转样式 */
+.pageModel-wap{ margin:40px auto;}
+.pageModel-wap .pageModel{ margin:0;}
+.page_jumpTo{ height:32px; line-height:32px; margin-left:10px; border:1px solid #e1e1e1; border-radius:5px; box-sizing:content-box;
+		text-align:center; color:#9a9a9a; overflow:hidden;}
+.page_jumpTo .txt_txt{ padding:0 13px;}
+.page_jumpTo .txt_ipt{ border-left:1px solid #e1e1e1; border-right:1px solid #e1e1e1;}
+.page_jumpTo .txt_ipt input{ width:60px; height:32px; border:none; text-align:center; font-size:12px; color:#6c6a6b;}
+.page_jumpTo .txt_btn .determine_btn{ display:block; width:50px; height:32px; border:0; background-color:#f6f6f8; 
+		font-size:12px; color:#9a9a9a; cursor:pointer;}

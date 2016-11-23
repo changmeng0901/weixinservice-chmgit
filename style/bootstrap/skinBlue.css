@@ -1,0 +1,100 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+.icheckbox_minimal, .iradio_minimal {
+    background: url("minimal.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: medium none;
+    cursor: pointer;
+    display: block;
+    height: 18px;
+    margin: 0;
+    padding: 0;
+    width: 18px;
+}
+.icheckbox_minimal, .icheckbox_minimal.static:hover {
+    background-position: 0 0;
+}
+.icheckbox_minimal.hover, .icheckbox_minimal:hover {
+    background-position: -20px 0;
+}
+.icheckbox_minimal.checked {
+    background-position: -40px 0;
+}
+.icheckbox_minimal.disabled {
+    background-position: -60px 0;
+    cursor: default;
+}
+.icheckbox_minimal.checked.disabled {
+    background-position: -80px 0;
+}
+.iradio_minimal, .iradio_minimal.static:hover {
+    background-position: -100px 0;
+}
+.iradio_minimal.hover, .iradio_minimal:hover {
+    background-position: -120px 0;
+}
+.iradio_minimal.checked {
+    background-position: -140px 0;
+}
+.iradio_minimal.disabled {
+    background-position: -160px 0;
+    cursor: default;
+}
+.iradio_minimal.checked.disabled {
+    background-position: -180px 0;
+}
+@media not all, not all, not all, not all {
+.icheckbox_minimal, .iradio_minimal {
+    background-image: url("minimal@2x.png");
+    background-size: 200px 20px;
+}
+}
+.icheckbox_minimal-blue, .iradio_minimal-blue {
+    background:url(../images/blue.png) no-repeat 0 0;
+    border: medium none;
+    cursor: pointer;
+    display: block;
+    height: 18px;
+    margin: 0;
+    padding: 0;
+    width: 18px;
+}
+.icheckbox_minimal-blue, .icheckbox_minimal-blue.static:hover {
+    background-position: 0 0;
+}
+.icheckbox_minimal-blue.hover, .icheckbox_minimal-blue:hover {
+    background-position: -20px 0;
+}
+.icheckbox_minimal-blue.checked {
+    background-position: -40px 0;
+}
+.icheckbox_minimal-blue.disabled {
+    background-position: -60px 0;
+    cursor: default;
+}
+.icheckbox_minimal-blue.checked.disabled {
+    background-position: -80px 0;
+}
+.iradio_minimal-blue, .iradio_minimal-blue.static:hover {
+    background-position: -100px 0;
+}
+.iradio_minimal-blue.hover, .iradio_minimal-blue:hover {
+    background-position: -120px 0;
+}
+.iradio_minimal-blue.checked {
+    background-position: -140px 0;
+}
+.iradio_minimal-blue.disabled {
+    background-position: -160px 0;
+    cursor: default;
+}
+.iradio_minimal-blue.checked.disabled {
+    background-position: -180px 0;
+}
+@media not all, not all, not all, not all {
+.icheckbox_minimal-blue, .iradio_minimal-blue {
+    background-image: url("blue@2x.png");
+    background-size: 200px 20px;
+}
+}
