@@ -147,9 +147,10 @@
 		margin-right:0;
 		}
 	.video_header_list .p_text .km_icon{
-		width:32px;
+		width:24px;
 		height:20px;
-		margin-top:7px;
+		margin-top:0px;
+		margin-right:0;
 		}
 	.video_header_list .p_text .mp_icon{
 		width:20px;
@@ -174,6 +175,10 @@
 	.video_header_list .item_scence .p_text{
 		max-width: 100%;
 	}
+	.video_header_list .item_qycard,
+	.video_header_list .item_scence{
+		display:none;
+		}
 	/*播放列表*/
 	.aerial_playlist{
 		position:absolute;
@@ -608,14 +613,15 @@
 		border-right: 1px solid #292828;
 		box-sizing: border-box;
 	}
-	.video_header_list2 .item2.item_qycard{
-		display: block;
+	.video_header_list2 .item_qycard,
+	.video_header_list2 .item_scence{
+		display: none;
 		min-width: 1.8rem;
 	}
-	.video_header_list2 .item2.item_scence{
-		display: block;
-		min-width: 1.8rem;
-	}
+	.video_header_list2 .item_qycard.block,
+	.video_header_list2 .item_scence.block{
+		display:block;
+		}
 	.video_header_list2 .item2 img{
 		vertical-align: middle;
 		margin-top: -0.1rem;

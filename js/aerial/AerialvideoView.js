@@ -319,7 +319,7 @@ var shareOnoff = true;
 			if( data.description != ''){
 				$('#scene_description').append(data.description);
 			}else{
-				$('.item_scence').hide();	
+				$('.item_scence').removeClass('block');	
 			}
 			if( data.logo_img == "1" ){ 
 				//如果企业、logo为true就显示
@@ -329,9 +329,9 @@ var shareOnoff = true;
 			}
 			if( data.business_card_show == "1"  ){
 				//如果头部企业名片为true就显示
-				$('.item_qycard').show();
+				$('.item_qycard').addClass('block');	
 			}else{
-				$('.item_qycard').hide();
+				$('.item_qycard').removeClass('block');	
 			}
 			if(data.track_list==""){
 				$('.aerial_map').hide();
@@ -479,10 +479,10 @@ var shareOnoff = true;
 						}
 						
 						if( that.attr("data-description")!= ''){
-							$('.item_scence').show();	
+							$('.item_scence').addClass('block');	
 							$('#scene_description').html(that.attr("data-description"));
 						}else{
-							$('.item_scence').hide();	
+							$('.item_scence').removeClass('block');	
 						}
 						//头部计算
 						var oWindowW = $(window).width();
@@ -639,6 +639,10 @@ var shareOnoff = true;
 			
 			
 			if($(window).width()>$(window).height()){
+				//resize到横屏时，模态框隐藏掉
+				$("#CardModal").hide();
+				$("#SceneModal").hide();
+				$(".modal-backdrop").hide();
 				headerLen = $(".video_header_list2 li:visible").length;
 				$(".video_header_list2 li:visible").css("width", parseInt($(".video_header_list2").width()/headerLen) );
 				
@@ -648,9 +652,23 @@ var shareOnoff = true;
 					$("#video_block").removeClass("invisible");
 					shareOnoff = false;
 				}
-				
-				
+	
 			}else{
+				//resize到竖屏时，判断模态框之前是不是打开的
+				if($("#CardModal").hasClass("in")){
+					$("#CardModal").show();
+					$(".modal-backdrop.fade").show();
+				}else{
+					$("#CardModal").hide();
+					$(".modal-backdrop").hide();
+				}
+				if($("#SceneModal").hasClass("in")){
+					$("#SceneModal").show();
+					$(".modal-backdrop.fade").show();
+				}else{
+					$("#SceneModal").hide();
+					$(".modal-backdrop").hide();
+				}
 				headerLen = $(".video_header_list2 li:visible").length;
 				$(".video_header_list2 li:visible").css("width", "inherit");
 				if(shareOnoff){
