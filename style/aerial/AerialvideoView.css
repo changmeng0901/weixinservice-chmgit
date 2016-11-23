@@ -1,7 +1,8 @@
 @charset "utf-8";
 /* CSS Document */
 .modal-dialog .i_close{
-	background: url(../../images/bootstrap/farmingIco17.jpg) no-repeat center center;
+	background: url(../../images/aerial/icon_closeL2.png) no-repeat center center;
+	background-size: 100% 100%;
 }
 /*-----------------------------------------------------航拍视频横屏样式-------------------------------------*/
 @media all and (orientation : landscape) { 
@@ -349,9 +350,9 @@
 	}
 	.modal-header .i_close{
 		float: right;
-		width: 0.4rem;
-		height: 0.4rem;
-		margin-top: 0.182rem;
+		width: 0.6rem;
+		height: 0.6rem;
+		margin-top: 0.132rem;
 	}
 	.modal-header .i_close img{
 		width: 100%;
@@ -408,11 +409,8 @@
 		width: 5.2rem;
 	}
 	.card_dialog .card_dd p{
-		height: 0.68rem;
 		line-height: 0.68rem;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		overflow: hidden;
+		word-break: break-all;
 	}
 	.card_dialog .card_dd p img{
 		width: 0.4rem;
@@ -451,8 +449,8 @@
 	}
 	.scene_dialog .i_close{
 		cursor: pointer;
-		width: 0.4rem;
-		height: 0.4rem;
+		width: 0.6rem;
+		height: 0.6rem;
 	    position: absolute;
 	    right: 0.4rem;
 	    top: 0.4rem;
@@ -1008,9 +1006,9 @@
 	}
 	.modal-header .i_close{
 		float: right;
-		width: 0.4rem;
-		height: 0.4rem;
-		margin-top: 0.2rem;
+		width: 0.6rem;
+		height: 0.6rem;
+		margin-top: 0.1rem;
 	}
 	.modal-header .i_close img{
 		width: 100%;
@@ -1070,11 +1068,8 @@
 		width: 6.5rem;
 	}
 	.card_dialog .card_dd p{
-		height: 0.68rem;
 		line-height: 0.68rem;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		overflow: hidden;
+		word-break: break-all;
 	}
 	.card_dialog .card_dd p img{
 		width: 0.5rem;
@@ -1114,10 +1109,10 @@
 	}
 	.scene_dialog .i_close{
 		cursor: pointer;
-		width: 0.4rem;
-		height: 0.4rem;
+		width: 0.6rem;
+		height: 0.6rem;
 	    position: absolute;
-	    right: 0.6rem;
+	    right: 0.4rem;
 	    top: 0.4rem;
 	}
 	.scene_dialog .i_close img{
