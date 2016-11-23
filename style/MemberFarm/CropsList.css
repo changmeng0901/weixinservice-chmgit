@@ -77,6 +77,11 @@ input:focus{
 	background-image: url(../../images/MemberFarm/CropsList_icon2_2.png);
 }
 /*种植作物列表主体内容*/
+.greenhouse,
+.monitor,
+.sensor{
+	background-color: #fff;
+}
 .croplist_tabbd{
 	padding-top: 1.53846rem;
 }
@@ -136,11 +141,23 @@ input:focus{
 	width: 0.53846rem;
 	height: 1.46154rem;
 }
+.crop_content .dl_arrow a{
+	display: block;
+	height: 100%;
+}
 .crop_content .dl_arrow img{
 	width: 0.30769rem;
 	height: 0.53846rem;
 	margin-top: 0.46154rem;
 	vertical-align: top;
+}
+/*无数据*/
+.nodata_block{
+	margin: 1.30788rem 0;
+	padding: 2rem 0;
+	background-color: #fff;
+	text-align: center;
+	font-size: 0.46154rem;
 }
 
 

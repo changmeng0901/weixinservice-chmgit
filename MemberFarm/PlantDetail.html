@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
 <meta name="format-detection" content="telephone=no" />
-	<title>会员农场</title>
+	<title>作物详情</title>
 	<link rel="stylesheet" type="text/css" href="../style/swiper/idangerous.swiper2.7.6.css">
 	<link rel="stylesheet" type="text/css" href="../style/commons/commons.css">
 	<link rel="stylesheet" type="text/css" href="../style/MemberFarm/PlantDetail.css">
@@ -24,17 +24,17 @@
 <div class="cropinfo_hd">
 	<dl class="dl_dl clear">
 		<dt class="dl_dt">
-			<img src="../images/MemberFarm/CropsList_pic1.png" >
+			<img id="plantImg" src="../images/MemberFarm/CropsList_pic1.png" >
 		</dt>
 		<dd class="dl_dd">
-			<strong class="crop_name">油菜</strong>
-			<p class="variety_name">小油菜珍妃</p>
-			<p class="plant_time">2016/03/01-2016/08/11</p>
+			<strong class="crop_name" id="plantName">油菜</strong>
+			<p class="variety_name" id="breedName">小油菜珍妃</p>
+			<p class="plant_time" id="plantTime">2016/03/01-2016/08/11</p>
 		</dd>
 	</dl>
 </div>
 <div class="cropinfo_bd">
-	<p class="life_cycle"><span class="text_cycle">开花结果期</span><span class="text_day">（第123天）</span></p>
+	<p class="life_cycle"><span class="text_cycle" id="periodName">开花结果期</span><span class="text_day" id="alreayPlantDays">（第123天）</span></p>
 	<div class="progress_block"><span class="progress_bar"></span></div>
 	<p class="present_cycle">目前处于<span class="text_cyle">采收期</span><span class="color_bloack">，还有10天采收结束</span></p>
 </div>

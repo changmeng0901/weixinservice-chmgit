@@ -69,7 +69,6 @@ $.ajax({
 // ajax加载右侧数据
 ParameterMethod2 = makeParameterMethod('phone.view.device');
 pageUrl2 = getTestUrl +"/rest/1.0/phoneView?v=1.0&format=json"+ ParameterMethod2 + ParameterField+ParameterVerify;
-alert(pageUrl2)
 $.ajax({
     type: "GET",
     timeout: 1000,
@@ -146,31 +145,36 @@ function InitPlantData(_data){
         var strong_list = '';
         var dl_list='';
         var $strong_list = $('#zhongzxx_content');
-        for(var i=0;i<_data.length;i++){
+        if(_data == '' || _data == 'undefined'){
+            strong_list = '<div class="nodata_block">暂无数据</div>';
+            $strong_list.append( strong_list );
+        }else{
+            for(var i=0;i<_data.length;i++){
 
-            var _list = _data[i].tunnelRealPlant;
-            for(var j=0;j<_list.length;j++){
-                dl_list +=  '<dl class="dl_dl clear">'+
-                                '<dt class="dl_dt">'+
-                                    '<img src="'+_list[j].plantImg+'" >'+
-                                '</dt>'+
-                                '<dd class="dl_dd">'+
-                                    '<p class="crop_name">'+_list[j].plantName+'</p>'+
-                                    '<p class="crop_time">定值时间：<span>'+_list[j].plantBeginTime+'</span></p>'+
-                                '</dd>'+
-                                '<dd class="dl_arrow">'+
-                                    '<a href="PlantDetail.html">'+
-                                        '<img src="../images/MemberFarm/CropsList_arrow.png" >'+
-                                    '</a>'+
-                                '</dd>'+
-                            '</dl>';
+                var _list = _data[i].tunnelRealPlant;
+                for(var j=0;j<_list.length;j++){
+                    dl_list +=  '<dl class="dl_dl clear" realPlantId="'+ _list[j].realPlantId +'">'+
+                                    '<dt class="dl_dt">'+
+                                        '<img src="'+_list[j].plantImg+'" >'+
+                                    '</dt>'+
+                                    '<dd class="dl_dd">'+
+                                        '<p class="crop_name">'+_list[j].plantName+'</p>'+
+                                        '<p class="crop_time">定值时间：<span>'+_list[j].plantBeginTime+'</span></p>'+
+                                    '</dd>'+
+                                    '<dd class="dl_arrow">'+
+                                        '<a href="javascript:;" onclick="ViewPlant(this)">'+
+                                            '<img src="../images/MemberFarm/CropsList_arrow.png" >'+
+                                        '</a>'+
+                                    '</dd>'+
+                                '</dl>';
+                }
+                strong_list += '<strong class="text_title">'+_data[i].tunnelName+'</strong>'+
+                               '<div class="greenhouse mtf1 pl10 pr10" id="greenhouse'+i+'">'+dl_list+'</div>';
+                // alert(dl_list);
             }
-            strong_list += '<strong class="text_title">'+_data[i].tunnelName+'</strong>'+
-                           '<div class="mtf1 pl10 pr10" id="greenhouse'+i+'">'+dl_list+'</div>';
-            // alert(dl_list);
+            
+            $strong_list.append( strong_list );
         }
-        
-        $strong_list.append( strong_list );
           
 }
 // 物联网设备函数
@@ -182,45 +186,60 @@ function InitMonitorData(_data){
         var svideo = _data.device;
         var $monitor = $('#monitor');
         var $sensor = $('#sensor');
-        for(var i=0;i<mvideo.length;i++){
+        if(mvideo == '' || mvideo == 'undefined'){
+            // 监控暂无数据
+            monitor_list = '<div class="nodata_block" style="margin:0;">暂无数据</div>';
+            $monitor.append( monitor_list );
+        }else{
+            for(var i=0;i<mvideo.length;i++){
 
-            monitor_list += '<dl class="dl_dl clear">'+
-                            '<dt class="dl_dt">'+
-                                '<img src="../images/MemberFarm/CropsList_monitor.png" >'+
-                            '</dt>'+
-                            '<dd class="dl_dd">'+
-                                '<p class="crop_name">'+mvideo[i].videoName+'</p>'+
-                                '<p class="crop_time">'+mvideo[i].tunnelName+'</span></p>'+
-                            '</dd>'+
-                            '<dd class="dl_arrow">'+
-                                '<a href="PlantDetail.html">'+
-                                    '<img src="../images/MemberFarm/CropsList_arrow.png" >'+
-                                '</a>'+
-                            '</dd>'+
-                        '</dl>';
-        }  
-        for(var i=0;i<svideo.length;i++){
+                monitor_list += '<dl class="dl_dl clear" videoId="'+ mvideo[i].videoId +'">'+
+                                '<dt class="dl_dt">'+
+                                    '<img src="../images/MemberFarm/CropsList_monitor.png" >'+
+                                '</dt>'+
+                                '<dd class="dl_dd">'+
+                                    '<p class="crop_name">'+mvideo[i].videoName+'</p>'+
+                                    '<p class="crop_time">'+mvideo[i].tunnelName+'</span></p>'+
+                                '</dd>'+
+                                '<dd class="dl_arrow">'+
+                                    '<a href="PlantDetail.html">'+
+                                        '<img src="../images/MemberFarm/CropsList_arrow.png" >'+
+                                    '</a>'+
+                                '</dd>'+
+                            '</dl>';
+            } 
+            $monitor.append( monitor_list ); 
+        }
+        if(svideo == '' || svideo == 'undefined'){
+            // 传感器暂无数据
+            sensor_list = '<div class="nodata_block" style="margin:0;">暂无数据</div>';
+            $sensor.append( sensor_list );
+        }else{
+            for(var i=0;i<svideo.length;i++){
 
-            sensor_list += '<dl class="dl_dl clear">'+
-                            '<dt class="dl_dt">'+
-                                '<img src="../images/MemberFarm/CropsList_sensor" >'+
-                            '</dt>'+
-                            '<dd class="dl_dd">'+
-                                '<p class="crop_name">'+svideo[i].deviceName+'</p>'+
-                                '<p class="crop_time">'+svideo[i].tunnelName+'</span></p>'+
-                            '</dd>'+
-                            '<dd class="dl_arrow">'+
-                                '<a href="PlantDetail.html">'+
-                                    '<img src="../images/MemberFarm/CropsList_arrow.png" >'+
-                                '</a>'+
-                            '</dd>'+
-                        '</dl>';
-        }  
-        $monitor.append( monitor_list );
-        $sensor.append( sensor_list );
-
+                sensor_list += '<dl class="dl_dl clear" deviceId="'+ svideo[i].deviceId +'">'+
+                                '<dt class="dl_dt">'+
+                                    '<img src="../images/MemberFarm/CropsList_sensor.png" >'+
+                                '</dt>'+
+                                '<dd class="dl_dd">'+
+                                    '<p class="crop_name">'+svideo[i].deviceName+'</p>'+
+                                    '<p class="crop_time">'+svideo[i].tunnelName+'</span></p>'+
+                                '</dd>'+
+                                '<dd class="dl_arrow">'+
+                                    '<a href="PlantDetail.html">'+
+                                        '<img src="../images/MemberFarm/CropsList_arrow.png" >'+
+                                    '</a>'+
+                                '</dd>'+
+                            '</dl>';
+            }  
+            $sensor.append( sensor_list );
+        }
           
 }
 function initBindDomEvent(){
     
+}
+
+function ViewPlant(obj){
+    window.location.href="http://192.168.21.187/weixinservice/MemberFarm/PlantDetail.html?enterpriseInfoId=2&realPlantId="+$(obj).parents('.dl_dl').attr('realplantid')+"&domain=http://192.168.21.188:8080&phone=13693047153";
 }
