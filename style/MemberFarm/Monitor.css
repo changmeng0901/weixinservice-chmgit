@@ -1,0 +1,326 @@
+@charset "utf-8";
+
+
+html,body{
+	width: 100%;
+	min-width: 100%;
+	min-height: 100%;
+}
+body{
+	background-color: #f7f7f7;
+}
+/*去除谷歌自带的橘色边框*/
+input:focus{
+	outline:none
+}
+.overflowH{
+	overflow: hidden;
+}
+.mtf1{
+	margin-top: -1px;
+}
+.pl10{
+	padding-left: 0.29412rem;
+}
+.pr10{
+	padding-right: 0.29412rem;
+}
+.white_nowrap{
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+/*监控页面*/
+.monitor_tabhd{
+	height: 2.05882rem;
+	background-color: #fff;
+}
+.monitor_tabhd .items{
+	float: left;
+	width: 33.333%;
+	height: 2.05882rem;
+	padding: 0.23529rem 0;
+	border-bottom: 1px solid #f4f4f4;
+	border-right: 1px solid #fff;
+	box-sizing: border-box;
+	text-align: center;
+	overflow: hidden;
+}
+.monitor_tabhd .items .cIcon{
+	display: inline-block;
+	width: 0.76471rem;
+	height: 0.76471rem;
+	margin-bottom: 0.11765rem;
+	vertical-align: top;
+	background-size: 100% 100%;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+.monitor_tabhd .items .icon1{
+	background-image: url(../../images/MemberFarm/Monitor_icon1_1.png);
+}
+.monitor_tabhd .items .icon2{
+	background-image: url(../../images/MemberFarm/Monitor_icon2_1.png);
+}
+.monitor_tabhd .items .icon3{
+	background-image: url(../../images/MemberFarm/Monitor_icon3_1.png);
+}
+.monitor_tabhd .text_text{
+	height: 0.58824rem;
+	line-height: 0.58824rem;
+	font-size: 0.47059rem;
+	color: #999;
+	overflow: hidden;
+}
+.monitor_tabbd .tab_content{
+	display: none;
+}
+/*当前状态*/
+.monitor_tabhd .items.cCur{
+	background-color: #f7f7f7;
+	border-right: 1px solid #f4f4f4;
+}
+.monitor_tabhd .items.cCur .text_text{
+	color: #84b845;
+}
+.monitor_tabhd .items.cCur .icon1{
+	background-image: url(../../images/MemberFarm/Monitor_icon1_2.png);
+}
+.monitor_tabhd .items.cCur .icon2{
+	background-image: url(../../images/MemberFarm/Monitor_icon2_2.png);
+}
+.monitor_tabhd .items.cCur .icon3{
+	background-image: url(../../images/MemberFarm/Monitor_icon3_2.png);
+}
+/*swiper*/
+.swiper_live,
+.envir_video_cont,
+.trace_video_cont{
+	width: 100%;
+	height: 14rem;
+	background-color: #f7f7f7;
+	overflow: hidden;
+}
+.swiper_live .swiper-wrapper{
+	height: 100%;
+}
+.swiper_live .swiper-slide{
+	padding-top: 1.35294rem;
+	height: 100%;
+	box-sizing: border-box;
+}
+.live_video_cont{
+	display: inline-block;
+	width: 100%;
+	height: 10.58824rem;
+	vertical-align: middle;
+	background-color: red;
+	overflow: hidden;
+}
+.live_video_cont .video,
+.live_video_cont video{
+	height: 100%;
+	min-height: 100%;
+	background-color: #2a2a2a;
+}
+/*swiper 分页器样式*/
+.pagination {
+  position: absolute;
+  z-index: 20;
+  bottom: 0.70588rem;
+  width: 100%;
+  text-align: center;
+}
+.swiper-pagination-switch {
+  display: inline-block;
+  width: 0.35294rem;
+  height: 0.35294rem;
+  border-radius: 0.17647rem;
+  background: #555;
+  margin: 0 0.14706rem;
+  opacity: 0.8;
+  cursor: pointer;
+}
+.swiper-active-switch {
+  background: #84b845;
+}
+/*实况直播*/
+.live_textcont{
+	height: 3.52941rem;
+	overflow: hidden;
+}
+.live_textcont .blong_dikuai{
+	float: left;
+	display: none;
+	width: 100%;
+	height: 3.52941rem;
+	box-sizing: border-box;
+}
+.live_textcont .blong_dikuai{
+	height: 3.52941rem;
+	padding: 0 0.47059rem;
+	background-color: #fff;
+}
+.live_textcont .text_name{
+	height: 1.76471rem;
+	line-height: 1.73529rem;
+	border-bottom: 1px solid #ededed;
+	box-sizing: border-box;
+	font-size: 0.47059rem;
+	color: #1a1a1a;
+}
+.live_textcont .text_crop{
+	padding-top: 0.58824rem;
+	height: 1.76471rem;
+	box-sizing: border-box;
+	font-size: 0.38235rem;
+	color: #999;
+}
+/*视频追溯*/
+.envir_video_cont,
+.trace_video_cont{
+	padding-top: 1.35294rem;
+	padding-bottom: 1.35294rem;
+	box-sizing: border-box;
+}
+.trace_video_cont .video,
+.trace_video_cont video{
+	height: 100%;
+	min-height: 100%;
+	background-color: #2a2a2a;
+	overflow: hidden;
+}
+.trace_textcont,
+.take_textcont{
+	height: 3.52941rem;
+	padding: 0 0.47059rem;
+	box-sizing: border-box;
+	background-color: #fff;
+	overflow: hidden;
+}
+.trace_textcont .cont_hd,
+.take_textcont .cont_hd{
+	height: 1.76471rem;
+	padding: 0.17647rem 0;
+	border-bottom: 1px solid #ededed;
+	box-sizing: border-box;
+}
+.trace_textcont .sheed_name,
+.take_textcont .sheed_name{
+	height: 0.64706rem;
+	line-height: 0.64706rem;
+	margin-bottom: 0.05882rem;
+	font-size: 0.47059rem;
+	color: #1a1a1a;
+} 
+.trace_textcont .play_num,
+.take_textcont .take_time{
+	height: 0.64706rem;
+	line-height: 0.64706rem;
+	overflow: hidden;
+	font-size: 0.38235rem;
+	color: #999;
+}
+.trace_textcont .play_num img,
+.take_textcont .take_time img{
+	float: left;
+	width: 0.64706rem;
+	height: 0.44118rem;
+	margin: 0.08824rem 0.14706rem 0 0;
+	vertical-align: top;
+}
+.trace_textcont .cont_bd,
+.take_textcont .cont_bd{
+	height: 1.76471rem;
+	padding: 0.17647rem 0;
+	box-sizing: border-box;
+}
+.trace_textcont .play_time,
+.take_textcont .take_total{
+	margin-bottom: 0.05882rem;
+}
+.trace_textcont .play_time,
+.trace_textcont .crop_name,
+.take_textcont .take_total,
+.take_textcont .crop_name{
+	height: 0.64706rem;
+	line-height: 0.64706rem;
+	overflow: hidden;
+	font-size: 0.38235rem;
+	color: #999;
+}
+/*环境实况*/
+.take_photos_hd{
+	position: relative;
+	height: 9.64706rem;
+}
+.take_photos_hd .swiper_takePhotos,
+.take_photos_hd .swiper-wrapper{
+	height: 100%;
+}
+.take_photos_hd .swiper-slide{
+	height: 100%;
+	background-color: red;
+	overflow: hidden;
+}
+.take_photos_hd .swiper-slide img{
+	width: 100%;
+	min-height: 100%;
+}
+.take_photos_hd .take_page{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	z-index: 1;
+	height: 0.76471rem;
+	line-height: 0.76471rem;
+	padding: 0 0.29412rem;
+	background: url(../../images/commons/opacity_b50.png);
+	font-size: 0.41176rem;
+	color: #fff;
+}
+.take_photos_bd{
+	height: 1.47059rem;
+	padding: 0.58824rem 1rem;
+	box-sizing: border-box;
+	background-color: #424242;
+}
+/*slider滑块样式*/
+.cur-picnum{
+	display: none;
+}
+.ui-widget-content{
+	height: 0.29412rem;
+	border: none;
+	border-radius: 0.14706rem;
+	background-color: #029ded;
+}
+.ui-widget-content .ui-widget-header{
+	background-color: #6f6f6f;
+}
+.ui-widget-content .ui-state-default{
+	top: -0.26471rem;
+	width: 0.82353rem;
+	height: 0.82353rem; 
+	border-radius: 50%;
+	border: 0;
+	background-size: 100% 100%;
+	background: url(../../images/MemberFarm/Monitor_sliderbar.png) no-repeat center center;
+}
+.ui-widget-content .ui-state-default:focus{
+	outline: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

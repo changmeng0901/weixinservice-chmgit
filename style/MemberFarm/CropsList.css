@@ -1,0 +1,165 @@
+@charset "utf-8";
+
+
+html,body{
+	width: 100%;
+	height: 100%;
+	min-width: 100%;
+	min-height: 100%;
+}
+body{
+	background-color: #f7f7f7;
+}
+/*去除谷歌自带的橘色边框*/
+input:focus{
+	outline:none
+}
+.mtf1{
+	margin-top: -1px;
+}
+.pl10{
+	padding-left: 0.38462rem;
+}
+.pr10{
+	padding-right: 0.38462rem;
+}
+/*种植作物列表固定头部*/
+.croplist_tabhd{
+	position: fixed;
+	width: 100%;
+	left: 0;
+	top: 0;
+	z-index: 1;
+	background-color: #f7f7f7;
+	overflow: hidden;
+}
+.croplist_tabhd .items{
+	float: left;
+	width: 50%;
+	height: 1.53846rem;
+	line-height: 1.5rem;
+	border-bottom: 1px solid #e0e0e0;
+	box-sizing: border-box;
+	background-color: #fff;
+	font-size: 0.57692rem;
+	text-align: center;
+	color: #999999;
+}
+.croplist_tabhd .items i{
+	display: inline-block;
+	width: 0.61538rem;
+	height: 0.61538rem;
+	margin: 0.42308rem 0.30769rem 0 0;
+	background-size: 100% 100%;
+	vertical-align: top;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+.croplist_tabhd .items .icon_zhong{
+	background-image: url(../../images/MemberFarm/CropsList_icon1_1.png);
+}
+.croplist_tabhd .items .icon_wu{
+	background-image: url(../../images/MemberFarm/CropsList_icon2_1.png);
+}
+.croplist_tabhd .items:first-child{
+	border-right: 1px solid #e0e0e0;
+}
+/*当前状态样式*/
+.croplist_tabhd .items.cCur{
+	border-bottom: 1px solid #f7f7f7;
+	background-color: #f7f7f7;
+	color: #6fac24;
+}
+.croplist_tabhd .items.cCur .icon_zhong{
+	background-image: url(../../images/MemberFarm/CropsList_icon1_2.png);
+}
+.croplist_tabhd .items.cCur .icon_wu{
+	background-image: url(../../images/MemberFarm/CropsList_icon2_2.png);
+}
+/*种植作物列表主体内容*/
+.croplist_tabbd{
+	padding-top: 1.53846rem;
+}
+.crop_content{
+	display: none;
+}
+.crop_content .text_title{
+	position: relative;
+	display: block;
+	padding: 0.38462rem;
+	background-color: #f7f7f7;
+	font-size: 0.53846rem;
+	font-weight: normal;
+	color: #4bafdd;
+}
+.crop_content .dl_dl{
+	padding: 0.38462rem 0;
+	border-top: 1px solid #e0e0e0;
+}
+.crop_content .dl_dt{
+	float: left;
+	width: 1.46154rem;
+	height: 1.46154rem;
+	margin: 0 0.69231rem 0 0.11538rem;
+	overflow: hidden;
+}
+.crop_content .dl_dt img{
+	width: 1.46154rem;
+	height: 1.46154rem;
+	border-radius: 0.73077rem;
+	box-shadow: inset 0 0 0.07692rem 0px #727778;
+}
+.crop_content .dl_dd{
+	float: left;
+	width: 8.24rem;
+	height: 1.46154rem;
+}
+.crop_content .dl_dd .crop_name{
+	height: 0.69231rem;
+	line-height: 0.69231rem;
+	margin-bottom: 0.15385rem;
+	font-size: 0.57692rem;
+	color: #414141;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.crop_content .dl_dd .crop_time{
+	height: 0.61538rem;
+	line-height: 0.61538rem;
+	font-size: 0.46154rem;
+	color: #999999;
+	overflow: hidden;
+}
+.crop_content .dl_arrow{
+	float: right;
+	width: 0.53846rem;
+	height: 1.46154rem;
+}
+.crop_content .dl_arrow img{
+	width: 0.30769rem;
+	height: 0.53846rem;
+	margin-top: 0.46154rem;
+	vertical-align: top;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

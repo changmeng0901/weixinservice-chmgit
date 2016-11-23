@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="initial-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
+<meta name="format-detection" content="telephone=no" />
+	<title>会员农场</title>
+	<link rel="stylesheet" type="text/css" href="../style/swiper/idangerous.swiper2.7.6.css">
+	<link rel="stylesheet" type="text/css" href="../style/commons/commons.css">
+	<link rel="stylesheet" type="text/css" href="../style/MemberFarm/PlantDetail.css">
+</head>
+<body>
+
+<!-- 作物信息 -->
+<i class="line_hui"></i>
+<div class="plant_title clear" style="margin-top:0;">
+	<h3>作物信息</h3>
+	<a class="text_link" id="add_monitor" href="#">
+		<img src="../images/MemberFarm/PlantDetail_icon1.png" >监控
+	</a>
+</div>
+<div class="cropinfo_hd">
+	<dl class="dl_dl clear">
+		<dt class="dl_dt">
+			<img src="../images/MemberFarm/CropsList_pic1.png" >
+		</dt>
+		<dd class="dl_dd">
+			<strong class="crop_name">油菜</strong>
+			<p class="variety_name">小油菜珍妃</p>
+			<p class="plant_time">2016/03/01-2016/08/11</p>
+		</dd>
+	</dl>
+</div>
+<div class="cropinfo_bd">
+	<p class="life_cycle"><span class="text_cycle">开花结果期</span><span class="text_day">（第123天）</span></p>
+	<div class="progress_block"><span class="progress_bar"></span></div>
+	<p class="present_cycle">目前处于<span class="text_cyle">采收期</span><span class="color_bloack">，还有10天采收结束</span></p>
+</div>
+<!-- 物联网设备-传感器数据 -->
+<div class="plant_title clear">
+	<h3>物联网设备-传感器数据</h3>
+	<a class="text_link" id="add_exponent" href="#">
+		<img src="../images/MemberFarm/PlantDetail_icon2.png" >指数
+	</a>
+</div>
+<div class="sensor_data_wap">
+	<div class="sensor_container" id="sensor_container">
+		<div class="swiper_sensor">
+			<div class="swiper_slide slide_active">
+				<p class="text_name">空气温度</p>
+				<img src="../images/MemberFarm/PlantDetail_kongqwd.png" class="icon_sen">
+				<p class="text_val">20.5℃</p>
+				<i class="line_arrow"></i>
+			</div>
+			<div class="swiper_slide">
+				<p class="text_name">空气湿度</p>
+				<img src="../images/MemberFarm/PlantDetail_kongqsd.png" class="icon_sen">
+				<p class="text_val">90%</p>
+				<i class="line_arrow"></i>
+			</div>
+			<div class="swiper_slide">
+				<p class="text_name">空气露点</p>
+				<img src="../images/MemberFarm/PlantDetail_kongqld.png" class="icon_sen">
+				<p class="text_val">20.5℃</p>
+				<i class="line_arrow"></i>
+			</div>
+			<div class="swiper_slide">
+				<p class="text_name">二氧化碳</p>
+				<img src="../images/MemberFarm/PlantDetail_eryht.png" class="icon_sen">
+				<p class="text_val">20.5℃</p>
+				<i class="line_arrow"></i>
+			</div>
+			<div class="swiper_slide">
+				<p class="text_name">光照强度</p>
+				<img src="../images/MemberFarm/PlantDetail_guangzqd.png" class="icon_sen">
+				<p class="text_val">100lux</p>
+				<i class="line_arrow"></i>
+			</div>
+			<div class="swiper_slide">
+				<p class="text_name">土壤温度</p>
+				<img src="../images/MemberFarm/PlantDetail_turwd.png" class="icon_sen">
+				<p class="text_val">20.5℃</p>
+				<i class="line_arrow"></i>
+			</div>
+			<div class="swiper_slide">
+				<p class="text_name">土壤湿度</p>
+				<img src="../images/MemberFarm/PlantDetail_tursd.png" class="icon_sen">
+				<p class="text_val">50%</p>
+				<i class="line_arrow"></i>
+			</div>
+		</div>
+	</div>
+	<!-- 数据图表 -->
+	<div class="sensor_chart">
+		<div id="sensor_chart"></div>
+	</div>
+	<!-- 天周月 -->
+	<div class="dayweekmonth" id="dayweekmonth">
+		<span class="sCur">天</span>
+		<span class="sLine">周</span>
+		<span>月</span>
+	</div>
+	<div class="plant_title clear" style="border:0;">
+		<p class="text_tip">作物正在最适宜的环境中最终成长！</p>
+		<a class="text_link" id="contact_customer" href="#">
+			<img src="../images/MemberFarm/PlantDetail_icon3.png" >联系客服
+		</a>
+	</div>
+</div>
+<!-- 农事信息 -->
+<div class="plant_title clear">
+	<h3>农事信息</h3>
+</div>
+<div class="farm_information">
+	<dl class="dl_dl">
+		<dt class="dl_dt">
+			<p class="text_time">15:32</p>
+			<p class="text_date">08/03</p>
+			<i class="cPoint"></i>
+		</dt>
+		<dd class="dl_dd">
+			<p class="text_con white_nowrap">松土</p>
+			<p class="text_dec">平整土地，之后再平整后的地上摆放整的秧盘，然后覆盖上一部分与肥料混合浇透水，最后在覆盖上一层土壤，浇水，盖塑料薄膜完成对玉米的育苗工作</p>
+			<div class="farm_piclist clear" id="farm_piclist0">
+				<img src="../images/MemberFarm/PlantDetail_temp1.jpg" >
+				<img src="../images/MemberFarm/PlantDetail_temp2.jpg" >
+				<img src="../images/MemberFarm/PlantDetail_temp3.jpg" >
+			</div>
+		</dd>
+	</dl>
+	<dl class="dl_dl">
+		<dt class="dl_dt">
+			<p class="text_time">15:32</p>
+			<p class="text_date">08/03</p>
+			<i class="cPoint"></i>
+		</dt>
+		<dd class="dl_dd">
+			<p class="text_con white_nowrap">松土</p>
+			<p class="text_dec">平整土地，之后再平整后的地上摆放整的秧盘，然后覆盖上一部分与肥料混合浇透水，最后在覆盖上一层土壤，浇水，盖塑料薄膜完成对玉米的育苗工作</p>
+			<div class="farm_piclist clear" id="farm_piclist1">
+				<img src="../images/MemberFarm/PlantDetail_temp1.jpg" >
+				<img src="../images/MemberFarm/PlantDetail_temp2.jpg" >
+				<img src="../images/MemberFarm/PlantDetail_temp3.jpg" >
+			</div>
+		</dd>
+	</dl>
+</div>
+<!-- 农事信息 无信息 -->
+<div class="no_information">
+	<img src="../images/MemberFarm/PlantDetail_icon4.png" class="no_icon">
+	<p class="no_tip">暂无农事信息</p>
+</div>
+<!-- 采收信息 -->
+<div class="plant_title clear">
+	<h3>采收信息</h3>
+</div>
+<ul class="harvest_information">
+	<li>
+		<div class="crop_pic">
+			<img src="../images/MemberFarm/PlantDetail_harvest.png" >
+		</div>
+		<div class="harvest_det">
+			<p class="text_name">张三</p>
+			<p class="text_date">07/22 10:01</p>
+		</div>
+		<p class="harvest_weight"><em class="num">300</em>kg</p>
+	</li>
+	<li>
+		<div class="crop_pic">
+			<img src="../images/MemberFarm/PlantDetail_harvest.png" >
+		</div>
+		<div class="harvest_det">
+			<p class="text_name">张三</p>
+			<p class="text_date">07/22 10:01</p>
+		</div>
+		<p class="harvest_weight"><em class="num">300</em>kg</p>
+	</li>
+</ul>
+<!-- 采收信息 无信息 -->
+<div class="no_information">
+	<img src="../images/MemberFarm/PlantDetail_icon5.png" class="no_icon">
+	<p class="no_tip">暂无采收信息</p>
+</div>
+<!-- 主体内容结束 -->
+
+<!-- ****************************************************************************************** -->
+<!-- @@ 农事信息~~农事图片swiper @@ -->
+<div class="swiper-container swiper_farmpic" id="swiper_farmpic">
+	<div class="swiper-wrapper">
+		<div class="swiper-slide">
+			<i class="text_empty"></i>
+			<img class="pic" src="../images/MemberFarm/PlantDetail_temp1.jpg">
+		</div>
+		<div class="swiper-slide">
+			<i class="text_empty"></i>
+			<img class="pic" src="../images/MemberFarm/PlantDetail_temp2.jpg">
+		</div>
+		<div class="swiper-slide">
+			<i class="text_empty"></i>
+			<img class="pic" src="../images/MemberFarm/PlantDetail_temp3.jpg">
+		</div>
+	</div>
+	<div class="page_bclok" id="page_bclok">
+		<span class="opacity_c3"></span>
+		<p class="text_num"><span class="n_cur"></span>/<span class="n_total"></span></p>
+	</div>
+</div>
+<!-- ****************************************************************************************** -->
+
+
+<script type="text/javascript" src="../js/commons/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="../js/swiper/idangerous.swiper2.7.6.min.js"></script>
+<script type="text/javascript" src="../js/highcharts/highcharts.js"></script>
+<script type="text/javascript" src="../js/MemberFarm/PlantDetail.js"></script>
+</body>
+</html>

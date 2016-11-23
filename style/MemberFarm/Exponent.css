@@ -1,0 +1,446 @@
+@charset "utf-8";
+
+/*横屏样式*/
+@media all and (orientation : landscape){
+html,body{
+	min-width: 100%;
+	min-height: 100%;
+}
+body{
+	height: 19.38462rem;
+}
+}
+/*竖屏样式*/
+@media all and (orientation : portrait){
+html,body{
+	width: 100%;
+	height: 100%;
+	min-width: 100%;
+	min-height: 100%;
+	overflow: hidden;
+}
+}
+
+
+body{
+	background-color: #fff;
+}
+/*去除谷歌自带的橘色边框*/
+input:focus{
+	outline:none
+}
+.overflowH{
+	overflow: hidden;
+}
+.mtf1{
+	margin-top: -1px;
+}
+.pl10{
+	padding-left: 0.29412rem;
+}
+.pr10{
+	padding-right: 0.29412rem;
+}
+.white_nowrap{
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+
+.exponent_wapper{
+	position: relative;
+	height: 100%;
+	padding-bottom: 1.84615rem;
+	box-sizing: border-box;
+	background-color: #f7f7f7;
+}
+/*传感器数据主体*/
+.sensor_main{
+	display: none;
+}
+.swiper_sensor {
+    width: 12.30769rem;
+    min-width: 100%;
+    max-width: 100%;
+    height: 4.92308rem;
+	margin-bottom: 0.38462rem;
+	background-color: #fff;
+}
+.swiper_sensor .swiper-wrapper{
+	height: 100%;
+	min-height: 100%;
+	max-height: 100%;
+}
+.swiper_sensor .swiper-slide{
+	position: relative;
+	float: left;
+	height: 100%;
+	min-height: 100%;
+	max-height: 100%;
+	text-align: center;
+}
+.swiper_sensor .data_items{
+	position: relative;
+	float: left;;
+	width: 33.33%;
+	height: 100%;
+	text-align: center;
+}
+.swiper_sensor .text_name{
+	height: 1.07692rem;
+	line-height: 1.07692rem;
+	margin-top: 0.19231rem;
+	font-size: 0.38462rem;
+	color: #999;
+	overflow: hidden;
+}
+.swiper_sensor .icon_sen{
+	width: 1.30769rem;
+	height: 1.30769rem;
+	vertical-align: top;
+}
+.swiper_sensor .text_val{
+	height: 1.15385rem;
+	line-height: 1.15385rem;
+	font-size: 0.53846rem;
+	font-weight: bold;
+	color: #666;
+	overflow: hidden;
+}
+.swiper_sensor .line_arrow{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	display: none;
+	width: 100%;
+	height: 0.07692rem;
+	background-color: #6fac24;
+}
+.swiper_sensor .line_arrow:after{
+	position: absolute;
+	left: 50%;
+	bottom: 0.07692rem;
+	display: block;
+	border-style: solid solid solid solid;
+	border-width: 0 0.11538rem 0.11538rem 0.11538rem;
+	border-color: transparent transparent #6fac24 transparent; 
+	content: '';
+	height: 0;
+	overflow: hidden;
+}
+.swiper_sensor .data_items.dCur .line_arrow{
+	display: block;
+} 
+/*swiper 分页器样式*/
+.pagination {
+  position: absolute;
+  z-index: 20;
+  bottom: 0.46154rem;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+}
+.swiper-pagination-switch {
+  display: inline-block;
+  width: 0.35294rem;
+  height: 0.35294rem;
+  border-radius: 50%;
+  background: #555;
+  margin: 0 0.14706rem;
+  opacity: 0.8;
+  cursor: pointer;
+}
+.swiper-active-switch {
+  background: #84b845;
+}
+/**/
+.sensor_chart_wap{
+	padding: 0.38462rem;
+	background-color: #fff;
+}
+#sensor_chart{
+	height: 6.23077rem-;
+}
+.dayweekmonth{
+	width: 4.26rem;
+	height: 0.86rem;
+	margin: 0.07692rem auto 0;
+	border: 1px solid #84b845;
+	border-radius: 0.15385rem;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+.dayweekmonth span{
+	float: left;
+	display: block;
+	width: 33.33%;
+	height: 0.82rem;
+	line-height: 0.82rem;
+	box-sizing: border-box;
+	font-size: 0.38462rem;
+	text-align: center;
+	color: #84b845;
+}
+.dayweekmonth .sCur{
+	background-color: #84b845;
+	color: #fff;
+}
+.dayweekmonth .sLine{
+	border-right: 1px solid #84b845;
+	border-left: 1px solid #84b845;
+}
+
+/*指数主体*/
+.exponent_mian{
+	position: relative;
+	display: none;
+	height: 100%;
+	padding-top: 1.84615rem;
+	box-sizing: border-box;
+}
+.exponent_head{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 1.84615rem;
+	padding-top: 0.76923rem;
+	background-color: #fff;
+}
+.exponent_head .items{
+	float: left;
+	width: 33.3333%;
+	height: 1.07692rem;
+	line-height: 1rem;
+	border: 1px solid #fff;
+	border-radius: 0.19231rem;
+	box-sizing: border-box;
+	font-size: 0.46154rem;
+	text-align: center;
+	color: #4e5d7e;
+}
+.exponent_head .items.eCur{
+	border: 1px solid #d2d3d5;
+	background-color: #ecf0f3;
+}
+.exponent_body{
+	height: 100%;
+	background-color: #fff;
+}
+.exponent_body .tab_content{
+	position: relative;
+	height: 100%;
+	padding-bottom: 3rem;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+.tongjfx_total{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	z-index: 1;
+	width: 100%;
+	border-top: 2px solid #ccc;
+	background-color: #fff;
+}
+.tongjfx_total:after{
+	position: absolute;
+	left: 50%;
+	top: -11px;
+	margin-left: -9px;
+	content: '';
+	border-style: solid solid solid solid;
+	border-width: 0 9px 9px 9px;
+	border-color: transparent transparent #ccc transparent;
+}
+.tongjfx_total:before{
+	position: absolute;
+	left: 50%;
+	top: -8px;
+	z-index: 1;
+	margin-left: -8px;
+	content: '';
+	border-style: solid solid solid solid;
+	border-width: 0 8px 8px 8px;
+	border-color: transparent transparent #fff transparent;
+}
+.tongjfx_total .items{
+	float: left;
+	width: 33.3333%;
+	height: 2.92308rem;
+	padding-top: 0.23077rem;
+	box-sizing: border-box;
+	text-align: center;
+	overflow: hidden;
+}
+.tongjfx_total .items .text_num{
+	height: 1.38462rem;
+	line-height: 1.38462rem;
+	margin-bottom: 0.23077rem;
+	font-size: 1.03846rem;
+	color: #4c4c4c;
+	overflow: hidden;
+}
+.tongjfx_total .items .text_name{
+	height: 0.76923rem;
+	line-height: 0.76923rem;
+	font-size: 0.46154rem;
+	color: #808080;
+	overflow: hidden;
+}
+.tongjfx_total .items.cCur .text_num{
+	color: #ff3b30;
+}
+.maturity_chart{
+	width: 8.61538rem;
+	height: 8.61538rem;
+	margin: 1.34615rem auto 0;
+}
+#maturity_chart{
+	width: 100%;
+	height: 100%;
+}
+#maturity_chart .angular{
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+#maturity_chart .chart{
+	width: 100%;
+	height: 100%;
+}
+#maturity_chart canvas{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	max-width: 100%;
+	max-height: 100%;
+}
+#maturity_chart .percent {
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 100%;
+	height: 0.76923rem;
+	line-height: 0.76923rem;
+	margin-top: -0.76923rem;
+	font-size: 0.65385rem;
+	font-weight: bold;
+	text-align: center;
+}
+#maturity_chart .text_name{
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 100%;
+	height: 0.76923rem;
+	line-height: 0.76923rem;
+	margin-top: 0px;
+	font-size: 0.38462rem;
+	font-weight: bold;
+	text-align: center;
+	color: #b4b4b4;
+}
+.disease_block{
+	height: 100%;
+	padding: 0.76923rem 0;
+	box-sizing: border-box;
+	overflow: hidden; 
+}
+.disease_list{
+	height: 100%;
+	padding: 0 0.76923rem;
+	box-sizing: border-box;
+	overflow-y: auto; 
+}
+.disease_list .text_name{
+	height: 1.30769rem;
+	line-height: 1.30769rem;
+	font-size: 0.46154rem;
+	color: #666;
+}
+.disease_list .progress{
+	float: left;
+	width: 80%;
+	height: 0.76923rem;
+}
+.disease_list .bar_num{
+	float: left;
+	width: 20%;
+	height: 0.76923rem;
+	line-height: 0.76923rem;
+	padding-left: 0.19231rem;
+	box-sizing: border-box;
+	font-size: 0.38462rem;
+	overflow: hidden;
+}
+.exponent_chart{
+	height: 100%;
+	padding: 0.76923rem 0.38462rem;
+	box-sizing: border-box;
+}
+#exponent_chart{
+	width: 100%;
+	height: 100%;
+}
+/*固定底部*/
+.fixed_foot{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	z-index: 1;
+	width: 100%;
+	height: 1.84615rem;
+	padding: 0.19231rem 0;
+	box-sizing: border-box;
+	background-color: #7f7f7f;
+}
+.fixed_foot .fline{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	z-index: 1;
+	margin-left: -1px;
+	margin-top: -0.57692rem;
+	width: 0.07692rem;
+	height: 1.15385rem;
+	background-color: #4c4c4c;
+	overflow: hidden;
+}
+.fixed_foot .fitems{
+	float: left;
+	width: 50%;
+	box-sizing: border-box;
+	text-align: center;
+}
+.fixed_foot .fitems .ficons{
+	display: inline-block;
+	width: 0.76923rem;
+	height: 0.76923rem;
+	vertical-align: top;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-position: center center; 
+}
+.fixed_foot .fitems .f_chuan{
+	background-image: url(../../images/MemberFarm/Exponent_chuanW.png);
+}
+.fixed_foot .fitems .f_zhi{
+	background-image: url(../../images/MemberFarm/Exponent_zhiW.png);
+}
+.fixed_foot .fitems .text_name{
+	height: 0.61538rem;
+	line-height: 0.61538rem;
+	margin-top: 0.07692rem;
+	font-size: 0.38462rem;
+	color: #fff;
+}
+.fixed_foot .fitems.fCur .f_chuan{
+	background-image: url(../../images/MemberFarm/Exponent_chuanB.png);
+}
+.fixed_foot .fitems.fCur .f_zhi{
+	background-image: url(../../images/MemberFarm/Exponent_zhiB.png);
+}

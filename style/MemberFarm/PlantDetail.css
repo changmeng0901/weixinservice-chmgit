@@ -1,0 +1,507 @@
+@charset "utf-8";
+
+
+html,body{
+	width: 100%;
+	min-width: 100%;
+	min-height: 100%;
+}
+body{
+	background-color: #f7f7f7;
+}
+/*去除谷歌自带的橘色边框*/
+input:focus{
+	outline:none
+}
+.overflowH{
+	overflow: hidden;
+}
+.mtf1{
+	margin-top: -1px;
+}
+.pl10{
+	padding-left: 0.38462rem;
+}
+.pr10{
+	padding-right: 0.38462rem;
+}
+.white_nowrap{
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+/*种植信息页面*/
+.line_hui{
+	display: block;
+	width: 100%;
+	height: 0.26923rem;
+	overflow: hidden;
+	background-color: #f7f7f7;
+}
+.plant_title{
+	position: relative;
+	margin-top: 0.26923rem;
+	padding: 0.23077rem 0.38462rem;
+	border-bottom: 1px solid #e0e0e0;
+	background-color: #fff;
+} 
+.plant_title h3{
+	float: left;
+	height: 0.76923rem;
+	line-height: 0.76923rem;
+	font-size: 0.53846rem;
+	font-weight: bold;
+	color: #6fac24;
+}
+.plant_title .text_tip{
+	float: left;
+	height: 0.76923rem;
+	line-height: 0.76923rem;
+	font-size: 0.38462rem;
+}
+.plant_title .text_link{
+	float: right;
+	height: 0.76923rem;
+	line-height: 0.76923rem;
+	font-size: 0.44462rem;
+	color: #4bafdd;
+	text-decoration: underline;
+}
+.plant_title .text_link img{
+	vertical-align: top;
+	width: 0.61538rem;
+	height: 0.61538rem;
+	margin: 0.05538rem 0.11538rem 0 0 ;
+}
+/*作物信息*/
+.cropinfo_hd{
+	padding: 0.38462rem 0.57692rem;
+	border-bottom: 1px dashed #e0e0e0;
+	background-color: #fff;
+}
+.cropinfo_hd .dl_dt{
+	float: left;
+	width: 2rem;
+	height: 2rem;
+	margin: 1px 0.57692rem 0 0;
+	padding: 1px;
+	border: 1px solid #e0e0e0;
+	border-radius: 50%;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+.cropinfo_hd .dl_dt img{
+	width: 100%;
+	height: 100%;
+}
+.cropinfo_hd .dl_dd{
+	float: left;
+	width: 8.26923rem;
+}
+.cropinfo_hd .dl_dd .crop_name{
+	height: 0.76923rem;
+	line-height: 0.76923rem;
+	font-size: 0.57692rem;
+	font-weight: bold;
+	color: #414141;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.cropinfo_hd .dl_dd .variety_name{
+	height: 0.53846rem;
+	line-height: 0.53846rem;
+	margin-top: 0.07692rem;
+	font-size: 0.42308rem;
+	color: #999;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.cropinfo_hd .dl_dd .plant_time{
+	height: 0.53846rem;
+	line-height: 0.53846rem;
+	margin-top: 0.15385rem;
+	font-size: 0.42308rem;
+	color: #999;
+	overflow: hidden;
+}
+.cropinfo_bd{
+	padding: 0.38462rem 0.57692rem;
+	background-color: #fff;
+}
+.cropinfo_bd .life_cycle{
+	margin-bottom: 0.19231rem;
+	font-size: 0.46154rem;
+	text-align: center;
+	color: #050505;
+}
+.cropinfo_bd .life_cycle .text_day{
+	padding-left: 0.19231rem;
+	color: #327eaf;
+}
+.progress_block{
+	position: relative;
+	height: 0.30769rem;
+	border-radius: 0.15385rem;
+	background-color: #e3e3e3;
+	overflow: hidden;
+}
+.progress_block .progress_bar{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 80%;
+	height: 100%;
+	border-radius: 0.15385rem;
+	background: -webkit-linear-gradient(left,#07ff01,#f4ff01,#ffbe01,#ff1900); /* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(left,#07ff01,#f4ff01,#ffbe01,#ff1900); /* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(left,#07ff01,#f4ff01,#ffbe01,#ff1900); /* Firefox 3.6 - 15 */
+	background: linear-gradient(left,#07ff01,#f4ff01,#ffbe01,#ff1900); /* 标准的语法 */
+	}
+.present_cycle{
+	margin-top: 0.19231rem;
+	text-align: right;	
+}
+.present_cycle .text_cyle{
+	font-weight: bold;
+	color: #f99303;
+}
+.present_cycle .color_bloack{
+	color: #050505;
+}
+/*物联网设备-传感器数据*/
+.sensor_data_wap{
+	background-color: #fff;
+}
+.sensor_container{
+	width: 100%;
+	overflow-y: hidden;
+}
+.swiper_sensor .swiper_slide{
+	position: relative;
+	float: left;
+	height: 3.84615rem;
+	text-align: center;
+}
+.swiper_sensor .text_name{
+	height: 1.07692rem;
+	line-height: 1.07692rem;
+	margin-top: 0.19231rem;
+	font-size: 0.38462rem;
+	color: #999;
+	overflow: hidden;
+}
+.swiper_sensor .icon_sen{
+	width: 1.30769rem;
+	height: 1.30769rem;
+	vertical-align: top;
+}
+.swiper_sensor .text_val{
+	height: 1.15385rem;
+	line-height: 1.15385rem;
+	font-size: 0.53846rem;
+	font-weight: bold;
+	color: #666;
+	overflow: hidden;
+}
+.swiper_sensor .line_arrow{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	display: none;
+	width: 100%;
+	height: 0.07692rem;
+	background-color: #6fac24;
+}
+.swiper_sensor .line_arrow:after{
+	position: absolute;
+	left: 50%;
+	bottom: 0.07692rem;
+	display: block;
+	border-style: solid solid solid solid;
+	border-width: 0 0.11538rem 0.11538rem 0.11538rem;
+	border-color: transparent transparent #6fac24 transparent; 
+	content: '';
+	height: 0;
+	overflow: hidden;
+}
+.swiper_sensor .slide_active .line_arrow{
+	display: block;
+}
+.sensor_chart{
+	padding: 0.38462rem 0.38462rem 0;
+}
+#sensor_chart{
+	height: 6.23077rem;
+}
+.dayweekmonth{
+	width: 4.26rem;
+	height: 0.86rem;
+	margin: 0.07692rem auto 0;
+	border: 1px solid #84b845;
+	border-radius: 0.15385rem;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+.dayweekmonth span{
+	float: left;
+	display: block;
+	width: 33.33%;
+	height: 0.82rem;
+	line-height: 0.82rem;
+	box-sizing: border-box;
+	font-size: 0.38462rem;
+	text-align: center;
+	color: #84b845;
+}
+.dayweekmonth .sCur{
+	background-color: #84b845;
+	color: #fff;
+}
+.dayweekmonth .sLine{
+	border-right: 1px solid #84b845;
+	border-left: 1px solid #84b845;
+}
+/*农事信息*/
+.farm_information {
+	background-color: #fff;
+}
+.farm_information .dl_dl{
+	position: relative;
+	min-height: 2.76923rem;
+	padding-left: 2.30769rem;
+}
+.farm_information .dl_dt{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 2.30769rem;
+	padding: 0.38462rem 0;
+	font-weight: normal;
+	text-align: center;
+}
+.farm_information .dl_dt .text_time{
+	font-size: 0.5rem;
+	color: #414141;
+}
+.farm_information .dl_dt .text_date{
+	font-size: 0.38462rem;
+	color: #909090;
+}
+.farm_information .dl_dt .cPoint{
+	position: absolute;
+	right: -0.30769rem;
+	top: 50%;
+	z-index: 1;
+	width: 0.46154rem;
+	height: 0.46154rem;
+	margin-top: -0.23077rem;
+	background: url(../../images/MemberFarm/CropsList_point.png) center center;
+	background-size: 100% 100%;
+}
+.farm_information .dl_dd{
+	min-height: 2.76923rem;
+	padding: 0px 0.38462rem 0.38462rem 0.57692rem;
+	border-left: 0.15385rem solid #f7f7f7;
+	box-sizing: border-box;
+}
+.farm_information .dl_dd .text_con{
+	height: 0.96154rem;
+	line-height: 0.96154rem;
+	padding-top: 0.53846rem;
+	box-sizing: content-box;
+	font-size: 0.53846rem;
+	font-weight: bold;
+	color: #414141;
+	overflow: hidden;
+}
+.farm_information .dl_dd .text_dec{
+	max-height: 1.53846rem;
+	line-height: 0.76923rem;
+	font-size: 0.46154rem;
+	overflow: hidden;
+}
+.farm_piclist{
+	max-height: 8.38462rem;
+	margin-right: -0.19231rem;
+	overflow: hidden;
+}
+.farm_piclist img{
+	float: left;
+	width: 2.659rem;
+	height: 2.659rem;
+	margin: 0.19231rem 0.19231rem 0 0;
+}
+/*swiper农事图片*/
+.swiper_farmpic{
+	position: fixed;
+	left: 0;
+	top: 0;
+	display: none;
+	width: 100%; 
+	background-color: #000;
+}
+.swiper_farmpic .swiper-slide{
+	width: 100%;
+	text-align: center;
+}
+.swiper_farmpic .swiper-slide .text_empty{
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+.swiper_farmpic .swiper-slide .pic{
+	width: 11.53846rem;
+	height: 12.30769rem;
+	vertical-align: middle;
+}
+.swiper_farmpic .page_bclok{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	z-index: 1;
+	width: 100%;
+	padding: 0.38462rem;
+	box-sizing: border-box;
+	font-size: 0.46154rem;
+	text-align: right;
+	color: #fff;
+}
+.swiper_farmpic .page_bclok .opacity_c3{
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: -1;
+	width: 100%;
+	height: 100%;
+	background-color: #2a2a2a;
+}
+.swiper_farmpic .page_bclok .n_cur{
+	font-size: 0.53846rem;
+}
+.swiper_farmpic .page_bclok .n_total{
+	font-size: 0.46154rem;
+}
+
+
+/*采收信息*/
+.harvest_information{
+	margin-top: -1px;
+	padding: 0 0.38462rem;
+	background-color: #fff;
+}
+.harvest_information li{
+	padding: 0.38462rem 0;
+	border-top: 1px dashed #e0e0e0;
+	overflow: hidden;
+}
+.harvest_information .crop_pic{
+	float: left;
+	width: 1.23077rem;
+	height: 1.23077rem;
+	margin: 0 0.57692rem 0 0.30769rem;
+	border: 1px solid #e0e0e0;
+	box-sizing: border-box;
+	border-radius: 50%;
+	overflow: hidden;
+}
+.harvest_information .crop_pic img{
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+.harvest_information .harvest_det{
+	float: left;
+	width: 4.92308rem;
+}
+.harvest_information .harvest_det .text_name{
+	height: 0.61538rem;
+	line-height: 0.61538rem;
+	font-size: 0.5rem;
+	color: #333;
+}
+.harvest_information .harvest_det .text_date{
+	height: 0.53846rem;
+	line-height: 0.53846rem;
+	margin-top: 0.07692rem;
+	font-size: 0.42308rem;
+	color: #999;
+}
+.harvest_information .harvest_weight{
+	float: right;
+	width: 3.64615rem;
+	height: 1.23077rem;
+	line-height: 1.23077rem;
+	font-size: 0.42308rem;
+	text-align: right;
+	overflow: hidden;
+}
+.harvest_information .harvest_weight .num{
+	font-size: 0.76923rem;
+	font-style: normal;
+	color: #00a0e9;
+}
+/*无信息样式*/
+.no_information{
+	padding: 1.07692rem 0;
+	background-color: #fff;
+	text-align: center;
+}
+.no_information .no_icon{
+	width: 1.23077rem;
+	height: 1.23077rem;
+}
+.no_information .no_tip{
+	margin-top: 0.38462rem;
+	font-size: 0.53846rem;
+	font-weight: bold;
+	color: #ccc;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
