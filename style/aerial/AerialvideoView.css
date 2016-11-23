@@ -652,6 +652,12 @@
 		height: 8.08rem;
 		background-color: #000;
 	}
+	.invisible{
+		visibility:hidden;
+		}
+	.invisible > div{
+		display:none;
+		}
 	#example-video_Flash_api,
 	object,
 	object param{
@@ -1175,6 +1181,9 @@
 		height: 100%;
 		background:url(../../images/commons/opacity_b50.png);
 	}
+	.WeChat_share.block{
+		display:block;
+		}
 	.WeChat_share .share_pos{
 		position: absolute;
 		right: 0.7692rem;

@@ -97,7 +97,7 @@ var latPo;
 				arrFnum = [];
 
 var onoffBtn = true;
-
+var shareOnoff = true;
 
 //(8)地图航线
 ;(function ($) {
@@ -351,15 +351,24 @@ var onoffBtn = true;
 				},700);
 			onoffBtn = true;
 
-
-			$('.WeChat_share .WeChat_img2').click(function(){
+			
+			/*$('.WeChat_share .WeChat_img2').click(function(){
 				$('.WeChat_share').hide();
 				$('body').css('overflow','auto');
+				if(navigator.userAgent.indexOf("Android")>0){
+					$("#video_block").removeClass("invisible");
+					$("#video_block>div").show();
+					
+				}
 			});
 			$('#WeChat_shareBtn').click(function(){
 				$('.WeChat_share').show();
 				$('body').css('overflow','hidden');
-			});
+				if(navigator.userAgent.indexOf("Android")>0){
+					$("#video_block").addClass("invisible");
+					$("#video_block>div").hide();
+				}
+			});*/
 			
 			//头部计算
 			var oWindowW = $(window).width();
@@ -627,21 +636,64 @@ var onoffBtn = true;
 				$(".item_EV").show();
 				$(".item_ISO").show();	
 			}
+			
+			
 			if($(window).width()>$(window).height()){
 				headerLen = $(".video_header_list2 li:visible").length;
-				$(".video_header_list2 li:visible").css("width", parseInt($(".video_header_list2").width()/headerLen) )
+				$(".video_header_list2 li:visible").css("width", parseInt($(".video_header_list2").width()/headerLen) );
+				
+				if(shareOnoff){
+					shareOnoff = true;
+				}else{
+					$("#video_block").removeClass("invisible");
+					shareOnoff = false;
+				}
+				
+				
 			}else{
 				headerLen = $(".video_header_list2 li:visible").length;
-				$(".video_header_list2 li:visible").css("width", "inherit")
+				$(".video_header_list2 li:visible").css("width", "inherit");
+				if(shareOnoff){
+					$('.WeChat_share').removeClass("block");
+					$('body').css('overflow','auto');
+					$("#video_block").removeClass("invisible");
+					shareOnoff = true;
+				}else{
+					$('.WeChat_share').addClass("block");
+					$('body').css('overflow','hidden');
+					$("#video_block").addClass("invisible");
+					shareOnoff = false;
+				}
+				if(navigator.userAgent.indexOf("Android")>0){
+					$(".pano_dialog").addClass("pano_android");
+					$('#WeChat_shareBtn').click(function(){
+						$('.WeChat_share').addClass("block");
+						$('body').css('overflow','hidden');
+						$("#video_block").addClass("invisible");
+						shareOnoff = false;
+					});
+					$('.WeChat_share .WeChat_img2').click(function(){
+						$('.WeChat_share').removeClass("block");
+						$('body').css('overflow','auto');
+						$("#video_block").removeClass("invisible");
+						shareOnoff = true;
+					});
+				}else{
+					$(".pano_dialog").removeClass("pano_android");	
+					$('#WeChat_shareBtn').click(function(){
+						$('.WeChat_share').addClass("block");
+						$('body').css('overflow','hidden');
+						shareOnoff = false;
+					});
+					$('.WeChat_share .WeChat_img2').click(function(){
+						$('.WeChat_share').removeClass("block");
+						$('body').css('overflow','auto');
+						shareOnoff = true;
+					});
+				}
 			}
 			
-			if(navigator.userAgent.indexOf("Android")>0){
-				$(".pano_dialog").addClass("pano_android");
-				$(".WeChat_share .share_pos").addClass("share_android");
-			}else{
-				$(".pano_dialog").removeClass("pano_android");	
-				$(".WeChat_share .share_pos").removeClass("share_android");
-			}
+			
 
 		},
 		initializeGoogelMaps: function (data,index_) {
