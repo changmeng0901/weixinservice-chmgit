@@ -187,6 +187,7 @@ var onoffBtn = true;
 						view_count : groupstr.list[0].view_count,//播放次数(浏览量)
 						good_count : groupstr.list[0].good_count,//点赞量(好评)
 						group_video_id:groupstr.list[0].group_video_id,//
+						thumbnail_image_url:groupstr.list[0].thumbnail_image_url,//视频图片
 						base_id : groupstr.list[0].base_id,
 						video_list_show : groupstr.video_list_show,  //左侧视频列表展开或收缩
 						business_card_show : groupstr.business_card_show,  //头部企业名片显示隐藏
@@ -236,6 +237,7 @@ var onoffBtn = true;
 								  "' data-description='"+ data[item].description +
 								  "' aerial-name='"+ data[item].aerial_name +
 								  "' group-video-id='"+ data[item].group_video_id +
+								  "' thumbnail-image-url='"+ data[item].thumbnail_image_url +
 								  "'><img src='"+data[item].thumbnail_image_url+
 								  "' /><p class='video_stro font12'><img src='../images/aerial/icon_mnplay.png' /><span>"+data[item].aerial_name+
 								  "</span></p><p class='play_time' style='display:"+style_time+";'>"+data[item].video_timer+
@@ -379,7 +381,7 @@ var onoffBtn = true;
 				$(".video_header_list2 li:visible").css("width", "inherit")
 			}
 
-			AerialVideoView.creatVideo(data.file_url);//初始化，创建视频插件
+			AerialVideoView.creatVideo(data.file_url,data.thumbnail_image_url);//初始化，创建视频插件
 
 		},
 		initBindDomEvent: function(){
@@ -492,8 +494,8 @@ var onoffBtn = true;
 							headerLen = $(".video_header_list2 li:visible").length;
 							$(".video_header_list2 li:visible").css("width", "inherit")
 						}
-
-						AerialVideoView.creatVideo2(that.attr("data-video-url"));//左侧菜单点击时，每次都得重新创建一次视频插件，否则会出问题
+						
+						AerialVideoView.creatVideo2(that.attr("data-video-url"),that.attr("thumbnail-image-url"));//左侧菜单点击时，每次都得重新创建一次视频插件，否则会出问题
 						
 					},
 					error: function(e) {
@@ -606,7 +608,7 @@ var onoffBtn = true;
 
 			}else{
 				$("#video_block").css({
-					"height" : "8.08rem"
+					"height" : "6.462rem"
 				});
 				//$(".bigbtn_map").hide();
 				$(".aerial_map").css({
@@ -782,9 +784,9 @@ var onoffBtn = true;
 
 		},
 
-		creatVideo : function(videoURL){
+		creatVideo : function(videoURL,imgURL){
 			
-			scriptAdd  = '<video id="example-video" class="video-js vjs-default-skin vjs-big-play-centered" style="width:100%;height:100%;" controls><source src="'+videoURL+'" type="application/x-mpegURL"/></video>';
+			scriptAdd  = '<video id="example-video" class="video-js vjs-default-skin vjs-big-play-centered" style="width:100%;height:100%;" preload="auto" poster="'+imgURL+'" controls><source src="'+videoURL+'" type="application/x-mpegURL"/></video>';
 			$("#video_block").html(scriptAdd);
 			player = videojs("example-video");
 			player.pause();
@@ -804,16 +806,16 @@ var onoffBtn = true;
 								latPo = po.fromContainerPixelToLatLng(point)
 								AnimateMarker.setPosition( latPo );
 								map.setCenter(latPo);
-								$("#longitude").html( LingPlanSite[index_] );
-								$("#latitude").html( LatPlanSite[index_] );
+								$("#longitude").html( LatPlanSite[index_] );
+								$("#latitude").html( LingPlanSite[index_] );
 								$('#altitude').html( AltPlanSite[index_]+'米' );
 								$("#isoitude").html( ISOPlanSite[index_] );
 								$("#evitude").html( EVPlanSite[index_] );
 								$("#kmitude").html( ShutterPlanSite[index_] );
 								$("#gyitude").html( FnumPlanSite[index_] );
 								
-								$("#longitude_pos").html( LingPlanSite[index_] );
-								$("#latitude_pos").html( LatPlanSite[index_] );
+								$("#longitude_pos").html( LatPlanSite[index_] );
+								$("#latitude_pos").html( LingPlanSite[index_] );
 								$('#altitude_pos').html( AltPlanSite[index_]+'米' );
 								index_++;
 							}else{
@@ -857,9 +859,9 @@ var onoffBtn = true;
 			})	
 			
 		},
-		creatVideo2 : function(videoURL){
+		creatVideo2 : function(videoURL,imgURL){
 			player.dispose();//清理
-			scriptAdd  = '<video id="example-video" class="video-js vjs-default-skin vjs-big-play-centered" style="width:100%;height:100%;" controls><source src="'+videoURL+'" type="application/x-mpegURL"/></video>';
+			scriptAdd  = '<video id="example-video" class="video-js vjs-default-skin vjs-big-play-centered" style="width:100%;height:100%;" preload="auto" poster="'+imgURL+'" controls><source src="'+videoURL+'" type="application/x-mpegURL"/></video>';
 			$("#video_block").html(scriptAdd);
 			player = videojs("example-video");
 			player.pause();

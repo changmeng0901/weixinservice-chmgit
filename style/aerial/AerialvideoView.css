@@ -102,10 +102,10 @@
 		cursor:pointer;
 		}
 	.video_header_list .qy_logo{
-		width:90px;
-		height:24px;
-		vertical-align:top;
-		margin-top:5px;
+		width:90px-;
+		height:24px-;
+		vertical-align:middle;
+		margin-top:5px-;
 		}
 	.video_header_list .jd_cor{
 		display:inline-block;
@@ -629,18 +629,19 @@
 		top: 0;
 	}
 	.video_header_list2 .qy_logo{
-		width: 3.6rem;
-		height: 1.03rem;
-		margin-top: 0.185rem;
-		vertical-align: top;
+		width: 3.6rem-;
+		height: 1.03rem-;
+		margin-top: middle;
+		vertical-align: top-;
 	}
 	.video_header_list2 .item2  .mp_icon{
-		width: 0.65rem;
-		height: 0.5rem;
+		
+    width: 1.1154rem;
+    height: 0.8462rem;
 	}
 	.video_header_list2 .item2  .cj_icon{
-		width: 0.60rem;
-		height: 0.52rem;
+		width: 0.9231rem;
+		height: 0.8462rem;
 	}
 	/*视频主体*/
 	#AerialPlayer{
@@ -679,6 +680,7 @@
 		width: 100%;
 		padding: 0.4rem 0.23rem;
 		height: 6.4rem;
+		margin-bottom:-1px;
 		box-sizing: border-box;
 		overflow: hidden;
 		background-color: #262626;
@@ -689,7 +691,7 @@
 		padding:1px;
 		border-radius: 5px;
 		box-sizing: border-box;
-		background: #fff;
+		background: #191919;
 		overflow: hidden;
 	}
 	#map-canvas{
@@ -699,6 +701,7 @@
 		position:absolute;
 		left:10px;
 		bottom:10px;
+		margin-bottom:10px;
 		z-index:1;
 		padding:0.1154rem 0.2rem;
 		border-radius:5px;
@@ -743,6 +746,7 @@
 		color:#7cff62;
 		}
 	.LangLat_area .p_text .gd_cor{
+		width:1.82rem;
 		color:#faed53;
 		}
 	.smallbtn_map{
@@ -817,7 +821,7 @@
 		padding: 0.2rem 0.4rem;
 		height: 6.52rem-;
 		box-sizing: content-box;
-		background-color: #000;
+		background-color: #262626;
 	}
 	.playlist_list .item{
 		padding: 0.19rem 0;
@@ -870,7 +874,7 @@
 		display:block;
 		height:0.4615rem;
 		line-height:0.4615rem;
-		margin-top:0.0769rem;
+		margin:0.2rem 0;
 		font-size:0.3846rem;
 		color:#fff;
 		white-space:nowrap;
@@ -895,7 +899,7 @@
 		}
 	.playlist_list .dd_foot{
 		margin-top:0.1538rem;
-		padding-top:0.1923rem;
+		padding-top:0.0923rem;
 		}
 	.playlist_list .sm_plays,
 	.playlist_list .sm_Opt{
@@ -985,7 +989,8 @@
 	.pano_dialog{
 		position: fixed;
 		left: 50%;
-		top: 50%;
+		top: 50%-;
+		top:0;
 	}
 	.modal-header .i_close{
 		float: right;
@@ -1006,7 +1011,8 @@
 	.card_dialog{
 		width: 10.8rem;
 		margin-left: -5.4rem;
-		margin-top: -5.15rem;
+		margin-top: -5.15rem-;
+		margin-top:4.292rem;
 	}
 	.card_dialog .modal-header{
 		padding: 0.4rem;
@@ -1074,7 +1080,8 @@
 	.scene_dialog{
 		width: 10.8rem;
 		margin-left: -5.4rem;
-		margin-top: -4.83rem;
+		margin-top: -4.83rem-;
+		margin-top:4.292rem;
 	}
 	.scene_dialog .modal-header{
 		padding: 0.4rem;
