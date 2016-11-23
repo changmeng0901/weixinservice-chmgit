@@ -147,15 +147,15 @@ var onoffBtn = true;
 			for (var item in data) {
 				
 				currentStyle = item == 0 ? 'icur' : '';
-				sliderItemStr  += '<dl class="item video-url '+currentStyle+
-								  '" data-video-url="'+ data[item].file_url +
-								  '" data-id="'+ data[item].id +
-								  '" base-id="'+ data[item].base_id +
-								  '" data-description="'+ data[item].description +
-								  '"><dt><img src="'+data[item].thumbnail_image_url+
-								  '" /><p class="video_stro font12"><img src="../images/aerial/icon_mnplay.png" /><span>'+data[item].aerial_name+
-								  '</span></p><i class="v_mark"></i></dt><dd>'+data[item].description
-								  +'</dd></dl>'
+				sliderItemStr  += "<dl class='item video-url "+currentStyle+
+								  "' data-video-url='"+ data[item].file_url +
+								  "' data-id='"+ data[item].id +
+								  "' base-id='"+ data[item].base_id +
+								  "' data-description='"+ data[item].description +
+								  "'><dt><img src='"+data[item].thumbnail_image_url+
+								  "' /><p class='video_stro font12'><img src='../images/aerial/icon_mnplay.png' /><span>"+data[item].aerial_name+
+								  "</span></p><i class='v_mark'></i></dt><dd>"+data[item].description
+								  +"</dd></dl>"
 			}
 			$playlistList.append(sliderItemStr);
 
