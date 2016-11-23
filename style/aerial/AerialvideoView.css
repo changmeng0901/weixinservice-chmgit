@@ -1,364 +1,932 @@
 @charset "utf-8";
 /* CSS Document */
+.modal-dialog .i_close{
+	background: url(../../images/bootstrap/farmingIco17.jpg) no-repeat center center;
+}
+/*-----------------------------------------------------航拍视频横屏样式-------------------------------------*/
+@media all and (orientation : landscape) { 
 
-/*航拍视频样式*/
-img{
-	vertical-align: middle;
-}
-html,body{
-	min-height: 100%;
-}
-dl,dt,dd,p{
-	margin: 0;
-}
-.font12{
-	font-size: 0.46rem;
-}
-.font13{
-	font-size: 0.5rem;
-}
-.font14{
-	font-size: 0.54rem;
-}
-.font15{
-	font-size: 0.58rem;
-}
-.font16{
-	font-size: 0.62rem;
-}
-body{
-	font-size: 0.46rem;
-}
-.color_y{
-	color: #ffae00;
-}
-.aerial_wapper{
-	position:absolute;
-	left:0;
-	top:0;
-	width:100%;
-	min-height: 100%;
-	background-color:#000;
+	img{
+		vertical-align: middle;
 	}
-.video_header_wap{
-	position: relative;
-	height: 1.4rem;
-	padding-right: 1.5rem;
-	background-color: #393a3c;
-}
+	html,body{
+		min-height: 100%;
+	}
+	dl,dt,dd,p,ul,ol{
+		margin: 0;
+	}
+	.font12{
+		font-size: 0.46rem;
+	}
+	.font13{
+		font-size: 0.5rem;
+	}
+	.font14{
+		font-size: 0.54rem;
+	}
+	.font15{
+		font-size: 0.58rem;
+	}
+	.font16{
+		font-size: 0.62rem;
+	}
+	body{
+		font-size: 0.46rem;
+		min-width: inherit;
+	}
+	.color_y{
+		color: #ffae00;
+	}
+	html{
+		height:100%;
+		background:none;
+		background-color:#000;
+		}
+	body{
+		position:relative;
+		min-width:1000px-;
+		height:100%;
+		min-height:100%;
+		}
+	.aerialvideo_body{
+		display: block;
+		width: 100%;
+		height: 100%;
+		min-height: 100%;
+		}
+	/*航拍视频头部*/
+	.video_header_wap{
+		position:relative;
+		padding-left:40px;
+		padding-right:36px;
+		width:100%;
+		height:34px;
+		background:url(../../images/commons/opacity_b50.png)-;
+		background:#3c3f44;
+		}
+	.video_header_wap .close_btn{
+		position:absolute;
+		right:0;
+		top:0;
+		width:36px;
+		height:34px;
+		padding:10px 12px;
+		box-sizing:border-box;
+		cursor:pointer;
+		}
+	.video_header_wap .close_btn img{
+		width:12px;
+		height:12px;
+		vertical-align:top;
+		}
+	.video_header_list .item1,
+	.video_header_list .item2{
+		float:left;
+		height:34px;
+		line-height:34px;
+		font-size: 0.38rem;
+		border-right:1px solid #292828;
+		box-sizing:border-box;
+		text-align:center;
+		}
+	.video_header_list .item1{
+		padding:0 10px;
+		}
+	.video_header_list .item2{
+		padding:6px 10px;
+		}
+	.video_header_list .onoff{
+		width:20px;
+		height:20px;
+		cursor:pointer;
+		}
+	.video_header_list .qy_logo{
+		width:90px;
+		height:24px;
+		vertical-align:top;
+		margin-top:5px;
+		}
+	.video_header_list .jd_cor{
+		display:inline-block;
+		color:#6cceff;
+		vertical-align: middle;
+		}
+	.video_header_list .wd_cor{
+		display:inline-block;
+		color:#7cff62;
+		vertical-align: middle;
+		}
+	.video_header_list .gd_cor{
+		display:inline-block;
+		color:#faed53;
+		vertical-align: middle;
+		}
+	.video_header_list .p_text{
+		display:inline-block;
+		max-width:80px;
+		height:20px;
+		line-height:20px;
+		font-weight:bold;
+		color:#fff;
+		word-break:break-all;
+		overflow:hidden;
+		vertical-align:top;
+		}
+	.video_header_list .p_text img{
+		vertical-align:top;
+		margin-right:5px;
+		}
+	.video_header_list .p_text .sm_icon{
+		width:20px;
+		height:20px;
+		margin-right:0;
+		}
+	.video_header_list .p_text .km_icon{
+		width:32px;
+		height:20px;
+		margin-top:7px;
+		}
+	.video_header_list .p_text .mp_icon{
+		width:20px;
+		height:14px;
+		margin-top:3px;
+		}
+	.video_header_list .p_text .cj_icon{
+		width:20px;
+		height:16px;
+		margin-top:2px;
+		}
+	.video_header_list .mp_text,
+	.video_header_list .cj_text{
+		cursor:pointer;
+		}
+	.video_header_list1{
+		position:absolute;
+		left:0;
+		top:0;
+		}
+	/*播放列表*/
+	.aerial_playlist{
+		position:absolute;
+		left:0;
+		top:34px;
+		bottom:0;
+		z-index:1000;
+		width:150px;
+		padding:10px;
+		box-sizing:border-box;
+		background-color:#282828;
+		overflow:auto;
+		}
+	.playlist_list .item{
+		position:relative;
+		width:130px;
+		height:72px;
+		margin-bottom:10px;
+		box-sizing:border-box;
+		cursor:pointer;	
+		}
+	.playlist_list .item dt{
+		position: relative;
+		width: 130px;
+		height: 72px;
+		overflow: hidden;
+		box-sizing: border-box;
+	}
+	.playlist_list .item dt img{
+		width: 100%;
+		height: 100%;
+	}
+	.playlist_list .item dt .v_mark{
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 1;
+		width: 100%;
+		height: 100%;
+		background:url(../../images/commons/opacity_b50.png);
+	}
+	.playlist_list .item dd{
+		display: none;
+	}
+	.playlist_list .item .video_stro{
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		height: 24px;
+		line-height: 24px;
+		padding: 0 5px;
+		box-sizing: border-box;
+		color: #fff;
+		font-size: 12px;
+		background:none;
+		white-space:nowrap;
+		text-overflow:ellipsis;
+		overflow:hidden;
+	}
+	.playlist_list .item .video_stro img{
+		width: 8px;
+		height: 12px;
+		vertical-align: top;
+		margin: 6px 5px 0 0;
+	}
+	.playlist_list .item.icur dt{
+		border:1px solid #83d542;
+	}
+	.playlist_list .item.icur dt .v_mark{
+		display: none;
+	}
+	.playlist_list .item.icur .video_stro{
+		background:url(../../images/commons/opacity_b50.png);
+	}
+	/*视频主体*/
+	#AerialPlayer{
+		position:relative;
+		}
+	.video-js{
+		width:100%;
+		height:100%;
+		}
+	.video_main_wap{
+		position:relative;
+		width: 100%;
+		overflow:hidden;
+		}
+	#example-video_Flash_api,
+	object,
+	object param{
+		width: 100%;
+		height: 100%;
+	}
+	.video-js .vjs-tech{
+		background-color: #312f2f;
+	}
+	/*地图*/
+	.aerial_map{
+		position:absolute;
+		left:20px;
+		bottom:40px;
+		z-index:6;
+		width:240px;
+		height:140px;
+		border:1px solid #666;
+		border-radius:10px;
+		box-sizing:border-box;
+		background-color:#fff;
+		overflow:hidden;
+		}
+	.google_map{
+		position: relative;
+		height: 100%;
+		padding:1px;
+		border-radius: 10px;
+		box-sizing: border-box;
+		background: #fff;
+		overflow: hidden;
+	}
+	#map-canvas{
+		border-radius: 10px;
+	}
+	.smallbtn_map{
+		position:absolute;
+		right:10px;
+		top:10px;
+		z-index:2;
+		width:34px;
+		height:34px;
+		cursor:pointer;
+		}
+	.smallbtn_map img,
+	.bigbtn_map img{
+		width:100%;
+		height:100%;
+		}
+	.bigbtn_map{
+		display:none;
+		position:absolute;
+		left:20px;
+		bottom:40px;
+		z-index:6;
+		width:40px;
+		height:40px;
+		cursor:pointer;
+		}
+	/*弹幕及弹幕设置框样式*/	
+		
+	/*模态框公用*/
+	.pano_dialog{
+		position: fixed;
+		left: 50%;
+		top: 50%;
+	}
+	.modal-header .i_close{
+		float: right;
+		width: 0.4rem;
+		height: 0.4rem;
+		margin-top: 0.182rem;
+	}
+	.modal-header .i_close img{
+		width: 100%;
+		height: 100%;
+	}
+	.modal-header .modal-title{
+		height: 0.764rem;
+		line-height: 0.764rem;
+		font-size: 0.4rem;
+	}
+	/*企业名片模态框*/
+	.card_dialog{
+		width: 8.8rem;
+		margin-left: -4.4rem;
+		margin-top: -3.91rem;
+		font-size: 0.4rem;
+	}
+	.card_dialog .modal-header{
+		padding: 0.2rem 0.28rem;
+		border-bottom: 1px solid #eee;
+	}
+	.card_dialog .modal-header .modal-title img{
+		width: 0.6rem;
+		height: 0.46rem;
+		margin: 0.152rem 0.2rem 0 0;
+		vertical-align: top;
+	}
+	.card_dialog .modal_body{
+		position: relative;
+		height: 6.2rem;
+		padding: 0.4rem 0.28rem;
+		margin-bottom: 0.4rem;
+		box-sizing: border-box;
+		overflow-y: auto;
+	}
+	.card_dialog .card_dl{
+		overflow: hidden;
+	}
+	.card_dialog .card_dt{
+		float: left;
+		width: 2.6rem;
+		height: 2.4rem;
+	}
+	.card_dialog .card_dt img{
+		width: 2.4rem;
+		height: 2.4rem;
+		border: 1px solid #f1f1f1;
+		box-sizing: border-box;
+		border-radius: 0.2rem;
+		background-color: #f1f1f1;
+	}
+	.card_dialog .card_dd {
+		float: left;
+		width: 5.2rem;
+	}
+	.card_dialog .card_dd p{
+		height: 0.68rem;
+		line-height: 0.68rem;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+	.card_dialog .card_dd p img{
+		width: 0.4rem;
+		height: 0.4rem;
+		margin-right: 0.2rem;
+	}
+	.card_dialog .title_intro{
+		display: block;
+		margin-top: 0.14rem;
+		padding: 0.14rem 0;
+		font-weight: normal;
+		font-size: 0.4rem;
+	}
+	.card_dialog .text_intro{
+		line-height: 0.8rem;
+		text-indent: 0.933rem;
+	}
 
-.close_btn{
-	position: absolute;
-	right: 0;
-	top: 0;
-	z-index: 0;
-	width: 1.5rem;
-	height: 1.4rem;
-	line-height: 1.4rem;
-	text-align: center;
-}
-.close_btn img{
-	width: 0.4rem;
-	height: 0.4rem;
-}
-.video_header_list .item{
-	float: left;
-	height: 1.4rem;
-	line-height: 1.4rem;
-	padding: 0 0.48rem;
-}
-.video_header_list .item img{
-	vertical-align: middle;
-	margin-top: -0.1rem;
-}
-.video_header_list .qy_logo{
-	width: 3.6rem;
-	height: 1.03rem;
-}
-.video_info .item{
-	border-right: 1px solid #292828;
-}
-.video_info .mp_icon{
-	width: 0.65rem;
-	height: 0.5rem;
-}
-.video_info .cj_icon{
-	width: 0.60rem;
-	height: 0.52rem;
-}
-/*视频*/
-.video_main_wap{
-	height: 7.2rem;
-	background-color: #f0ede5;
-}
-/*弹幕*/
-.danmu_wap{
-	display: none;
-	padding: 0.4rem 0.23rem;
-	background-color: #262626;
-}
-.danmu_wap{
-	display: none;
-	padding: 0.4rem 0.23rem;
-	background-color: #262626;
-}
+	/*场景介绍模态框*/
+	.scene_dialog{
+		width: 8.8rem;
+		margin-left: -4.4rem;
+		margin-top: -3.91rem;
+		font-size: 0.4rem;
+	}
+	.scene_dialog .modal-header{
+		padding: 0.2rem 0.28rem;
+		border-bottom: 1px solid #eee;
+	}
+	.scene_dialog .modal-header .modal-title img{
+		width: 0.6rem;
+		height: 0.46rem;
+		margin: 0.152rem 0.2rem 0 0;
+		vertical-align: top;
+	}
+	.scene_dialog .i_close{
+		cursor: pointer;
+		width: 0.4rem;
+		height: 0.4rem;
+	    position: absolute;
+	    right: 0.4rem;
+	    top: 0.4rem;
+	}
+	.scene_dialog .i_close img{
+		width: 100%;
+		height: 100%;
+	}
+	.scene_dialog .modal_body{
+		position: relative;
+		height: 6.2rem;
+		padding: 0.4rem 0.28rem;
+		margin: 1rem 0 0.4rem 0;
+		box-sizing: border-box;
+		overflow-y: auto;
+	}
+	.scene_dialog .card_dl{
+		overflow: hidden;
+	}
+	.scene_dialog .card_dt{
+		float: left;
+		width: 3.1rem;
+		height: 2.7rem;
+	}
+	.scene_dialog .card_dt img{
+		width: 2.7rem;
+		height: 2.7rem;
+		border: 1px solid #f1f1f1;
+		box-sizing: border-box;
+		border-radius: 0.2rem;
+		background-color: #f1f1f1;
+	}
+	.scene_dialog .card_dd {
+		float: left;
+		width: 6.5rem;
+	}
+	.scene_dialog .card_dd p{
+		height: 0.68rem;
+		line-height: 0.68rem;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+	.scene_dialog .card_dd p img{
+		width: 0.5rem;
+		height: 0.5rem;
+		margin-right: 0.2rem;
+	}
+	.scene_dialog .title_intro{
+		display: block;
+		padding: 0.2rem 0;
+		font-weight: normal;
+	}
+	.scene_dialog .text_intro{
+		line-height: 0.8rem;
+		text-indent: 0.92rem;
+	}
 
-/*地图*/
-.googlemap_wap{
-	display: none-;
-	padding: 0.4rem 0.23rem;
-	background-color: #262626;
-}
-.aerial_map{
-	height: 3.46rem;
-	border: 1px solid #f1f1f1;
-	border-radius: 0.2rem;
-	overflow: hidden;
-	background-color: #fff;
-}
+	/*分享模态框*/
+}		
+/*----------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------航拍视频竖屏样式----------------------------------------*/
+@media all and (orientation : portrait){ 
 
-/*视频列表*/
-.playlist_wap{
-	padding: 0.4rem;
-	background-color: #000;
-}
-.playlist_list{
-	height: 6.52rem;
-	overflow: auto;
-}
-.playlist_list .item{
-	padding: 0.19rem 0;
-	box-sizing: border-box;
-	overflow: hidden;
-}
-.playlist_list dt{
-	position: relative;
-	float: left;
-	width:3.8rem;
-	height: 2.88rem;
-	margin-right: 0.28rem;
-	box-sizing: border-box;
-	background-color: #fff;
-	overflow: hidden;
-	font-weight: normal;
-	color: #b4b4b4;
-}
-.playlist_list dt .v_mark{
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	background: url(../../images/commons/opacity_b50.png);
-}
-.playlist_list .video_stro{
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	height: 0.76rem;
-	line-height: 0.76rem;
-	padding: 0 0.12rem;
-	box-sizing: border-box;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
-}
-.playlist_list .video_stro img{
-	display: inline-block;
-	vertical-align: top;
-	width: 0.34rem;
-	height: 0.34rem;
-	margin: 0.2rem 0.12rem 0 0;
-}
-.playlist_list .text_title{
-	display: block;
-	width: 6.8rem;
-	height: 0.7rem;
-	line-height: 0.7rem;
-	margin-bottom: 0.12rem;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	font-weight: normal;
-	color: #fff;
-}
-.playlist_list .text_cont{
-	height: 2.1rem;
-	line-height: 0.7rem;
-	overflow: hidden;
-	color: #b4b4b4;
-}
-.playlist_list .icur dt{
-	border: 1px solid #83d542;
-}
-.playlist_list .icur .video_stro{
-	background: url(../../images/commons/opacity_b50.png);
-}
-.playlist_list .icur .video_stro img{
-	display: inline-block;
-}
-.playlist_list .icur .v_mark{
-	display: none;
-}
+	img{
+		vertical-align: middle;
+	}
+	html,body{
+		min-height: 100%;
+	}
+	dl,dt,dd,p{
+		margin: 0;
+	}
+	.font12{
+		font-size: 0.46rem;
+	}
+	.font13{
+		font-size: 0.5rem;
+	}
+	.font14{
+		font-size: 0.54rem;
+	}
+	.font15{
+		font-size: 0.58rem;
+	}
+	.font16{
+		font-size: 0.62rem;
+	}
+	body{
+		font-size: 0.46rem;
+		min-width: inherit;
+	}
+	.color_y{
+		color: #ffae00;
+	}
+	.aerialvideo_body{
+		display: block;
+		width: 100%;
+		height: 100%;
+		min-height: 100%;
+		}
+	.aerial_wapper22{
+		position:absolute;
+		left:0;
+		top:0;
+		width:100%;
+		min-height: 100%;
+		background-color:#000;
+		}
+	.video_header_wap{
+		position: relative;
+		height: 1.4rem;
+		padding-left: 0;
+		padding-right: 1.5rem;
+		background-color: #393a3c;
+	}
+	.video_header_list1{
+		display: none;
+	}
 
-/*模态框公用*/
-.pano_dialog{
-	position: fixed;
-	left: 50%;
-	top: 50%;
-}
-.modal-header .i_close{
-	float: right;
-	width: 0.4rem;
-	height: 0.4rem;
-}
-.modal-header .i_close img{
-	width: 100%;
-	height: 100%;
-}
-.modal-header .modal-title{}
-/*企业名片模态框*/
-.card_dialog{
-	width: 10.8rem;
-	margin-left: -5.4rem;
-	margin-top: -5.15rem;
-}
-.card_dialog .modal-header{
-	padding: 0.4rem;
-	border-bottom: 1px solid #eee;
-}
-.card_dialog .modal-header .modal-title img{
-	width: 0.7rem;
-	height: 0.54rem;
-	margin: 0.1rem 0.2rem 0 0;
-	vertical-align: top;
-}
-.card_dialog .modal_body{
-	position: relative;
-	height: 8.2rem;
-	padding: 0.4rem;
-	margin-bottom: 0.4rem;
-	box-sizing: border-box;
-	overflow-y: auto;
-}
-.card_dialog .card_dl{
-	overflow: hidden;
-}
-.card_dialog .card_dt{
-	float: left;
-	width: 3.1rem;
-	height: 2.7rem;
-}
-.card_dialog .card_dt img{
-	width: 2.7rem;
-	height: 2.7rem;
-	border: 1px solid #f1f1f1;
-	box-sizing: border-box;
-	border-radius: 0.2rem;
-	background-color: #f1f1f1;
-}
-.card_dialog .card_dd {
-	float: left;
-	width: 6.5rem;
-}
-.card_dialog .card_dd p{
-	height: 0.68rem;
-	line-height: 0.68rem;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-}
-.card_dialog .card_dd p img{
-	width: 0.5rem;
-	height: 0.5rem;
-	margin-right: 0.2rem;
-}
-.card_dialog .title_intro{
-	display: block;
-	padding: 0.2rem 0;
-	font-weight: normal;
-}
-.card_dialog .text_intro{
-	line-height: 0.8rem;
-	text-indent: 0.933rem;
-}
+	.close_btn{
+		position: absolute;
+		right: 0;
+		top: 0;
+		z-index: 0;
+		width: 1.5rem;
+		height: 1.4rem;
+		line-height: 1.4rem;
+		text-align: center;
+	}
+	.close_btn img{
+		width: 0.4rem;
+		height: 0.4rem;
+	}
+	.video_header_list2 .item1{
+		float: left;
+		display: none;
+	}
+	.video_header_list2{
+		float: right;
+	}
+	.video_header_list2 .item2{
+		display: none;
+		float: left;
+		height: 1.4rem;
+		line-height: 1.4rem;
+		padding: 0 0.48rem;
+		border-right: 1px solid #292828;
+		box-sizing: border-box;
+	}
+	.video_header_list2 .item2.item_qycard{
+		display: block;
+		min-width: 1.8rem;
+	}
+	.video_header_list2 .item2.item_scence{
+		display: block;
+		min-width: 1.8rem;
+	}
+	.video_header_list2 .item2 img{
+		vertical-align: middle;
+		margin-top: -0.1rem;
+	}
+	.video_header_list2 .item2 .mp_cor,
+	.video_header_list2 .item2 .cj_cor{
+		display: none;
+	}
+	.video_header_list2 .qy_logo{
+		width: 3.6rem;
+		height: 1.03rem;
+	}
+	.video_header_list2 .item2  .mp_icon{
+		width: 0.65rem;
+		height: 0.5rem;
+	}
+	.video_header_list2 .item2  .cj_icon{
+		width: 0.60rem;
+		height: 0.52rem;
+	}
+	/*视频主体*/
+	#AerialPlayer{
+		position:relative;
+		}
+	#video_block{
+		height: 8.08rem;
+		background-color: #000;
+	}
+	#example-video_Flash_api,
+	object,
+	object param{
+		width: 100%;
+		height: 100%;
+	}
+	.video_main_wap .video-js,
+	.video_main_wap video{
+		width: 100%;
+		height: 100%;
+		background-color: #fff;
+	}
+	.video-js .vjs-tech{
+		background-color: #312f2f;
+	}
 
-/*场景介绍模态框*/
-.scene_dialog{
-	width: 10.8rem;
-	margin-left: -5.4rem;
-	margin-top: -4.83rem;
-}
-.scene_dialog .modal-header{
-	padding: 0.4rem;
-	border-bottom: 1px solid #eee;
-}
-.scene_dialog .modal-header .modal-title img{
-	width: 0.7rem;
-	height: 0.54rem;
-	margin-right: 0.2rem;
-}
-.scene_dialog .i_close{
-	cursor: pointer;
-	width: 0.54rem;
-	height: 0.54rem;
-    position: absolute;
-    right: 0.6rem;
-    top: 0.4rem;
-}
-.scene_dialog .i_close img{
-	width: 100%;
-	height: 100%;
-}
-.scene_dialog .modal_body{
-	position: relative;
-	height: 8.2rem;
-	padding: 0.4rem;
-	margin: 1rem 0 0.4rem 0;
-	box-sizing: border-box;
-	overflow-y: auto;
-}
-.scene_dialog .card_dl{
-	overflow: hidden;
-}
-.scene_dialog .card_dt{
-	float: left;
-	width: 3.1rem;
-	height: 2.7rem;
-}
-.scene_dialog .card_dt img{
-	width: 2.7rem;
-	height: 2.7rem;
-	border: 1px solid #f1f1f1;
-	box-sizing: border-box;
-	border-radius: 0.2rem;
-	background-color: #f1f1f1;
-}
-.scene_dialog .card_dd {
-	float: left;
-	width: 6.5rem;
-}
-.scene_dialog .card_dd p{
-	height: 0.68rem;
-	line-height: 0.68rem;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-}
-.scene_dialog .card_dd p img{
-	width: 0.5rem;
-	height: 0.5rem;
-	margin-right: 0.2rem;
-}
-.scene_dialog .title_intro{
-	display: block;
-	padding: 0.2rem 0;
-	font-weight: normal;
-}
-.scene_dialog .text_intro{
-	line-height: 0.8rem;
-	text-indent: 0.92rem;
-}
+	/*弹幕及弹幕设置框样式*/	
 
-/*分享模态框*/
+	/*地图*/
+	.aerial_map{
+		position: relative-;
+		left: inherit;
+		top: inherit;
+		bottom: inherit;
+		right: inherit;
+		display: none-;
+		width: 100%;
+		padding: 0.4rem 0.23rem;
+		height: 6.4rem;
+		box-sizing: border-box;
+		overflow: hidden;
+		background-color: #262626;
+	}
+	.google_map{
+		position: relative;
+		height: 100%;
+		padding:1px;
+		border-radius: 5px;
+		box-sizing: border-box;
+		background: #fff;
+		overflow: hidden;
+	}
+	#map-canvas{
+		border-radius: 5px;
+	}
+	.smallbtn_map{
+		display: none;
+	}
+	.bigbtn_map{
+		display: none;
+	}
+
+	/*视频列表*/
+	.aerial_playlist{
+		display: none-;
+	}
+	.aerial_playlist{
+		display: block;
+		overflow: auto;
+		padding: 0.2rem 0.4rem;
+		height: 6.52rem;
+		box-sizing: content-box;
+		background-color: #000;
+	}
+	.playlist_list .item{
+		padding: 0.19rem 0;
+		box-sizing: border-box;
+		overflow: hidden;
+	}
+	.playlist_list dt{
+		position: relative;
+		float: left;
+		width:3.8rem;
+		height: 2.88rem;
+		margin-right: 0.28rem;
+		box-sizing: border-box;
+		background-color: #fff;
+		overflow: hidden;
+		font-weight: normal;
+		color: #b4b4b4;
+	}
+	.playlist_list dt img{
+		width: 100%;
+		height: 100%;
+	}
+	.playlist_list dt .v_mark22{
+		position: absolute;
+		left: 0;
+		top: 0;
+		display: none;
+		width: 100%;
+		height: 100%;
+		background: url(../../images/commons/opacity_b50.png);
+	}
+	.playlist_list dd{
+		height: 2.88rem;
+		overflow: hidden;
+	}
+	.playlist_list .video_stro{
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		height: 0.76rem;
+		line-height: 0.76rem;
+		padding: 0 0.12rem;
+		box-sizing: border-box;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+		color: #fff;
+	}
+	.playlist_list .video_stro img{
+		display: inline-block;
+		vertical-align: top;
+		width: 0.34rem;
+		height: 0.34rem;
+		margin: 0.2rem 0.12rem 0 0;
+	}
+	.playlist_list .text_title{
+		display: block;
+		width: 6.8rem;
+		height: 0.7rem;
+		line-height: 0.7rem;
+		margin-bottom: 0.12rem;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		font-weight: normal;
+		color: #fff;
+	}
+	.playlist_list .text_cont{
+		height: 2.1rem;
+		line-height: 0.7rem;
+		overflow: hidden;
+		color: #b4b4b4;
+	}
+	.playlist_list .icur dt{
+		border: 1px solid #83d542;
+	}
+	.playlist_list .icur .video_stro{
+		background: url(../../images/commons/opacity_b50.png);
+	}
+	.playlist_list .icur .video_stro img{
+		display: inline-block;
+	}
+	.playlist_list .icur .v_mark{
+		display: none;
+	}
+
+	/*模态框公用*/
+	.pano_dialog{
+		position: fixed;
+		left: 50%;
+		top: 50%;
+	}
+	.modal-header .i_close{
+		float: right;
+		width: 0.4rem;
+		height: 0.4rem;
+		margin-top: 0.2rem;
+	}
+	.modal-header .i_close img{
+		width: 100%;
+		height: 100%;
+	}
+	.modal-header .modal-title{
+		height: 0.8rem;
+		line-height: 0.8rem;
+		font-size: 0.4rem;
+	}
+	/*企业名片模态框*/
+	.card_dialog{
+		width: 10.8rem;
+		margin-left: -5.4rem;
+		margin-top: -5.15rem;
+	}
+	.card_dialog .modal-header{
+		padding: 0.4rem;
+		border-bottom: 1px solid #eee;
+	}
+	.card_dialog .modal-header .modal-title img{
+		width: 0.7rem;
+		height: 0.54rem;
+		margin: 0.13rem 0.2rem 0 0;
+		vertical-align: top;
+	}
+	.card_dialog .modal_body{
+		position: relative;
+		height: 8.2rem;
+		padding: 0.4rem;
+		margin-bottom: 0.4rem;
+		box-sizing: border-box;
+		overflow-y: auto;
+	}
+	.card_dialog .card_dl{
+		overflow: hidden;
+	}
+	.card_dialog .card_dt{
+		float: left;
+		width: 3.1rem;
+		height: 2.7rem;
+	}
+	.card_dialog .card_dt img{
+		width: 2.7rem;
+		height: 2.7rem;
+		border: 1px solid #f1f1f1;
+		box-sizing: border-box;
+		border-radius: 0.2rem;
+		background-color: #f1f1f1;
+	}
+	.card_dialog .card_dd {
+		float: left;
+		width: 6.5rem;
+	}
+	.card_dialog .card_dd p{
+		height: 0.68rem;
+		line-height: 0.68rem;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+	.card_dialog .card_dd p img{
+		width: 0.5rem;
+		height: 0.5rem;
+		margin-right: 0.2rem;
+	}
+	.card_dialog .title_intro{
+		display: block;
+		margin-top: 0.2rem;
+		padding: 0.2rem 0;
+		font-weight: normal;
+	}
+	.card_dialog .text_intro{
+		line-height: 0.8rem;
+		text-indent: 0.933rem;
+	}
+
+	/*场景介绍模态框*/
+	.scene_dialog{
+		width: 10.8rem;
+		margin-left: -5.4rem;
+		margin-top: -4.83rem;
+	}
+	.scene_dialog .modal-header{
+		padding: 0.4rem;
+		border-bottom: 1px solid #eee;
+	}
+	.scene_dialog .modal-header .modal-title img{
+		width: 0.7rem;
+		height: 0.54rem;
+		margin-right: 0.2rem;
+	}
+	.scene_dialog .i_close{
+		cursor: pointer;
+		width: 0.4rem;
+		height: 0.4rem;
+	    position: absolute;
+	    right: 0.6rem;
+	    top: 0.4rem;
+	}
+	.scene_dialog .i_close img{
+		width: 100%;
+		height: 100%;
+	}
+	.scene_dialog .modal_body{
+		position: relative;
+		height: 8.2rem;
+		padding: 0.4rem;
+		margin: 1rem 0 0.4rem 0;
+		box-sizing: border-box;
+		overflow-y: auto;
+	}
+	.scene_dialog .card_dl{
+		overflow: hidden;
+	}
+	.scene_dialog .card_dt{
+		float: left;
+		width: 3.1rem;
+		height: 2.7rem;
+	}
+	.scene_dialog .card_dt img{
+		width: 2.7rem;
+		height: 2.7rem;
+		border: 1px solid #f1f1f1;
+		box-sizing: border-box;
+		border-radius: 0.2rem;
+		background-color: #f1f1f1;
+	}
+	.scene_dialog .card_dd {
+		float: left;
+		width: 6.5rem;
+	}
+	.scene_dialog .card_dd p{
+		height: 0.68rem;
+		line-height: 0.68rem;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+	.scene_dialog .card_dd p img{
+		width: 0.5rem;
+		height: 0.5rem;
+		margin-right: 0.2rem;
+	}
+	.scene_dialog .title_intro{
+		display: block;
+		padding: 0.2rem 0;
+		font-weight: normal;
+	}
+	.scene_dialog .text_intro{
+		line-height: 0.8rem;
+		text-indent: 0.92rem;
+	}
+
+	/*分享模态框*/
+
+}
