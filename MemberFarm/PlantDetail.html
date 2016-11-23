@@ -52,46 +52,46 @@
 <div class="sensor_data_wap">
 	<div class="sensor_container" id="sensor_container">
 		<div class="swiper_sensor">
-			<div class="swiper_slide slide_active">
+			<div class="swiper_slide slide_active" dataType="1">
 				<p class="text_name">空气温度</p>
 				<img src="../images/MemberFarm/PlantDetail_kongqwd.png" class="icon_sen">
-				<p class="text_val">20.5℃</p>
+				<p class="text_val" id="airTemp">20.5℃</p>
 				<i class="line_arrow"></i>
 			</div>
-			<div class="swiper_slide">
+			<div class="swiper_slide" dataType="2">
 				<p class="text_name">空气湿度</p>
 				<img src="../images/MemberFarm/PlantDetail_kongqsd.png" class="icon_sen">
-				<p class="text_val">90%</p>
+				<p class="text_val" id="airHumidity">90%</p>
 				<i class="line_arrow"></i>
 			</div>
-			<div class="swiper_slide">
-				<p class="text_name">空气露点</p>
-				<img src="../images/MemberFarm/PlantDetail_kongqld.png" class="icon_sen">
-				<p class="text_val">20.5℃</p>
-				<i class="line_arrow"></i>
-			</div>
-			<div class="swiper_slide">
-				<p class="text_name">二氧化碳</p>
-				<img src="../images/MemberFarm/PlantDetail_eryht.png" class="icon_sen">
-				<p class="text_val">20.5℃</p>
-				<i class="line_arrow"></i>
-			</div>
-			<div class="swiper_slide">
-				<p class="text_name">光照强度</p>
-				<img src="../images/MemberFarm/PlantDetail_guangzqd.png" class="icon_sen">
-				<p class="text_val">100lux</p>
-				<i class="line_arrow"></i>
-			</div>
-			<div class="swiper_slide">
-				<p class="text_name">土壤温度</p>
-				<img src="../images/MemberFarm/PlantDetail_turwd.png" class="icon_sen">
-				<p class="text_val">20.5℃</p>
-				<i class="line_arrow"></i>
-			</div>
-			<div class="swiper_slide">
+			<div class="swiper_slide" dataType="3">
 				<p class="text_name">土壤湿度</p>
 				<img src="../images/MemberFarm/PlantDetail_tursd.png" class="icon_sen">
-				<p class="text_val">50%</p>
+				<p class="text_val" id="soilHumidity">50%</p>
+				<i class="line_arrow"></i>
+			</div>
+			<div class="swiper_slide" dataType="4">
+				<p class="text_name">光照强度</p>
+				<img src="../images/MemberFarm/PlantDetail_guangzqd.png" class="icon_sen">
+				<p class="text_val" id="illumination">100lux</p>
+				<i class="line_arrow"></i>
+			</div>
+			<div class="swiper_slide" dataType="5">
+				<p class="text_name">二氧化碳</p>
+				<img src="../images/MemberFarm/PlantDetail_eryht.png" class="icon_sen">
+				<p class="text_val" id="co2">20.5℃</p>
+				<i class="line_arrow"></i>
+			</div>
+			<div class="swiper_slide" dataType="6">
+				<p class="text_name">土壤温度</p>
+				<img src="../images/MemberFarm/PlantDetail_turwd.png" class="icon_sen">
+				<p class="text_val" id="soilTemp">20.5℃</p>
+				<i class="line_arrow"></i>
+			</div>
+			<div class="swiper_slide" dataType="7">
+				<p class="text_name">空气露点</p>
+				<img src="../images/MemberFarm/PlantDetail_kongqld.png" class="icon_sen">
+				<p class="text_val" id="dewPoint">20.5℃</p>
 				<i class="line_arrow"></i>
 			</div>
 		</div>
@@ -99,12 +99,16 @@
 	<!-- 数据图表 -->
 	<div class="sensor_chart">
 		<div id="sensor_chart"></div>
+		<div id="sensor_nochart" class="no_information">
+			<img class="no_icon" src="../images/MemberFarm/PlantDetail_nodata1.png" />
+			<p class="no_tip">暂无数据</p>
+		</div>
 	</div>
 	<!-- 天周月 -->
 	<div class="dayweekmonth" id="dayweekmonth">
-		<span class="sCur">天</span>
-		<span class="sLine">周</span>
-		<span>月</span>
+		<span class="sCur" timeType="1">天</span>
+		<span class="sLine" timeType="2">周</span>
+		<span timeType="3">月</span>
 	</div>
 	<div class="plant_title clear" style="border:0;">
 		<p class="text_tip">作物正在最适宜的环境中最终成长！</p>
@@ -139,27 +143,6 @@
 
 <!-- ****************************************************************************************** -->
 <!-- @@ 农事信息~~农事图片swiper @@ -->
-<div class="swiper-container swiper_farmpic" id="swiper_farmpic">
-	<div class="swiper-wrapper">
-		<div class="swiper-slide">
-			<i class="text_empty"></i>
-			<img class="pic" src="../images/MemberFarm/PlantDetail_temp1.jpg">
-		</div>
-		<div class="swiper-slide">
-			<i class="text_empty"></i>
-			<img class="pic" src="../images/MemberFarm/PlantDetail_temp2.jpg">
-		</div>
-		<div class="swiper-slide">
-			<i class="text_empty"></i>
-			<img class="pic" src="../images/MemberFarm/PlantDetail_temp3.jpg">
-		</div>
-	</div>
-	<div class="page_bclok" id="page_bclok">
-		<span class="opacity_c3"></span>
-		<p class="text_num"><span class="n_cur"></span>/<span class="n_total"></span></p>
-	</div>
-</div>
-<!-- ****************************************************************************************** -->
 
 
 <script type="text/javascript" src="../js/commons/jquery-1.10.2.min.js"></script>

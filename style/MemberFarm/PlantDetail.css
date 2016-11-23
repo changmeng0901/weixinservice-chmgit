@@ -241,6 +241,10 @@ input:focus{
 .sensor_chart{
 	padding: 0.38462rem 0.38462rem 0;
 }
+#sensor_nochart{
+	padding: 2.07692rem 0;
+	box-sizing: border-box;
+}
 #sensor_chart{
 	height: 6.23077rem;
 }

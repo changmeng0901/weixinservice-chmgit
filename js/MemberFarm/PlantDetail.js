@@ -2,8 +2,10 @@
 var FontTimer,
     makeParameterMethod,
     makeParameterField,
+    makeParameterFieldType,
     makeParameterVerify,
-    pageUrl;
+    pageUrl,
+    pageUrlType;
 FontSize();
 
 // 进度条计算
@@ -14,8 +16,11 @@ $('.progress_percent').css('width',progress_block);
 var iframeSearch = location.search.split('&');
 var getEnterpriseInfoId = iframeSearch[0].split("=")[1];
 var getRealPlantId = iframeSearch[1].split('=')[1];
-var getTestUrl = iframeSearch[2].split("=")[1];
-var getPhone = iframeSearch[3].split("=")[1];
+var getDataType = iframeSearch[2].split('=')[1];
+var getTimeType = iframeSearch[3].split('=')[1];
+var getVerify = iframeSearch[4].split('=')[1];
+var getTestUrl = iframeSearch[5].split("=")[1];
+var getPhone = iframeSearch[6].split("=")[1];
 makeParameterMethod = function(string){
     var Method = '&method=' + string;
     return Method;
@@ -23,15 +28,17 @@ makeParameterMethod = function(string){
 makeParameterField = function(PhoneNumber,Number, EnterpriseInfoId,ID, RealPlantId,plantId){
     return encodeURI('&field={"'+PhoneNumber+'":"'+Number+'","'+EnterpriseInfoId+'":"'+ID+'","'+RealPlantId+'":"'+plantId+'"}');
 }
+makeParameterFieldType = function(PhoneNumber,Number, EnterpriseInfoId,ID, RealPlantId,plantId, DataType,Type1, TimeType,Type2){
+    return encodeURI('&field={"'+PhoneNumber+'":"'+Number+'","'+EnterpriseInfoId+'":"'+ID+'","'+RealPlantId+'":"'+plantId+'","'+DataType+'":"'+Type1+'","'+TimeType+'":"'+Type2+'"}');
+}
 makeParameterVerify = function(string){
     var Verify = '&verify=' + string;
     return Verify;
 }
 ParameterMethod = makeParameterMethod('phone.view.plant');
-ParameterField = makeParameterField('phone','3693047153','enterpriseInfoId','2','realPlantId',getRealPlantId);
-ParameterVerify = makeParameterVerify('asdf');
+ParameterField = makeParameterField('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'realPlantId',getRealPlantId);
+ParameterVerify = makeParameterVerify(getVerify);
 pageUrl = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethod + ParameterField + ParameterVerify;
-console.log(pageUrl)
 $.ajax({
     type: "GET",
     timeout: 1000,
@@ -50,6 +57,45 @@ $.ajax({
     }
 });
 
+// 物联网设备-传感器数据ajax加载数据
+$('#sensor_container .swiper_slide').eq(getDataType-1).addClass('slide_active').siblings().removeClass('slide_active');
+$('#dayweekmonth span').eq(getTimeType-1).addClass('sCur').siblings().removeClass('sCur');
+ParameterMethodType = makeParameterMethod('phone.view.plant.device.data');
+ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'realPlantId',getRealPlantId,'dataType',getDataType,'timeType',getTimeType);
+ParameterVerifyType = makeParameterVerify(getVerify);
+pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
+var hasChartData, //是否有折线图数据
+    ChartData,  //折线图数据集合
+    ChartTime;  //折线图数据时间
+$.ajax({
+    type: "GET",
+    timeout: 1000,
+    url: pageUrlType,
+    dataType: "jsonp",
+    jsonp: 'callback',
+    success: function(response) {
+        
+        InitDeviceData(response.data_result);
+        hasChartData = response.data_result.hasChartData;
+        ChartData = response.data_result.ChartData;
+        ChartTime = response.data_result.ChartTime;
+        if(hasChartData == true){
+            $('#sensor_chart').show();
+            $('#sensor_nochart').hide();
+            SensorChart(ChartData,ChartTime);
+        }else{
+            $('#sensor_chart').hide();
+            $('#sensor_nochart').show();
+        }
+        
+
+    },
+    error: function(e) {
+        try {
+            console.log('传感器数据,请求失败了吧！！')
+        } catch (e) {}
+    }
+});
 
 // 传感器数据--列表平均分配宽度
 var windowWidth = document.documentElement.clientWidth;
@@ -65,47 +111,89 @@ $('.swiper_sensor').css({
 // 传感器数据--点击事件及切换图表内容
 $('.swiper_sensor .swiper_slide').each(function(index,elem){
     $(elem).click(function(){
+
         $(elem).addClass('slide_active').siblings().removeClass('slide_active');
+        $('#dayweekmonth span').eq(getTimeType-1).addClass('sCur').siblings().removeClass('sCur');
+        var index = $(elem).index()+1;
+
+        // URL
+        ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'realPlantId',getRealPlantId,'dataType',index,'timeType',getTimeType);
+        pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
+        // alert(index+'点击时类型'+getTimeType)
+        // console.log(pageUrlType);
+        // AJAX
+        $.ajax({
+            type: "GET",
+            timeout: 1000,
+            url: pageUrlType,
+            dataType: "jsonp",
+            jsonp: 'callback',
+            success: function(response) {
+                
+                hasChartData = response.data_result.hasChartData;
+                ChartData = response.data_result.ChartData;
+                ChartTime = response.data_result.ChartTime;
+                if(hasChartData == true){
+                    $('#sensor_chart').show();
+                    $('#sensor_nochart').hide();
+                    SensorChart(ChartData,ChartTime);
+                }else{
+                    $('#sensor_chart').hide();
+                    $('#sensor_nochart').show();
+                }
+
+            },
+            error: function(e) {
+                try {
+                    console.log('传感器数据,请求失败了吧！！')
+                } catch (e) {}
+            }
+        });
+
     });
 });
+// 天周月
 $('#dayweekmonth span').click(function(){
     $(this).addClass('sCur').siblings().removeClass('sCur');
-});
-$('#sensor_chart').css('height',$('#sensor_chart').width()*0.6);
-SensorChart();// 传感器数据--图表
+    var indexData = $('#sensor_container .slide_active').attr('datatype');
 
-
-
-
-// swiper农事图片
-var farmpicLen = $('#farm_piclist0 img').length;
-$('#swiper_farmpic').height( windowHeight );
-$('#farm_piclist0 img').each(function(g_index,elem){
-    $(elem).click(function(){
-        $('body').addClass('overflowH');
-        $('#swiper_farmpic').show();
-        var FarmSwiper = new Swiper('#swiper_farmpic',{
-            loop : false,
-            initialSlide : g_index,
-            onFirstInit: function( FarmSwiper ){ //Swiper2.x的回调函数，首次初始化后执行,初始化是onFirstInit
-                $('#page_bclok .n_cur').html( g_index+1 ); 
-                $('#page_bclok .n_total').html( farmpicLen );    
-            }, 
-            onSlideChangeEnd: function(swiper){ 
-                $('#page_bclok .n_cur').html( FarmSwiper.activeIndex+1 ); 
-                $('#page_bclok .n_total').html( farmpicLen );  
+    // URL
+    ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'realPlantId',getRealPlantId,'dataType',indexData,'timeType',$(this).attr('timeType'));        
+    pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
+    // alert(indexData+'月日类型'+$(this).attr('timeType'))
+    console.log(pageUrlType)
+    // AJAX
+    $.ajax({
+        type: "GET",
+        timeout: 1000,
+        url: pageUrlType,
+        dataType: "jsonp",
+        jsonp: 'callback',
+        success: function(response) {
+            
+            hasChartData = response.data_result.hasChartData;
+            ChartData = response.data_result.ChartData;
+            ChartTime = response.data_result.ChartTime;
+            if(hasChartData == true){
+                $('#sensor_chart').show();
+                $('#sensor_nochart').hide();
+                SensorChart(ChartData,ChartTime);
+            }else{
+                $('#sensor_chart').hide();
+                $('#sensor_nochart').show();
             }
-          });
-        
+
+        },
+        error: function(e) {
+            try {
+                console.log('传感器数据,请求失败了吧！！')
+            } catch (e) {}
+        }
     });
 });
-$('#swiper_farmpic').click(function(){
-    $('body').removeClass('overflowH');
-    $('#swiper_farmpic').hide();
-});
-
-
-
+// 传感器数据图表，有无数据高度
+$('#sensor_chart').css('height',$('#sensor_chart').width()*0.6);
+$('#sensor_nochart').css('height',$('#sensor_chart').width()*0.6);
 
 
 
@@ -119,9 +207,11 @@ $(window).resize(function(){
     // 进度条计算
     var progress_block = $('.progress_block').width();
     $('.progress_percent').css('width',progress_block);
-
+    // 传感器数据图表，有无数据高度
     $('#sensor_chart').css('height',$('#sensor_chart').width()*0.6);
-    SensorChart();// 传感器数据--图表
+    $('#sensor_nochart').css('height',$('#sensor_chart').width()*0.6);
+    // 传感器数据--图表
+    SensorChart(response.ChartData,response.ChartTime);
 
 });
 
@@ -141,8 +231,6 @@ function InitCropInfoData(_data){
     $('#breedName').html(_data.breedName);
     $('#plantTime').html(_data.plantBeginTime+'-'+_data.plantEndTime);
     // 生命周期及天数
-    // $('#life_cycle').html('<span class="text_cycle">'+_data.periodName+'</span><span class="text_day">（第'+_data.alreayPlantDays+'天）</span>');
-    // $('#present_cycle').html('目前处于<span class="text_cyle" id="text_cyle">'+_data.periodName+'</span><span class="color_bloack">，还有'+_data.remain+'天采收结束</span>');
     $('#periodName').html(_data.periodName);
     $('#alreayPlantDays').html('（第'+_data.alreayPlantDays+'天）');
     $('#text_cyle').html(_data.periodName);
@@ -156,6 +244,31 @@ function InitCropInfoData(_data){
     if(farmings.length>0){
         // 有数据
         for( var i=0;i<farmings.length;i++){
+            var imagesArr = '';
+            var swiper_wrapper = '';
+            var swiper_farmpic = '';
+             var indexIn = i;
+            for( var j=0;j<farmings[i].images.split(',').length;j++){
+               
+                imagesArr += '<img img_index="'+j+'" onclick="SwiperFn('+indexIn+','+j+')" src="'+farmings[i].images.split(',')[j]+'" />';
+                swiper_wrapper += 
+                    '<div class="swiper-slide">'+
+                        '<i class="text_empty"></i>'+
+                        '<img class="pic" src="'+farmings[i].images.split(',')[j]+'">'+
+                    '</div>';
+            }
+            // 获取swiper图片，追加到body最后
+            swiper_farmpic += 
+            '<div class="swiper-container swiper_farmpic" id="swiper_farmpic'+i+'">'+
+                '<div class="swiper-wrapper">'+ swiper_wrapper +'</div>'+
+                '<div class="page_bclok" id="page_bclok">'+
+                    '<span class="opacity_c3"></span>'+
+                    '<p class="text_num"><span class="n_cur"></span>/<span class="n_total"></span></p>'+
+                '</div>'+
+            '</div>';
+            $('body').append( swiper_farmpic )
+
+            // 获取农事信息列表，追加到农事信息内容部分
             farmingsList += 
             '<dl class="dl_dl" agriculturalId="'+farmings[i].agriculturalId+'">'+
                 '<dt class="dl_dt">'+
@@ -166,11 +279,14 @@ function InitCropInfoData(_data){
                 '<dd class="dl_dd">'+
                     '<p class="text_con white_nowrap">'+farmings[i].name+'</p>'+
                     '<p class="text_dec">'+farmings[i].description+'</p>'+
-                    '<div class="farm_piclist clear" id="farm_piclist'+i+'">'+farmings[i].images.split(',').join('')+'</div>'+
+                    '<div class="farm_piclist clear" id="farm_piclist'+i+'">'+imagesArr+'</div>'+
+                    // '<div class="farm_piclist clear" id="farm_piclist'+i+'">'+farmings[i].images.split(',').join('')+'</div>'+
                 '</dd>'+
             '</dl>';
         }
         $farm_information.append( farmingsList );
+
+        
     }else{
         // 无数据
         farmingsList = 
@@ -185,7 +301,6 @@ function InitCropInfoData(_data){
     var harvestsList = '';
     var harvests = _data.harvests;
     var $harvests_information = $('#harvests_information');
-    alert(harvests.length)
     if(harvests.length>0){
         // 有数据
         for( var i=0;i<harvests.length;i++ ){
@@ -210,8 +325,46 @@ function InitCropInfoData(_data){
 
 }
 
+// 初始化传感器数据函数
+function InitDeviceData(_data){
+    $('#airTemp').html(_data.airTemp+'℃');
+    $('#airHumidity').html(_data.airHumidity+'%');
+    $('#soilHumidity').html(_data.soilHumidity+'%');
+    $('#illumination').html(_data.illumination+'lux');
+    $('#co2').html(_data.co2+'℃');
+    $('#soilTemp').html(_data.soilTemp+'℃');
+    $('#dewPoint').html(_data.dewPoint+'℃');
+}
+
+
+// swiper农事图片
+function SwiperFn(swiperId,imgIndex){
+    var farmpicLen = $('#farm_piclist'+swiperId+' img').length;
+    $('#swiper_farmpic'+swiperId).height( windowHeight );
+    $('body').addClass('overflowH');
+    $('#swiper_farmpic'+swiperId).show();
+    var FarmSwiper = new Swiper('#swiper_farmpic'+swiperId,{
+        loop : false,
+        initialSlide : imgIndex,
+        onFirstInit: function( FarmSwiper ){ //Swiper2.x的回调函数，首次初始化后执行,初始化是onFirstInit
+            $('#page_bclok .n_cur').html( imgIndex+1 ); 
+            $('#page_bclok .n_total').html( farmpicLen );    
+        }, 
+        onSlideChangeEnd: function(swiper){ 
+            $('#swiper_farmpic'+swiperId+' .n_cur').html( FarmSwiper.activeIndex+1 ); 
+            $('#swiper_farmpic'+swiperId+' .n_total').html( farmpicLen );  
+        }
+      });
+            
+    $('#swiper_farmpic'+swiperId).click(function(){
+        $('body').removeClass('overflowH');
+        $('#swiper_farmpic'+swiperId).hide();
+    });
+}
+
+
 // 传感器数据--图表
-function SensorChart(){
+function SensorChart(chartData,chartTime){
     $('#sensor_chart').highcharts({
         credits: {
             enabled:false  // 去掉版权信息
@@ -231,7 +384,7 @@ function SensorChart(){
             y: 45
         },
         xAxis: {
-            categories: ['1月', '3月', '7月', '9月'],
+            categories: chartTime,
             labels:{
                 style: {                         // 标签全局样式
                     color: "#414141",
@@ -255,6 +408,7 @@ function SensorChart(){
         },
         plotOptions: {//点上边的数值
             line: {
+                connectNulls:true,//该设置会连接空值点
                 dataLabels: {
                     enabled: false
                 },
@@ -263,7 +417,7 @@ function SensorChart(){
         },
         series: [{
             name: '',
-            data: [7.0, 14.5, 25.2, 18.3],
+            data: chartData,
             color : "#6fac24"
         }]
     });
