@@ -57,8 +57,6 @@ WGS84_to_GCJ02.prototype.transformLon = function(x, y) {
 };
 
 
-
-
 xc_zoomSet = true;
 var zyghOnoff = true;	
 var map;
@@ -635,6 +633,14 @@ var onoffBtn = true;
 			}else{
 				headerLen = $(".video_header_list2 li:visible").length;
 				$(".video_header_list2 li:visible").css("width", "inherit")
+			}
+			
+			if(navigator.userAgent.indexOf("Android")>0){
+				$(".pano_dialog").addClass("pano_android");
+				$(".WeChat_share .share_pos").addClass("share_android");
+			}else{
+				$(".pano_dialog").removeClass("pano_android");	
+				$(".WeChat_share .share_pos").removeClass("share_android");
 			}
 
 		},
