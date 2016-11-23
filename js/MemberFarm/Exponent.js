@@ -111,12 +111,7 @@ function SensorChart(){
             text: ''
         },
         legend: {
-            layout: 'vertical',
-            floating: true,
-            align: 'left',
-            verticalAlign: 'top',
-            x: 9000,
-            y: 45
+            enabled:false //去掉legend图例
         },
         xAxis: {
             categories: ['1月', '3月', '7月', '9月'],
@@ -202,7 +197,13 @@ function ExponentChart(){
         },
         plotOptions: {
             areaspline: {
-                fillOpacity: 0.5
+               fillColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1},
+                    stops: [
+                        [0, Highcharts.getOptions().colors[0]],
+                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                    ]
+                }
             }
         },
         series: [{

@@ -9,6 +9,7 @@
 	<title>会员农场</title>
 	<link rel="stylesheet" type="text/css" href="../style/swiper/idangerous.swiper2.7.6.css">
 	<link rel="stylesheet" type="text/css" href="../js/jquery-ui/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="../js/videojsPlug/video-js.css" />
 	<link rel="stylesheet" type="text/css" href="../style/commons/commons.css">
 	<link rel="stylesheet" type="text/css" href="../style/MemberFarm/Monitor.css">
 </head>
@@ -36,57 +37,21 @@
 				<div class="swiper-slide">
 					<div class="live_video_cont">  
 
-                            <div class="video" id="HLSPlayerLive0">
-                            <script type="text/javascript">
-                            var vID        = "HLSPlayerLive0"; 
-                            var vWidth     = "100%";                //播放器宽度设置
-                            var vHeight    = "100%";                    //播放器宽度设置
-                            var vPlayer    = "../js/hls/player.swf"; //播放器文件
-                            var vHLSset    = "../js/hls/HLS.swf";             //HLS配置
-                            var vPic       = "../js/hls/videosImg.jpg"; 
-                            var vCssurl    = "../js/hls/mini.css";     //移动端CSS应用文件                            
-                            var  vHLSurl    = "http://farmeasy.cn/video/934/891/playlist.m3u8";
-                            </script> 
-							<script type="text/javascript" src="../js/hls/hls.min.js"></script>
-                            </div>
+                        <div id="LiveVideoBlock0" style="height:100%;"></div>
                         
 					</div>
 				</div>
 				<div class="swiper-slide">
 					<div class="live_video_cont">   
 
-                            <div class="video" id="HLSPlayerLive1">
-                            <script type="text/javascript">
-                            var vID        = "HLSPlayerLive1"; 
-                            var vWidth     = "100%";                //播放器宽度设置
-                            var vHeight    = "100%";                    //播放器宽度设置
-                            var vPlayer    = "../js/hls/player.swf"; //播放器文件
-                            var vHLSset    = "../js/hls/HLS.swf";             //HLS配置
-                            var vPic       = "../js/hls/videosImg.jpg"; 
-                            var vCssurl    = "../js/hls/mini.css";     //移动端CSS应用文件                            
-                            var  vHLSurl    = "http://farmeasy.cn/video/934/891/playlist.m3u8";
-                            </script> 
-							<script type="text/javascript" src="../js/hls/hls.min.js"></script>
-                            </div>
+                        <div id="LiveVideoBlock1" style="height:100%;"></div>
                         
 					</div>
 				</div>
 				<div class="swiper-slide">
 					<div class="live_video_cont">  
 
-                            <div class="video" id="HLSPlayerLive2">
-                            <script type="text/javascript">
-                            var vID        = "HLSPlayerLive2"; 
-                            var vWidth     = "100%";                //播放器宽度设置
-                            var vHeight    = "100%";                    //播放器宽度设置
-                            var vPlayer    = "../js/hls/player.swf"; //播放器文件
-                            var vHLSset    = "../js/hls/HLS.swf";             //HLS配置
-                            var vPic       = "../js/hls/videosImg.jpg"; 
-                            var vCssurl    = "../js/hls/mini.css";     //移动端CSS应用文件                            
-                            var  vHLSurl    = "http://farmeasy.cn/video/934/891/playlist.m3u8";
-                            </script> 
-							<script type="text/javascript" src="../js/hls/hls.min.js"></script>
-                            </div>
+                        <div id="LiveVideoBlock2" style="height:100%;"></div>  
 
 					</div>
 				</div>
@@ -150,19 +115,9 @@
 	<div class="tab_content">
 	<!-- 视频追溯 -->
 		<div class="trace_video_cont">
-				<div class="video" id="HLSPlayertrace">
-                <script type="text/javascript">
-                var vID        = "HLSPlayertrace"; 
-                var vWidth     = "100%";                //播放器宽度设置
-                var vHeight    = "100%";                    //播放器宽度设置
-                var vPlayer    = "../js/hls/player.swf"; //播放器文件
-                var vHLSset    = "../js/hls/HLS.swf";             //HLS配置
-                var vPic       = "../js/hls/videosImg.jpg"; 
-                var vCssurl    = "../js/hls/mini.css";     //移动端CSS应用文件                            
-                var  vHLSurl    = "http://farmeasy.cn/video/934/891/playlist.m3u8";
-                </script> 
-				<script type="text/javascript" src="../js/hls/hls.min.js"></script>
-                </div>
+
+			<div id="TraceVideoBlock0" style="height:100%;"></div>  
+
 		</div>
 		<div class="trace_textcont">
 			<div class="cont_hd">
@@ -182,6 +137,12 @@
 <script type="text/javascript" src="../js/commons/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="../js/swiper/idangerous.swiper2.7.6.min.js"></script>
 <script type="text/javascript" src="../js/jquery-ui/jquery-ui.js"></script>
+	<!--[if lt IE 9]>
+	<script src="../js/videojsPlugvideojs-ie8.js"></script>
+	<![endif]-->
+    <script src="../js/videojsPlug/video.js"></script>
+	<script src="../js/videojsPlug/videojs-contrib-hls.js"></script>
+	<script src="../js/videojsPlug/m3u8-parser.js"></script>
 <script type="text/javascript" src="../js/MemberFarm/Monitor.js"></script>
 </body>
 </html>
