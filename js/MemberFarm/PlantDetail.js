@@ -5,7 +5,8 @@ var FontTimer,
     makeParameterFieldType,
     makeParameterVerify,
     pageUrl,
-    pageUrlType;
+    pageUrlType,
+	http = '192.168.21.187:8081';
 FontSize();
 
 // 进度条计算
@@ -38,7 +39,7 @@ makeParameterVerify = function(string){
 ParameterMethod = makeParameterMethod('phone.view.plant');
 ParameterField = makeParameterField('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'realPlantId',getRealPlantId);
 ParameterVerify = makeParameterVerify(getVerify);
-pageUrl = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethod + ParameterField + ParameterVerify;
+pageUrl = getTestUrl + "/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethod + ParameterField + ParameterVerify;
 $.ajax({
     type: "GET",
     timeout: 1000,
@@ -58,12 +59,13 @@ $.ajax({
 });
 
 // 跳转到监控页面
+var LocationUrl = 'http://192.168.21.187:8081';
 $('#view_monitor').click(function(){
-    window.location.href="http://192.168.21.187/weixinservice/MemberFarm/Monitor.html?realPlantId="+getRealPlantId+"&verify=asdf&domain=http://192.168.21.188:8080&phone="+getPhone;
+    window.location.href= LocationUrl + "/weixinservice/MemberFarm/Monitor.html?realPlantId="+getRealPlantId+"&enterpriseInfoId="+ getEnterpriseInfoId +"&verify=asdf&domain="+getTestUrl+"&phone="+getPhone;
 });
 // 跳转到指数页面
 $('#view_exponent').click(function(){
-    window.location.href="http://192.168.21.187/weixinservice/MemberFarm/Exponent.html?enterpriseInfoId=2&realPlantId="+getRealPlantId+"&verify=asdf&domain=http://192.168.21.188:8080&phone="+getPhone;
+    window.location.href= LocationUrl + "/weixinservice/MemberFarm/Exponent.html?enterpriseInfoId="+getEnterpriseInfoId+"&realPlantId="+getRealPlantId+"&verify=asdf&domain="+getTestUrl+"&phone="+getPhone;
 });
 
 // 物联网设备-传感器数据ajax加载数据
@@ -72,7 +74,7 @@ $('#dayweekmonth span').eq(getTimeType-1).addClass('sCur').siblings().removeClas
 ParameterMethodType = makeParameterMethod('phone.view.plant.device.data');
 ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'realPlantId',getRealPlantId,'dataType',getDataType,'timeType',getTimeType);
 ParameterVerifyType = makeParameterVerify(getVerify);
-pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
+pageUrlType = getTestUrl + "/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
 var hasChartData, //是否有折线图数据
     ChartData,  //折线图数据集合
     ChartTime;  //折线图数据时间
@@ -98,18 +100,17 @@ $.ajax({
             $('#sensor_nochart').show();
         }
         
-		// 传感器数据--列表平均分配宽度
-		var windowWidth = document.documentElement.clientWidth;
-		var windowHeight= document.documentElement.clientHeight;
-		var swiperWidth = windowWidth/4;
-		var swiperLen = $('.swiper_sensor .swiper_slide').length;
-		$('.swiper_sensor .swiper_slide').css({
-			'width' : swiperWidth
-		}); 
-		$('.swiper_sensor').css({
-			'width' : swiperWidth*swiperLen
-		});
-
+     // 传感器数据--列表平均分配宽度
+        var windowWidth = document.documentElement.clientWidth;
+        var windowHeight= document.documentElement.clientHeight;
+        var swiperWidth = windowWidth/4;
+        var swiperLen = $('.swiper_sensor .swiper_slide').length;
+        $('.swiper_sensor .swiper_slide').css({
+            'width' : swiperWidth
+        }); 
+        $('.swiper_sensor').css({
+            'width' : swiperWidth*swiperLen
+        });
     },
     error: function(e) {
         try {
@@ -124,12 +125,12 @@ $('.swiper_sensor .swiper_slide').each(function(index,elem){
     $(elem).click(function(){
 
         $(elem).addClass('slide_active').siblings().removeClass('slide_active');
-        $('#dayweekmonth span').eq(getTimeType-1).addClass('sCur').siblings().removeClass('sCur');
+//        $('#dayweekmonth span').eq(getTimeType-1).addClass('sCur').siblings().removeClass('sCur');
         var index = $(elem).index()+1;
 
         // URL
-        ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'realPlantId',getRealPlantId,'dataType',index,'timeType',getTimeType);
-        pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
+        ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'realPlantId',getRealPlantId,'dataType',index,'timeType',$("#dayweekmonth .sCur").attr('timeType'));
+        pageUrlType = getTestUrl + "/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
         // alert(index+'点击时类型'+getTimeType)
         // console.log(pageUrlType);
         // AJAX
@@ -171,7 +172,7 @@ $('#dayweekmonth span').click(function(){
 
     // URL
     ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'realPlantId',getRealPlantId,'dataType',indexData,'timeType',$(this).attr('timeType'));        
-    pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
+    pageUrlType = getTestUrl + "/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
     // alert(indexData+'月日类型'+$(this).attr('timeType'))
     console.log(pageUrlType)
     // AJAX
@@ -239,30 +240,36 @@ function FontSize(){
 
 // 初始化作物信息
 function InitCropInfoData(_data){
+	
+	//如果没有监控，则不显示监控按钮
+	if( _data.hasVideo == false ){
+		$('#view_monitor').hide();
+	}
 
     // 作物信息
     $('#plantImg').attr('src',_data.plantImg);
     $('#plantName').html(_data.plantName);
     $('#breedName').html(_data.breedName);
     $('#plantTime').html(_data.plantBeginTime+'-'+_data.plantEndTime);
-    // 生命周期及天数
-    $('#periodName').html(_data.periodName);
-    $('#alreayPlantDays').html('（第'+_data.alreayPlantDays+'天）');
-    $('#text_cyle').html(_data.periodName);
-    $('#remain').html(_data.remain);
-    $('#progress_bar').css('width',_data.grownProp+'%');
-	//如果没有生命周期，则：
+    
+  //如果没有生命周期，则：
 	if( _data.hasPeriod == false ){
 		$('.cropinfo_bd').hide();
 	}else{
 		$('.cropinfo_bd').show();	
+		// 生命周期及天数
+	    $('#periodName').html(_data.periodName);
+	    $('#alreayPlantDays').html('（第'+_data.alreayPlantDays+'天）');
+	    $('#text_cyle').html(_data.periodName);
+	    $('#remain').html(_data.remain);
+	    $('#progress_bar').css('width',_data.grownProp+'%');
 	}
 
     // 种植信息
     var farmingsList = '';
     var farmings = _data.farmings;
     var $farm_information = $('#farm_information');
-    if(farmings.length>0){
+    if(farmings!=undefined  && farmings.length>0){
         // 有数据
         for( var i=0;i<farmings.length;i++){
             var imagesArr = '';
@@ -270,13 +277,14 @@ function InitCropInfoData(_data){
             var swiper_farmpic = '';
              var indexIn = i;
             for( var j=0;j<farmings[i].images.split(',').length;j++){
-               
-                imagesArr += '<img img_index="'+j+'" onclick="SwiperFn('+indexIn+','+j+')" src="'+farmings[i].images.split(',')[j]+'" />';
-                swiper_wrapper += 
-                    '<div class="swiper-slide">'+
-                        '<i class="text_empty"></i>'+
-                        '<img class="pic" src="'+farmings[i].images.split(',')[j]+'">'+
-                    '</div>';
+               if(farmings[i].images.split(',')[j] != ''){
+            	   imagesArr += '<img img_index="'+j+'" onclick="SwiperFn('+indexIn+','+j+')" src="'+farmings[i].images.split(',')[j]+'" />';
+                   swiper_wrapper += 
+                       '<div class="swiper-slide">'+
+                           '<i class="text_empty"></i>'+
+                           '<img class="pic" src="'+farmings[i].images.split(',')[j]+'">'+
+                       '</div>';
+               }
             }
             // 获取swiper图片，追加到body最后
             swiper_farmpic += 
@@ -312,7 +320,7 @@ function InitCropInfoData(_data){
         // 无数据
         farmingsList = 
         '<div class="no_information">'+
-            '<img src="../images/MemberFarm/PlantDetail_icon4.png" class="no_icon">'+
+            '<img src="/asset/images/phone/PlantDetail_icon4.png" class="no_icon">'+
             '<p class="no_tip">暂无农事信息</p>'+
         '</div>';
         $farm_information.append( farmingsList );
@@ -328,7 +336,7 @@ function InitCropInfoData(_data){
             harvestsList += 
             '<li>'+
                 '<div class="crop_pic">'+
-                    '<img src="../images/MemberFarm/PlantDetail_harvest.png" >'+
+                    '<img src="/asset/images/phone/PlantDetail_harvest.png" >'+
                 '</div>'+
                 '<div class="harvest_det">'+
                     '<p class="text_name">'+harvests[i].name+'</p>'+

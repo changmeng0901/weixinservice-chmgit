@@ -434,6 +434,12 @@ input:focus{
 .fixed_foot .fitems.fCur .f_zhi{
 	background-image: url(../../images/MemberFarm/Exponent_zhiB.png);
 }
+.fixed_foot .fitems.unclick .f_zhi{
+	background-image: url(../../images/MemberFarm/Exponent_zhino.png);
+	}
+.fixed_foot .fitems.unclick .text_name{
+	color:#c9c9c9;
+	}
 
 /*无信息样式*/
 .no_information{

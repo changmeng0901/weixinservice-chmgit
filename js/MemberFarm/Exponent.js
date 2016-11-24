@@ -44,6 +44,7 @@ makeParameterVerify = function(string){
 */
 if( iframeSearch[1].split('=')[0] == 'deviceId'){
     // 如果是点击传感器进来的，则：[不让指数点击]
+	$('.fixed_foot .fitems').eq(1).addClass('unclick');
     var indexData,
         indexTime;
     $('.fixed_foot .fitems').eq(0).addClass('fCur').siblings().removeClass('fCur');
@@ -62,7 +63,7 @@ if( iframeSearch[1].split('=')[0] == 'deviceId'){
     ParameterMethodType = makeParameterMethod('phone.view.plant.device.data');
     ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'deviceId',getDeviceId,'dataType',indexData,'timeType',indexTime);        
     ParameterVerifyType = makeParameterVerify(getVerify);
-    pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
+    pageUrlType = getTestUrl + "/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
     // 本地 = http://192.168.21.187/weixinservice/MemberFarm/Exponent.html?enterpriseInfoId=2&deviceid=1045&dataType=1&timeType=3&verify=asdf&domain=http://192.168.21.188:8080&phone=13693047153
     // 拼完 = http://192.168.21.188:8080/rest/1.0/phoneView?v=1.0&format=json&method=phone.view.plant.device.data&field={"phone":"13693047153","enterpriseInfoId":"2","deviceid":"1045","dataType":"1","timeType":"3"}&verify=asdf
     
@@ -106,14 +107,15 @@ if( iframeSearch[1].split('=')[0] == 'deviceId'){
         $(elem).click(function(){
             $('#swiper_sensor .data_items').removeClass('dCur');
             $(this).addClass('dCur');
-            $('#dayweekmonth span').eq(getTimeType-1).addClass('sCur').siblings().removeClass('sCur');
+//            $('#dayweekmonth span').eq(getTimeType-1).addClass('sCur').siblings().removeClass('sCur');
+//            indexTime = $('#dayweekmonth .sCur').attr('timeType');
             // URL
             indexData = $('#swiper_sensor .dCur').attr('datatype');
             indexTime = $('#dayweekmonth .sCur').attr('timeType');
             ParameterMethodType = makeParameterMethod('phone.view.plant.device.data');
             ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'deviceId',getDeviceId,'dataType',indexData,'timeType',indexTime);        
             ParameterVerifyType = makeParameterVerify(getVerify);
-            pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
+            pageUrlType = getTestUrl + "/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
             // AJAX
             $.ajax({
                 type: "GET",
@@ -154,7 +156,7 @@ if( iframeSearch[1].split('=')[0] == 'deviceId'){
         ParameterMethodType = makeParameterMethod('phone.view.plant.device.data');
         ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'deviceId',getDeviceId,'dataType',indexData,'timeType',indexTime);        
         ParameterVerifyType = makeParameterVerify(getVerify);
-        pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
+        pageUrlType = getTestUrl + "/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
         // AJAX
         $.ajax({
             type: "GET",
@@ -204,11 +206,11 @@ if( iframeSearch[1].split('=')[0] == 'deviceId'){
     var indexData,
         indexTime;
     indexData = 1;
-    indexTime = 3;
+    indexTime = 1;
     ParameterMethod = makeParameterMethod('phone.view.exponent');
     ParameterField = makeParameterField('pnone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'realPlantId',getRealPlantId);
     ParameterVerify = makeParameterVerify(getVerify);
-    pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethod + ParameterField + ParameterVerify;
+    pageUrlType = getTestUrl + "/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethod + ParameterField + ParameterVerify;
     // 本地 = http://192.168.21.187/weixinservice/MemberFarm/Exponent.html?enterpriseInfoId=2&realPlantId=33174&verify=asdf&domain=http://192.168.21.188:8080&phone=13693047153
     // 接口 = http://192.168.21.188:8080/rest/1.0/phoneView?v=1.0&format=json&method=phone.view.exponent&field={"phone":"13693047153","enterpriseInfoId":"2","enterpriseInfoId":"2","realPlantId":"33174"}&verify=asdf&
     console.log(pageUrlType)
@@ -230,7 +232,7 @@ if( iframeSearch[1].split('=')[0] == 'deviceId'){
                     trackColor: '#f9f9f9',  
                     barColor : '#55bf3b',
                     onStep: function(from, to, percent) {
-                        this.el.children[0].innerHTML = Math.round(percent);
+                        this.el.children[0].innerHTML = percent;
                     }
                 });
             // 健康指数分析图表
@@ -241,7 +243,7 @@ if( iframeSearch[1].split('=')[0] == 'deviceId'){
             }else{
                 nodata = 
                 '<div class="no_information" style="background:none;">'+
-                    '<img src="../images/MemberFarm/Monitor_nodata.png" class="no_icon">'+
+                    '<img src="/asset/images/phone/Monitor_nodata.png" class="no_icon">'+
                     '<p class="no_tip">暂无数据</p>'+
                 '</div>';
                 $exponent_chart.append( nodata );
@@ -277,7 +279,7 @@ if( iframeSearch[1].split('=')[0] == 'deviceId'){
         ParameterMethodType = makeParameterMethod('phone.view.plant.device.data');
         ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'realPlantId',getRealPlantId,'dataType',indexData,'timeType',indexTime);        
         ParameterVerifyType = makeParameterVerify(getVerify);
-        pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
+        pageUrlType = getTestUrl + "/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
         // AJAX
         $.ajax({
             type: "GET",
@@ -314,12 +316,13 @@ if( iframeSearch[1].split('=')[0] == 'deviceId'){
                 $('#swiper_sensor .data_items').removeClass('dCur');
                 $(this).addClass('dCur');
                 indexData = $('#swiper_sensor .dCur').index();
-                $('#dayweekmonth span').eq(indexTime-1).addClass('sCur').siblings().removeClass('sCur');
+                indexTime = $('#dayweekmonth .sCur').attr('timeType');
+//                $('#dayweekmonth span').eq(indexTime-1).addClass('sCur').siblings().removeClass('sCur');
                 // URL
                 ParameterMethodType = makeParameterMethod('phone.view.plant.device.data');
                 ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'realPlantId',getRealPlantId,'dataType',indexData,'timeType',indexTime);        
                 ParameterVerifyType = makeParameterVerify(getVerify);
-                pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
+                pageUrlType = getTestUrl + "/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
                 // AJAX
                 $.ajax({
                     type: "GET",
@@ -359,7 +362,7 @@ if( iframeSearch[1].split('=')[0] == 'deviceId'){
             ParameterMethodType = makeParameterMethod('phone.view.plant.device.data');
             ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'realPlantId',getRealPlantId,'dataType',indexData,'timeType',$(this).attr('timeType'));        
             ParameterVerifyType = makeParameterVerify(getVerify);
-            pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
+            pageUrlType = getTestUrl + "/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
             // AJAX
             $.ajax({
                 type: "GET",
@@ -536,7 +539,7 @@ function InitExponentData(_data){
     }else{
         disease_list = 
         '<div class="no_information" style="background:none;">'+
-            '<img src="../images/MemberFarm/Monitor_nodata.png" class="no_icon">'+
+            '<img src="/asset/images/phone/Monitor_nodata.png" class="no_icon">'+
             '<p class="no_tip">暂无数据</p>'+
         '</div>';
         AvgHarmful = 0;
@@ -654,7 +657,7 @@ function ExponentChart(categoriesData,seriesData){
         },
         tooltip: {
             shared: true,
-            valueSuffix: '@@'
+            valueSuffix: ''
         },
         credits: {
             enabled: false

@@ -6,7 +6,8 @@ var FontTimer,
     ParameterMethod,
     ParameterField,
     ParameterVerify,
-    pageUrl;
+    pageUrl,
+	http = 'http://192.168.21.187:8081';
 FontSize();
 
 // ?enterprise_info_id=2&verify=######&domain=http://app.frameasy.cn&phone=13693047153
@@ -253,14 +254,14 @@ var indexData,
 indexData = 1;
 indexTime = 1;
 function VideoIdLink(obj){
-    window.location.href="http://192.168.21.187/weixinservice/MemberFarm/Monitor.html?videoId="+$(obj).parents('.dl_dl').attr('videoid')+"&verify="+getVerify+"&domain="+getTestUrl+"&phone="+getPhone;
+    window.location.href=http+"/weixinservice/MemberFarm/Monitor.html?videoId="+$(obj).parents('.dl_dl').attr('videoid')+"&enterpriseInfoId="+getEnterpriseId+"&verify="+getVerify+"&domain="+getTestUrl+"&phone="+getPhone;
 }
 // 物联网设备--传感器列表单项点击事件
 function DeviceIdLink(obj){
     // 本地 = http://192.168.21.187/weixinservice/MemberFarm/Exponent.html?enterpriseInfoId=2&deviceId=1045&dataType=1&timeType=3&verify=asdf&domain=http://192.168.21.188:8080&phone=13693047153
-    window.location.href="http://192.168.21.187/weixinservice/MemberFarm/Exponent.html?enterpriseInfoId="+getEnterpriseId+"&deviceId="+$(obj).parents('.dl_dl').attr('deviceid')+"&dataType="+indexData+"&timeType="+indexTime+"&verify="+getVerify+"&domain="+getTestUrl+"&phone="+getPhone;
+    window.location.href=http+"/weixinservice/MemberFarm/Exponent.html?enterpriseInfoId="+getEnterpriseId+"&deviceId="+$(obj).parents('.dl_dl').attr('deviceid')+"&dataType="+indexData+"&timeType="+indexTime+"&verify="+getVerify+"&domain="+getTestUrl+"&phone="+getPhone;
 }
 // 种植信息--种植列表单项点击事件
 function ViewPlant(obj){
-    window.location.href="http://192.168.21.187/weixinservice/MemberFarm/PlantDetail.html?enterpriseInfoId="+getEnterpriseId+"&realPlantId="+$(obj).parents('.dl_dl').attr('realplantid')+"&dataType="+indexData+"&timeType="+indexTime+"&verify="+getVerify+"&domain="+getTestUrl+"&phone="+getPhone;
+    window.location.href=http+"/weixinservice/MemberFarm/PlantDetail.html?enterpriseInfoId="+getEnterpriseId+"&realPlantId="+$(obj).parents('.dl_dl').attr('realplantid')+"&dataType="+indexData+"&timeType="+indexTime+"&verify="+getVerify+"&domain="+getTestUrl+"&phone="+getPhone;
 }
