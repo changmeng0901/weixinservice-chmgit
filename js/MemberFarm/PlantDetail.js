@@ -9,6 +9,10 @@ var FontTimer,
 	http = '192.168.21.187:8081';
 FontSize();
 
+
+var windowWidth = document.documentElement.clientWidth;
+var windowHeight= document.documentElement.clientHeight;
+
 // 进度条计算
 var progress_block = $('.progress_block').width();
 $('.progress_percent').css('width',progress_block);
@@ -86,31 +90,35 @@ $.ajax({
     jsonp: 'callback',
     success: function(response) {
         // 传感器7个数据
-        InitDeviceData(response.data_result);
-        // 是否有折线图数据
-        hasChartData = response.data_result.hasChartData;
-        ChartData = response.data_result.ChartData;
-        ChartTime = response.data_result.ChartTime;
-        if(hasChartData == true){
-            $('#sensor_chart').show();
-            $('#sensor_nochart').hide();
-            SensorChart(ChartData,ChartTime);
+        if( response.invoke_result == 'INVOKE_SUCCESS' ){
+	        if( response.data_result != '' || response.data_result != undefined ){
+	        	InitDeviceData(response.data_result);
+	        }
+	        // 是否有折线图数据
+	        hasChartData = response.data_result.hasChartData;
+	        ChartData = response.data_result.ChartData;
+	        ChartTime = response.data_result.ChartTime;
+	        if(hasChartData == true){
+	            $('#sensor_chart').show();
+	            $('#sensor_nochart').hide();
+	            SensorChart(ChartData,ChartTime);
+	        }else{
+	            $('#sensor_chart').hide();
+	            $('#sensor_nochart').show();
+	        }
+	        
+	        // 传感器数据--列表平均分配宽度
+	        var swiperWidth = windowWidth/4;
+	        var swiperLen = $('.swiper_sensor .swiper_slide').length;
+	        $('.swiper_sensor .swiper_slide').css({
+	            'width' : swiperWidth
+	        }); 
+	        $('.swiper_sensor').css({
+	            'width' : swiperWidth*swiperLen
+	        });
         }else{
-            $('#sensor_chart').hide();
-            $('#sensor_nochart').show();
+        	$('.sensor_data_wap').hide();
         }
-        
-     // 传感器数据--列表平均分配宽度
-        var windowWidth = document.documentElement.clientWidth;
-        var windowHeight= document.documentElement.clientHeight;
-        var swiperWidth = windowWidth/4;
-        var swiperLen = $('.swiper_sensor .swiper_slide').length;
-        $('.swiper_sensor .swiper_slide').css({
-            'width' : swiperWidth
-        }); 
-        $('.swiper_sensor').css({
-            'width' : swiperWidth*swiperLen
-        });
     },
     error: function(e) {
         try {
