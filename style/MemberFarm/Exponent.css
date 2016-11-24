@@ -160,7 +160,12 @@ input:focus{
 	background-color: #fff;
 }
 #sensor_chart{
-	height: 6.23077rem-;
+	height: 6.23077rem;
+}
+#sensor_nochart{
+	height: 6.23077rem;
+	padding: 1.80692rem 0;
+	box-sizing: border-box;
 }
 .dayweekmonth{
 	width: 4.26rem;
@@ -293,33 +298,18 @@ input:focus{
 	color: #ff3b30;
 }
 .maturity_chart{
+	position: relative;
 	width: 8.61538rem;
 	height: 8.61538rem;
 	margin: 1.34615rem auto 0;
 }
-#maturity_chart{
+.maturity_chart canvas{
 	width: 100%;
+	min-width: 100%;
 	height: 100%;
+	min-height: 100%;
 }
-#maturity_chart .angular{
-	position: relative;
-	width: 100%;
-	height: 100%;
-}
-#maturity_chart .chart{
-	width: 100%;
-	height: 100%;
-}
-#maturity_chart canvas{
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	max-width: 100%;
-	max-height: 100%;
-}
-#maturity_chart .percent {
+.maturity_chart .percent {
 	position: absolute;
 	left: 0;
 	top: 50%;
@@ -331,7 +321,7 @@ input:focus{
 	font-weight: bold;
 	text-align: center;
 }
-#maturity_chart .text_name{
+.maturity_chart .text_name{
 	position: absolute;
 	left: 0;
 	top: 50%;
@@ -443,4 +433,21 @@ input:focus{
 }
 .fixed_foot .fitems.fCur .f_zhi{
 	background-image: url(../../images/MemberFarm/Exponent_zhiB.png);
+}
+
+/*无信息样式*/
+.no_information{
+	padding: 1.07692rem 0;
+	background-color: #fff;
+	text-align: center;
+}
+.no_information .no_icon{
+	width: 1.23077rem;
+	height: 1.23077rem;
+}
+.no_information .no_tip{
+	margin-top: 0.38462rem;
+	font-size: 0.53846rem;
+	font-weight: bold;
+	color: #ccc;
 }

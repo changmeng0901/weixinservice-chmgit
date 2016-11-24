@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
 <meta name="format-detection" content="telephone=no" />
-	<title>会员农场</title>
+	<title>指数</title>
 	<link rel="stylesheet" type="text/css" href="../style/bootstrap/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../style/swiper/idangerous.swiper2.7.6.css">
 	<link rel="stylesheet" type="text/css" href="../style/commons/commons.css">
@@ -21,50 +21,50 @@
 		<div class="swiper-container swiper_sensor" id="swiper_sensor">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide">
-					<div class="data_items dCur">
+					<div class="data_items dCur" dataType="1">
 						<p class="text_name">空气温度</p>
 						<img src="../images/MemberFarm/PlantDetail_kongqwd.png" class="icon_sen">
-						<p class="text_val">20.5℃</p>
+						<p class="text_val" id="airTemp">0℃</p>
 						<i class="line_arrow"></i>
 					</div>
-					<div class="data_items">
+					<div class="data_items" dataType="2">
 						<p class="text_name">空气湿度</p>
 						<img src="../images/MemberFarm/PlantDetail_kongqsd.png" class="icon_sen">
-						<p class="text_val">90%</p>
+						<p class="text_val" id="airHumidity">0%</p>
 						<i class="line_arrow"></i>
 					</div>
-					<div class="data_items">
-						<p class="text_name">空气露点</p>
-						<img src="../images/MemberFarm/PlantDetail_kongqld.png" class="icon_sen">
-						<p class="text_val">20.5℃</p>
-						<i class="line_arrow"></i>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<div class="data_items">
-						<p class="text_name">二氧化碳</p>
-						<img src="../images/MemberFarm/PlantDetail_eryht.png" class="icon_sen">
-						<p class="text_val">20.5℃</p>
-						<i class="line_arrow"></i>
-					</div>
-					<div class="data_items">
-						<p class="text_name">光照强度</p>
-						<img src="../images/MemberFarm/PlantDetail_guangzqd.png" class="icon_sen">
-						<p class="text_val">100lux</p>
-						<i class="line_arrow"></i>
-					</div>
-					<div class="data_items">
-						<p class="text_name">土壤温度</p>
-						<img src="../images/MemberFarm/PlantDetail_turwd.png" class="icon_sen">
-						<p class="text_val">20.5℃</p>
-						<i class="line_arrow"></i>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<div class="data_items">
+					<div class="data_items" dataType="3">
 						<p class="text_name">土壤湿度</p>
 						<img src="../images/MemberFarm/PlantDetail_tursd.png" class="icon_sen">
-						<p class="text_val">50%</p>
+						<p class="text_val" id="soilHumidity">0%</p>
+						<i class="line_arrow"></i>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div class="data_items" dataType="4">
+						<p class="text_name">光照强度</p>
+						<img src="../images/MemberFarm/PlantDetail_guangzqd.png" class="icon_sen">
+						<p class="text_val" id="illumination">0lux</p>
+						<i class="line_arrow"></i>
+					</div>
+					<div class="data_items">
+						<p class="text_name" dataType="5">二氧化碳</p>
+						<img src="../images/MemberFarm/PlantDetail_eryht.png" class="icon_sen">
+						<p class="text_val" id="co2">0℃</p>
+						<i class="line_arrow"></i>
+					</div>
+					<div class="data_items" dataType="6">
+						<p class="text_name">土壤温度</p>
+						<img src="../images/MemberFarm/PlantDetail_turwd.png" class="icon_sen">
+						<p class="text_val" id="soilTemp">0℃</p>
+						<i class="line_arrow"></i>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div class="data_items" dataType="7">
+						<p class="text_name">空气露点</p>
+						<img src="../images/MemberFarm/PlantDetail_kongqld.png" class="icon_sen">
+						<p class="text_val" id="dewPoint">0℃</p>
 						<i class="line_arrow"></i>
 					</div>
 				</div>
@@ -75,12 +75,16 @@
 		<div class="sensor_chart_wap">
 			<div class="sensor_chart">
 				<div id="sensor_chart"></div>
+				<div id="sensor_nochart" class="no_information">
+					<img class="no_icon" src="../images/MemberFarm/PlantDetail_nodata1.png" />
+					<p class="no_tip">暂无数据</p>
+				</div>
 			</div>
 			<!-- 天周月 -->
 			<div class="dayweekmonth" id="dayweekmonth">
-				<span class="sCur">天</span>
-				<span class="sLine">周</span>
-				<span>月</span>
+				<span class="sCur" timeType="1">天</span>
+				<span class="sLine" timeType="2">周</span>
+				<span timeType="3">月</span>
 			</div>
 		</div>
 	</div>
@@ -93,29 +97,22 @@
 		</ul>
 		<div class="exponent_body">
 			<div class="tab_content">
-				<div class="maturity_chart">
-					<div id="maturity_chart">
-						<div class="angular" ng-controller="chartCtrl">
-	                        <span class="chart" easypiechart="animate:false;barColor:#55bf3b;scaleColor:false;lineWidth:40;lineCap:circle" ng-percent="Percent2">
-	                            <span class="percent" ng-bind="percent"></span>
-	                            <br/>
-	                             <span class="text_name">成熟度</span>
-	                        </span>
-	                    </div>
-                    </div>
-				</div>
+				<div class="maturity_chart" data-percent="86">
+			         <span class="percent"></span>
+			         <span class="text_name">自然成熟度</span>
+			    </div>
 				<!-- 成熟度统计值 -->
 				<ul class="tongjfx_total">
 					<li class="items">
-						<p class="text_num">93</p>
+						<p class="text_num" id="realPlantDay">0</p>
 						<p class="text_name">实际种植天数</p>
 					</li>
 					<li class="items cCur">
-						<p class="text_num">31</p>
+						<p class="text_num" id="alreadyDay"></p>
 						<p class="text_name">已种植天数</p>
 					</li>
 					<li class="items">
-						<p class="text_num">5</p>
+						<p class="text_num" id="matureExp"></p>
 						<p class="text_name">自然成熟度</p>
 					</li>
 				</ul>
@@ -124,7 +121,7 @@
 				<!-- 病虫害列表 -->
 				<div class="disease_block">
 					<ol class="disease_list" id="disease_list">
-						<li>
+						<!-- <li>
 							<p class="text_name white_nowrap">草莓黄萎病</p>
 							<div class="clear">
 								<div class="progress">
@@ -178,18 +175,18 @@
 								</div>
 								<span class="bar_num">123456</span>
 							</div>
-						</li>
+						</li> -->
 					</ol>
 				</div>
 				<!-- 病虫害统计值 -->
 				<ul class="tongjfx_total">
 					<li class="items cCur" style="width:50%;">
-						<p class="text_num">0.2</p>
+						<p class="text_num" id="avgHarmful">0.2</p>
 						<p class="text_name">平均发病概率</p>
 					</li>
 					<li class="items" style="width:50%;">
-						<p class="text_num">0.2</p>
-						<p class="text_name">平均发病概率</p>
+						<p class="text_num" id="maxHarmful">0.2</p>
+						<p class="text_name">最大发病概率</p>
 					</li>
 				</ul>
 			</div>
@@ -229,10 +226,8 @@
 
 
 <script type="text/javascript" src="../js/commons/jquery-1.10.2.min.js"></script>
-<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="../js/easypiechart/excanvas.js"></script><![endif]-->
-<script type="text/javascript" src="../js/easypiechart/angular.min.js"></script>
-<script type="text/javascript" src="../js/easypiechart/angular.easypiechart.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/easypiechart/easypiechart.min.js"></script>
 <script type="text/javascript" src="../js/swiper/idangerous.swiper2.7.6.min.js"></script>
 <script type="text/javascript" src="../js/highcharts/highcharts.js"></script>
 <script type="text/javascript" src="../js/MemberFarm/Exponent.js"></script>

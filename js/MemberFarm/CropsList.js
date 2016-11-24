@@ -202,7 +202,7 @@ function InitMonitorData(_data){
                                     '<p class="crop_time">'+mvideo[i].tunnelName+'</span></p>'+
                                 '</dd>'+
                                 '<dd class="dl_arrow">'+
-                                    '<a href="PlantDetail.html">'+
+                                    '<a href="javascript:;" onclick="VideoIdLink()">'+
                                         '<img src="../images/MemberFarm/CropsList_arrow.png" >'+
                                     '</a>'+
                                 '</dd>'+
@@ -226,7 +226,7 @@ function InitMonitorData(_data){
                                     '<p class="crop_time">'+svideo[i].tunnelName+'</span></p>'+
                                 '</dd>'+
                                 '<dd class="dl_arrow">'+
-                                    '<a href="PlantDetail.html">'+
+                                    '<a href="javascript:;" onclick="DeviceIdLink(this)">'+
                                         '<img src="../images/MemberFarm/CropsList_arrow.png" >'+
                                     '</a>'+
                                 '</dd>'+
@@ -236,10 +236,17 @@ function InitMonitorData(_data){
         }
           
 }
-function initBindDomEvent(){
-    
-}
 
+// 物联网设备--监控列表单项点击事件
+function VideoIdLink(){
+    window.location.href="http://192.168.21.187/weixinservice/MemberFarm/Monitor.html?videoId=916&verify=asdf&domain=http://192.168.21.188:8080";;
+}
+// 物联网设备--传感器列表单项点击事件
+function DeviceIdLink(obj){
+    // 本地 = http://192.168.21.187/weixinservice/MemberFarm/Exponent.html?enterpriseInfoId=2&deviceId=1045&dataType=1&timeType=3&verify=asdf&domain=http://192.168.21.188:8080&phone=13693047153
+    window.location.href="http://192.168.21.187/weixinservice/MemberFarm/Exponent.html?enterpriseInfoId=2&deviceId="+$(obj).parents('.dl_dl').attr('deviceid')+"&dataType=1&timeType=3&verify=asdf&domain=http://192.168.21.188:8080&phone=13693047153";
+}
+// 种植信息--种植列表单项点击事件
 function ViewPlant(obj){
-    window.location.href="http://192.168.21.187/weixinservice/MemberFarm/PlantDetail.html?enterpriseInfoId=2&realPlantId="+$(obj).parents('.dl_dl').attr('realplantid')+"&domain=http://192.168.21.188:8080&phone=13693047153";
+    window.location.href="http://192.168.21.187/weixinservice/MemberFarm/PlantDetail.html?enterpriseInfoId=2&realPlantId="+$(obj).parents('.dl_dl').attr('realplantid')+"&dataType=1&timeType=3&verify=asdf&domain=http://192.168.21.188:8080&phone=13693047153";
 }

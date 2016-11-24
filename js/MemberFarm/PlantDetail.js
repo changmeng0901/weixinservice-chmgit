@@ -46,7 +46,7 @@ $.ajax({
     dataType: "jsonp",
     jsonp: 'callback',
     success: function(response) {
-        
+        // 作物信息数据
         InitCropInfoData(response.data_result);
 
     },
@@ -55,6 +55,15 @@ $.ajax({
             console.log('请求失败了吧！！')
         } catch (e) {}
     }
+});
+
+// 跳转到监控页面
+$('#view_monitor').click(function(){
+    window.location.href="http://192.168.21.187/weixinservice/MemberFarm/Monitor.html?videoId=916&domain=http://192.168.21.188:8080";
+});
+// 跳转到指数页面
+$('#view_exponent').click(function(){
+    window.location.href="http://192.168.21.187/weixinservice/MemberFarm/Exponent.html?enterpriseInfoId=2&realPlantId="+getRealPlantId+"&verify=asdf&domain=http://192.168.21.188:8080";
 });
 
 // 物联网设备-传感器数据ajax加载数据
@@ -182,23 +191,7 @@ $('#dayweekmonth span').click(function(){
             if(hasChartData == true){
                 $('#sensor_chart').show();
                 $('#sensor_nochart').hide();
-                if( $('#dayweekmonth span').eq(0).hasClass('sCur') ){
-                    // alert(ChartTime)
-                    // ChartTime = ChartTime.replace(/ /g, "")
-                    // alert(ChartTime)
-                    // ChartTime = ChartTime.replace(/[]/g, "").split(' ')[0].split('-')[2].join('日，')
-                }else if( $('#dayweekmonth span').eq(1).hasClass('sCur') ){
-                    // alert(ChartTime)
-                    // ChartTime = ChartTime.replace(/[]/g, "").split(' ')[0].split('-')[2].join('日，')
-                    // alert('ni'+ChartTime)
-                    // SensorChart(ChartData,ChartTime);
-                }else{
-                    // alert(ChartTime)
-                    // ChartTime = ChartTime.replace(/[]/g, "")
-                    // alert(ChartTime)
-                    // SensorChart(ChartData,ChartTime);
-                }
-                 SensorChart(ChartData,ChartTime);
+                SensorChart(ChartData,ChartTime);
             }else{
                 $('#sensor_chart').hide();
                 $('#sensor_nochart').show();

@@ -151,7 +151,6 @@ input:focus{
 }
 .live_textcont .blong_dikuai{
 	float: left;
-	display: none;
 	width: 100%;
 	height: 3.52941rem;
 	box-sizing: border-box;

@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
 <meta name="format-detection" content="telephone=no" />
-	<title>会员农场</title>
+	<title>监控</title>
 	<link rel="stylesheet" type="text/css" href="../style/swiper/idangerous.swiper2.7.6.css">
 	<link rel="stylesheet" type="text/css" href="../js/jquery-ui/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="../js/videojsPlug/video-js.css" />
@@ -34,7 +34,7 @@
 	<!-- 实况直播  -->
 		<div class="swiper-container swiper_live" id="swiper_live">
 			<div class="swiper-wrapper">
-				<div class="swiper-slide">
+				<!-- <div class="swiper-slide">
 					<div class="live_video_cont">  
 
                         <div id="LiveVideoBlock0" style="height:100%;"></div>
@@ -54,22 +54,14 @@
                         <div id="LiveVideoBlock2" style="height:100%;"></div>  
 
 					</div>
-				</div>
+				</div> -->
 			</div>
 			<div class="pagination"></div>
 		</div>
 		<div class="live_textcont">
-			<div class="blong_dikuai" style="display:block;">
-				<p class="text_name white_nowrap">50号蔬菜棚</p>
-				<p class="text_crop white_nowrap">种植作物：黄瓜﹒白菜西﹒红柿</p>
-			</div>
 			<div class="blong_dikuai">
-				<p class="text_name white_nowrap">50号蔬菜棚</p>
-				<p class="text_crop white_nowrap">种植作物：黄瓜﹒白菜西﹒红柿</p>
-			</div>
-			<div class="blong_dikuai">
-				<p class="text_name white_nowrap">50号蔬菜棚</p>
-				<p class="text_crop white_nowrap">种植作物：黄瓜﹒白菜西﹒红柿</p>
+				<p class="text_name white_nowrap" id="tunnelName"></p>
+				<p class="text_crop white_nowrap" id="plantName"></p>
 			</div>
 		</div>
 	<!-- 实况直播  -->
@@ -80,7 +72,7 @@
 			<div class="take_photos_hd">
 				<div class="swiper-container swiper_takePhotos" id="swiper_takePhotos">
 					<div class="swiper-wrapper">
-						<div class="swiper-slide">
+						<!-- <div class="swiper-slide">
 							<img src="../images/MemberFarm/PlantDetail_temp1.jpg" />
 						</div>
 						<div class="swiper-slide">
@@ -88,7 +80,7 @@
 						</div>
 						<div class="swiper-slide">
 							<img src="../images/MemberFarm/PlantDetail_temp3.jpg" />
-						</div>
+						</div> -->
 					</div>
 				</div>
 				<div class="take_page">图<span id="takeNum"></span>/<span id="takeTotal"></span></div>
@@ -102,12 +94,12 @@
 		</div>
 		<div class="take_textcont">
 			<div class="cont_hd">
-				<p class="sheed_name white_nowrap">2号蔬菜棚</p>
-				<p class="take_time"><img src="../images/MemberFarm/Monitor_icotake.png">拍摄于2016-03-12 20:22</p>
+				<p class="sheed_name white_nowrap" id="tunnelName2"></p>
+				<p class="take_time"><img src="../images/MemberFarm/Monitor_icotake.png">拍摄于<span id="take_time"></span></p>
 			</div>
 			<div class="cont_bd">
-				<p class="take_total">图片张数：<span id="TakePlayTime">10</span>张</p>
-				<p class="crop_name">种植作物：黄瓜﹒白菜西﹒红柿</p>
+				<p class="take_total">图片张数：<span id="TakePlayTime"></span>张</p>
+				<p class="crop_name" id="plantName2"></p>
 			</div>
 		</div>
 	<!-- 环境实况 -->
@@ -121,12 +113,12 @@
 		</div>
 		<div class="trace_textcont">
 			<div class="cont_hd">
-				<p class="sheed_name white_nowrap">2号蔬菜棚</p>
-				<p class="play_num"><img src="../images/MemberFarm/Monitor_icoplay.png"><span id="TracePlayNum">15</span>次播放</p>
+				<p class="sheed_name white_nowrap" id="tunnelName3"></p>
+				<p class="play_num"><img src="../images/MemberFarm/Monitor_icoplay.png"><span id="video_duration"></span>次播放</p>
 			</div>
 			<div class="cont_bd">
-				<p class="play_time">播放时长：<span id="TracePlayTime">2.56</span>秒</p>
-				<p class="crop_name">种植作物：黄瓜﹒白菜西﹒红柿</p>
+				<p class="play_time">播放时长：<span id="video_play_times"></span>秒</p>
+				<p class="crop_name"></p>
 			</div>
 		</div>
 	<!-- 视频追溯 -->
