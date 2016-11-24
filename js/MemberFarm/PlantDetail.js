@@ -325,9 +325,9 @@ function InitCropInfoData(_data){
                 '</div>'+
                 '<div class="harvest_det">'+
                     '<p class="text_name">'+harvests[i].name+'</p>'+
-                    '<p class="text_date">'+harvests[i].time.split(' ')[0].split('-')[1]+'/'+harvests[i].time.split(' ')[0].split('-')[2]+' '+harvests[i].time.split(' ')[1].split(':')[0]+':'+harvests[i].time.split(' ')[1].split(':')[1]+'</p>'+
+                    '<p class="text_date">'+harvests[i].time+'</p>'+
                 '</div>'+
-                '<p class="harvest_weight"><em class="num>'+harvests[i].weight+'</em>kg</p>'+
+                '<p class="harvest_weight"><em class="num">'+harvests[i].weight+'</em>kg</p>'+
             '</li>';
         }
         $harvests_information.append( harvestsList );
