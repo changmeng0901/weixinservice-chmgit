@@ -98,6 +98,17 @@ $.ajax({
             $('#sensor_nochart').show();
         }
         
+		// 传感器数据--列表平均分配宽度
+		var windowWidth = document.documentElement.clientWidth;
+		var windowHeight= document.documentElement.clientHeight;
+		var swiperWidth = windowWidth/4;
+		var swiperLen = $('.swiper_sensor .swiper_slide').length;
+		$('.swiper_sensor .swiper_slide').css({
+			'width' : swiperWidth
+		}); 
+		$('.swiper_sensor').css({
+			'width' : swiperWidth*swiperLen
+		});
 
     },
     error: function(e) {
@@ -107,17 +118,7 @@ $.ajax({
     }
 });
 
-// 传感器数据--列表平均分配宽度
-var windowWidth = document.documentElement.clientWidth;
-var windowHeight= document.documentElement.clientHeight;
-var swiperWidth = windowWidth/4;
-var swiperLen = $('.swiper_sensor .swiper_slide').length;
-$('.swiper_sensor .swiper_slide').css({
-    'width' : swiperWidth
-}); 
-$('.swiper_sensor').css({
-    'width' : swiperWidth*swiperLen
-});
+
 // 传感器数据--点击事件及切换图表内容
 $('.swiper_sensor .swiper_slide').each(function(index,elem){
     $(elem).click(function(){
@@ -250,6 +251,12 @@ function InitCropInfoData(_data){
     $('#text_cyle').html(_data.periodName);
     $('#remain').html(_data.remain);
     $('#progress_bar').css('width',_data.grownProp+'%');
+	//如果没有生命周期，则：
+	if( _data.hasPeriod == false ){
+		$('.cropinfo_bd').hide();
+	}else{
+		$('.cropinfo_bd').show();	
+	}
 
     // 种植信息
     var farmingsList = '';
