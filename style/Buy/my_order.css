@@ -24,8 +24,9 @@
 }
 html,body{ position: relative;height: 100%; overflow: hidden;}
 .overflowH{ overflow: hidden;}
-div.overflowH{ overflow: hidden;}
 .overflowA{ overflow: auto;}
+div.overflowH{ overflow: hidden;}
+div.overflowA{ overflow: auto;}
 .wrap_myorder{ position: relative; height:100%;overflow-y: auto;}
 /*我的订单*/
 .my_order{width: 100%; height: auto; backface-visibility: #f1f1f1;}
@@ -42,7 +43,7 @@ div.overflowH{ overflow: hidden;}
 .my_order .news li .pic{height: 1.8rem; margin-top: 1rem; position: relative; line-height: 2rem;}
 .my_order .news li .pic .order{width: 1.375rem; height: 1.3125rem; position: absolute; left: 50%; margin-left: -0.6875rem;}
 .my_order .news li.cur .pic .order{background-position: 0 0;}
-.my_order .news li .pic i{display: none; min-width: 0.8rem; min-height: 0.8rem; line-height: 0.8rem;padding:0 0.02rem; background-color: #ff4d45; text-align: center; font-size: 0.625rem; color: #fff; border-radius: 0.4rem; position: absolute; top: -0.4rem; left: 2.3rem;}
+.my_order .news li .pic i{display: none-; min-width: 0.8rem; min-height: 0.8rem; line-height: 0.8rem;padding:0 0.02rem; background-color: #ff4d45; text-align: center; font-size: 0.625rem; color: #fff; border-radius: 0.4rem; position: absolute; top: -0.4rem; left: 2.3rem;}
 .my_order .news li.cur .pic i{display: block-;}
 .order1{background: url(../../images/Buy/order1.png) 0 -1.5625rem no-repeat; background-size: cover;}
 .order2{background: url(../../images/Buy/order2.png) 0 -1.5625rem no-repeat; background-size: cover;}
@@ -188,3 +189,7 @@ div.overflowH{ overflow: hidden;}
 #has_evaluate li .middle .text_comment{ line-height: 1.4rem; font-size: 0.75rem; border: 1px solid #ff4d45;border-radius: 4px;color: #ff4d45; padding:0 0.65rem;}
 #registerPop .tip_phonenumber{ display: none; position: absolute;right:0;top: -1rem; z-index:1;font-size: 0.45rem; color: #f00;}
 #registerPop .tip_securitycode{ display: none; position: absolute;right:6.5rem;top: -1rem; z-index:1;font-size: 0.45rem; color: #f00;}
+/*微信支付和暂不支付样式*/
+.referPop{position: absolute; left: 0; top: 0; z-index: 3;width:100%;height:100%; background: url(../../images/Buy/pop_bg.png) repeat; display: none;}
+.referPop .payment,.packetContent{position: fixed; left: 0; bottom: 0; width: 100%; height: auto; z-index: 10; }
+.referPop .payment li{width: 17.1875rem; height: 2.5625rem; line-height: 2.5625rem; margin: 0 auto 0.625rem; border-radius: 5px;background-color: rgba(255,255,255,0.9); text-align: center; font-size: 1rem; }

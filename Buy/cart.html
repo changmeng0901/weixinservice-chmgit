@@ -14,10 +14,10 @@
 </head>
 <body>
 	<div class="wrap_cart">
-		<div class="binding">
-			<img src="../images/Buy/dele.png" alt="">绑定手机号可查看所有订单
-			<span class="now fr">立即绑定</span>
-		</div>
+		<!--<div class="binding" id="binding" style="display: none;">
+			<img onclick="DeleteBindingPhone('#binding')" src="../images/Buy/dele.png" alt="">绑定手机号可查看所有订单
+			<span class="now fr" onclick="PromptlyBinding(this,'#registerPop')">立即绑定</span>
+		</div>-->
 		<!-- 购物车有内容 -->
 		<ul class="cart" id="cart_list"></ul>
 		<!-- 无内容 -->
@@ -49,6 +49,31 @@
 			<li class="sure" onclick="DeleteSure(this)">确定</li>
 		</ul>
 	</div>
+	
+<!-- 注册弹窗 -->
+<div class="mark_bind" onclick="MarkBindHide()"></div>
+<div class="registerPop" id="registerPop">
+	<div class="member">
+		<div class="pen"><img src="../images/Buy/pen.png" alt=""></div>
+		<h4>注册会员账号</h4>
+		<ul class="register_ul">
+			<li class="info">
+				<input type="text" value="手机号" class="entry1" id="phoneVal">
+				<i class="icon1"></i>
+				<p class="tip_phonenumber">手机号不正确，请输入正确的手机号</p>
+			</li>
+			<li class="info">
+				<input type="text" value="验证码" class="entry2" id="securitycodeVal">
+				<i class="icon2"></i>
+				<span class="code fr" id="security_btn" code="" onclick="SecurityBtn()">验证码</span>
+				<span class="time_s60 fr" id="time_s60">10s</span>
+				<p class="tip_securitycode">验证码不正确</p>
+			</li>
+			<li class="regBtn" onclick="RegisterBinding()">注册并绑定</li>
+		</ul>
+	</div>
+</div>
+<!-- 注册弹窗 -->
 </body>
 <script type="text/javascript" src="../js/commons/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="../js/commons/jquery.lazyload.js"></script>
@@ -253,6 +278,15 @@
     var getMemberInfo = weixin_info.member_info_id;
     var getEnterpriseId = weixin_info.enterprise_info_id;
     
+    //绑定手机号判断
+    if(weixin_info.phone!=null&&weixin_info.phone!=''&&weixin_info.phone!=undefined){
+		//已绑定手机号
+		$('.binding').hide();
+	}else{
+		//未绑定手机号
+		$('.binding').show();
+	}
+    
      //图片懒加载
 	$("img").lazyload({
 		effect: "fadeIn"
@@ -298,7 +332,6 @@
 	//if ( isWeiXin ){
 		$.ajax({//---start  ajax
 			type: "GET",
-			timeout: 1000,
 			url: getTestUrl+'/rest/1.0/purchase',
 			dataType: "jsonp",
 			data:{
@@ -312,8 +345,7 @@
 			success: function( response ) {
 				console.log(response)
 				if(response.invoke_result == 'INVOKE_SUCCESS'){
-					console.log('1111')
-					if( response.cart_list!=[] || response.cart_list!='' || response.cart_list!=undefined ){
+					if( response.cart_list.length>0 ){
 						//初始化购物车列表
 						InitShoppingCart(response.cart_list);
 						//有无数据板块（显示或隐藏）
@@ -328,9 +360,7 @@
 				
 			},
 			error: function(e) {
-				try {
-					console.log('购物车列表失败了吧！！')
-				} catch (e) {}
+				console.log('购物车列表请求失败了！')
 			}
 		});	//-----end ajax
 	//}
@@ -362,20 +392,7 @@
 			$('#del_pop').attr('itemBlong',$(obj).parents('li').attr('product_id'));
 			$('#tip_box').attr('itemBlong',$(obj).parents('li').attr('product_id'));
 			
-			$.ajax({
-				type: "GET",
-				url: getTestUrl+'/rest/1.0/purchase',
-				dataType: "jsonp",
-				data:{
-					'method':'delete.cart.data',
-					'field':JSON.stringify({
-						'enterprise_info_id' : getEnterpriseId	,
-						'member_info'        : getMemberInfo	,
-						'product_id'         : $(obj).parents('li').attr('product_id')
-					})
-				},
-				jsonp: 'callback'
-			});	//-----end ajax
+			
 			
 		};
 	//取消
@@ -387,18 +404,35 @@
 	//确定
 	var DeleteSure = function(obj)
 		{
-			$('#del_pop').hide();
-		 	$('#tip_box').hide();
-		 	$('#cart_list li').attr('product_id',$(obj).parents('#tip_box').attr('itemBlong')).remove();
-		 	var now= $('#cart_list .on_check').length;
-		 	$('.accounts span').html('（'+now+'）');
-		 	if( now == 0 ){
-		 		//如果都删没了，则结算不可点击，且数量为空，且全选取消勾选
-		 		$('.accounts').removeClass('cff');
-		   		$('.accounts span').html('');
-		   		$('#all_select').removeClass('on_check');	
-		 		$('#all_select').attr('flag','false');
-		 	}
+			$.ajax({
+				type: "GET",
+				url: getTestUrl+'/rest/1.0/purchase',
+				dataType: "jsonp",
+				data:{
+					'method':'delete.cart.data',
+					'field':JSON.stringify({
+						'enterprise_info_id' : getEnterpriseId	,
+						'member_info'        : getMemberInfo	,
+						'product_id'         : $('#tip_box').attr('itemBlong')
+					})
+				},
+				jsonp: 'callback',
+				success :  function( response ) {
+					$('#del_pop').hide();
+				 	$('#tip_box').hide();
+				 	$('#cart_list li[product_id='+$('#tip_box').attr('itemBlong')+']').remove();
+				 	var now= $('#cart_list .on_check').length;
+				 	$('.accounts span').html('（'+now+'）');
+				 	if( now == 0 ){
+				 		//如果都删没了，则结算不可点击，且数量为空，且全选取消勾选
+				 		$('.accounts').removeClass('cff');
+				   		$('.accounts span').html('');
+				   		$('#all_select').removeClass('on_check');	
+				 		$('#all_select').attr('flag','false');
+				 	}
+				}
+			});	//-----end ajax
+			
 		};
 	
 	//遮罩点击事件
@@ -524,6 +558,8 @@
 				$('#total_money').html('￥0.00');
 			}
 		}
+		
+	
 
 </script>
 </html>

@@ -219,7 +219,6 @@
 	
 	$.ajax({//---start ajax
 		type: "GET",
-		timeout: 1000,
 		url: getTestUrl+'/rest/1.0/purchase',
 		data:{
 			'method':'query.address.data',
@@ -267,9 +266,7 @@ var InitAddressData = function ( _data ){
 		addrreceiver = '',
 		addraddressid='';
 	
-	if( addrcookie == ''|| addrcookie==null || addrcookie == 'undefined'){
-		
-	}else{
+	if( addrcookie != ''&& addrcookie!=null && addrcookie != undefined){
 		addrcookie  = JSON.parse( addrcookie );
 		addrid = addrcookie.address_id;
 		addrreceiver = addrcookie.receiver;
@@ -282,23 +279,21 @@ var InitAddressData = function ( _data ){
 		//_data[j].address_id == addrid ? _class = ' iCur' : _class = '';
 		if ( _data[j].address_id == addrid ){
 			_class = ' iCur';
-			addraddressid = addrcookie.address_id;
-			addrreceiver = addrcookie.receiver;
-			addrpnone = addrcookie.phone_num;
-			addraddress = addrcookie.address;
 		}else{
 			_class = '';
+		}
 			addraddressid = _data[j].address_id;
 			addrreceiver = _data[j].receiver;
 			addrpnone = _data[j].phone;
 			addraddress = _data[j].address;
-		}
 		_list += 
-		'<li class="clearfix'+ _class +'" phoneNum="'+ addrpnone +'" addressId="'+ addraddressid +'" onclick="ClickFn(this)">'+
-			'<div class="fl left"><img src="../images/Buy/correct.png" alt=""></div>'+
-			'<div class="center fl">'+
-				'<p class="name">'+ addrreceiver +'</p>'+
-				'<p class="dizhi">'+ addraddress +'</p>'+
+		'<li class="clearfix'+ _class +'" phoneNum="'+ addrpnone +'" addressId="'+ addraddressid +'">'+
+			'<div class="selectadd fl" onclick="ClickFn(this)">'+
+				'<div class="fl left"><img src="../images/Buy/correct.png" alt=""></div>'+
+				'<div class="center fl">'+
+					'<p class="name">'+ addrreceiver +'</p>'+
+					'<p class="dizhi">'+ addraddress +'</p>'+
+				'</div>'+
 			'</div>'+
 			'<div class="right fr" onclick="EditAddress(this)"><img src="../images/Buy/dizhi.png" alt=""></div>'+
 		'</li>';	
@@ -313,12 +308,12 @@ var InitAddressData = function ( _data ){
 	}
 }
 var ClickFn = function(obj){
-	$(obj).addClass('iCur').siblings().removeClass('iCur');
+	$(obj).parents('li').addClass('iCur').siblings().removeClass('iCur');
 }
 //编辑地址函数
 var EditAddress = function(obj){
 	//点击编辑地址--跳转到编辑地址页
-	var address_id = $(obj).parents('li').attr('addressId');
+	var address_id = $(obj).parents('li').attr('addressid');
 	var receiver = $(obj).parents('li').find('.name').html();
 	var phone_num = $(obj).parents('li').attr('phoneNum');
 	var address = $(obj).parents('li').find('.dizhi').html();
@@ -342,7 +337,7 @@ var EditAddress = function(obj){
 //如果没有地址，则提示您还没有添加收货地址，如果有就返回待付款的订单页面
 $('.submitaddress').click(function(){
 	
-	if($('#address_list').attr('adlength') == '0'){
+	if($('#address_list .iCur').length==0){
 		confirm('您还没有收货地址')
 	}else{
 			yjgmAddressCookie = {
@@ -354,8 +349,9 @@ $('.submitaddress').click(function(){
 			yjgmAddressCookie = JSON.stringify( yjgmAddressCookie );
 		setCookie('yjgmAddressCookie',yjgmAddressCookie);
 		
-		window.location.href = http+'/weixinservice/Buy/PaymentOrders.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&domain='+getTestUrl;
-	
+		//window.location.href = http+'/weixinservice/Buy/PaymentOrders.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&domain='+getTestUrl;
+		history.go(-1);
+		
 	}
 	
 });

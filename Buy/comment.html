@@ -239,24 +239,26 @@
 		((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
 	}
 	
+	var http = 'http://szq.s1.natapp.cc'; 
 	var iframeSearch = location.search.split('&');
 	//var getEnterpriseId = iframeSearch[0].split('=')[1];
 	//var getMemberInfo = iframeSearch[1].split('=')[1];
 	var getOrderProductId = iframeSearch[2].split('=')[1];
-	var http = 'http://szq.s1.natapp.cc'; 
-	var getTestUrl = 'http://192.168.21.207:8080';
+	var getTestUrl = iframeSearch[3].split('=')[1];
 	
-	var cookieinfo = getCookie("weixin_info_pay");
+	var cookieinfo='',
+		getMemberInfo='',
+		getEnterpriseId='';
+	cookieinfo = getCookie("weixin_info_pay");
 	cookieinfo = base64decode(cookieinfo);
 	cookieinfo = utf8to16(cookieinfo);
 	weixin_info = JSON.parse( cookieinfo );
-    var getMemberInfo = weixin_info.member_info_id;
-    var getEnterpriseId = weixin_info.enterprise_info_id;
+    getMemberInfo = weixin_info.member_info_id;
+    getEnterpriseId = weixin_info.enterprise_info_id;
 
 	//评价接口
 	$.ajax({
 		type: "GET",
-		timeout: 1000,
 		url: getTestUrl+'/rest/1.0/purchase',
 		dataType: "jsonp",
 		data:{
@@ -279,9 +281,7 @@
 			}
 		},
 		error: function(e) {
-			try {
-				console.log('评价页接口请求失败了！')
-			} catch (e) {}
+			console.log('评价页接口请求失败了！')
 		}
 	});	//-----end ajax
 	
@@ -317,7 +317,7 @@
 		}else{
 			
 				var textareaVal = $('#comment_area').val();
-				if ( textareaVal==null || textareaVal=='请输入评价内容' ){
+				if ( textareaVal==''||textareaVal==null || textareaVal=='请输入评价内容' ){
 						//如果为空或者为默认值，则提示填写内容
 						confirm('请说点什么吧！');
 				}else{
@@ -342,7 +342,6 @@
 					    //console.log(vcommentimages)
 						$.ajax({
 							type: "GET",
-							timeout: 1000,
 							url: getTestUrl+'/rest/1.0/purchase',
 							dataType: "jsonp",
 							data:{
@@ -357,7 +356,7 @@
 							},
 							jsonp: 'callback'
 						});	//-----end ajax
-						window.location.href = http+'/weixinservice/Buy/MyOrder.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&order_status=5';
+						window.location.href = http+'/weixinservice/Buy/MyOrder.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&order_status=5'+'&domain='+getTestUrl;
 				}
 		}
 	}

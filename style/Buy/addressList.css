@@ -22,6 +22,10 @@
     	font-size: 20px;
     }
 }
+.overflowH{ overflow: hidden;}
+.overflowA{ overflow: auto;}
+div.overflowH{ overflow: hidden;}
+div.overflowA{ overflow: auto;}
 .address{width: 100%; height: auto; padding-left: 0.625rem; background-color: #fff; box-sizing: border-box;}
 .address li{min-height: 2.6875rem; border-bottom: 1px solid #e1e1e1; padding-right: 0.625rem; }
 .address li .left{width: 1.525rem; min-height: 2.6875rem;}

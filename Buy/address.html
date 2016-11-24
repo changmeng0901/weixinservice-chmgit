@@ -247,13 +247,18 @@
 	var http = 'http://szq.s1.natapp.cc'; 
 	var iframeSearch    = location.search.split('&');
 	var getTestUrl      = iframeSearch[0].split('=')[1];
+	var getMemberInfo='',
+		getEnterpriseId='';
 	
-	var cookieinfo = getCookie("weixin_info_pay");
-		cookieinfo = base64decode(cookieinfo);
-		cookieinfo = utf8to16(cookieinfo);
-		weixin_info = JSON.parse( cookieinfo );
-    var getMemberInfo = weixin_info.member_info_id;
-    var getEnterpriseId = weixin_info.enterprise_info_id;
+	var cookieinfo='';
+		cookieinfo = getCookie("weixin_info_pay");
+		if(cookieinfo!=''&&cookieinfo!=null&&cookieinfo!=undefined){
+			cookieinfo = base64decode(cookieinfo);
+			cookieinfo = utf8to16(cookieinfo);
+			weixin_info = JSON.parse( cookieinfo );
+	    	getMemberInfo = weixin_info.member_info_id;
+	    	getEnterpriseId = weixin_info.enterprise_info_id;
+	    }
 	
 	
 	$('input[type=text],textarea').focus(function(){
@@ -276,7 +281,7 @@
 	
 	//点击地址列表编辑按钮时，会把地址信息存放在cookie里，这里从cookie里拿到信息，添加到地址里就行
 	var addrcookie = getCookie('editAddressCookie');
-	var method = "add_address_data";
+	var method = "add.address.data";
 	var address_id = "";
 	if( addrcookie != null && addrcookie!= '' && addrcookie!='undefined'){
 		addrcookie = JSON.parse( addrcookie )
@@ -315,9 +320,6 @@
 			alert('请填写正确的手机号');
 		}else{
 			
-				
-				
-				
 				$.ajax({
 					type: "GET",
 					url: getTestUrl+'/rest/1.0/purchase',
@@ -336,17 +338,9 @@
 					jsonp: 'callback',
 					success: function( response ) {
 						
-						var yjgmAddressCookie = {
-							'address_id' : $('.newAdd').attr('address_id') ,
-							'receiver' : $('#receiverVal').val() ,
-							'phone_num' : $('#phoneVal').val() ,
-							'address' : $('#addressVal').val()
-						};
-						yjgmAddressCookie = JSON.stringify( yjgmAddressCookie );
-						setCookie('yjgmAddressCookie',yjgmAddressCookie);
 						setCookie('editAddressCookie',"");
-						//window.location.href = encodeURI(http+'/weixinservice/Buy/addressList.html?member_info='+getMemberInfo+'&domain='+getTestUrl);
-						window.location.href = http+'/weixinservice/Buy/addressList.html?member_info='+getMemberInfo+'&domain='+getTestUrl;
+						//window.location.href = http+'/weixinservice/Buy/addressList.html?member_info='+getMemberInfo+'&domain='+getTestUrl;
+						history.go(-1);
 						
 					},
 					error: function(e) {

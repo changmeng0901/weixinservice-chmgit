@@ -34,6 +34,8 @@ body{
 	}
 .overflowH{ overflow: hidden;}
 .overflowA{ overflow: auto;}
+div.overflowH{ overflow: hidden;}
+div.overflowA{ overflow: auto;}
 .wrap{ position: relative; width: 100%; height: 100%; overflow: auto;}
 
 /*地址*/
@@ -97,7 +99,7 @@ body{
 .selected{width: 1.125rem; height: 1.125rem; background: url(../../images/Buy/checkBox.png) no-repeat 0 -1.25rem; background-size: cover; margin-top: 3.6rem;}
 .selected.on_check{background-position: 0 0;}
 .selected input{opacity: 0;}
-.unselected{ display:inline-block;width: 1.125rem; height: 1.125rem;  background: url(../../images/Buy/checkBoxNo.png) no-repeat; background-size: cover;}
+.unselected{ display:inline-block;width: 1.125rem; height: 1.125rem;  margin-top: 3.6rem; background: url(../../images/Buy/checkBoxNo.png) no-repeat; background-size: cover;}
 .content3 .use{height: 2.1875rem; line-height: 2.1875rem; background-color: #b5b5b5; font-size: 0.875rem; color: #fff; text-align: center;}
 .content3 .use.cur{background-color: #ff4d45;}
 .content3 .card{float: left; width: 14.8125rem; height: 6.5625rem; margin:1rem 0 0 0.75rem; position: relative;}
@@ -121,3 +123,21 @@ body{
 .leave_message{ display:none;position: absolute;left: 0;top: 0; z-index: 3; width: 100%; height: 100%; background-color: #f7f7f7;}
 .leave_message .buyer{width: 100%; height: 8.125rem; border-top: 1px solid #e1e1e1; border-bottom: 1px solid #e1e1e1; padding: 0.625rem; font-size: 0.875rem; color: #ccc; font-family: "微软雅黑"; margin: 0.625rem 0 1.25rem; box-sizing:border-box; resize:none;}
 .leave_message .hold{width: 11.25rem; height: 2.1875rem; line-height: 2.1875rem; text-align: center; margin: 0 auto; font-size: 0.875rem; color: #fff; background-color: #ff4d45; border-radius: 4px;}
+
+/*注册弹窗*/
+.mark_bind{position: absolute; top: 0; left: 0; z-index: 10; width: 100%; height: 100%; background: url(../../images/Buy/pop_bg.png) repeat; display: none;}
+.registerPop { display:none;width: 17.75rem; height: 15.25rem; background: #fff; border-radius: 5px; position: absolute; left: 50%; margin-left: -8.875rem; top: 20%; z-index: 11;}
+.registerPop .member .pen{width: 3.75rem; height: 3.75rem;  margin: -1.85rem auto 0;}
+.registerPop .member .pen img{width: 100%; height: 100%;}
+.registerPop .member h4{font-size: 0.9375rem; height: 3.3rem; line-height: 3rem; text-align: center; font-weight: normal; color: #333;}
+.registerPop .member .info{width: 15.75rem; height: 2.25rem; margin: 0 auto 0.8125rem; position: relative;}
+.registerPop .member .info .entry1,.registerPop .member .info .entry2{width: 100%; height: 2.25rem; line-height: 2.25rem; box-sizing:border-box; padding: 0 0.625rem 0 1.875rem; border: 1px solid #e1e1e1; border-radius: 4px; font-size: 0.9375rem; color: #b2b2b2; font-family: "微软雅黑";}
+.registerPop .member .info .entry2{width: 9.375rem;}
+.registerPop .member .info .code,
+.registerPop .member .time_s60{width: 5.75rem; height: 2.25rem; line-height: 2.25rem; font-size: 0.9375rem; color: #62b30c; box-sizing:border-box; border: 1px solid #62b30c; border-radius: 4px; text-align: center;}
+.registerPop .member .regBtn{width: 15.75rem; margin: 0 auto; height: 2.25rem; line-height: 2.25rem; border-radius: 4px; text-align: center; background-color: #62b30c; color: #fff;}
+.registerPop .member .info .icon1,.registerPop .member .info .icon2{position: absolute; width: 0.75rem; height: 0.9375rem; left: 0.75rem; top: 0.625rem; background: url(../../images/Buy/entry1.png) no-repeat; background-size: cover;}
+.registerPop .member .info .icon2{background: url(../../images/Buy/entry2.png); background-size: cover;}
+.registerPop .member .time_s60{ display: none;}
+#registerPop .tip_phonenumber{ display: none; position: absolute;right:0;top: -1rem; z-index:1;font-size: 0.45rem; color: #f00;}
+#registerPop .tip_securitycode{ display: none; position: absolute;right:6.5rem;top: -1rem; z-index:1;font-size: 0.45rem; color: #f00;}

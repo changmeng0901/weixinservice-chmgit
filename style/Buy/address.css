@@ -22,6 +22,10 @@
     	font-size: 20px;
     }
 }
+.overflowH{ overflow: hidden;}
+.overflowA{ overflow: auto;}
+div.overflowH{ overflow: hidden;}
+div.overflowA{ overflow: auto;}
 .newAdd{padding-left: 0.625rem; height: auto; border-bottom: 1px solid #e1e1e1; background-color: #fff;}
 .newAdd li{padding-right: 0.625rem; height: 2.4375rem; line-height: 2.4375rem; font-size: 0.875rem; color: #333; border-bottom: 1px solid #e1e1e1; }
 .newAdd li .detail{width: 14rem; text-align: right; font-size: 0.875rem; color: #ccc; height: 2.4375rem; line-height: 2.4375rem; font-family: "微软雅黑"; box-sizing:border-box;}

@@ -51,7 +51,7 @@
 		jsonp: 'callback',
 		success: function(response) {
 			
-			if( !response.option_product_list == '' || !response.option_product_list == [] || !response.option_product_list == 'undefined' ){
+			if( response.option_product_list.length>0 ){
 				InitListData( response.option_product_list );		
 			}
 			

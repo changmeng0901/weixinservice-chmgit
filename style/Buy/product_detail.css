@@ -22,11 +22,15 @@
     	font-size: 20px;
     }
 }
+.overflowH{ overflow: hidden;}
+.overflowA{ overflow: auto;}
+div.overflowH{ overflow: hidden;}
+div.overflowA{ overflow: auto;}
 html,body{ position: relative;width: 100%; height: 100%; overflow: hidden;}
 body{ max-width: 640px; margin: auto; padding-bottom:2.8rem; box-sizing: border-box;}
 .wrap_productdetail{ position: relative;width:100%;height: 100%;overflow-x: hidden;overflow-y: auto;}
 .swiper-wrapper .swiper-slide{width: 100%; height: 16rem;}
-.swiper-wrapper .swiper-slide img{width: 100%; height: auto;}
+.swiper-wrapper .swiper-slide img{width: 100%; height: auto;min-height: 100%;}
 .swiper-pagination-bullet{background:#fff; opacity: 0.8;}
 .swiper-pagination-bullet-active {background: #659b32;}
 .logo{position: absolute; width: 5rem-; height: 1.875rem; line-height: 1.875rem; font-size: 0.6875rem; color: #fff; border-radius: 1rem; background: url(../../images/Buy/logo_bg.png) repeat; border: 1px solid #e1e1e1; left: 0.625rem; top: 0.8125rem; z-index: 5;}
@@ -161,6 +165,25 @@ body{ max-width: 640px; margin: auto; padding-bottom:2.8rem; box-sizing: border-
 .load_more{ position:absolute; bottom:0.3rem; left:0; width:20rem; height:1.2rem; display:none;}
 .load_more p{ width:100%; height:100%; font-size:.7rem; line-height:1.2rem; text-align:center; color: #999;}
 
+/*注册弹窗*/
+.mark_bind{position: absolute; top: 0; left: 0; z-index: 10; width: 100%; height: 100%; background: url(../../images/Buy/pop_bg.png) repeat; display: none;}
+.registerPop { display:none;width: 17.75rem; height: 15.25rem; background: #fff; border-radius: 5px; position: absolute; left: 50%; margin-left: -8.875rem; top: 20%; z-index: 11;}
+.registerPop .member .pen{width: 3.75rem; height: 3.75rem;  margin: -1.85rem auto 0;}
+.registerPop .member .pen img{width: 100%; height: 100%;}
+.registerPop .member h4{font-size: 0.9375rem; height: 3.3rem; line-height: 3rem; text-align: center; font-weight: normal; color: #333;}
+.registerPop .member .info{width: 15.75rem; height: 2.25rem; margin: 0 auto 0.8125rem; position: relative;}
+.registerPop .member .info .entry1,.registerPop .member .info .entry2{width: 100%; height: 2.25rem; line-height: 2.25rem; box-sizing:border-box; padding: 0 0.625rem 0 1.875rem; border: 1px solid #e1e1e1; border-radius: 4px; font-size: 0.9375rem; color: #b2b2b2; font-family: "微软雅黑";}
+.registerPop .member .info .entry2{width: 9.375rem;}
+.registerPop .member .info .code,
+.registerPop .member .time_s60{width: 5.75rem; height: 2.25rem; line-height: 2.25rem; font-size: 0.9375rem; color: #62b30c; box-sizing:border-box; border: 1px solid #62b30c; border-radius: 4px; text-align: center;}
+.registerPop .member .regBtn{width: 15.75rem; margin: 0 auto; height: 2.25rem; line-height: 2.25rem; border-radius: 4px; text-align: center; background-color: #62b30c; color: #fff;}
+.registerPop .member .info .icon1,.registerPop .member .info .icon2{position: absolute; width: 0.75rem; height: 0.9375rem; left: 0.75rem; top: 0.625rem; background: url(../../images/Buy/entry1.png) no-repeat; background-size: cover;}
+.registerPop .member .info .icon2{background: url(../../images/Buy/entry2.png); background-size: cover;}
+.registerPop .member .time_s60{ display: none;}
+#registerPop .tip_phonenumber{ display: none; position: absolute;right:0;top: -1rem; z-index:1;font-size: 0.45rem; color: #f00;}
+#registerPop .tip_securitycode{ display: none; position: absolute;right:6.5rem;top: -1rem; z-index:1;font-size: 0.45rem; color: #f00;}
+
+
 /*修改样式*/
 .has_evaluate li .pics{ margin-top: 0.4rem;}
 .stars_iconbg{ width: 4.6rem; height: 0.6rem; background-repeat: no-repeat; background-size: 100% 100%;}
@@ -171,4 +194,5 @@ body{ max-width: 640px; margin: auto; padding-bottom:2.8rem; box-sizing: border-
 .stars_iconbg.sta4{ background-image: url(../../images/Buy/pingj_star4.png);}
 .stars_iconbg.sta5{ background-image: url(../../images/Buy/pingj_star5.png);}
 .wrap_cart{ position: relative; height: 100%;overflow-x: hidden; overflow-y: auto;}
-.wrap_cart .cart{ margin-bottom: 0;}
+.wrap_cart .binding{ border-bottom: 0;}
+.wrap_cart .cart{ margin-bottom: 0;border-top: 0.625rem solid #f7f7f7;}

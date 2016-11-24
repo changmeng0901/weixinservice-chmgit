@@ -22,7 +22,7 @@
 	        <div class="swiper-pagination"></div>
 	        <!-- logo -->
 	        <div class="logo" id="logo"><img src="../images/Buy/logo.jpg" /></div>
-	        <div class="edit"><a href=""><img src="../images/Buy/edit.png" ></a></div>
+	        <div class="edit" id="enter_myorder" style="display: none;"><a href="javascript:;"><img src="../images/Buy/edit.png" ></a></div>
 	    </div>
 	    <div class="title">
 	    	<p class="content">
@@ -85,7 +85,7 @@
 	    <div class="show">
 	        <h4><span class="line"></span><span>农场地图</span><span class="line"></span></h4>
 	        <div class="pic map" id="farm_map">
-	            <img src="../images/Buy/map.jpg" />
+	            <!--<img src="../images/Buy/map.jpg" />-->
 	        </div>
 	    </div>
 	    <!-- 商品详情及评价 板块  -->
@@ -123,13 +123,38 @@
         <li class="nub1" id="EnterCart">
             <a href="javascript:;">
                <img src="../images/Buy/cart.png" />
-                <i id="cart_total"></i>
+                <i id="cart_total">0</i>
                 <p>购物车</p> 
             </a> 
         </li>
         <li class="nub2" id="AddCart">加入购物车</li>
         <li class="nub3" id="BuyNow">立即购买</li>  
     </ul>
+    
+    <!-- 注册弹窗 -->
+	<div class="mark_bind" onclick="MarkBindHide()"></div>
+	<div class="registerPop" id="registerPop">
+		<div class="member">
+			<div class="pen"><img src="../images/Buy/pen.png" alt=""></div>
+			<h4>注册会员账号</h4>
+			<ul class="register_ul">
+				<li class="info">
+					<input type="text" value="手机号" class="entry1" id="phoneVal">
+					<i class="icon1"></i>
+					<p class="tip_phonenumber">手机号不正确，请输入正确的手机号</p>
+				</li>
+				<li class="info">
+					<input type="text" value="验证码" class="entry2" id="securitycodeVal">
+					<i class="icon2"></i>
+					<span class="code fr" id="security_btn" code="" onclick="SecurityBtn()">验证码</span>
+					<span class="time_s60 fr" id="time_s60">60s</span>
+					<p class="tip_securitycode">验证码不正确</p>
+				</li>
+				<li class="regBtn" onclick="RegisterBinding()">注册并绑定</li>
+			</ul>
+		</div>
+	</div>
+    
 </body>
 <script type="text/javascript" src="../js/commons/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="../js/commons/jquery.lazyload.js"></script>
@@ -312,6 +337,10 @@
 		((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
 	}
 	
+	/* 本地微信公众号下的产品详情页的测试地址
+	 * http://szq.s1.natapp.cc/weixinservice/Buy/ProductDetail.html?enterprise_info_id=2&product_id=1&domain=http://192.168.21.207:8080
+	 * */
+	
 	//微信
 	var weixin_info = null,
 		cookieinfo = '',
@@ -319,6 +348,8 @@
 		cookieinfo = getCookie("weixin_info_pay"),
 		loginUrl,
 		LocationUrl;
+		
+		
 	
 	
 	var sumCount=''; //分页
@@ -335,6 +366,7 @@
 	var getEnterpriseId = iframeSearch[0].split("=")[1];
 	var getProductId = iframeSearch[1].split("=")[1];
 	var getTestUrl = iframeSearch[2].split("=")[1];
+	var getMemberInfo='';
 	
 	$.ajax({
 		type: "GET",
@@ -349,8 +381,11 @@
 		},		
 		jsonp: 'callback',
 		success: function(response) {
-			
-			InitInforData(response.purchase_product_info);			
+			if(response.invoke_result == 'INVOKE_SUCCESS'){
+				if( response.purchase_product_info!='' && response.purchase_product_info!=null && response.purchase_product_info!=undefined ){
+					InitInforData(response.purchase_product_info);	
+				}
+			}
 			
 		},
 		error: function(e) {
@@ -360,7 +395,60 @@
 		}
 	});  //ajax----end
 	
+	//购物车接口
+	var CartAjax = function()
+		{
+		    $.ajax({
+				type: "GET",
+				url: getTestUrl+'/rest/1.0/purchase',
+				dataType: "jsonp",
+				data:{
+					'method':'cart.data',
+					'field':JSON.stringify({
+						'enterprise_info_id' : getEnterpriseId,
+						'member_info'        : getMemberInfo
+					})
+				},		
+				jsonp: 'callback',
+				success: function(response) {
+					
+					if(response.invoke_result == 'INVOKE_SUCCESS'){
+						$('#cart_total').html( response.cart_num );
+					}
+					
+				},
+				error: function(e) {
+					console.log('购物车接口请求失败！')
+				}
+			});  //ajax----end
+		}
+		
+		
+	if( cookieinfo == ''||cookieinfo == null ){
+		
+	}else{
+		cookieinfo = base64decode(cookieinfo);
+		cookieinfo = utf8to16(cookieinfo);
+		weixin_info = JSON.parse( cookieinfo );
+	    getMemberInfo = weixin_info.member_info_id;
+	    getEnterpriseId = weixin_info.enterprise_info_id;
+	    //如果已经登录过，则我的订单按钮显示，点击跳转到我的订单页面，否则按钮隐藏
+	    if( getMemberInfo==''||getMemberInfo==null||getMemberInfo==undefined ){
+			$('#enter_myorder').hide();
+		}else{
+			$('#enter_myorder').show();
+		}
+	    //如果已经登录过，则调用购物车接口，之后把返回的数量添加进去
+	    CartAjax();
+	    
+	    
+	}
 	
+	
+	//右上角订单按钮，点击进入我的订单页
+	$('#enter_myorder').click(function(){
+		window.location.href = http+'/weixinservice/Buy/MyOrder.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&order_status=1&domain='+getTestUrl;
+	});
 	
 	// 商品详情选项卡
 	$('.tabs .item li').click(function() {
@@ -388,36 +476,37 @@
 		$('#Total').val( _num );	
 	});
 
+
 	//初始化参数
 	var InitInforData = function(_data)
 		{
 			//logo  Logo是否启用 1是 0不
-			if( _data.logo.logo_flag == 0 ){
+			if( _data.logo.logo_flag == '0' ){
 				$('#logo').hide();
 			}else{
 				$('#logo').show();
 				$('#logo img').attr('src',_data.logo.logo_url);
 			}
 			//商品名称
-			_data.product_name==''|| _data.product_name=='undefined' ?  $('#product_name').html('--') : $('#product_name').html( _data.product_name )
+			_data.product_name==''|| _data.product_name==undefined ?  $('#product_name').html('--') : $('#product_name').html( _data.product_name )
 			//价格
-			_data.product_price==''|| _data.product_price=='undefined' ? $('#product_price').html('--') : $('#product_price').html( _data.product_price )
+			_data.product_price==''|| _data.product_price==undefined ? $('#product_price').html('--') : $('#product_price').html( _data.product_price )
 			//是否免邮 1免邮 0不免
-			if( _data.freight.freefreight_price_flag == 0 ){
+			if( _data.freight.freefreight_price_flag == '0' ){
 				$('#freefreight_price_flag').html('不包邮');
 			}else{
 				$('#freefreight_price_flag').html('包邮');	
 			}
 			//运费价格
-			_data.freight.freight_price==''|| _data.freight.freight_price=='undefined' ? $('#freight_price').html('￥--') : $('#freight_price').html( _data.freight.freight_price )
+			_data.freight.freight_price==''|| _data.freight.freight_price==undefined ? $('#freight_price').html('￥--') : $('#freight_price').html( _data.freight.freight_price )
 			//需满免邮
-			_data.freight.free_freight_price==''|| _data.freight.free_freight_price=='undefined' ? $('#free_freight_price').html('--') : $('#free_freight_price').html( _data.freight.free_freight_price )
+			_data.freight.free_freight_price==''|| _data.freight.free_freight_price==undefined ? $('#free_freight_price').html('--') : $('#free_freight_price').html( _data.freight.free_freight_price )
 			//规格
-			_data.product_unit==''|| _data.product_unit=='undefined' ? $('#option_product').html('--') : $('#option_product').html( _data.product_unit+$('#product_name').html() )
+			_data.product_unit==''|| _data.product_unit==undefined ? $('#option_product').html('--') : $('#option_product').html( _data.product_unit+$('#product_name').html() )
 			//销量
-			_data.sale_num==''|| _data.sale_num=='undefined' ?  $('#sale_num').html('--') : $('#sale_num').html( _data.sale_num )
+			_data.sale_num==''|| _data.sale_num==undefined ?  $('#sale_num').html('--') : $('#sale_num').html( _data.sale_num )
 			//是否启用四季田景 1是 0 不
-			if( _data.krpanos.krpanos_flag == 0 ){
+			if( _data.krpanos.krpanos_flag == '0' ){
 				$('#krpanos').hide();
 			}else{
 				$('#krpanos').show();	
@@ -425,7 +514,7 @@
 				$('#krpanos p').attr('krpanos_group_id',_data.krpanos.krpanos_group_id);
 			}
 			//是否启用航拍 1是 0 不
-			if( _data.aerial_video.aerial_video_flag == 0 ){
+			if( _data.aerial_video.aerial_video_flag == '0' ){
 				$('#aerial_video').hide();
 			}else{
 				$('#aerial_video').show();	
@@ -433,7 +522,7 @@
 				$('#aerial_video p').attr('aerial_video_group_id',_data.aerial_video.aerial_video_group_id);
 			}
 			//是否启用农场秀 1是 0 不
-			if( _data.farm_show.farm_show_flag == 0 ){
+			if( _data.farm_show.farm_show_flag == '0' ){
 				$('#farm_show').hide();
 			}else{
 				$('#farm_show').show();	
@@ -441,7 +530,7 @@
 				$('#farm_show p').attr('farm_show_group_id',_data.farm_show.farm_show_group_id);
 			}
 			//是否启用履历 1是 0 不
-			if( _data.resume.resume_flag == 0 ){
+			if( _data.resume.resume_flag == '0' ){
 				$('#resume').hide();
 			}else{
 				$('#resume').show();	
@@ -449,24 +538,24 @@
 				$('#resume p').attr('resume_id',_data.resume.resume_id);
 			}
 			//是否启用农场地图 1是 0 不
-			if( _data.farm_map.farm_map_flag == 0 ){
+			if( _data.farm_map.farm_map_flag == '0' ){
 				$('#farm_map').hide();
 			}else{
 				$('#farm_map').show();	
 				$('#farm_map').attr('farm_map_id',_data.farm_map.farm_map_id);
 				var map = new BMap.Map('farm_map',{mapType:BMAP_NORMAL_MAP});//在百度地图容器中创建一个地图
-		        var point = new BMap.Point(_data.farm_map.coordinate_X,_data.farm_map.coordinate_Y);//定义一个中心点坐标
+		        var point = new BMap.Point(_data.farm_map.coordinate_Y,_data.farm_map.coordinate_X);//定义一个中心点坐标
 		        map.centerAndZoom(point,13);//设定地图的中心点和坐标并将地图显示在地图容器中
 
 			}
 			
 			//=========================================length>0
 			//如果精选商品列表不为空，则执行精选商品列表函数
-			if( !_data.product_list=='' || !_data.product_list==[] || _data.product_list==undefined ){
+			if( _data.product_list!='' && _data.product_list!=null && _data.product_list!=undefined ){
 				ProductListData(_data.product_list.purchase_product_list);
 			}
 			//商品详情，图片
-			if( !_data.product_introduction == '' || !_data.product_introduction == undefined ){
+			if( _data.product_introduction != '' &&  _data.product_introduction != undefined ){
 				$('#product_introduction').append( _data.product_introduction );
 			}
 			
@@ -479,28 +568,12 @@
 			//评价总数量
 			$('#Evaluate span').html('('+_data.comment_num+')');
 			
-			//购物车统计
-			/*cookieinfo = getCookie("username");
-			if( cookieinfo == "" ){
-				//如果未登录过
-				weixin_info = {count:0,arr:[]};
-				$('#cart_total').html( weixin_info.count );
-			}else{
-				//如果已登录
-				cookieinfo = base64decode(cookieinfo);
-				cookieinfo = utf8to16(cookieinfo);
-				cookieinfo = getCookie("username");
-				weixin_info = JSON.parse( cookieinfo );
-				$('#cart_total').html( cookieinfo.count );
-			}*/
-			
-			
 		}//-------初始化参数结束
 	
 	//商品展示图片   SWIPER函数
 	var SwiperListData = function(_data)
 		{
-			if( !_data=='' || !_data==[] || _data=='undefined' ){
+			if( _data!='' && _data!=[] && _data!=undefined ){
 				var _slider = '';
 				var $swiperContainer = $('.swiper-container .swiper-wrapper');
 				for( var k=0;k<_data.length;k++ ){
@@ -526,7 +599,7 @@
 		{
 			var _list='',
 				_classname = '';
-			if( !_data==[] || !_data=='undefined' ){
+			if(_data!=[] && _data!=undefined ){
 					for( var i=0;i<_data.length;i++ ){
 						//取膜，基数class=right_b,偶数class=left_b
 						i%2==0 ? _classname='right_b' : _classname='left_b'
@@ -590,7 +663,7 @@
 						var _data = response.purchase_product_info.product_list.purchase_product_list;
 						var _list='',
 							_classname = '';
-						if( !_data=='' ||　!_data==[] || !_data=='undefined' ){
+						if( _data.length>0 ){
 								for( var i=0;i<_data.length;i++ ){
 									//取膜，基数class=right_b,偶数class=left_b
 									i%2==0 ? _classname='right_b' : _classname='left_b'
@@ -774,7 +847,7 @@
 */
 	//判断类型：1=微信浏览器，2=非微信
 	var type_wx = '';
-	//if( isWeiXin() ){
+	if( isWeiXin() ){
 		
 		type_wx = 1;
 		
@@ -782,7 +855,7 @@
 		$('#AddCart').click(function(){
 			
 			//console.log($('#Total').val()+'@@'+cookieinfo)
-			if( cookieinfo == '' ){
+			if( cookieinfo == ''||cookieinfo == null ||cookieinfo == undefined ){
 				
 				//如果未登录过，跳指定页面拉取登录
 				LocationUrl = window.location.href;
@@ -798,8 +871,6 @@
 			        	
 			            if(data.invoke_result == 'INVOKE_SUCCESS'){
 			                window.location.href = data.LoginUrl;
-			                var Numbcartnum = Number($('#cart_total').html());
-			                $('#cart_total').html( Numbcartnum+1 );
 			            }
 			            
 			        }
@@ -812,7 +883,7 @@
 				cookieinfo = base64decode(cookieinfo);
 				cookieinfo = utf8to16(cookieinfo);
 				weixin_info = JSON.parse( cookieinfo );
-				member_info_id = weixin_info.member_info_id;//weixin_info.openid   8867
+				getMemberInfo = weixin_info.member_info_id;//weixin_info.openid   8867
 				
 				$.ajax({
 					type: "GET",
@@ -822,7 +893,7 @@
 						'method':'add.cart.data',
 						'field':JSON.stringify({
 							'enterprise_info_id' : getEnterpriseId,
-							'member_info'        : member_info_id,
+							'member_info'        : getMemberInfo,
 							'product_id'         : getProductId ,
 							'product_num'        : $('#Total').val(),
 						})
@@ -830,9 +901,7 @@
 					jsonp: 'callback',
 					success: function( response ) {
 						
-						alert('success');
-						console.log(response)
-						//$('#cart_total').html( userInfor.count );	
+						CartAjax();
 						var Numbcartnum = Number($('#cart_total').html());
 			            $('#cart_total').html( Numbcartnum+1 );
 			            
@@ -852,7 +921,7 @@
 		//点击购物车---进入购物车列表页
 		$('#EnterCart').click(function(){
 			
-			if( cookieinfo == '' ){
+			if( cookieinfo == ''||cookieinfo == null ||cookieinfo == undefined ){
 				
 				//如果未登录过，跳指定页面拉取登录
 				LocationUrl = window.location.href;
@@ -880,10 +949,10 @@
 				cookieinfo = base64decode(cookieinfo);
 				cookieinfo = utf8to16(cookieinfo);
 				weixin_info = JSON.parse( cookieinfo );
-				member_info_id = weixin_info.member_info_id;//weixin_info.openid   8867
+				getMemberInfo = weixin_info.member_info_id;//weixin_info.openid   8867
 				//openid = weixin_info.openid;  //weixin_info.openid  8867*/
 				
-				window.location.href = http+'/weixinservice/Buy/cart.html?enterprise_info_id='+getEnterpriseId+'&member_info='+member_info_id+'&domain='+getTestUrl;
+				window.location.href = http+'/weixinservice/Buy/cart.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&domain='+getTestUrl;
 				
 			}
 			
@@ -893,7 +962,7 @@
 		//点击立即购买---
 		$('#BuyNow').click(function(){
 			
-			if( cookieinfo == '' ){
+			if( cookieinfo == ''||cookieinfo == null ||cookieinfo == undefined ){
 				
 				//如果未登录过，跳指定页面拉取登录
 				LocationUrl = window.location.href;
@@ -921,7 +990,7 @@
 				cookieinfo = base64decode(cookieinfo);
 				cookieinfo = utf8to16(cookieinfo);
 				weixin_info = JSON.parse( cookieinfo );
-				member_info_id = weixin_info.member_info_id;//weixin_info.openid   8867
+				getMemberInfo = weixin_info.member_info_id;//weixin_info.openid   8867
 				//openid = weixin_info.openid;  //weixin_info.openid  8867*/
 				
 				//设置cookie(商品列表信息)
@@ -936,31 +1005,248 @@
 					});
 				var spOrderArr = '['+ListArr+']';
 				setCookie('spOrderCookie','');
-				setCookie('spOrderCookie',spOrderArr,7);
+				setCookie('spOrderCookie',spOrderArr);
 				
-				window.location.href = http+'/weixinservice/Buy/PaymentOrders.html?enterprise_info_id='+getEnterpriseId+'&member_info='+member_info_id+'&domain='+getTestUrl;
+				window.location.href = http+'/weixinservice/Buy/PaymentOrders.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&domain='+getTestUrl;
 				
 			}
 			
 		});	
 		
 		
-	/*}else{
+	}else{
 		
+		//如果是非微信浏览器，并且cookie里没有cookieinfo = getCookie("weixin_info_pay")的值
 		type_wx = 2;	
 		
-		var r=confirm("请用微信打开此页面!");
-		if (r==true){
-			//window.location.href = 'http://www.baidu.com';
-		}
+		//点击加入购物车事件
+		$('#AddCart').click(function(){
+			
+			if( cookieinfo == ''||cookieinfo == null ||cookieinfo == undefined ){
+				$('.mark_bind').show();
+				$('#registerPop').show();
+				$('.wrap_productdetail').addClass('overflowH');
+			}else{
+				$('.mark_bind').hide();
+				$('#registerPop').hide();
+				$('.wrap_productdetail').removeClass('overflowH');
+			}
+			
+		});	
 		
-	}*/
+		//点击购物车---进入购物车列表页
+		$('#EnterCart').click(function(){
+			
+			if( cookieinfo == ''||cookieinfo == null ||cookieinfo == undefined ){
+				$('.mark_bind').show();
+				$('#registerPop').show();
+				$('.wrap_productdetail').addClass('overflowH');
+			}else{
+				$('.mark_bind').hide();
+				$('#registerPop').hide();
+				$('.wrap_productdetail').removeClass('overflowH');
+			}
+			
+		});	
+		
+		//点击立即购买---
+		$('#BuyNow').click(function(){
+			
+			if( cookieinfo == ''||cookieinfo == null ||cookieinfo == undefined ){
+				$('.mark_bind').show();
+				$('#registerPop').show();
+				$('.wrap_productdetail').addClass('overflowH');
+			}else{
+				$('.mark_bind').hide();
+				$('#registerPop').hide();
+				$('.wrap_productdetail').removeClass('overflowH');
+			}
+			
+		});	
+		
+		
+		
+//		if( cookieinfo == ''||cookieinfo == null ||cookieinfo == undefined ){
+//			$('.mark_bind').show();
+//			$('#registerPop').show();
+//			$('.wrap_productdetail').addClass('overflowH');
+//		}else{
+//			$('.mark_bind').hide();
+//			$('#registerPop').hide();
+//			$('.wrap_productdetail').removeClass('overflowH');
+//		}
+		
+		//var r=confirm("请用微信打开此页面!");
+		//if (r==true){
+			//window.location.href = 'http://www.baidu.com';
+		//}
+		
+	}
 	
 	
 	
 
 
 //----------------------------onload之后的独立函数，如下：
+
+//------------------------------------------------------绑定手机号
+	// 立即绑定按钮
+ 	var PromptlyBinding = function(obj,oParent)
+	 	{
+	 		$('.wrap_productdetail').addClass('overflowH');
+	 		$('.mark_bind').show();
+	 		$(oParent).show();
+	 	}
+// 	var MarkBindHide = function()
+//	 	{
+//	 		$('.wrap_productdetail').removeClass('overflowH');
+//	 		$('.mark_bind').hide();
+//	 		$('#registerPop').hide();
+//	 	
+//	 	}	
+	//注册并绑定按钮
+ 	var phoneVal = $('#phoneVal').val(),
+ 		securitycodeVal = $('#securitycodeVal').val();
+ 	var RegisterBinding = function()
+	 	{
+	 		phoneVal = $('#phoneVal').val(),
+	 		securitycodeVal = $('#securitycodeVal').val();
+	 		$('.tip_phonenumber').hide();//提示
+	 		$('.tip_securitycode').hide();//提示
+	 		
+	 		if( phoneVal == '手机号' || phoneVal == '' || !IsPhone(phoneVal) || phoneVal.length!=11 ){
+	 			
+	 			//如果手机号码不正确
+	 			$('#phoneVal').val( phoneVal );
+	 			$('#securitycodeVal').val( securitycodeVal );
+	 			$('.tip_phonenumber').show();//提示
+	 			$('.tip_securitycode').hide();//提示
+	 			
+	 		}else if( securitycodeVal=='验证码' ||　securitycodeVal=='' || securitycodeVal.length!=6 ){
+	 			
+	 			//如果验证码不正确
+	 			$('#phoneVal').val( phoneVal );
+	 			$('#securitycodeVal').val( securitycodeVal );
+	 			$('.tip_phonenumber').hide();//提示
+	 			$('.tip_securitycode').show();//提示
+	 			
+	 		}else{
+	 			
+	 			//如果注册并绑定成功，则重新刷新页面
+	 			$.ajax({
+			        type: "GET",
+					url: getTestUrl+'/rest/1.0/purchase',
+					dataType: "jsonp",
+					data:{
+						'method':'login.method.data',
+						'field':JSON.stringify({
+							'enterprise_info_id' : getEnterpriseId	,
+							//'memeber_info'       : getMemberInfo,
+							'phone'              : phoneVal,
+							'code'               : securitycodeVal
+						})
+					},
+					jsonp: 'callback',
+					success: function( response ) {
+						
+						if( response.result == 'failed' ){
+							alert(response.message)
+						}else{
+							alert(getCookie("weixin_info_pay"));
+							window.location.reload(); 
+							//cookieinfo = settCookie("weixin_info_pay")
+							
+						}
+						
+					},
+					error: function(e) {
+						console.log('！')
+					}
+			    });
+	 			
+	 			
+	 		}
+	 	}
+ 	//验证码按钮----点击之后倒计时60s，且当弹框关闭后时间还继续走，目的防止二次点击
+ 	var SecurityBtn = function(){
+ 		phoneVal = $('#phoneVal').val();
+ 		if( phoneVal != '手机号' && phoneVal != '' && IsPhone(phoneVal) && phoneVal.length==11 ){
+ 			
+ 			$('.tip_phonenumber').hide();//提示
+	 		$('.tip_securitycode').hide();//提示
+ 			
+ 			$.ajax({
+				type: "GET",
+				url: getTestUrl+'/rest/1.0/purchase',
+				dataType: "jsonp",
+				data:{
+					'method':'get.verification.data',
+					'field':JSON.stringify({
+						'phone' : $('#phoneVal').val()	
+					})
+				},
+				jsonp: 'callback'
+			});	//-----end ajax
+			
+			var Stimer = null,
+ 				Mtime = 60;
+	 		//定时器
+	 		clearInterval( Stimer );
+	 		Stimer = setInterval(function(){
+	 			
+	 			if(Mtime==0){
+	 				clearInterval( Stimer );
+	 				Mtime = 60;
+	 				$('#security_btn').show();
+	 				$('#time_s60').hide();
+	 				$('#time_s60').html('60s');
+	 			}
+	 			Mtime--;
+	 			$('#time_s60').html(Mtime+'s')
+	 			
+	 		},1000)
+	 		$('#security_btn').hide();
+	 		$('#time_s60').show();
+			
+ 		}else{
+ 			
+ 			$('.tip_phonenumber').show();//提示
+	 		$('.tip_securitycode').hide();//提示
+ 			
+ 		}
+ 		
+ 	}
+ 	
+ 	//获取焦点和失去焦点
+ 	$('input[type=text],textarea').focus(function(){
+		var txt_value = $(this).val();
+		if(txt_value==this.defaultValue){
+			$(this).val("");          
+		};	
+	});
+	$('input[type=text],textarea').blur(function(){
+		var txt_value = $(this).val();
+		if(txt_value==""){
+			$(this).val(this.defaultValue);
+		};	     
+	});	
+ 	
+ 	//封装判断手机号函数
+	var IsPhone = function(inpurStr)
+	{
+		var partten = /^(13[0-9]|15[012356789]|17[01236789]|18[0-9]|14[57])[0-9]{8}$/;
+		if(partten.test(inpurStr))
+		{
+		   //alert('是电话号码');
+		   return true;
+		}
+		else
+		{
+		   //alert('不是电话号码');
+		   return false;
+		}
+	} 
+    //------------------------------------------------------绑定手机号
 
 //判断用户是否是用微信浏览器
 function isWeiXin(){

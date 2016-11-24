@@ -20,7 +20,7 @@
 				<li onclick="MyPacketUrl()"><a href="javascript:;"><p>我的红包</p></a></li>
 			</ul>
 			<!--立即绑定-->
-			<div class="binding" id="binding">
+			<div class="binding" id="binding" style="display: none;">
 				<img onclick="DeleteBindingPhone('#binding')" src="../images/Buy/dele.png" />绑定手机号可查看所有订单
 				<span class="now fr" onclick="PromptlyBinding(this,'#registerPop')">立即绑定</span>
 			</div>
@@ -159,26 +159,39 @@
 		</ul>
 	</div>
 	
-	<!-- 立即绑定弹框 -->
-	<div class="mark_bind" onclick="MarkBindHide()"></div>
-	<div class="registerPop" id="registerPop">
-		<div class="member">
-			<div class="pen"><img src="../images/Buy/pen.png" alt=""></div>
-			<h4>注册会员账号</h4>
-			<ul>
-				<li class="info">
-					<input type="text" value="手机号" class="entry1">
-					<i class="icon1"></i>
-				</li>
-				<li class="info">
-					<input type="text" value="验证码" class="entry2">
-					<i class="icon2"></i>
-					<span class="code fr">验证码</span>
-				</li>
-				<li class="regBtn" onclick="RegisterBinding()">注册并绑定</li>
-			</ul>
-		</div>
+	
+<!-- 提交订单弹窗 -->
+<div class="referPop">
+	<ul class="payment">
+		<li style="color:#56b331; font-weight:bold;" id="WeChat_pay">微信支付</li>
+		<li class="zan" id="notto_pay">暂不支付</li>
+	</ul>
+</div>	
+<!-- 注册弹窗 -->
+<div class="mark_bind" onclick="MarkBindHide()"></div>
+<div class="registerPop" id="registerPop">
+	<div class="member">
+		<div class="pen"><img src="../images/Buy/pen.png" alt=""></div>
+		<h4>注册会员账号</h4>
+		<ul class="register_ul">
+			<li class="info">
+				<input type="text" value="手机号" class="entry1" id="phoneVal">
+				<i class="icon1"></i>
+				<p class="tip_phonenumber">手机号不正确，请输入正确的手机号</p>
+			</li>
+			<li class="info">
+				<input type="text" value="验证码" class="entry2" id="securitycodeVal">
+				<i class="icon2"></i>
+				<span class="code fr" id="security_btn" code="" onclick="SecurityBtn()">验证码</span>
+				<span class="time_s60 fr" id="time_s60">60s</span>
+				<p class="tip_securitycode">验证码不正确</p>
+			</li>
+			<li class="regBtn" onclick="RegisterBinding()">注册并绑定</li>
+		</ul>
 	</div>
+</div>
+<!-- 注册弹窗 -->
+
 </body>
 
 
@@ -362,21 +375,39 @@
 		((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
 	}
 
+	var http = 'http://szq.s1.natapp.cc'; 	
 	var iframeSearch = location.search.split('&');
 	//var getEnterpriseId = iframeSearch[0].split('=')[1];
 	//var getMemberInfo = iframeSearch[1].split('=')[1];
 	var getOrderStatus = iframeSearch[2].split('=')[1];
-	var http = 'http://szq.s1.natapp.cc'; 	
-	var getTestUrl = 'http://192.168.21.207:8080';
+	var getTestUrl = iframeSearch[3].split('=')[1];
+	
+	var getMemberInfo='',
+		getEnterpriseId='';
 	
 	var cookieinfo = getCookie("weixin_info_pay");
-	cookieinfo = base64decode(cookieinfo);
-	cookieinfo = utf8to16(cookieinfo);
-	weixin_info = JSON.parse( cookieinfo );
-    var getMemberInfo = weixin_info.member_info_id;
-    var getEnterpriseId = weixin_info.enterprise_info_id;
+	if(cookieinfo!=''&&cookieinfo!=null&&cookieinfo!=undefined){
+		
+		cookieinfo = base64decode(cookieinfo);
+		cookieinfo = utf8to16(cookieinfo);
+		weixin_info = JSON.parse( cookieinfo );
+	    getMemberInfo = weixin_info.member_info_id;
+	    getEnterpriseId = weixin_info.enterprise_info_id;
+	    
+	    //绑定手机号判断
+	    if(weixin_info.phone!=null&&weixin_info.phone!=''&&weixin_info.phone!=undefined){
+			//已绑定手机号
+			$('.binding').hide();
+		}else{
+			//未绑定手机号
+			$('.binding').show();
+		}
+    }
     
+    //把商品信息清空
     setCookie('spOrderCookie','');
+    
+    
 	
 	//图片懒加载
 	$("img").lazyload({
@@ -387,7 +418,7 @@
     //【我的红包点击接口】
 	var MyPacketUrl = function()
 		{
-			window.location.href = http+'/weixinservice/Buy/MyPacket.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo;
+			window.location.href = http+'/weixinservice/Buy/MyPacket.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&domain='+getTestUrl;
 		}
 	
  	
@@ -411,21 +442,23 @@
 					
 					if(response.invoke_result == 'INVOKE_SUCCESS')
 					{
-						if( response.order_list !=''|| response.order_list !=null ||response.order_list !=undefined)
+						if( response.order_list !=''&& response.order_list !=null &&response.order_list !=undefined)
 						{
+							//返回我的订单所有状态的对应的数量
+							InitStatesTotal(response.order_list);
 							if ( response.order_list.order_list.length > 0 )
 							{
 								//有数据
-								$('#order_menulist li i').hide();
-								$('.payment_item i').fadeIn();//数量
+								//$('#order_menulist li i').hide();
+								//$('.payment_item i').fadeIn();//数量
 								$('.payment_item i').html( response.order_list.no_pay_order_count );
 								$('#has_payment').show();//有待付款盒子
 								$('#no_payment').hide();//无待付款盒子
 								InitPaymentData( response.order_list.order_list );
 							}else{
 								//无数据
-								$('#order_menulist li i').hide();
-								$('.payment_item i').fadeOut();//数量
+								//$('#order_menulist li i').hide();
+								//$('.payment_item i').fadeOut();//数量
 								$('#has_payment').hide();//有待付款盒子
 								$('#no_payment').show();//无待付款盒子
 							}
@@ -461,21 +494,23 @@
 				success: function( response ) {
 					if(response.invoke_result == 'INVOKE_SUCCESS')
 					{
-						if( response.order_list !=''|| response.order_list !=null ||response.order_list !=undefined)
+						if( response.order_list !=''&& response.order_list !=null &&response.order_list !=undefined)
 						{
+							//返回我的订单所有状态的对应的数量
+							InitStatesTotal(response.order_list);
 							if ( response.order_list.order_list.length > 0 )
 							{
 								//有数据
-								$('#order_menulist li i').hide();
-								$('.sendgood_item i').fadeIn();//数量
+								//$('#order_menulist li i').hide();
+								//$('.sendgood_item i').fadeIn();//数量
 								$('.sendgood_item i').html( response.order_list.wait_shipping_order_count );
 								$('#has_sendgood').show();//有待发货盒子
 								$('#no_sendgood').hide();//无待发货盒子
 								InitSendgoodData( response.order_list.order_list );
 							}else{
 								//无数据
-								$('#order_menulist li i').hide();
-								$('.sendgood_item i').fadeOut();//数量
+								//$('#order_menulist li i').hide();
+								//$('.sendgood_item i').fadeOut();//数量
 								$('#has_sendgood').hide();//有待发货盒子
 								$('#no_sendgood').show();//无待发货盒子
 							}
@@ -509,21 +544,23 @@
 				success: function( response ) {
 					if(response.invoke_result == 'INVOKE_SUCCESS')
 					{
-						if( response.order_list !=''|| response.order_list !=null ||response.order_list !=undefined)
+						if( response.order_list !=''&& response.order_list !=null &&response.order_list !=undefined)
 						{
+							//返回我的订单所有状态的对应的数量
+							InitStatesTotal(response.order_list);
 							if ( response.order_list.order_list.length > 0 )
 							{
 								//有数据
-								$('#order_menulist li i').hide();
-								$('.shipments_item i').fadeIn();//数量
+								//$('#order_menulist li i').hide();
+								//$('.shipments_item i').fadeIn();//数量
 								$('.shipments_item i').html( response.order_list.delivering_order_count );
 								$('#has_shipments').show();//有已发货盒子
 								$('#no_shipments').hide();//无已发货盒子
 								InitShipmentsData( response.order_list.order_list );
 							}else{
 								//无数据
-								$('#order_menulist li i').hide();
-								$('.shipments_item i').fadeOut();//数量
+								//$('#order_menulist li i').hide();
+								//$('.shipments_item i').fadeOut();//数量
 								$('#has_shipments').hide();//有已发货盒子
 								$('#no_shipments').show();//无已发货盒子
 							}
@@ -557,21 +594,23 @@
 				success: function( response ) {
 					if(response.invoke_result == 'INVOKE_SUCCESS')
 					{
-						if( response.order_list !=''|| response.order_list !=null ||response.order_list !=undefined)
+						if( response.order_list !=''&& response.order_list !=null && response.order_list !=undefined)
 						{
+							//返回我的订单所有状态的对应的数量
+							InitStatesTotal(response.order_list);
 							if ( response.order_list.order_list.length > 0 )
 							{
 								//有数据
-								$('#order_menulist li i').hide();
-								$('.evaluate_item i').fadeIn();//数量
+								//$('#order_menulist li i').hide();
+								//$('.evaluate_item i').fadeIn();//数量
 								$('.evaluate_item i').html( response.order_list.not_evaluated_order_count );
 								$('#has_evaluate').show();//有待评价盒子
 								$('#no_evaluate').hide();//无待评价盒子
 								InitEvaluateData( response.order_list.order_list );
 							}else{
 								//无数据
-								$('#order_menulist li i').hide();
-								$('.evaluate_item i').fadeOut();//数量
+							//	$('#order_menulist li i').hide();
+								//$('.evaluate_item i').fadeOut();//数量
 								$('#has_evaluate').hide();//有待评价盒子
 								$('#no_evaluate').show();//无待评价盒子
 							}
@@ -605,21 +644,23 @@
 				success: function( response ) {
 					if(response.invoke_result == 'INVOKE_SUCCESS')
 					{
-						if( response.order_list !=''|| response.order_list !=null ||response.order_list !=undefined)
+						if( response.order_list !=''&& response.order_list !=null && response.order_list !=undefined)
 						{
+							//返回我的订单所有状态的对应的数量
+							InitStatesTotal(response.order_list);
 							if ( response.order_list.order_list.length > 0 )
 							{
 								//有数据
-								$('#order_menulist li i').hide();
-								$('.completed_item i').fadeIn();//数量
+								//$('#order_menulist li i').hide();
+								//$('.completed_item i').fadeIn();//数量
 								$('.completed_item i').html( response.order_list.deliver_done_order_count );
 								$('#has_completed').show();//有已完成盒子
 								$('#no_completed').hide();//无已完成盒子
 								InitCompletedData( response.order_list.order_list );
 							}else{
 								//无数据
-								$('#order_menulist li i').hide();
-								$('.completed_item i').fadeOut();//数量
+								//$('#order_menulist li i').hide();
+								//$('.completed_item i').fadeOut();//数量
 								$('#has_completed').hide();//有已完成盒子
 								$('#no_completed').show();//无已完成盒子
 							}
@@ -680,6 +721,43 @@
 			$has_payment.html('');
 			$has_payment.append( _paymentList );
 		}
+	//返回我的订单所有状态的对应的数量
+	var InitStatesTotal = function(_data){
+		if(_data.no_pay_order_count=='0'){
+			$('.payment_item i').hide();
+		}else{
+			$('.payment_item i').fadeIn();
+		}
+		$('.payment_item i').html(_data.no_pay_order_count);
+		
+		if(_data.wait_shipping_order_count=='0'){
+			$('.sendgood_item i').hide();
+		}else{
+			$('.sendgood_item i').fadeIn();
+		}
+		$('.sendgood_item i').html(_data.wait_shipping_order_count);
+		
+		if(_data.delivering_order_count=='0'){
+			$('.shipments_item i').hide();
+		}else{
+			$('.shipments_item i').fadeIn();
+		}
+		$('.shipments_item i').html(_data.delivering_order_count);
+		
+		if(_data.not_evaluated_order_count=='0'){
+			$('.evaluate_item i').hide();
+		}else{
+			$('.evaluate_item i').fadeIn();
+		}
+		$('.evaluate_item i').html(_data.not_evaluated_order_count);
+		
+		if(_data.deliver_done_order_count=='0'){
+			$('.completed_item i').hide();
+		}else{
+			$('.completed_item i').fadeIn();
+		}
+		$('.completed_item i').html(_data.deliver_done_order_count);
+	}
 	//初始化待发货列表数据（2）
 	var InitSendgoodData = function( _data )
 		{
@@ -721,27 +799,6 @@
 			$has_sendgood.html('');
 			$has_sendgood.append( _sendgoodList );
 			
-			//########################（待发货）
-		    // 联系客服
-		    /*$('.contact').click(function(){
-		   		$('#serviceModal').show();
-		    	$('#serviceModal').attr('order_info_id',$(this).parents('li').attr('order_info_id'));
-		    	$('.mark_opa5').show();
-		    	$('.mark_opa5').attr('order_info_id',$(this).parents('li').attr('order_info_id'));
-		    });
-		    $('#serviceModal .cancel').click(function(){
-		    	$('#serviceModal').hide();
-		    	$('#serviceModal').attr('order_info_id','');
-		    	$('.mark_opa5').hide();
-		    	$('.mark_opa5').attr('order_info_id','');
-		    });
-		    $('#serviceModal .sure').click(function(){
-		      	$('#has_completed li').attr('order_info_id',$(this).parents('#finishModal').attr('order_info_id')).remove();
-		    	//$('#serviceModal').hide();
-		    	//$('#serviceModal').attr('order_info_id','');
-		    	//$('.mark_opa5').hide();
-		    	//$('.mark_opa5').attr('order_info_id','');
-		    });*/
 		}
 	//初始化已发货列表数据（3）
 	var InitShipmentsData = function( _data )
@@ -797,7 +854,10 @@
 							'order_id' : $(this).parents('li').attr('order_info_id')
 						})
 					},
-					jsonp: 'callback'
+					jsonp: 'callback',
+					success:function(){
+						window.location.reload();
+					}
 				});	
 				$('.evaluate_item').addClass('cur').siblings().removeClass('cur');
 				$('.payment_content .details').eq(3).show().siblings().hide();
@@ -889,7 +949,7 @@
 		    });
 		    //评价按钮----   点击评价对单个商品评价---跳转至评价页面
 		    $('#has_evaluate .text_comment').click(function(){ //点击确定跳转至评价页面
-		    	window.location.href = http+'/weixinservice/Buy/Comment.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&order_product_id='+$(this).parents('.middle').attr('order_product_id');
+		    	window.location.href = http+'/weixinservice/Buy/Comment.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&order_product_id='+$(this).parents('.middle').attr('order_product_id')+'&domain='+getTestUrl;
 		    });
 		}
 	//初始化已完成列表数据（5）
@@ -982,9 +1042,20 @@
      	'height':bodyH
     });
     //########################（待付款）
+    var myordercode='';
     var EnterPayment = function(obj){//等待买家付款--付款按钮--点击跳页（查看订单页或叫订单详情页）
-    	window.location.href = http+'/weixinservice/Buy/OrderDetail.html?order_id='+$(obj).parents('li').attr('order_info_id')+'&enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&order_status=1';
+    	myordercode = $(obj).parents('li').attr('order_code');
+    	$('.referPop').show();
+    	//window.location.href = http+'/weixinservice/Buy/OrderDetail.html?order_id='+$(obj).parents('li').attr('order_info_id')+'&enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&order_status=1';
     }
+    //暂不支付
+    $('#notto_pay').click(function(){
+    	$('.referPop').hide();
+    });
+    //微信支付
+    $('#WeChat_pay').click(function(){
+    	save( myordercode );
+    });
     var DeletePayment = function(obj,orderId){ // 等待买家付款--取消按钮
     	$('.wrap_myorder').addClass('overflowH');
     	$('#cancelModal').show();
@@ -1077,45 +1148,208 @@
 	    $('.wrap_myorder').removeClass('overflowH');
 	}
     
+   	
+   	//------------------------------------------------------winxin 支付
+    function save(order_code){ //order_code订单编号
+		var cookieinfo = getCookie("weixin_info_pay");
+		var openid = "";
+		if(cookieinfo != null){
+			cookieinfo = base64decode(cookieinfo);
+			cookieinfo = utf8to16(cookieinfo);
+			weixin_info = JSON.parse(cookieinfo);
+			openid = weixin_info.openid;
+			
+			//调起支付
+			$("#btnSubmit").attr("disabled", true); 
+		    $.ajax({
+		        url : "http://magicbutton.s1.natapp.cc/rest/1.0/purchase?method=wechat.pay",
+		        data : {'field':JSON.stringify({'enterprise_info_id':getEnterpriseId,'open_id':openid,'order_code':order_code})},
+		        type : "get",
+		        dataType : "jsonp",
+		        success : function(data){
+		        	if(data.invoke_result == 'INVOKE_SUCCESS'){
+		                calc(data.weixin_pay_result);
+		            }else{
+			            alert("支付失败，请稍后重试")
+			        }
+		        }
+		    });
+		}else{
+			alert("登陆超时，请重新登陆后支付");
+		}
+	}
+	
+	function calc(data){
+		if (typeof (WeixinJSBridge) == "undefined"){
+			   if(document.addEventListener){
+			       document.addEventListener('WeixinJSBridgeReady', onBridgeReady(data), false);
+			   }else if (document.attachEvent){
+			       document.attachEvent('WeixinJSBridgeReady', onBridgeReady(data)); 
+			       document.attachEvent('onWeixinJSBridgeReady', onBridgeReady(data));
+			   }
+			}else{
+				onBridgeReady(data);
+			}
+	}
+	
+	function onBridgeReady(data){
+		var app_id = data.appId;
+		var pay_sign = data.paySign;
+		var nonce_Str = data.nonceStr;
+		var package_id = data.packageId;
+		var time_stamp = data.timeStamp;
+		   WeixinJSBridge.invoke(
+		       'getBrandWCPayRequest', {
+		           "appId" : app_id,     //公众号名称，由商户传入     
+		           "paySign": pay_sign,         //时间戳，自1970年以来的秒数     
+		           "nonceStr" : nonce_Str, //随机串     
+		           "package" : package_id,     
+		           "signType" : "MD5",         //微信签名方式：     
+		           "timeStamp" : time_stamp //微信签名 
+		       },
+		       function(res){     
+		           if(res.err_msg == "get_brand_wcpay_request:ok" ) {// 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。 
+			           //把订单编号存在cookie跳转到支付成功页面
+			           alert(1)
+			       }
+		       }
+		   ); 
+		}
     
-	//删除绑定手机号
+	//------------------------------------------------------winxin 支付
+   	
+    //------------------------------------------------------绑定手机号
+    //删除绑定手机号
  	var DeleteBindingPhone = function(oParent){
  		$(oParent).remove();
  	}
- 	// 立即绑定按钮
- 	var PromptlyBinding = function(obj,oParent){
- 		$('.wrap_myorder').addClass('overflowH');
- 		$('.mark_bind').show();
- 		$(oParent).show();
+	// 立即绑定按钮
+ 	var PromptlyBinding = function(obj,oParent)
+	 	{
+	 		$('.wrap_cart').addClass('overflowH');
+	 		$('.mark_bind').show();
+	 		$(oParent).show();
+	 	}
+ 	var MarkBindHide = function()
+	 	{
+	 		$('.wrap_cart').removeClass('overflowH');
+	 		$('.mark_bind').hide();
+	 		$('#registerPop').hide();
+	 	
+	 	}	
+	//注册并绑定按钮
+ 	var phoneVal = $('#phoneVal').val(),
+ 		securitycodeVal = $('#securitycodeVal').val();
+ 	var RegisterBinding = function()
+	 	{
+	 		phoneVal = $('#phoneVal').val(),
+	 		securitycodeVal = $('#securitycodeVal').val();
+	 		$('.tip_phonenumber').hide();//提示
+	 		$('.tip_securitycode').hide();//提示
+	 		
+	 		if( phoneVal == '手机号' || phoneVal == '' || !IsPhone(phoneVal) || phoneVal.length!=11 ){
+	 			
+	 			//如果手机号码不正确
+	 			$('#phoneVal').val( phoneVal );
+	 			$('#securitycodeVal').val( securitycodeVal );
+	 			$('.tip_phonenumber').show();//提示
+	 			$('.tip_securitycode').hide();//提示
+	 			
+	 		}else if( securitycodeVal=='验证码' ||　securitycodeVal=='' || securitycodeVal.length!=6 ){
+	 			
+	 			//如果验证码不正确
+	 			$('#phoneVal').val( phoneVal );
+	 			$('#securitycodeVal').val( securitycodeVal );
+	 			$('.tip_phonenumber').hide();//提示
+	 			$('.tip_securitycode').show();//提示
+	 			
+	 		}else{
+	 			
+	 			//如果注册并绑定成功，则重新刷新页面
+	 			window.location.reload(); 
+	 			
+	 		}
+	 	}
+ 	//验证码按钮----点击之后倒计时60s，且当弹框关闭后时间还继续走，目的防止二次点击
+ 	var SecurityBtn = function(){
+ 		phoneVal = $('#phoneVal').val();
+ 		if( phoneVal != '手机号' && phoneVal != '' && IsPhone(phoneVal) && phoneVal.length==11 ){
+ 			
+ 			$('.tip_phonenumber').hide();//提示
+	 		$('.tip_securitycode').hide();//提示
+ 			
+ 			$.ajax({
+				type: "GET",
+				url: getTestUrl+'/rest/1.0/purchase',
+				dataType: "jsonp",
+				data:{
+					'method':'get.verification.data',
+					'field':JSON.stringify({
+						'phone' : $('#phoneVal').val()	
+					})
+				},
+				jsonp: 'callback'
+			});	//-----end ajax
+			
+			var Stimer = null,
+ 				Mtime = 60;
+	 		//定时器
+	 		clearInterval( Stimer );
+	 		Stimer = setInterval(function(){
+	 			
+	 			if(Mtime==0){
+	 				clearInterval( Stimer );
+	 				Mtime = 60;
+	 				$('#security_btn').show();
+	 				$('#time_s60').hide();
+	 				$('#time_s60').html('60s');
+	 			}
+	 			Mtime--;
+	 			$('#time_s60').html(Mtime+'s')
+	 			
+	 		},1000)
+	 		$('#security_btn').hide();
+	 		$('#time_s60').show();
+			
+ 		}else{
+ 			
+ 			$('.tip_phonenumber').show();//提示
+	 		$('.tip_securitycode').hide();//提示
+ 			
+ 		}
+ 		
  	}
- 	var MarkBindHide = function(){
- 		$('.wrap_myorder').removeClass('overflowH');
- 		$('.mark_bind').hide();
- 		$('#registerPop').hide();
  	
- 	}
- 	//注册并绑定按钮
- 	var RegisterBinding = function(){
- 		$.ajax({//---start  ajax
-			type: "GET",
-			url: getTestUrl+'/rest/1.0/purchase',
-			dataType: "jsonp",
-			data:{
-				'method':'delete.order.data',
-				'field':JSON.stringify({
-					'order_id' : $(this).parents('#finishModal').attr('order_info_id')		
-				})
-			},
-			jsonp: 'callback',
-			success : function(data){
-	            if(data.invoke_result == 'INVOKE_SUCCESS'){
-	                window.location.href = data.LoginUrl;
-	            }
-	        }
-		});	//-----end ajax  
- 	}
-   
-    
+ 	//获取焦点和失去焦点
+ 	$('input[type=text],textarea').focus(function(){
+		var txt_value = $(this).val();
+		if(txt_value==this.defaultValue){
+			$(this).val("");          
+		};	
+	});
+	$('input[type=text],textarea').blur(function(){
+		var txt_value = $(this).val();
+		if(txt_value==""){
+			$(this).val(this.defaultValue);
+		};	     
+	});	
+ 	
+ 	//封装判断手机号函数
+	var IsPhone = function(inpurStr)
+	{
+		var partten = /^(13[0-9]|15[012356789]|17[01236789]|18[0-9]|14[57])[0-9]{8}$/;
+		if(partten.test(inpurStr))
+		{
+		   //alert('是电话号码');
+		   return true;
+		}
+		else
+		{
+		   //alert('不是电话号码');
+		   return false;
+		}
+	} 
+    //------------------------------------------------------绑定手机号
 
 </script>
 </html>
