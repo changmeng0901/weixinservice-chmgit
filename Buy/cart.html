@@ -13,28 +13,30 @@
 	<link rel="stylesheet" href="../style/Buy/product_detail.css">
 </head>
 <body>
-	<div class="binding">
-		<img src="../images/Buy/dele.png" alt="">绑定手机号可查看所有订单
-		<span class="now fr">立即绑定</span>
-	</div>
-	<!-- 购物车有内容 -->
-	<ul class="cart" id="cart_list"></ul>
-	<!-- 无内容 -->
-	<div class="no_content" style="display:none;">
-		<img src="../images/Buy/cart.png" alt="">
-		<p>您的购物车是空的</p>
-	</div>
-	<div class="all_select">
-		<div class="left fl">
-			<div class="selected fl" flag="false" id="all_select" onclick="AllSelectFn()" style="margin-top: 0.85rem; margin-right: 0.25rem;"><input type="checkbox" ></div>
-			<span class="fl">全选</span>
+	<div class="wrap_cart">
+		<div class="binding">
+			<img src="../images/Buy/dele.png" alt="">绑定手机号可查看所有订单
+			<span class="now fr">立即绑定</span>
 		</div>
-		<div class="fr">
-			<div class="total fl">
-				<p class="sup">合计<span id="total_money"></span></p>
-				<p class="sub">不含运费</p>
+		<!-- 购物车有内容 -->
+		<ul class="cart" id="cart_list"></ul>
+		<!-- 无内容 -->
+		<div class="no_content" style="display:none;">
+			<img src="../images/Buy/cart.png" alt="">
+			<p>您的购物车是空的</p>
+		</div>
+		<div class="all_select">
+			<div class="left fl">
+				<div class="selected fl" flag="false" id="all_select" onclick="AllSelectFn()" style="margin-top: 0.85rem; margin-right: 0.25rem;"><input type="checkbox" ></div>
+				<span class="fl">全选</span>
 			</div>
-			<div class="accounts fl" id="accounts">结算<span></span></div>
+			<div class="fr">
+				<div class="total fl">
+					<p class="sup">合计<span id="total_money"></span></p>
+					<p class="sub">不含运费</p>
+				</div>
+				<div class="accounts fl" id="accounts">结算<span></span></div>
+			</div>
 		</div>
 	</div>
 	<!-- 删除弹窗 -->
@@ -245,9 +247,9 @@
 	var getTestUrl = iframeSearch[2].split('=')[1];
 	
 	var cookieinfo = getCookie("weixin_info_pay");
-	cookieinfo = base64decode(cookieinfo);
-	cookieinfo = utf8to16(cookieinfo);
-	weixin_info = JSON.parse( cookieinfo );
+		cookieinfo = base64decode(cookieinfo);
+		cookieinfo = utf8to16(cookieinfo);
+		weixin_info = JSON.parse( cookieinfo );
     var getMemberInfo = weixin_info.member_info_id;
     var getEnterpriseId = weixin_info.enterprise_info_id;
     
@@ -265,15 +267,28 @@
 		var CartLen = $on_check.length;
 		var ListArr = [];
 		for ( var i=0; i<CartLen; i++ ){
-			ListArr[i] = JSON.stringify({"product_id": $on_check.eq(i).parents('li').attr('product_id'),"product_num": $on_check.eq(i).parents('li').find('.Total').val()});
+			//ListArr[i] = JSON.stringify({"product_id": $on_check.eq(i).parents('li').attr('product_id'),"product_num": $on_check.eq(i).parents('li').find('.Total').val()});
+			ListArr[i] = JSON.stringify({
+				"product_img": $on_check.eq(i).parents('li').find('.product_img').attr('src'),
+				"product_id": $on_check.eq(i).parents('li').attr('product_id'),
+				"product_name": $on_check.eq(i).parents('li').find('.product_name').html(),
+				"product_num": $on_check.eq(i).parents('li').find('.Total').val(),
+				"product_price": $on_check.eq(i).parents('li').find('.prize span').html(),
+				"product_unit": $on_check.eq(i).parents('li').find('.unit').html()
+				});
 		}
 		/*ListArr[0] = JSON.stringify({"product_id": "2","poduct_num": "2"})
 
 		window.location.href = http+'/weixinservice/Buy/PaymentOrders.html?enterprise_info_id='+2+'&product_list=['+ListArr+']';*/
 		
 		if($('#accounts').hasClass('cff')){
-			console.log('['+ListArr+']')
-			window.location.href = http+'/weixinservice/Buy/PaymentOrders.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&product_list=['+ListArr+']'+'&domain='+getTestUrl;
+			//点击结算时，把要结算的商品列表存放到COOKIE里
+			var spOrderArr = '['+ListArr+']';
+			setCookie('spOrderCookie','');
+			setCookie('spOrderCookie',spOrderArr,7);
+			window.location.href = http+'/weixinservice/Buy/PaymentOrders.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&domain='+getTestUrl;
+			//console.log('['+ListArr+']')
+			//window.location.href = http+'/weixinservice/Buy/PaymentOrders.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&product_list=['+ListArr+']'+'&domain='+getTestUrl;
 		}
 	});
     
@@ -333,181 +348,182 @@
     
     
 //----------------------------onload之后的独立函数，如下：
-//删除列表项
-var DeleteItemsSp = function(obj)
-	{
-		var m = $(window).width();
-		var n = $(window).height();
-		$('#del_pop').show();
-		$('#tip_box').show();
-		$('#del_pop').css({
-		 	'width':m,
-		 	'height':n
-		});
-		$('#del_pop').attr('itemBlong',$(obj).parents('li').attr('product_id'));
-		$('#tip_box').attr('itemBlong',$(obj).parents('li').attr('product_id'));
-		
-		$.ajax({
-			type: "GET",
-			url: getTestUrl+'/rest/1.0/purchase',
-			dataType: "jsonp",
-			data:{
-				'method':'delete.cart.data',
-				'field':JSON.stringify({
-					'enterprise_info_id' : getEnterpriseId	,
-					'member_info'        : getMemberInfo	,
-					'product_id'         : $(obj).parents('li').attr('product_id')
-				})
-			},
-			jsonp: 'callback'
-		});	//-----end ajax
-		
-	};
-//取消
-var DeleteCancel = function()
-	{
-		$('#del_pop').hide();
-	 	$('#tip_box').hide();
-	};
-//确定
-var DeleteSure = function(obj)
-	{
-		$('#del_pop').hide();
-	 	$('#tip_box').hide();
-	 	$('#cart_list li').attr('product_id',$(obj).parents('#tip_box').attr('itemBlong')).remove();
-	 	var now= $('#cart_list .on_check').length;
-	 	$('.accounts span').html('（'+now+'）');
-	 	if( now == 0 ){
-	 		//如果都删没了，则结算不可点击，且数量为空，且全选取消勾选
-	 		$('.accounts').removeClass('cff');
-	   		$('.accounts span').html('');
-	   		$('#all_select').removeClass('on_check');	
-	 		$('#all_select').attr('flag','false');
-	 	}
-	};
-
-//遮罩点击事件
-var MarkClick = function(obj,oParent) 
-	{
-	 	$(obj).hide();
-	 	$(oParent).hide();
-	};
-//减，最小为1
-var Subtract = function (obj)
-	{
-		var _num = Number($(obj).siblings('.Total').val())-1;
-		if( _num <= 1 ){ _num = 1 }
-		$(obj).siblings('.Total').val( _num );	
-		GetTotal();
-	};
-//加，最大为99
-var Addition = function (obj)
-	{
-		var _num = Number($(obj).siblings('.Total').val())+1;
-		if( _num >= 99 ){ _num = 99 }
-		$(obj).siblings('.Total').val( _num );	
-		GetTotal();
-	};
-//数量的文本框失去焦点
-var ShoppingNumBlur = function()
-	{
-		GetTotal();
-	};
-//单选按钮
-var ItemSelectFn = function(obj)
-	{
-		var now= $("#cart_list .on_check").length; //单选按钮选中的个数
-		var Len = $("#cart_list .selected").length;//单选按钮总个数
-		if($(obj).hasClass("on_check")){
-			now--;
-			$(obj).removeClass("on_check");
+	//删除列表项
+	var DeleteItemsSp = function(obj)
+		{
+			var m = $(window).width();
+			var n = $(window).height();
+			$('#del_pop').show();
+			$('#tip_box').show();
+			$('#del_pop').css({
+			 	'width':m,
+			 	'height':n
+			});
+			$('#del_pop').attr('itemBlong',$(obj).parents('li').attr('product_id'));
+			$('#tip_box').attr('itemBlong',$(obj).parents('li').attr('product_id'));
+			
+			$.ajax({
+				type: "GET",
+				url: getTestUrl+'/rest/1.0/purchase',
+				dataType: "jsonp",
+				data:{
+					'method':'delete.cart.data',
+					'field':JSON.stringify({
+						'enterprise_info_id' : getEnterpriseId	,
+						'member_info'        : getMemberInfo	,
+						'product_id'         : $(obj).parents('li').attr('product_id')
+					})
+				},
+				jsonp: 'callback'
+			});	//-----end ajax
+			
+		};
+	//取消
+	var DeleteCancel = function()
+		{
+			$('#del_pop').hide();
+		 	$('#tip_box').hide();
+		};
+	//确定
+	var DeleteSure = function(obj)
+		{
+			$('#del_pop').hide();
+		 	$('#tip_box').hide();
+		 	$('#cart_list li').attr('product_id',$(obj).parents('#tip_box').attr('itemBlong')).remove();
+		 	var now= $('#cart_list .on_check').length;
+		 	$('.accounts span').html('（'+now+'）');
+		 	if( now == 0 ){
+		 		//如果都删没了，则结算不可点击，且数量为空，且全选取消勾选
+		 		$('.accounts').removeClass('cff');
+		   		$('.accounts span').html('');
+		   		$('#all_select').removeClass('on_check');	
+		 		$('#all_select').attr('flag','false');
+		 	}
+		};
+	
+	//遮罩点击事件
+	var MarkClick = function(obj,oParent) 
+		{
+		 	$(obj).hide();
+		 	$(oParent).hide();
+		};
+	//减，最小为1
+	var Subtract = function (obj)
+		{
+			var _num = Number($(obj).siblings('.Total').val())-1;
+			if( _num <= 1 ){ _num = 1 }
+			$(obj).siblings('.Total').val( _num );	
 			GetTotal();
-		}else{	
-			now++;
-			$('.accounts').addClass('cff');
-			$(obj).addClass("on_check");
+		};
+	//加，最大为99
+	var Addition = function (obj)
+		{
+			var _num = Number($(obj).siblings('.Total').val())+1;
+			if( _num >= 99 ){ _num = 99 }
+			$(obj).siblings('.Total').val( _num );	
 			GetTotal();
-		}
-		if(now==Len){
-			$('#all_select').attr('flag','true');
-			$('#all_select').addClass('on_check');
-		}else if(now==0){
-			$('#all_select').attr('flag','false');
-			$('#all_select').removeClass('on_check');
-			$('.accounts').removeClass('cff');
-			$('.accounts span').html('');
-		}else{
-			$('#all_select').attr('flag','false');
-			$('#all_select').removeClass('on_check');	
-		}
-		//结算数量
-		$('.accounts span').html('（'+now+'）');
-		
-	};
-//全选按钮    (判断全选状态，false=未选中，true=选中)
-function AllSelectFn() 
-	{
-	    var Len = $("#cart_list .selected").length;
-		if ( Len>0 ){
-	       	if ( $('#all_select').attr('flag')=='false' ){
-	       		$("#cart_list .selected").addClass('on_check');
-	       		$('.accounts').addClass('cff');
-	       		$('.accounts span').html('（'+Len+'）');
-	       		$('#all_select').addClass('on_check');
-	       		$('#all_select').attr('flag','true');
-	       	}else{
-	       		$("#cart_list .selected").removeClass('on_check');
-	       		$('.accounts').removeClass('cff');
-	       		$('.accounts span').html('');
-	       		$('#all_select').removeClass('on_check');	
-	       		$('#all_select').attr('flag','false');
-	       	}
-	       	GetTotal();
-	   	}
-	};
-//初始化购物车列表
-var InitShoppingCart = function (_data)
-	{
-		var _list = '';
-		for ( var k=0;k<_data.length;k++ ) {
-			_list += 
-			'<li class="clearfix" product_id="'+_data[k].product_id+'">'+
-				'<div class="left fl">'+
-					'<div class="selected" onclick="ItemSelectFn(this)"><input type="checkbox"></div>'+
-				'</div>'+
-				'<div class="right fl">'+
-					'<div class="image_text clearfix">'+
-						'<div class="pic fl"><img src="'+_data[k].product_img+'"></div>'+
-						'<div class="text fl">'+
-							'<h4>'+_data[k].product_name+'</h4>'+
-							'<p class="num">'+_data[k].unit+'</p>'+
-							'<p class="prize">￥'+_data[k].product_price+'</p>'+
-						'</div>'+
-					'</div>'+
-					'<div class="inputBox fl">'+
-						'<span class="fl Subtract" onclick="Subtract(this)">-</span><input type="text" value="'+_data[k].product_num+'" class="fl Total" onblur="ShoppingNumBlur()"><span class="fr Addition" onclick="Addition(this)">＋</span>'+
-					'</div>'+
-					'<div class="delet fr" onclick="DeleteItemsSp(this)">删除</div>'+
-				'</div>'+
-			'</li>';
-		}
-		$('#cart_list').append( _list );
-	}
-//总价格的计算函数
-var GetTotal = function ()
-	{
-		var Lens = $('#cart_list .on_check').length;
-		var str = '';
-		if(Lens!=0){
-			for(var j=0;j<Lens;j++){
-				str = Number(str);
-				str += Number($('#cart_list .on_check').eq(j).parents('li').find('.prize').html().substring(1))*$('#cart_list .on_check').eq(j).parents('li').find('.Total').val();
+		};
+	//数量的文本框失去焦点
+	var ShoppingNumBlur = function()
+		{
+			GetTotal();
+		};
+	//单选按钮
+	var ItemSelectFn = function(obj)
+		{
+			var now= $("#cart_list .on_check").length; //单选按钮选中的个数
+			var Len = $("#cart_list .selected").length;//单选按钮总个数
+			if($(obj).hasClass("on_check")){
+				now--;
+				$(obj).removeClass("on_check");
+				GetTotal();
+			}else{	
+				now++;
+				$('.accounts').addClass('cff');
+				$(obj).addClass("on_check");
+				GetTotal();
 			}
-			$('#total_money').html('￥'+str);
-		}else{
-			$('#total_money').html('￥0.00');
+			if(now==Len){
+				$('#all_select').attr('flag','true');
+				$('#all_select').addClass('on_check');
+			}else if(now==0){
+				$('#all_select').attr('flag','false');
+				$('#all_select').removeClass('on_check');
+				$('.accounts').removeClass('cff');
+				$('.accounts span').html('');
+			}else{
+				$('#all_select').attr('flag','false');
+				$('#all_select').removeClass('on_check');	
+			}
+			//结算数量
+			$('.accounts span').html('（'+now+'）');
+			
+		};
+	//全选按钮    (判断全选状态，false=未选中，true=选中)
+	function AllSelectFn() 
+		{
+		    var Len = $("#cart_list .selected").length;
+			if ( Len>0 ){
+		       	if ( $('#all_select').attr('flag')=='false' ){
+		       		$("#cart_list .selected").addClass('on_check');
+		       		$('.accounts').addClass('cff');
+		       		$('.accounts span').html('（'+Len+'）');
+		       		$('#all_select').addClass('on_check');
+		       		$('#all_select').attr('flag','true');
+		       	}else{
+		       		$("#cart_list .selected").removeClass('on_check');
+		       		$('.accounts').removeClass('cff');
+		       		$('.accounts span').html('');
+		       		$('#all_select').removeClass('on_check');	
+		       		$('#all_select').attr('flag','false');
+		       	}
+		       	GetTotal();
+		   	}
+		};
+	//初始化购物车列表
+	var InitShoppingCart = function (_data)
+		{
+			var _list = '';
+			$('#cart_list').html('');
+			for ( var k=0;k<_data.length;k++ ) {
+				_list += 
+				'<li class="clearfix" product_id="'+_data[k].product_id+'">'+
+					'<div class="left fl">'+
+						'<div class="selected" onclick="ItemSelectFn(this)"><input type="checkbox"></div>'+
+					'</div>'+
+					'<div class="right fl">'+
+						'<div class="image_text clearfix">'+
+							'<div class="pic fl"><img class="product_img" src="'+_data[k].product_img+'"></div>'+
+							'<div class="text fl">'+
+								'<h4 class="product_name">'+_data[k].product_name+'</h4>'+
+								'<p class="num unit">'+_data[k].unit+'</p>'+
+								'<p class="prize">￥<span class="prize_num">'+_data[k].product_price+'</span></p>'+
+							'</div>'+
+						'</div>'+
+						'<div class="inputBox fl">'+
+							'<span class="fl Subtract" onclick="Subtract(this)">-</span><input type="text" value="'+_data[k].product_num+'" class="fl Total" onblur="ShoppingNumBlur()"><span class="fr Addition" onclick="Addition(this)">＋</span>'+
+						'</div>'+
+						'<div class="delet fr" onclick="DeleteItemsSp(this)">删除</div>'+
+					'</div>'+
+				'</li>';
+			}
+			$('#cart_list').append( _list );
 		}
-	}
+	//总价格的计算函数
+	var GetTotal = function ()
+		{
+			var Lens = $('#cart_list .on_check').length;
+			var str = '';
+			if(Lens!=0){
+				for(var j=0;j<Lens;j++){
+					str = Number(str);
+					str += Number($('#cart_list .on_check').eq(j).parents('li').find('.prize_num').html())*$('#cart_list .on_check').eq(j).parents('li').find('.Total').val();
+				}
+				$('#total_money').html('￥'+str);
+			}else{
+				$('#total_money').html('￥0.00');
+			}
+		}
 
 </script>
 </html>

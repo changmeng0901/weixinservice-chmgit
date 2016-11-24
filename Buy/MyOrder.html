@@ -375,6 +375,8 @@
 	weixin_info = JSON.parse( cookieinfo );
     var getMemberInfo = weixin_info.member_info_id;
     var getEnterpriseId = weixin_info.enterprise_info_id;
+    
+    setCookie('spOrderCookie','');
 	
 	//图片懒加载
 	$("img").lazyload({

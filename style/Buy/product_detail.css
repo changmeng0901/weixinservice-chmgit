@@ -170,3 +170,5 @@ body{ max-width: 640px; margin: auto; padding-bottom:2.8rem; box-sizing: border-
 .stars_iconbg.sta3{ background-image: url(../../images/Buy/pingj_star3.png);}
 .stars_iconbg.sta4{ background-image: url(../../images/Buy/pingj_star4.png);}
 .stars_iconbg.sta5{ background-image: url(../../images/Buy/pingj_star5.png);}
+.wrap_cart{ position: relative; height: 100%;overflow-x: hidden; overflow-y: auto;}
+.wrap_cart .cart{ margin-bottom: 0;}

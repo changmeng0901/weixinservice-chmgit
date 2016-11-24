@@ -23,7 +23,7 @@
 			</a>
 		</li>
 	</ul>
-    <div class="submitaddress" onclick="shengProductOrder()">完成</div>
+    <div class="submitaddress" >完成</div>
 </body>
 <script type="text/javascript" src="../js/commons/jquery-1.11.3.min.js"></script>
 <script>
@@ -215,6 +215,7 @@
 		weixin_info = JSON.parse( cookieinfo );
     var getMemberInfo = weixin_info.member_info_id;
     var getEnterpriseId = weixin_info.enterprise_info_id;
+    var yjgmAddressCookie;//地址信息cookie
 	
 	$.ajax({//---start ajax
 		type: "GET",
@@ -231,16 +232,14 @@
 		success: function( response ) {
 			
 			//如果地址列表有数据，则执行函数：
-			if( !response.address_list == undefined || !response.address_list == '' ||　!response.address_list == [] )
+			if( response.address_list.length>0 )
 			{
 				InitAddressData( response.address_list )
 			}
 					
 		},
 		error: function(e) {
-			try {
-				console.log('地址列表页失败了吧！！')
-			} catch (e) {}
+			console.log('地址列表页失败了吧！！')
 		}
 	});//----end ajax
 	
@@ -261,21 +260,57 @@ var InitAddressData = function ( _data ){
 	var _list = '',
 		_class = '';
 	var $address_list = $('#address_list');
+	
+	var addrcookie = getCookie('yjgmAddressCookie');
+		
+	var addrid = -1,
+		addrreceiver = '',
+		addraddressid='';
+	
+	if( addrcookie == ''|| addrcookie==null || addrcookie == 'undefined'){
+		
+	}else{
+		addrcookie  = JSON.parse( addrcookie );
+		addrid = addrcookie.address_id;
+		addrreceiver = addrcookie.receiver;
+		addrpnone = addrcookie.phone_num;
+		addraddress = addrcookie.address;
+	}
+	
 	//循环
 	for( var j=0;j<_data.length;j++ ){
-		j == 0 ? _class = ' iCur' : _class = '';
+		//_data[j].address_id == addrid ? _class = ' iCur' : _class = '';
+		if ( _data[j].address_id == addrid ){
+			_class = ' iCur';
+			addraddressid = addrcookie.address_id;
+			addrreceiver = addrcookie.receiver;
+			addrpnone = addrcookie.phone_num;
+			addraddress = addrcookie.address;
+		}else{
+			_class = '';
+			addraddressid = _data[j].address_id;
+			addrreceiver = _data[j].receiver;
+			addrpnone = _data[j].phone;
+			addraddress = _data[j].address;
+		}
 		_list += 
-		'<li class="clearfix'+ _class +'" phoneNum="'+ _data[j].phone +'" addressId="'+ _data[j].address_id +'" onclick="ClickFn(this)">'+
+		'<li class="clearfix'+ _class +'" phoneNum="'+ addrpnone +'" addressId="'+ addraddressid +'" onclick="ClickFn(this)">'+
 			'<div class="fl left"><img src="../images/Buy/correct.png" alt=""></div>'+
 			'<div class="center fl">'+
-				'<p class="name">'+ _data[j].receiver +'</p>'+
-				'<p class="dizhi">'+ _data[j].address +'</p>'+
+				'<p class="name">'+ addrreceiver +'</p>'+
+				'<p class="dizhi">'+ addraddress +'</p>'+
 			'</div>'+
 			'<div class="right fr" onclick="EditAddress(this)"><img src="../images/Buy/dizhi.png" alt=""></div>'+
 		'</li>';	
 	}
 	//添加到列表的最后
 	$address_list.append( _list );
+	
+	if(_data.length==0){
+		$address_list.attr('adlength','no');
+	}else{
+		$address_list.attr('adlength','yes');
+	}
 }
 var ClickFn = function(obj){
 	$(obj).addClass('iCur').siblings().removeClass('iCur');
@@ -287,13 +322,44 @@ var EditAddress = function(obj){
 	var receiver = $(obj).parents('li').find('.name').html();
 	var phone_num = $(obj).parents('li').attr('phoneNum');
 	var address = $(obj).parents('li').find('.dizhi').html();
-	window.location.href = http+'/weixinservice/Buy/address.html?domain='+getTestUrl+'&address_id='+address_id+'&receiver='+receiver+'&phone_num='+phone_num+'&address='+address;	
+	
+	yjgmAddressCookie = {
+			'address_id' : address_id ,
+			'receiver' : receiver ,
+			'phone_num' : phone_num,
+			'address' : address
+		};
+		yjgmAddressCookie = JSON.stringify( yjgmAddressCookie );
+	setCookie('editAddressCookie',yjgmAddressCookie);
+
+	window.location.href = http+'/weixinservice/Buy/address.html?domain='+getTestUrl;	
 }
 
+
+
+
 //完成按钮
-var shengProductOrder = function(){
+//如果没有地址，则提示您还没有添加收货地址，如果有就返回待付款的订单页面
+$('.submitaddress').click(function(){
 	
-}
+	if($('#address_list').attr('adlength') == '0'){
+		confirm('您还没有收货地址')
+	}else{
+			yjgmAddressCookie = {
+				'address_id' : $('#address_list .iCur').attr('addressid') ,
+				'receiver' : $('#address_list .iCur .name').html() ,
+				'phone_num' : $('#address_list .iCur').attr('phonenum') ,
+				'address' : $('#address_list .iCur .dizhi').html()
+			};
+			yjgmAddressCookie = JSON.stringify( yjgmAddressCookie );
+		setCookie('yjgmAddressCookie',yjgmAddressCookie);
+		
+		window.location.href = http+'/weixinservice/Buy/PaymentOrders.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&domain='+getTestUrl;
+	
+	}
+	
+});
+
 
 </script>
 </html>

@@ -274,8 +274,20 @@
 		$('.bigBox').css('display','none');
 	});
 	
-	//如果地址上有传值，则为地址列表页--的点击编辑进来的
-	if( iframeSearch )
+	//点击地址列表编辑按钮时，会把地址信息存放在cookie里，这里从cookie里拿到信息，添加到地址里就行
+	var addrcookie = getCookie('editAddressCookie');
+	var method = "add_address_data";
+	var address_id = "";
+	if( addrcookie != null && addrcookie!= '' && addrcookie!='undefined'){
+		addrcookie = JSON.parse( addrcookie )
+		address_id = addrcookie.address_id;
+		$('.newAdd').attr('address_id', addrcookie.address_id );
+		$('#receiverVal').val( addrcookie.receiver );
+		$('#phoneVal').val( addrcookie.phone_num );
+		$('#addressVal').val( addrcookie.address );
+		method = "edit.address.data";
+	}
+	
 	
 	//点击保存，跳到收货地址页面
 	var receiverVal = $('#receiverVal').val(),
@@ -303,16 +315,20 @@
 			alert('请填写正确的手机号');
 		}else{
 			
-				$.ajax({//---start ajax
+				
+				
+				
+				$.ajax({
 					type: "GET",
-					timeout: 1000,
 					url: getTestUrl+'/rest/1.0/purchase',
 					data:{
-						'method':'add.address.data',
+						'method':method,
 						'field':JSON.stringify({
+							'address_id':address_id,
 							'receiver' : receiverVal,
 							'phone_num' : phoneVal ,
-							'address' : receiverVal+phoneVal+addressVal,
+							//'address' : receiverVal+phoneVal+addressVal,
+							'address' : addressVal,
 							'member_info' : getMemberInfo	
 						})
 					},
@@ -320,13 +336,21 @@
 					jsonp: 'callback',
 					success: function( response ) {
 						
-						window.location.href = encodeURI(http+'/weixinservice/Buy/addressList.html?member_info='+getMemberInfo+'&domain='+getTestUrl);	
+						var yjgmAddressCookie = {
+							'address_id' : $('.newAdd').attr('address_id') ,
+							'receiver' : $('#receiverVal').val() ,
+							'phone_num' : $('#phoneVal').val() ,
+							'address' : $('#addressVal').val()
+						};
+						yjgmAddressCookie = JSON.stringify( yjgmAddressCookie );
+						setCookie('yjgmAddressCookie',yjgmAddressCookie);
+						setCookie('editAddressCookie',"");
+						//window.location.href = encodeURI(http+'/weixinservice/Buy/addressList.html?member_info='+getMemberInfo+'&domain='+getTestUrl);
+						window.location.href = http+'/weixinservice/Buy/addressList.html?member_info='+getMemberInfo+'&domain='+getTestUrl;
 						
 					},
 					error: function(e) {
-						try {
-							console.log('点击保存失败了吧！！')
-						} catch (e) {}
+						console.log('点击保存失败了吧！！')
 					}
 				});//----end ajax
 			
