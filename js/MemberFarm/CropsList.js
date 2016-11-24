@@ -142,9 +142,8 @@ function FontSize(){
 // 种植信息函数
 function InitPlantData(_data){
         var strong_list = '';
-        var dl_list='';
         var $strong_list = $('#zhongzxx_content');
-        if(_data == [] || _data == 'undefined'){
+        if( _data == '' || _data == [] || _data == 'undefined'){
             strong_list = 
             '<div class="no_information" style="background:none;">'+
                 '<img src="../images/MemberFarm/CropsList_nodata1.png" class="no_icon">'+
@@ -153,7 +152,7 @@ function InitPlantData(_data){
             $strong_list.append( strong_list );
         }else{
             for(var i=0;i<_data.length;i++){
-
+        		var dl_list='';
                 var _list = _data[i].tunnelRealPlant;
                 for(var j=0;j<_list.length;j++){
                     dl_list +=  '<dl class="dl_dl clear" realPlantId="'+ _list[j].realPlantId +'">'+
@@ -189,7 +188,7 @@ function InitMonitorData(_data){
         var svideo = _data.device;
         var $monitor = $('#monitor');
         var $sensor = $('#sensor');
-        if(mvideo == [] || mvideo == 'undefined'){
+        if( mvideo == '' || mvideo == [] || mvideo == 'undefined'){
             // 监控暂无数据
             monitor_list = 
             '<div class="no_information" style="background:none;">'+
@@ -217,7 +216,7 @@ function InitMonitorData(_data){
             } 
             $monitor.append( monitor_list ); 
         }
-        if(svideo == '' || svideo == 'undefined'){
+        if(svideo == '' || svideo == [] || svideo == 'undefined'){
             // 传感器暂无数据
             sensor_list = 
             '<div class="no_information" style="background:none;">'+
