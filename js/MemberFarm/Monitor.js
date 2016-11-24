@@ -11,12 +11,13 @@ var scriptAdd,
 	ParameterField2,
 	ParameterFieldMoiitor,
     pageUrl;
-FontSize();
+//FontSize();
 
 
 // 传感器数据--列表平均分配宽度
 var windowWidth = document.documentElement.clientWidth;
 var windowHeight= document.documentElement.clientHeight;
+var bodyWidth= $('body').width();
 
 // ajax 
 var iframeSearch = location.search.split('&');
@@ -57,7 +58,6 @@ console.log(pageUrl)
 // pageUrl = http://192.168.21.188:8080/rest/1.0/phoneView?v=1.0&format=json&method=phone.view.monitoring&field={"videoId":"916"}&verify=asdf
 $.ajax({
     type: "GET",
-    timeout: 1000,
     url: pageUrl,
     dataType: "jsonp",
     jsonp: 'callback',
@@ -85,18 +85,37 @@ $('.monitor_tabbd .tab_content').eq(0).show().siblings().hide();
 // ---------------------------------------------------------------------------
 // 浏览器变化时执行
 $(window).resize(function(){
-	clearTimeout( FontTimer );
-	FontTimer = setTimeout( FontSize , 500 );
+	var windowWidth = document.documentElement.clientWidth;
+	var windowHeight= document.documentElement.clientHeight;
+	var bodyWidth= $('body').width();
+//	clearTimeout( FontTimer );
+//	FontTimer = setTimeout( FontSize , 500 );
+	// 计算宽度及数据个数
+	// swiper农事图片
+	var aTimer = '';
+		windowWidth = document.documentElement.clientWidth,
+		windowHeight= document.documentElement.clientHeigh,
+		bodyWidth= $('body').width();
+	//alert(windowWidth)
+	var swiperTabLen =$('#swiper_live .swiper-slide').length;
+	$('#swiper_live .swiper-wrapper').css({
+		'width' : bodyWidth * swiperTabLen
+	});
+	$('#swiper_live .swiper-slide').css({
+		'width' : bodyWidth
+	});
 });
+
 
 
 // ---------------------------------------------------------------------------
 // 计算不同分辨率下的文字大小
-function FontSize(){
-	document.documentElement.style.fontSize = parseInt((document.documentElement.clientWidth>414?414:document.documentElement.clientWidth)/12)+'px';
-}
+//function FontSize(){
+//	document.documentElement.style.fontSize = parseInt((document.documentElement.clientWidth>414?414:document.documentElement.clientWidth)/12)+'px';
+//}
 
 // 初始化视频数据
+var FarmSwiper;
 function InitVideoData(_data){
     
 	// 无数据
@@ -105,7 +124,7 @@ function InitVideoData(_data){
 		$tab_content2 = $('.tab_content').eq(2);
 	var nodata = 
 	'<div class="no_information" style="background:none;">'+
-		'<img src="../images/MemberFarm/Monitor_nodata.png" class="no_icon">'+
+		'<img src="/asset/images/phone/Monitor_nodata.png" class="no_icon">'+
 		'<p class="no_tip">暂无数据</p>'+
 	'</div>';
 	
@@ -136,11 +155,12 @@ function InitVideoData(_data){
             $('#tunnelName3').html(tunnelName3);
             // 作物
             var plantName = _data.plantName;
-            var plantName2 =  _data.plantName2;
+            //var plantName2 =  _data.plantName2;
             !plantName=='undefined'||!plantName==''? plantName=_data.plantName.substring(0,_data.plantName.length-1) : plantName='--';
-            !plantName2=='undefined'||!plantName2==''? plantName2=_data.plantName.substring(0,_data.plantName.length-1) : plantName2='--';
+            //!plantName2=='undefined'||!plantName2==''? plantName2=_data.plantName.substring(0,_data.plantName.length-1) : plantName2='--';
             $('#plantName').html('种植作物：'+plantName);
-            $('#plantName2').html('种植作物：'+plantName2);
+            $('#plantName2').html($('#plantName').html());
+            $('#plantName3').html($('#plantName').html());
             // 拍摄时间
 			
             if( !_data.images == 'undefined' || !_data.images == [] || !_data.images == ''){
@@ -150,7 +170,7 @@ function InitVideoData(_data){
 					var takePhotosList = '';
 					var $swiper_takePhotos = $('#swiper_takePhotos .swiper-wrapper');
 					var imgIndexUrl = '';
-					if( _data.images=='' || _data.images==[] ||　_data.images=='undefined' ){
+					if( _data.images=='' || _data.images==[] || _data.images=='undefined' ){
 						//如果环境实况无数据，则：
 						$swiper_takePhotos.append( nodata );
 					}else{
@@ -158,7 +178,7 @@ function InitVideoData(_data){
 							var _index = k;
 							takePhotosList += 
 							'<div class="swiper-slide">'+
-								'<img src="'+_data.images[_index].url+'" />'+  
+								'<img data-src="'+_data.images[_index].url+'" class="swiper-lazy" />'+  
 							'</div>';
 						}
 						$swiper_takePhotos.append( takePhotosList );
@@ -186,10 +206,9 @@ function InitVideoData(_data){
             
 
             // 一：把拼好的实况直播slide，添加到盒子里
-			var FarmSwiper;
             var devicesList = '';
             var $swiper_live = $('#swiper_live .swiper-wrapper');
-			if( _data.devices=='' || _data.devices==[] ||　_data.devices=='undefined' ){
+			if( _data.devices=='' || _data.devices==[] || _data.devices=='undefined' ){
 				//如果实况直播无数据，则：
             	$swiper_live.append( nodata );
 			}else{
@@ -204,15 +223,16 @@ function InitVideoData(_data){
 				}
             	$swiper_live.append( devicesList );
 				// 初始化实况直播视频
-				CreatVideo('0',_data.devices[0].webcam_url,'../../images/MemberFarm/PlantDetail_temp1.jpg');
+				CreatVideo('0',_data.devices[0].webcam_url,'/asset/images/phone/PlantDetail_temp1.jpg');
 				// 计算宽度及数据个数
 				// swiper农事图片
+				bodyWidth= $('body').width();
 				var swiperTabLen = _data.devices.length;
 				$('#swiper_live .swiper-wrapper').css({
-					'width' : windowWidth * swiperTabLen
+					'width' : bodyWidth * swiperTabLen
 				})
 				$('#swiper_live .swiper-slide').css({
-					'width' : windowWidth
+					'width' : bodyWidth
 				})
 				FarmSwiper = new Swiper('#swiper_live',{
 						loop : false,
@@ -220,15 +240,10 @@ function InitVideoData(_data){
 						cssWidthAndHeight : true,
 						onSlideChangeEnd : function(){
 							// 当swiper农事图片滑动的时候，重新生成对应的视频
-							CreatVideo2(FarmSwiper.activeIndex ,_data.devices[activeIndex].webcam_url,'../../images/MemberFarm/PlantDetail_temp1.jpg');
+							CreatVideo2(FarmSwiper.activeIndex ,_data.devices[FarmSwiper.activeIndex].webcam_url,'/asset/images/phone/PlantDetail_temp1.jpg');
 						}
 					});
 			}
-			
-
-            
-            
-
             
             // ---------------------
             $('.monitor_tabhd .items').each(function(index,elem){	
@@ -239,20 +254,30 @@ function InitVideoData(_data){
                     if( $('.monitor_tabhd .items').eq(0).attr('onoff') == 'true' ){
                         // 1）实况直播
                         // swiper农事图片
-						if(  _data.devices=='' || _data.devices==[] ||　_data.devices=='undefined' ){
+						if(  _data.devices=='' || _data.devices==[] || _data.devices=='undefined' ){
 							//如果实况直播无数据，则：
 							$tab_content0.append( nodata );
 							$('.live_textcont').hide();
 							$('#swiper_live').hide();
 						}else{
-							FarmSwiper.reInit();
-                       		CreatVideo2(FarmSwiper.activeIndex,_data.devices[FarmSwiper.activeIndex],'../../images/MemberFarm/PlantDetail_temp1.jpg');	
+//							FarmSwiper.reInit();
+//                       	CreatVideo2(FarmSwiper.activeIndex,_data.devices[FarmSwiper.activeIndex].webcam_url,'/asset/images/phone/PlantDetail_temp1.jpg');	
+							/*FarmSwiper = new Swiper('#swiper_live',{
+								loop : false,
+								pagination : '.pagination',
+								cssWidthAndHeight : true,
+								onSlideChangeEnd : function(){
+									// 当swiper农事图片滑动的时候，重新生成对应的视频
+									CreatVideo2(FarmSwiper.activeIndex ,_data.devices[FarmSwiper.activeIndex].webcam_url,'/asset/images/phone/PlantDetail_temp1.jpg');
+								}
+							});*/
+							CreatVideo2(FarmSwiper.activeIndex,_data.devices[FarmSwiper.activeIndex].webcam_url,'/asset/images/phone/PlantDetail_temp1.jpg');	
 						}
                         
                     }else if( $('.monitor_tabhd .items').eq(1).attr('onoff') == 'true' ){
                         // 2）环境实况
                         // swiper环境实况-拍摄的图片
-						if( _data.images=='' || _data.images==[] ||　_data.images==undefined ){
+						if( _data.images=='' || _data.images==[] || _data.images==undefined ){
 							//如果环境实况无数据，则：
 							$tab_content1.html('');//清空
 							$tab_content1.append( nodata );
@@ -261,15 +286,19 @@ function InitVideoData(_data){
 						}else{
 							var swiperTakeLen = _data.images.length;
 							var TakeSwiper;
+							bodyWidth= $('body').width();
 							$('#swiper_takePhotos .swiper-wrapper').css({
-								'width' : windowWidth * swiperTakeLen
+								'width' : bodyWidth * swiperTakeLen
 							})
 							$('#swiper_takePhotos .swiper-slide').css({
-								'width' : windowWidth
+								'width' : bodyWidth
 							})
 							TakeSwiper = new Swiper('#swiper_takePhotos',{
 									loop : false,
 									cssWidthAndHeight : true,
+									lazyLoading : true,
+									preloadImages:true,
+									updateOnImagesReady : true,
 									onSlideChangeEnd: function(swiper){
 										$('#takeNum').html( TakeSwiper.activeIndex+1 );
 										$('#takeTotal').html( swiperTakeLen );
@@ -279,16 +308,17 @@ function InitVideoData(_data){
 								});
 							$('#takeNum').html( TakeSwiper.activeIndex+1 );
 							$('#takeTotal').html( swiperTakeLen );
-	
-							$( "#slider-range-max" ).slider({  //滑块控制控件
+						
+							$("#slider-range-max").slider({  //滑块控制控件
 									range: "max",
 									min: 0,
 									max: swiperTakeLen-1,
 									step: 1,
 									slide: function( event, ui ) {
-										TakeSwiper.setWrapperTranslate(-windowWidth*ui.value,0,0);
+										TakeSwiper.setWrapperTranslate(-bodyWidth*ui.value,0,0);
 										$('#swiper_takePhotos .swiper-slide').eq(ui.value).addClass('swiper-slide-visible swiper-slide-active')
 										.siblings().removeClass('swiper-slide-visible swiper-slide-active');
+										$('#swiper_takePhotos .swiper-slide-active img').attr('src',$('#swiper_takePhotos .swiper-slide-active img').attr('data-src'));
 										$('#takeNum').html( ui.value+1 );
 										$('#takeTotal').html( swiperTakeLen );
 										$('#amount').val( ui.value );
@@ -301,13 +331,13 @@ function InitVideoData(_data){
                         // 3）视频追溯
                         // 视频追溯下的，重新生成对应的视频
                         // CreatVideo3(0 ,'http://farmeasy.cn/video/934/891/playlist.m3u8','../../images/MemberFarm/PlantDetail_temp1.jpg');
-						if( _data.videos=='' || _data.videos==[] ||　_data.videos==undefined ){
+						if( _data.videos=='' || _data.videos==[] || _data.videos==undefined ){
 							$tab_content2.html('');//清空
 							$tab_content2.append( nodata );
 							$('.trace_video_cont').hide();
 							$('.trace_textcont').hide();
 						}else{
-                        	CreatVideo3(0 ,_data.videos[0].video_url,'../../images/MemberFarm/PlantDetail_temp1.jpg',_data.videos[0].video_duration);
+                        	CreatVideo3(0 ,_data.videos[0].video_url,'/asset/images/phone/PlantDetail_temp1.jpg',_data.videos[0].video_duration);
 						}
 
                     }
@@ -317,7 +347,7 @@ function InitVideoData(_data){
                 // 如果是从列表页点击进来的监控，则没有视频追溯，则不让点击
                 if( iframeSearch[0].split('=')[0] == '?videoId'){
                     $('.monitor_tabhd .items').eq(2).unbind();
-					$('.monitor_tabhd .items').eq(2).addClass('unclick');
+                    $('.monitor_tabhd .items').eq(2).addClass('unclick');
                 }
             });
             // ---------------------
@@ -349,12 +379,11 @@ function CreatVideo3(videoItems,videoURL,imgURL,videoDuration){
     if( iframeSearch[0].split('=')[0] == '?realPlantId'){
     // 如果是从种植详情点进来的，才会有种植ID，否则不会请求
         ParameterMethod = makeParameterMethod('phone.view.play.num');
-        ParameterField = makeParameterField2('realPlantId',getVideoId,'getVideoId',videoDuration)
+        ParameterField2 = makeParameterField2('realPlantId',getVideoId,'getVideoId',videoDuration)
         ParameterVerify = makeParameterVerify(getVerify);
         pageUrl = getTestUrl+'/rest/1.0/phoneView?v=1.0&format=json'+ParameterMethod+ParameterField2+ParameterVerify;;
         $.ajax({
             type: "GET",
-            timeout: 1000,
             url: pageUrl,
             dataType: "jsonp",
             jsonp: 'callback'

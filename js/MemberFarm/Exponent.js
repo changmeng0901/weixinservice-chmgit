@@ -12,7 +12,7 @@ var FontTimer,
     ParameterFieldType,
     ParameterVerify,
     ParameterVerifyType;
-FontSize();
+//FontSize();
 
 // ajax 
 var iframeSearch = location.search.split('&');
@@ -232,9 +232,10 @@ if( iframeSearch[1].split('=')[0] == 'deviceId'){
                     trackColor: '#f9f9f9',  
                     barColor : '#55bf3b',
                     onStep: function(from, to, percent) {
-                        this.el.children[0].innerHTML = percent;
+                        //this.el.children[0].innerHTML = percent;
                     }
                 });
+			$('.maturity_chart .percent').html(matureExpVal);
             // 健康指数分析图表
             var $exponent_chart = $('#exponent_chart');
             var nodata;
@@ -414,8 +415,7 @@ var FarmSwiper
 FarmSwiper = new Swiper('#swiper_sensor',{
     pagination: '.pagination',
     loop:false
-  })    
-
+  })  
 
 // ---------------------------------------------------------------------------
 // 浏览器变化时执行
@@ -425,8 +425,8 @@ $(window).resize(function(){
     var windowHeight= document.documentElement.clientHeight;
 
     // 字号的计算
-	clearTimeout( FontTimer );
-	FontTimer = setTimeout( FontSize , 500 );
+	//clearTimeout( FontTimer );
+	//FontTimer = setTimeout( FontSize , 500 );
 
     // 传感器图表计算
     $('#sensor_chart').css('height',$('#sensor_chart').width()*0.4);
@@ -446,9 +446,9 @@ $(window).resize(function(){
 
 
 // 计算不同分辨率下的文字大小
-function FontSize(){
-	document.documentElement.style.fontSize = parseInt((document.documentElement.clientWidth>414?414:document.documentElement.clientWidth)/12)+'px';
-}
+//function FontSize(){
+	//document.documentElement.style.fontSize = parseInt((document.documentElement.clientWidth>414?414:document.documentElement.clientWidth)/12)+'px';
+//}
 // 初始化传感器数据函数
 function InitDeviceData(_data){
     if( _data.hasDevice != false ){
@@ -645,15 +645,23 @@ function ExponentChart(categoriesData,seriesData){
         xAxis: {
             categories: categoriesData,
             plotBands: [{ // visualize the weekend
-                from: 4.5,
-                to: 6.5,
-                color: 'rgba(68, 170, 213, .2)'
-            }]
+                //from: 4.5,
+               // to: 6.5,
+                //color: 'rgba(68, 170, 213, .2)'
+            }],
+            //min: 0,
+    		//max: 100//标签个数-1
+    		//tickInterval: 0
+    		//max:10
         },
+	    scrollbar: {//设置滚动条   
+	        enabled: true
+	    },
         yAxis: {
             title: {
                 text: ''
-            }
+            },
+            min:0
         },
         tooltip: {
             shared: true,

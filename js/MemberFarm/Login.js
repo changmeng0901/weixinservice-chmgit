@@ -1,7 +1,7 @@
 $(function(){
 
-	var FontTimer;
-	FontSize();
+	//var FontTimer;
+	//FontSize();
 
 	// 文本域获取焦点和失去焦点状态
     $("input[type=text]").not(".ipt_link").focus(function(){
@@ -42,14 +42,14 @@ $(function(){
     }
 
 $(window).resize(function(){
-	clearTimeout( FontTimer );
-	FontTimer = setTimeout( FontSize , 500 );
+	//clearTimeout( FontTimer );
+	//FontTimer = setTimeout( FontSize , 500 );
 });
 
 });
 
 
 // 计算不同分辨率下的文字大小
-function FontSize(){
-	document.documentElement.style.fontSize = parseInt((document.documentElement.clientWidth>414?414:document.documentElement.clientWidth)/12)+'px';
-}
+//function FontSize(){
+	//document.documentElement.style.fontSize = parseInt((document.documentElement.clientWidth>414?414:document.documentElement.clientWidth)/12)+'px';
+//}

@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>商品详情页</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="../style/Buy/reset.css">
+    <link rel="stylesheet" href="../style/Buy/swiper.min.css">
+	<link rel="stylesheet" href="../style/Buy/product_detail.css">
+</head>
+<body>
+	<div class="swiper-container">
+        <div class="swiper-wrapper"></div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <!-- logo -->
+        <div class="logo" id="logo"><img src="../images/Buy/logo.jpg" /></div>
+        <div class="edit"><a href=""><img src="../images/Buy/edit.png" ></a></div>
+    </div>
+    <div class="title">
+    	<p class="content">
+    		<span class="txt" id="product_name">【纯天然绿色】车厘子 产自加拿大进口的车厘子</span>
+    		<span class="tip"><i id="freefreight_price_flag">包邮</i>满<code id="free_freight_price">50</code>元包邮</span>
+    	</p>
+    	<p class="prize"><i>￥</i><span id="product_price">5.00</span></p>
+    </div>
+    <div class="detail">
+    	<p class="line" style="border-bottom:1px solid #e1e1e1;"><span class="fl">运费<i id="freight_price">￥10.00</i></span><span class="fr">销量 <i id="sale_num">5022</i>笔</span></p>
+    	<div class="line" id="enter_SPEC">
+        	<span class="text_name fl">已选<i id="option_product">500g加拿大车厘子</i></span>
+            <div class="fr inputBox">
+            	<span class="fl" id="Subtract"><img src="../images/Buy/icon_jian.jpg" /></span>
+                <input type="text" value="1" class="fl" id="Total" />
+                <span class="fr" id="Addition"><img src="../images/Buy/icon_jia.jpg" /></span>
+            </div>
+        </div>
+    </div>
+    <div class="show">
+    	<h4><span class="line"></span><span>农场风光</span><span class="line"></span></h4>
+    	<div class="pic" id="krpanos">
+    		<img src="../images/Buy/pic_bg.jpg" />
+    		<i class="icon1"></i>
+    		<p>#四季田景#</p>
+    		<div class="mask"></div>
+    	</div>
+        <div class="pic" id="aerial_video">
+            <img src="../images/Buy/pic_bg.jpg" />
+            <i class="icon2"></i>
+            <p>#航拍视频#</p>
+            <div class="mask"></div>
+        </div>
+        <div class="pic" id="farm_show">
+            <img src="../images/Buy/pic_bg1.jpg" />
+            <i class="icon3"></i>
+            <p>#农场秀#</p>
+            <div class="mask"></div>
+            <div class="phone">
+                <img src="" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="show">
+        <h4><span class="line"></span><span>绿色履历</span><span class="line"></span></h4>
+        <div class="pic" id="resume">
+            <img src="../images/Buy/pic_bg2.jpg" />
+            <i class="icon4"></i>
+            <p>#商品履历#</p>
+            <div class="mask"></div>
+            <div class="phone">
+                <img src="" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="show">
+        <h4><span class="line"></span><span>农场地图</span><span class="line"></span></h4>
+        <div class="pic map" id="farm_map">
+            <img src="../images/Buy/map.jpg" />
+        </div>
+    </div>
+    <div class="tabs">
+        <ul class="item">
+            <li class="cur">商品详情</li>
+            <li id="Evaluate">评价<span>（8）</span></li>
+        </ul>
+        <div class="details current">
+            <div class="goods_pic" id="product_introduction"></div>
+            <div class="show" style="border-bottom:0; padding:0;">
+                <h4><span class="line"></span><span>精选商品</span><span class="line"></span></h4>
+                <ul class="fruit clearfix" id="fruit_list"></ul>
+            </div>
+        </div>
+        <div class="details">
+            <!-- 有评价 -->
+            <ul class="evaluate" id="evaluate">
+                <li>
+                    <div class="top_line">
+                        <span class="photo fl"><img src="../images/Buy/photo.png" alt=""></span>
+                        <span class="tel fl">139*****1522</span>
+                        <span class="date fr">2016-09-18</span>
+                    </div>
+                    <div class="stars">
+                        <img src="../images/Buy/star1.png" alt="">
+                        <img src="../images/Buy/star1.png" alt="">
+                        <img src="../images/Buy/star1.png" alt="">
+                        <img src="../images/Buy/star1.png" alt="">
+                        <img src="../images/Buy/star2.png" alt="">
+                    </div>
+                    <p class="txt">可以买过两次了</p>
+                </li>
+                <li>
+                    <div class="top_line">
+                        <span class="photo fl"><img src="../images/Buy/photo.png" alt=""></span>
+                        <span class="tel fl">139*****1522</span>
+                        <span class="date fr">2016-09-18</span>
+                    </div>
+                    <div class="stars">
+                        <img src="../images/Buy/star1.png" alt="">
+                        <img src="../images/Buy/star1.png" alt="">
+                        <img src="../images/Buy/star1.png" alt="">
+                        <img src="../images/Buy/star1.png" alt="">
+                        <img src="../images/Buy/star2.png" alt="">
+                    </div>
+                    <p class="txt">可以买过两次了</p>
+                    <div class="pics">
+                        <img src="../images/Buy/apple.jpg" alt="">
+                        <img src="../images/Buy/apple.jpg" alt="">
+                        <img src="../images/Buy/apple.jpg" alt="">
+                        <img src="../images/Buy/apple.jpg" alt="">
+                    </div>
+                </li>
+            </ul>
+            <!-- 没评价 -->
+            <div class="no_evaluate">
+                <img src="../images/Buy/txt.png" alt="">
+                <p>暂无评价</p>
+            </div>
+        </div>
+        <div class="load_more"><p>加载中...</p></div>
+    </div>
+    
+    <div class="copyRight">Copyright北京奥科美技术服务有限公司</div>
+    <ul class="purchase">
+        <li class="nub1" id="EnterCart">
+            <a href="javascript:;">
+               <img src="../images/Buy/cart.png" />
+                <i id="cart_total">1</i>
+                <p>购物车</p> 
+            </a> 
+        </li>
+        <li class="nub2" id="AddCart">加入购物车</li>
+        <li class="nub3">立即购买</li>  
+    </ul>
+</body>
+<script type="text/javascript" src="../js/commons/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../js/commons/jquery.lazyload.js"></script>
+<script type="text/javascript" src="../js/swiper/swiper.min.js"></script>
+<script>
+$(document).ready(function() {
+	
+	var sumCount=''; //分页
+	 
+	//图片懒加载
+	$("img").lazyload({
+		effect: "fadeIn"
+	});
+	
+	var http = 'http://192.168.21.187:8081'; 
+	var makeParameterMethod,
+    makeParameterField,
+	makeParameterFieldPage,
+	makeParameterFieldWX,
+    ParameterMethod,
+    ParameterField,
+	ParameterFieldPage,
+	ParameterFieldWX,
+    pageUrl;
+	
+	//SEARCH
+	var iframeSearch = location.search.split("&");
+	var getProductId = iframeSearch[0].split("=")[1];
+	var getEnterpriseId = iframeSearch[1].split("=")[1];
+	var getTestUrl = iframeSearch[2].split("=")[1];
+	makeParameterMethod =  function (string) {
+		var Method = '&method=' + string;
+		return Method;
+	}
+	makeParameterField = function (ProductId,ID,EnterpriseId,ID2) { 
+		return encodeURI('&field={"'+ProductId+'":"'+ID+'","'+EnterpriseId+'":"'+ID2+'"}');
+	}
+	makeParameterFieldPage = function (ProductId,ID,EnterpriseId,ID2,Page,Num) { 
+		return encodeURI('&field={"'+ProductId+'":"'+ID+'","'+EnterpriseId+'":"'+ID2+'","'+Page+'":"'+Num+'"}');
+	}
+	makeParameterFieldWX = function(ProductId,ID,ProductNum,Num,MemberInfo,openid,EnterpriseId,ID2){
+		return encodeURI('&field={"'+ProductId+'":"'+ID+'","'+ProductNum+'":"'+Num+'","'+MemberInfo+'":"'+openid+'","'+EnterpriseId+'":"'+ID2+'"}');
+	}
+	//URL
+	ParameterMethod = makeParameterMethod('product.info.data');
+	ParameterField = makeParameterField('product_id',getProductId,'enterprise_info_id',getEnterpriseId);
+	pageUrl = getTestUrl +"/rest/1.0/purchase?v=1.0&format=json"+ ParameterMethod + ParameterField;
+	//console.log(pageUrl)
+	//AJAX
+	$.ajax({
+		type: "GET",
+		timeout: 1000,
+		url: pageUrl,
+		dataType: "jsonp",
+		jsonp: 'callback',
+		success: function(response) {
+			
+			InitInforData(response.purchase_product_info);			
+			
+		},
+		error: function(e) {
+			try {
+				console.log('商品详情请求失败了吧！！')
+			} catch (e) {}
+		}
+	});
+	
+	
+	
+	// 商品详情选项卡
+	$('.tabs .item li').click(function() {
+		var index = $(this).index();
+		$(this).addClass('cur').siblings().removeClass('cur');
+		$('.details').eq(index).addClass('current').siblings().removeClass('current');
+	});
+	
+	//进入到规格选择页
+	$('#option_product').click(function(){
+		window.location.href = http+'/weixinservice/Buy/specification.html?product_id='+ getProductId +'&enterprise_info_id='+getEnterpriseId +'&domain='+getTestUrl 
+	});
+	
+	//加减计算
+	$('#Subtract').click(function(){//减，最小为1
+		var _num = Number($('#Total').val())-1;
+		if( _num <= 1 ){ _num = 1 }
+		$('#Total').val( _num );	
+	});
+	$('#Addition').click(function(){//加，最大为99
+		var _num = Number($('#Total').val())+1;
+		if( _num >= 99 ){ _num = 99 }
+		$('#Total').val( _num );	
+	});
+
+	//初始化参数
+	var InitInforData = function(_data){
+		//logo  Logo是否启用 1是 0不
+		if( _data.logo.logo_flag == 0 ){
+			$('#logo').hide();
+		}else{
+			$('#logo').show();
+			$('#logo img').attr('src',_data.logo.logo_url);
+		}
+		//商品名称
+		_data.product_name==''|| _data.product_name=='undefined' ?  $('#product_name').html('--') : $('#product_name').html( _data.product_name )
+		//价格
+		_data.product_price==''|| _data.product_price=='undefined' ? $('#product_price').html('--') : $('#product_price').html( _data.product_price )
+		//是否免邮 1免邮 0不免
+		if( _data.freight.freefreight_price_flag == 0 ){
+			$('#freefreight_price_flag').html('不包邮');
+		}else{
+			$('#freefreight_price_flag').html('包邮');	
+		}
+		//运费价格
+		_data.freight.freight_price==''|| _data.freight.freight_price=='undefined' ? $('#freight_price').html('￥--') : $('#freight_price').html( _data.freight.freight_price )
+		//需满免邮
+		_data.freight.free_freight_price==''|| _data.freight.free_freight_price=='undefined' ? $('#free_freight_price').html('--') : $('#free_freight_price').html( _data.freight.free_freight_price )
+		//规格
+		_data.option_product==''|| _data.option_product=='undefined' ? $('#option_product').html('--') : $('#option_product').html( _data.option_product )
+		//销量
+		_data.sale_num==''|| _data.sale_num=='undefined' ?  $('#sale_num').html('--') : $('#sale_num').html( _data.sale_num )
+		//是否启用四季田景 1是 0 不
+		if( _data.krpanos.krpanos_flag == 0 ){
+			$('#krpanos').hide();
+		}else{
+			$('#krpanos').show();	
+			$('#krpanos img').attr('src',_data.krpanos.krpanos_image_url);
+			$('#krpanos p').attr('krpanos_group_id',_data.krpanos.krpanos_group_id);
+		}
+		//是否启用航拍 1是 0 不
+		if( _data.aerial_video.aerial_video_flag == 0 ){
+			$('#aerial_video').hide();
+		}else{
+			$('#aerial_video').show();	
+			$('#aerial_video img').attr('src',_data.aerial_video.aerial_video_image_url);
+			$('#aerial_video p').attr('aerial_video_group_id',_data.aerial_video.aerial_video_group_id);
+		}
+		//是否启用农场秀 1是 0 不
+		if( _data.farm_show.farm_show_flag == 0 ){
+			$('#farm_show').hide();
+		}else{
+			$('#farm_show').show();	
+			$('#farm_show img').attr('src',_data.farm_show.farm_show_image_url);
+			$('#farm_show p').attr('farm_show_group_id',_data.farm_show.farm_show_group_id);
+		}
+		//是否启用履历 1是 0 不
+		if( _data.resume.resume_flag == 0 ){
+			$('#resume').hide();
+		}else{
+			$('#resume').show();	
+			$('#resume img').attr('src',_data.resume.phone_model_info_image_url);
+			$('#resume p').attr('resume_id',_data.resume.resume_id);
+		}
+		//是否启用农场地图 1是 0 不
+		if( _data.farm_map.farm_map_flag == 0 ){
+			$('#farm_map').hide();
+		}else{
+			$('#farm_map').show();	
+			$('#farm_map img').attr('src',_data.farm_map.farm_map_image_url);
+			$('#farm_map p').attr('farm_map_id',_data.farm_map.farm_map_id);
+		}
+		
+		//如果精选商品列表不为空，则执行精选商品列表函数
+		if( !_data.product_list=='' || !_data.product_list==[] || _data.product_list=='undefined' ){
+			ProductListData(_data.product_list.purchase_product_list);
+		}
+		//商品详情，图片
+		if( !_data.product_introduction == '' || !_data.product_introduction == 'undefined' ){
+			$('#product_introduction').append( _data.product_introduction );
+		}
+		
+		//所有分页的数据条数总和：为：
+		_data.total_page==''|| _data.total_page=='undefined' ?  sumCount = 0 : sumCount = _data.total_page;
+		
+		//商品展示图片,函数执行
+		SwiperListData(_data.product_image);
+		
+		//购物车统计
+		/*cookieinfo = getCookie("username");
+		if( cookieinfo == "" ){
+			//如果未登录过
+			weixin_info = {count:0,arr:[]};
+			$('#cart_total').html( weixin_info.count );
+		}else{
+			//如果已登录
+			cookieinfo = base64decode(cookieinfo);
+			cookieinfo = utf8to16(cookieinfo);
+			cookieinfo = getCookie("username");
+			weixin_info = JSON.parse( cookieinfo );
+			$('#cart_total').html( cookieinfo.count );
+		}*/
+		
+		
+	}//-------初始化参数结束
+	
+	//商品展示图片   SWIPER函数
+	var SwiperListData = function(_data){
+		if( !_data=='' || !_data==[] || _data=='undefined' ){
+			var _slider = '';
+			var $swiperContainer = $('.swiper-container .swiper-wrapper');
+			for( var k=0;k<_data.length;k++ ){
+				_slider += '<div class="swiper-slide"><a href="javascript:;"><img src="'+ _data[k] +'" ></a></div>';	
+			}
+			$swiperContainer.append( _slider );
+			//轮播图
+			var swiper1 = new Swiper('.swiper-container', {
+				pagination: '.swiper-pagination',
+				paginationClickable: true, //值为真时，当单击指示器时会执行过渡动画到目标slide...
+				autoplay: 3000,
+				speed : 500,
+				autoplayDisableOnInteraction: false,  //触摸后状态，true之后停止自动播放，false之后还可以自动播放
+				loop : true, //无限循环切换
+			});	
+		}
+		
+	}//--------------end
+	
+	//精选商品列表函数
+	var $fruit_list = $('#fruit_list');
+	var ProductListData = function(_data){
+		var _list='',
+			_classname = '';
+		if( !_data==[] || !_data=='undefined' ){
+				for( var i=0;i<_data.length;i++ ){
+					//取膜，基数class=right_b,偶数class=left_b
+					i%2==0 ? _classname='right_b' : _classname='left_b'
+					//拼接精选商品列表
+					_list += 
+					'<li class="'+ _classname +'">'+
+						'<a href="">'+
+							'<img src="'+ _data[i].image_url +'" />'+
+							'<h6>'+ _data[i].product_name +'</h6>'+
+							'<p class="prize">￥'+ _data[i].product_price +'</p>'+
+						'</a>'+
+					'</li>';
+				}
+				$fruit_list.append( _list );
+		}		
+	}//--------------end
+	
+	// 上拉加载
+	var page = 1;
+	$(window).on('touchmove',function(){
+		var scrollH = $(document).scrollTop();
+		//console.log(($(window).height() + scrollH) + ':' +($(document).height()))
+		if( ($(window).height() + scrollH) >= $(document).outerHeight() ){
+			page++;	
+			if( page <= sumCount/4 ){
+				$('.load_more p').html('加载中...');
+				$('.load_more').show();
+				setTimeout(function(){
+					$('.load_more').hide();
+					LoadingMore( page );
+				},500);		
+			}else{
+				$('.load_more p').html('已经没有更多数据了');
+				$('.load_more').show();
+				setTimeout(function(){
+					$('.load_more').hide();
+				},500);		
+			}
+		}	
+	});
+	var LoadingMore = function( pageIndex ){
+		ParameterMethod = makeParameterMethod('option.product.list.data');
+		ParameterFieldPage = makeParameterFieldPage('product_id',getProductId,'enterprise_info_id',getEnterpriseId,'page',pageIndex);
+		pageUrl =  getTestUrl +"/rest/1.0/purchase?v=1.0&format=json"+ ParameterMethod + ParameterFieldPage;
+		$.ajax({
+			type: "GET",
+			timeout: 1000,
+			url: pageUrl,
+			dataType: "jsonp",
+			jsonp: 'callback',
+			success: function( response ) {
+				var _list='',
+					_classname = '';
+				if( !_data=='' ||　!_data==[] || !_data=='undefined' ){
+						for( var i=0;i<_data.length;i++ ){
+							//取膜，基数class=right_b,偶数class=left_b
+							i%2==0 ? _classname='right_b' : _classname='left_b'
+							//拼接精选商品列表
+							_list += 
+							'<li class="'+ _classname +'">'+
+								'<a href="">'+
+									'<img src="'+ _data[i].image_url +'" />'+
+									'<h6>'+ _data[i].product_name +'</h6>'+
+									'<p class="prize">￥'+ _data[i].product_price +'</p>'+
+								'</a>'+
+							'</li>';
+						}
+						$fruit_list.append( _list );
+				}			
+				
+			},
+			error: function(e) {
+				try {
+					console.log('规格页请求失败了吧！！')
+				} catch (e) {}
+			}
+		});	
+	}
+	
+	//点击评价事件
+	$('#Evaluate').click(function(){
+		alert('加载评价')
+	});
+	
+	
+	//微信
+	var weixin_info = null,
+		cookieinfo = '',
+		openid = ''; 
+		cookieinfo = getCookie("weixin_info");
+	//判断类型：1=微信浏览器，2=非微信
+	var type_wx = '';
+	//if( isWeiXin() ){
+		type_wx = 1;
+		//加入购物车事件
+		$('#AddCart').click(function(){
+			console.log($('#Total').val()+'@@'+cookieinfo)
+			if( cookieinfo == '' ){
+				//如果未登录过，跳指定页面
+				var LocationUrl = window.location.href;
+					LocationUrl = encodeURIComponent(LocationUrl);//转义一下
+				var WeixinUrl = domain+"/weixinservice/farmeasy/adopter?method=user_info&url="+LocationUrl;
+					WeixinUrl = encodeURIComponent(redirect_url);
+				var auth_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+appId+"&redirect_uri="+WeixinUrl+"&response_type=code&scope=snsapi_userinfo&state=nonthing#wechat_redirect";
+				window.location.href = auth_url;
+			}else{
+				//如果已登录
+				cookieinfo = base64decode(cookieinfo);
+				cookieinfo = utf8to16(cookieinfo);
+				weixin_info = JSON.parse( cookieinfo );
+				openid = 8867;//weixin_info.openid
+				
+				ParameterMethod = makeParameterMethod('add.cart.data');
+				ParameterFieldPageWX = makeParameterFieldWX('product_id',getProductId,'product_num',$('#Total').val(),'member_info',openid,'enterprise_info_id',getEnterpriseId);
+				pageUrl = getTestUrl +"/rest/1.0/purchase?v=1.0&format=json"+ ParameterMethod + ParameterFieldPageWX;
+				$.ajax({
+					type: "GET",
+					timeout: 1000,
+					url: pageUrl,
+					dataType: "jsonp",
+					jsonp: 'callback',
+					success: function( response ) {
+						alert('success')
+						//$('#cart_total').html( userInfor.count );		
+						
+					},
+					error: function(e) {
+						try {
+							console.log('点击加入购物车失败了吧！！')
+						} catch (e) {}
+					}
+				});	
+			}
+			
+		});	
+		//点击购物车---进入购物车列表页
+		$('#EnterCart').click(function(){
+			if( cookieinfo == '' ){
+				//如果未登录过，跳指定页面
+				var LocationUrl = window.location.href;
+					LocationUrl = encodeURIComponent(LocationUrl);//转义一下
+				var WeixinUrl = domain+"/weixinservice/farmeasy/adopter?method=user_info&url="+LocationUrl;
+					WeixinUrl = encodeURIComponent(redirect_url);
+				var auth_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+appId+"&redirect_uri="+WeixinUrl+"&response_type=code&scope=snsapi_userinfo&state=nonthing#wechat_redirect";
+				window.location.href = auth_url;
+			}else{
+				//如果已登录
+				cookieinfo = base64decode(cookieinfo);
+				cookieinfo = utf8to16(cookieinfo);
+				weixin_info = JSON.parse( cookieinfo );
+				openid = 8867;//weixin_info.openid
+				
+				window.location.href = http+'/weixinservice/Buy/cart.html?member_info='+openid+'&enterprise_info_id='+getEnterpriseId;
+				
+			}
+			
+		});	
+/*	}else{
+		type_wx = 2;	
+		var r=confirm("请用微信打开此页面!");
+		if (r==true){
+			//window.location.href = 'http://www.baidu.com';
+		}
+	}*/
+	
+	
+	
+	
+	//windowResize
+	$(window).resize(function(){
+		
+	});
+	
+});
+
+
+//----------------------------onload之后的独立函数，如下：
+function getCookie(c_name){
+	if (document.cookie.length>0){
+		c_start=document.cookie.indexOf(c_name + "=")
+		if (c_start!=-1){ 
+			c_start=c_start + c_name.length+1 
+			c_end=document.cookie.indexOf(";",c_start)
+			if (c_end==-1) c_end=document.cookie.length
+			return unescape(document.cookie.substring(c_start,c_end))
+		} 
+	}
+	return ""
+}
+
+function setCookie(c_name,value,expiredays){
+	var exdate=new Date()
+	exdate.setDate(exdate.getDate()+expiredays)
+	document.cookie=c_name+ "=" +escape(value)+
+	((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+}
+
+//判断用户是否是用微信浏览器
+function isWeiXin(){
+	var ua = window.navigator.userAgent.toLowerCase();
+	if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+var base64EncodeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";  
+var base64DecodeChars = new Array(-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1, -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1);  
+/** 
+ * base64编码 
+ * @param {Object} str 
+ */  
+function base64encode(str){  
+	var out, i, len;  
+	var c1, c2, c3;  
+	len = str.length;  
+	i = 0;  
+	out = "";  
+	while (i < len) {  
+		c1 = str.charCodeAt(i++) & 0xff;  
+		if (i == len) {  
+			out += base64EncodeChars.charAt(c1 >> 2);  
+			out += base64EncodeChars.charAt((c1 & 0x3) << 4);  
+			out += "==";  
+			break;  
+		}  
+		c2 = str.charCodeAt(i++);  
+		if (i == len) {  
+			out += base64EncodeChars.charAt(c1 >> 2);  
+			out += base64EncodeChars.charAt(((c1 & 0x3) << 4) | ((c2 & 0xF0) >> 4));  
+			out += base64EncodeChars.charAt((c2 & 0xF) << 2);  
+			out += "=";  
+			break;  
+		}  
+		c3 = str.charCodeAt(i++);  
+		out += base64EncodeChars.charAt(c1 >> 2);  
+		out += base64EncodeChars.charAt(((c1 & 0x3) << 4) | ((c2 & 0xF0) >> 4));  
+		out += base64EncodeChars.charAt(((c2 & 0xF) << 2) | ((c3 & 0xC0) >> 6));  
+		out += base64EncodeChars.charAt(c3 & 0x3F);  
+	}  
+	return out;  
+}
+/** 
+ * base64解码 
+ * @param {Object} str 
+ */  
+function base64decode(str){  
+	var c1, c2, c3, c4;  
+	var i, len, out;  
+	len = str.length;  
+	i = 0;  
+	out = "";  
+	while (i < len) {  
+		/* c1 */  
+		do {  
+			c1 = base64DecodeChars[str.charCodeAt(i++) & 0xff];  
+		}  
+		while (i < len && c1 == -1);  
+		if (c1 == -1)   
+			break;  
+		/* c2 */  
+		do {  
+			c2 = base64DecodeChars[str.charCodeAt(i++) & 0xff];  
+		}  
+		while (i < len && c2 == -1);  
+		if (c2 == -1)   
+			break;  
+		out += String.fromCharCode((c1 << 2) | ((c2 & 0x30) >> 4));  
+		/* c3 */  
+		do {  
+			c3 = str.charCodeAt(i++) & 0xff;  
+			if (c3 == 61)   
+				return out;  
+			c3 = base64DecodeChars[c3];  
+		}  
+		while (i < len && c3 == -1);  
+		if (c3 == -1)   
+			break;  
+		out += String.fromCharCode(((c2 & 0XF) << 4) | ((c3 & 0x3C) >> 2));  
+		/* c4 */  
+		do {  
+			c4 = str.charCodeAt(i++) & 0xff;  
+			if (c4 == 61)   
+				return out;  
+			c4 = base64DecodeChars[c4];  
+		}  
+		while (i < len && c4 == -1);  
+		if (c4 == -1)   
+			break;  
+		out += String.fromCharCode(((c3 & 0x03) << 6) | c4);  
+	}  
+	return out;  
+}  
+/** 
+ * utf16转utf8 
+ * @param {Object} str 
+ */  
+function utf16to8(str){  
+	var out, i, len, c;  
+	out = "";  
+	len = str.length;  
+	for (i = 0; i < len; i++) {  
+		c = str.charCodeAt(i);  
+		if ((c >= 0x0001) && (c <= 0x007F)) {  
+			out += str.charAt(i);  
+		}  
+		else   
+			if (c > 0x07FF) {  
+				out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));  
+				out += String.fromCharCode(0x80 | ((c >> 6) & 0x3F));  
+				out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));  
+			}  
+			else {  
+				out += String.fromCharCode(0xC0 | ((c >> 6) & 0x1F));  
+				out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));  
+			}  
+	}  
+	return out;  
+}  
+/** 
+ * utf8转utf16 
+ * @param {Object} str 
+ */  
+function utf8to16(str){  
+	var out, i, len, c;  
+	var char2, char3;  
+	out = "";  
+	len = str.length;  
+	i = 0;  
+	while (i < len) {  
+		c = str.charCodeAt(i++);  
+		switch (c >> 4) {  
+			case 0:  
+			case 1:  
+			case 2:  
+			case 3:  
+			case 4:  
+			case 5:  
+			case 6:  
+			case 7:  
+				// 0xxxxxxx  
+				out += str.charAt(i - 1);  
+				break;  
+			case 12:  
+			case 13:  
+				// 110x xxxx 10xx xxxx  
+				char2 = str.charCodeAt(i++);  
+				out += String.fromCharCode(((c & 0x1F) << 6) | (char2 & 0x3F));  
+				break;  
+			case 14:  
+				// 1110 xxxx10xx xxxx10xx xxxx  
+				char2 = str.charCodeAt(i++);  
+				char3 = str.charCodeAt(i++);  
+				out += String.fromCharCode(((c & 0x0F) << 12) | ((char2 & 0x3F) << 6) | ((char3 & 0x3F) << 0));  
+				break;  
+		}  
+	}  
+	return out;  
+} 
+
+</script>
+</html>

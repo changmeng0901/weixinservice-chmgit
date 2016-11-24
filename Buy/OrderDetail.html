@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>订单详情</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="../style/Buy/reset.css">
+	<link rel="stylesheet" href="../style/Buy/pay.css">
+</head>
+<body style="background:#f7f7f7;">
+	<div class="wrap_orderdetail">
+		<p class="wait">等待买家付款</p>
+		<div class="resure" id="address_box" adress_id="">
+			<p class="name">收货地址</p>
+			<p class="phone" id="receive_address">北京北京市朝阳区通惠河畔文化园区惠河南街1002-7</p>
+			<p class="phone"><span id="receive_name">夏岩岩</span>，<span id="receive_phone">18612104915</span></p>
+		</div>
+		<div class="pic_txt">
+			<div id="product_list">
+			
+			</div>
+			<div class="nHeight">
+				<span class="left">配送方式</span>
+				<span class="right fr">快递发货</span>
+			</div>
+			<div class="nHeight">
+				<span class="left">运费</span>
+				<div class="right fr cff">￥<span id="deliver_account">5.00</span></div>
+			</div>
+			<div class="nHeight">
+				<span class="left">买家留言</span>
+				<span class="right fr message">轻拿、轻放</span>
+			</div>
+			<div class="nHeight">
+				<span class="left">支付方式</span>
+				<span class="right fr">微信支付</span>
+			</div>
+			<div class="nHeight">
+				<span class="left">支付状态</span>
+				<span class="right fr">还未付款</span>
+			</div>
+			<div class="nHeight" style="border:0;">
+				<span class="left">下单时间</span>
+				<span class="right fr" id="order_time">2016-09-12 16:34:24</span>
+			</div>
+		</div>
+		<div class="warpBox">
+			<div class="pic_txt">
+				<div class="nHeight">
+					<span class="left">红包</span>
+					<div class="right fr">-￥<span id="coupon_price" coupon_id="">0.00</span></div>
+				</div>
+				<div class="nHeight">
+					<a href="javascript:;">
+						<span class="left">短信通知收件人</span>
+						<span class="fr note note_state" id="note_state">通知</span>
+					</a>
+				</div>
+				<p class="sum">合计：<span>￥</span><span id="payment_account">10.00</span></p>
+			</div>
+		</div>
+		<div class="btns">
+			<span style="margin-right:1rem;" onclick="DeleteOrder()">取消订单</span>
+			<span class="cff" onclick="PromptlyPayment()">立即支付</span>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../js/commons/jquery-1.11.3.min.js"></script>
+<script>
+
+	var http = 'http://192.168.21.166:8081';
+ 	var getTestUrl      = 'http://192.168.21.207:8080';
+ 	var iframeSearch    = location.search.split('&');
+ 	var getOrderId = iframeSearch[0].split('=')[1];
+ 	var getEnterpriseId = iframeSearch[1].split('=')[1];
+	var getMemberInfo = iframeSearch[2].split('=')[1];
+	var getOrderStatus = iframeSearch[3].split('=')[1];
+	
+ 	$.ajax({
+		type: "GET",
+		timeout: 1000,
+		url: getTestUrl+'/rest/1.0/purchase',
+		dataType: "jsonp",
+		data:{
+			'method':'order.pay.detail',
+			'field':JSON.stringify({
+				'order_id' : getOrderId	
+			})
+		},
+		jsonp: 'callback',
+		success: function( response ) {
+			
+			if(response.invoke_result == 'INVOKE_SUCCESS'){
+				if(response.result!=''||response.result!=null||response.result!=undefined){
+					InitResultData(response.result);
+				}
+			}
+			
+		},
+		error: function(e) {
+			try {
+				console.log('立即支付页面请求失败了吧！！')
+			} catch (e) {}
+		}
+	});	//-----end ajax
+	
+	
+	
+	var InitResultData = function(_data)
+		{
+			//id
+			$('#address_box').attr('adress_id',_data.adress_id)
+			//地址
+			if( _data.receive_address!=''||_data.receive_address!=null||_data.receive_address!=undefined ){
+				$('#receive_address').html( _data.receive_address );
+			}else{
+				$('#receive_address').html('--');
+			}
+			//人名
+			if( _data.receive_name!=''||_data.receive_name!=null||_data.receive_name!=undefined ){
+				$('#receive_name').html( _data.receive_name );
+			}else{
+				$('#receive_name').html('--');
+			}
+			//电话
+			if( _data.receive_phone!=''||_data.receive_phone!=null||_data.receive_phone!=undefined ){
+				$('#receive_phone').html( _data.receive_phone );
+			}else{
+				$('#receive_phone').html('--');
+			}
+			//运费
+			$('#deliver_account').html( _data.deliver_account );
+			//下单时间
+			$('#order_time').html( _data.order_time );
+			//红包
+			$('#coupon_price').html( _data.coupon_price );
+			$('#coupon_price').attr('coupon_id',_data.coupon_id);
+			//短信通知收件人
+			if( _data.notify_recipients_flag == '0' ){
+				$('#note_state').html('不通知');
+			}else if( _data.notify_recipients_flag == '1' ){
+				$('#note_state').html('通知');
+			}
+			//合计
+			$('#payment_account').html( _data.payment_account );
+			//列表
+			var proArr = _data.product_list;
+			if( proArr.length>0 )
+			{
+				var $product_list = $('#product_list');
+				var _list = '';
+				for( var k=0;k<proArr.length;k++ )
+				{
+					_list += 
+						'<div class="border_b">'+
+							'<div class="left fl">'+
+								'<img src="'+proArr[k].product_image+'" alt="">'+
+							'</div>'+
+							'<div class="center fl">'+
+								'<h4>'+proArr[k].product_name+'</h4>'+
+								'<p>'+proArr[k].product_unit+'</p>'+
+							'</div>'+
+							'<p class="unit fr">'+
+								'<span>×'+proArr[k].product_num+'</span><br>'+
+								'<span class="prize">￥'+proArr[k].product_price+'</span>'+
+							'</p>'+
+						'</div>';
+				}
+				$product_list.append( _list );
+				
+			}
+			
+		}
+	//取消订单接口
+	var DeleteOrder = function()
+		{
+			$.ajax({//---start  ajax
+				type: "GET",
+				timeout: 1000,
+				url: getTestUrl+'/rest/1.0/purchase',
+				dataType: "jsonp",
+				data:{
+					'method':'delete.order.data',
+					'field':JSON.stringify({
+						'order_id' : getOrderId	
+					})
+				},
+				jsonp: 'callback',
+				success: function( response ) {
+					
+					if(response.invoke_result == 'INVOKE_SUCCESS'){
+						//window.location.href = http+'/weixinservice/Buy/MyOrder.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&order_status='+getOrderStatus;
+					}
+					
+				}
+				
+			});	//-----end ajax
+			window.location.href = http+'/weixinservice/Buy/MyOrder.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&order_status='+getOrderStatus;
+		}
+	//立即支付
+	var PromptlyPayment = function()
+		{
+			
+		}
+	
+
+</script>
+</html>

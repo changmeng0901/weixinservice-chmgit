@@ -7,7 +7,7 @@ var FontTimer,
     pageUrl,
     pageUrlType,
 	http = '192.168.21.187:8081';
-FontSize();
+//FontSize();
 
 
 var windowWidth = document.documentElement.clientWidth;
@@ -215,9 +215,7 @@ $('#dayweekmonth span').click(function(){
         }
     });
 });
-// 传感器数据图表，有无数据高度
-$('#sensor_chart').css('height',$('#sensor_chart').width()*0.6);
-$('#sensor_nochart').css('height',$('#sensor_chart').width()*0.6);
+
 
 
 
@@ -225,26 +223,21 @@ $('#sensor_nochart').css('height',$('#sensor_chart').width()*0.6);
 // 浏览器变化时执行
 $(window).resize(function(){
 
-	clearTimeout( FontTimer );
-	FontTimer = setTimeout( FontSize , 500 );
+	//clearTimeout( FontTimer );
+	//FontTimer = setTimeout( FontSize , 500 );
 
     // 进度条计算
     var progress_block = $('.progress_block').width();
     $('.progress_percent').css('width',progress_block);
-    // 传感器数据图表，有无数据高度
-    $('#sensor_chart').css('height',$('#sensor_chart').width()*0.6);
-    $('#sensor_nochart').css('height',$('#sensor_chart').width()*0.6);
-    // 传感器数据--图表
-    SensorChart(response.ChartData,response.ChartTime);
 
 });
 
 
 // ---------------------------------------------------------------------------
 // 计算不同分辨率下的文字大小
-function FontSize(){
-	document.documentElement.style.fontSize = parseInt((document.documentElement.clientWidth>414?414:document.documentElement.clientWidth)/12)+'px';
-}
+//function FontSize(){
+	//document.documentElement.style.fontSize = parseInt((document.documentElement.clientWidth>414?414:document.documentElement.clientWidth)/12)+'px';
+//}
 
 // 初始化作物信息
 function InitCropInfoData(_data){

@@ -1,0 +1,41 @@
+/*iphone4*/
+@media screen and (min-width: 0px) and (max-width: 320px) {
+    html{
+    	font-size: 16px;
+    }
+}
+/*iphone6*/
+@media screen and (min-width: 321px) and (max-width: 375px) {
+    html{
+    	font-size: 18px;
+    }
+}
+/*iphone6 plus*/
+@media screen and (min-width: 376px) and (max-width: 414px) {
+    html{
+    	font-size: 20px;
+    }
+}
+/*pc*/
+@media screen and (min-width: 415px) and (max-width: 3000px) {
+    html{
+    	font-size: 20px;
+    }
+}
+.address{width: 100%; height: auto; padding-left: 0.625rem; background-color: #fff; box-sizing: border-box;}
+.address li{min-height: 2.6875rem; border-bottom: 1px solid #e1e1e1; padding-right: 0.625rem; }
+.address li .left{width: 1.525rem; min-height: 2.6875rem;}
+.address li .left img{ display:none; width: 0.9rem; height: 0.6rem; margin-top: 2.5rem;}
+.address li .right img{width: 1.125rem; height: 1.125rem; margin-top: 2rem;}
+.address li .center{width:14.6875rem;}
+.address li.add{line-height: 2.6875rem; border: none;}
+.address li.add img{width: 0.9rem; height: 0.9rem; vertical-align: middle; margin-right: 0.625rem;}
+.address li.add .txt,.name{font-size: 0.9375rem; color: #333; font-weight: bold;}
+.address_list{ margin-top: 1rem; margin-bottom:-1px; border-top: 1px solid #e1e1e1; border-bottom: 1px solid #e1e1e1;}
+.address_list .iCur .left img{ display:block;}
+.name{line-height: 2rem;}
+.dizhi{font-size: 0.8125rem; color: #999; line-height: 1.3rem; margin-bottom: 0.625rem;}
+/*完成按钮*/
+heml,body{ height:100%; min-height:100%; }
+body{ position:relative; overflow-y:auto; box-sizing:border-box; padding-bottom:2.8rem;}
+.submitaddress{ position:fixed; left:0; bottom:0; width: 100%; font-size: 1rem; line-height: 2.8rem; color: #fff; background-color: #90c953; text-align: center;}

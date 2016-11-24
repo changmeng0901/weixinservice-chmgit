@@ -12,55 +12,400 @@
 	<link rel="stylesheet" href="../style/Buy/reset.css">
 	<link rel="stylesheet" href="../style/Buy/my_order.css">
 </head>
-<body style="background-color:#f7f7f7;">
-	<div class="commment">
+<body style="background-color:#f7f7f7;" class="wrap_comment">
+	<div class="commment" id="commment_list">
 		<div class="pic_txt">
 			<div class="border_b">
 				<div class="left fl">
-					<img src="../images/Buy/productBanner1.jpg" alt="">
+					<img id="product_image" src="" />
 				</div>
 				<div class="center fl">
-					<h4>【纯天然绿色】车厘子 产自加拿大进口车厘子</h4>
-					<p>500g</p>
+					<h4 id="product_name"></h4>
+					<p id="product_unit"></p>
 				</div>
-				<p class="unit fr">
-					<span>×1</span><br>
-					<span class="prize">￥15.00</span>
-				</p>
+				<div class="unit fr">
+					<p>×<span id="product_num"></span></p>
+					<p class="prize">￥<span id="price"></span></p>
+				</div>
 			</div>
 		</div>
 		<div class="grade">
 			<span>选择好评等级</span>
-			<span>
-				<img src="../images/Buy/star1.png" alt="">
-				<img src="../images/Buy/star1.png" alt="">
-				<img src="../images/Buy/star1.png" alt="">
-				<img src="../images/Buy/star2.png" alt="">
-				<img src="../images/Buy/star2.png" alt="">
+			<span class="grade_start">
+				<i class="iStart"></i>
+				<i class="iStart"></i>
+				<i class="iStart"></i>
+				<i class="iStart"></i>
+				<i class="iStart"></i>
 			</span>
 		</div>
-		<textarea  cols="30" rows="3">请输入评价内容</textarea>
-		<ul class="upload clearfix">
-			<li>
-				<img src="../images/Buy/upload.jpg" alt="">
-				<img src="../images/Buy/close.png" alt="" class="close">
-			</li>
-			<li>
-				<input type="file">
-				<img src="../images/Buy/camera.jpg" alt="">
-			</li>
-			<li>发照片</li>
-		</ul>
+		<textarea  cols="30" rows="3" id="comment_area">请输入评价内容</textarea>
+		<div class="upload">
+			<ul class="uploadphones_list" id="uploadphones_list">
+				
+			</ul>
+			<div class="upload_pictures" id="container">
+				<div id="selectfiles" class="fileBtn" style="width: 85px">选择文件</div>
+				<!--上传图片的存储及请求事件-->
+				<div id="ossfile1"></div>
+				<a style="display: none" id="postfiles1" href="javascript:void(0);" class='btn' onclick="apply(18);"></a>
+				<a style="display: none" id="callback" href="javascript:void(0);" class='btn' onclick="callback();"></a>
+				<input type="hidden" id="commentFileUrl" name="commentFileUrl" />
+				<!--上传图片的存储及请求事件-->
+			</div>
+			<span class="text_upload">发照片</span>
+		</div>
 	</div>
-	<div class="publish"><p class="p_btn">发表评价</p></div>
-</body>
+	<div class="publish"><p class="p_btn" onclick="CommentSubmit()">发表评价</p></div>
+
+
+
 <script type="text/javascript" src="../js/commons/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../js/oss_fileimg/lib/plupload-2.1.2/js/plupload.full.min.js"></script>
 <script>
-	$(document).ready(function() {
-		//设置font-size
-	    var fontsize = 16 * $(window).width() / 320;
-	    $('html').css('font-size',fontsize);
-     	//rem设置结束
+	
+	var base64EncodeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";  
+	var base64DecodeChars = new Array(-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1, -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1);  
+	/** 
+	 * base64编码 
+	 * @param {Object} str 
+	 */  
+	function base64encode(str){  
+		var out, i, len;  
+		var c1, c2, c3;  
+		len = str.length;  
+		i = 0;  
+		out = "";  
+		while (i < len) {  
+			c1 = str.charCodeAt(i++) & 0xff;  
+			if (i == len) {  
+				out += base64EncodeChars.charAt(c1 >> 2);  
+				out += base64EncodeChars.charAt((c1 & 0x3) << 4);  
+				out += "==";  
+				break;  
+			}  
+			c2 = str.charCodeAt(i++);  
+			if (i == len) {  
+				out += base64EncodeChars.charAt(c1 >> 2);  
+				out += base64EncodeChars.charAt(((c1 & 0x3) << 4) | ((c2 & 0xF0) >> 4));  
+				out += base64EncodeChars.charAt((c2 & 0xF) << 2);  
+				out += "=";  
+				break;  
+			}  
+			c3 = str.charCodeAt(i++);  
+			out += base64EncodeChars.charAt(c1 >> 2);  
+			out += base64EncodeChars.charAt(((c1 & 0x3) << 4) | ((c2 & 0xF0) >> 4));  
+			out += base64EncodeChars.charAt(((c2 & 0xF) << 2) | ((c3 & 0xC0) >> 6));  
+			out += base64EncodeChars.charAt(c3 & 0x3F);  
+		}  
+		return out;  
+	}
+	/** 
+	 * base64解码 
+	 * @param {Object} str 
+	 */  
+	function base64decode(str){  
+		var c1, c2, c3, c4;  
+		var i, len, out;  
+		len = str.length;  
+		i = 0;  
+		out = "";  
+		while (i < len) {  
+			/* c1 */  
+			do {  
+				c1 = base64DecodeChars[str.charCodeAt(i++) & 0xff];  
+			}  
+			while (i < len && c1 == -1);  
+			if (c1 == -1)   
+				break;  
+			/* c2 */  
+			do {  
+				c2 = base64DecodeChars[str.charCodeAt(i++) & 0xff];  
+			}  
+			while (i < len && c2 == -1);  
+			if (c2 == -1)   
+				break;  
+			out += String.fromCharCode((c1 << 2) | ((c2 & 0x30) >> 4));  
+			/* c3 */  
+			do {  
+				c3 = str.charCodeAt(i++) & 0xff;  
+				if (c3 == 61)   
+					return out;  
+				c3 = base64DecodeChars[c3];  
+			}  
+			while (i < len && c3 == -1);  
+			if (c3 == -1)   
+				break;  
+			out += String.fromCharCode(((c2 & 0XF) << 4) | ((c3 & 0x3C) >> 2));  
+			/* c4 */  
+			do {  
+				c4 = str.charCodeAt(i++) & 0xff;  
+				if (c4 == 61)   
+					return out;  
+				c4 = base64DecodeChars[c4];  
+			}  
+			while (i < len && c4 == -1);  
+			if (c4 == -1)   
+				break;  
+			out += String.fromCharCode(((c3 & 0x03) << 6) | c4);  
+		}  
+		return out;  
+	}  
+	/** 
+	 * utf16转utf8 
+	 * @param {Object} str 
+	 */  
+	function utf16to8(str){  
+		var out, i, len, c;  
+		out = "";  
+		len = str.length;  
+		for (i = 0; i < len; i++) {  
+			c = str.charCodeAt(i);  
+			if ((c >= 0x0001) && (c <= 0x007F)) {  
+				out += str.charAt(i);  
+			}  
+			else   
+				if (c > 0x07FF) {  
+					out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));  
+					out += String.fromCharCode(0x80 | ((c >> 6) & 0x3F));  
+					out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));  
+				}  
+				else {  
+					out += String.fromCharCode(0xC0 | ((c >> 6) & 0x1F));  
+					out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));  
+				}  
+		}  
+		return out;  
+	}  
+	/** 
+	 * utf8转utf16 
+	 * @param {Object} str 
+	 */  
+	function utf8to16(str){  
+		var out, i, len, c;  
+		var char2, char3;  
+		out = "";  
+		len = str.length;  
+		i = 0;  
+		while (i < len) {  
+			c = str.charCodeAt(i++);  
+			switch (c >> 4) {  
+				case 0:  
+				case 1:  
+				case 2:  
+				case 3:  
+				case 4:  
+				case 5:  
+				case 6:  
+				case 7:  
+					// 0xxxxxxx  
+					out += str.charAt(i - 1);  
+					break;  
+				case 12:  
+				case 13:  
+					// 110x xxxx 10xx xxxx  
+					char2 = str.charCodeAt(i++);  
+					out += String.fromCharCode(((c & 0x1F) << 6) | (char2 & 0x3F));  
+					break;  
+				case 14:  
+					// 1110 xxxx10xx xxxx10xx xxxx  
+					char2 = str.charCodeAt(i++);  
+					char3 = str.charCodeAt(i++);  
+					out += String.fromCharCode(((c & 0x0F) << 12) | ((char2 & 0x3F) << 6) | ((char3 & 0x3F) << 0));  
+					break;  
+			}  
+		}  
+		return out;  
+	} 
+
+	//------------------------cookie相关
+	function getCookie(c_name){
+		if (document.cookie.length>0){
+			c_start=document.cookie.indexOf(c_name + "=")
+			if (c_start!=-1){ 
+				c_start=c_start + c_name.length+1 
+				c_end=document.cookie.indexOf(";",c_start)
+				if (c_end==-1) c_end=document.cookie.length
+				return unescape(document.cookie.substring(c_start,c_end))
+			} 
+		}
+		return ""
+	}
+	
+	function setCookie(c_name,value,expiredays){
+		var exdate=new Date()
+		exdate.setDate(exdate.getDate()+expiredays)
+		document.cookie=c_name+ "=" +escape(value)+
+		((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+	}
+	
+	var iframeSearch = location.search.split('&');
+	//var getEnterpriseId = iframeSearch[0].split('=')[1];
+	//var getMemberInfo = iframeSearch[1].split('=')[1];
+	var getOrderProductId = iframeSearch[2].split('=')[1];
+	var http = 'http://szq.s1.natapp.cc'; 
+	var getTestUrl = 'http://192.168.21.207:8080';
+	
+	var cookieinfo = getCookie("weixin_info_pay");
+	cookieinfo = base64decode(cookieinfo);
+	cookieinfo = utf8to16(cookieinfo);
+	weixin_info = JSON.parse( cookieinfo );
+    var getMemberInfo = weixin_info.member_info_id;
+    var getEnterpriseId = weixin_info.enterprise_info_id;
+
+	//评价接口
+	$.ajax({
+		type: "GET",
+		timeout: 1000,
+		url: getTestUrl+'/rest/1.0/purchase',
+		dataType: "jsonp",
+		data:{
+			'method':'query.order.product.data',
+			'field':JSON.stringify({
+				'order_product_id' : getOrderProductId	
+			})
+		},
+		jsonp: 'callback',
+		success: function( response ) {
+			if ( response.invoke_result == 'INVOKE_SUCCESS' )
+			{
+				var order_product = response.order_product;
+				$('#commment_list .pic_txt').attr('product_id',order_product.product_id)
+				$('#product_image').attr('src',order_product.product_image);	
+				$('#product_name').html(order_product.product_name);	
+				$('#product_num').html(order_product.product_num);	
+				$('#product_unit').html(order_product.product_unit);	
+				$('#price').html(order_product.price);	
+			}
+		},
+		error: function(e) {
+			try {
+				console.log('评价页接口请求失败了！')
+			} catch (e) {}
+		}
+	});	//-----end ajax
+	
+	$('.grade_start .iStart').click(function(){
+		if($(this).hasClass('iCur')){
+			$(this).removeClass('iCur');
+			$('.grade_start .iStart').removeClass('iCur');
+		}else{
+			$('.grade_start .iStart').removeClass('iCur');
+			$(this).addClass('iCur');
+		}
+		
+		$(this).nextUntil().addClass('iCur');
 	});
+	
+	//获取焦点和失去焦点事件
+	$('input[type=text],textarea').focus(function(){
+		var txt_value = $(this).val();
+		if(txt_value==this.defaultValue){
+			$(this).val("");          
+		};	
+	});
+	$('input[type=text],textarea').blur(function(){
+		var txt_value = $(this).val();
+		if(txt_value==""){
+			$(this).val(this.defaultValue);
+		};	     
+	});
+	//发表评价按钮
+	var CommentSubmit = function(){
+		if($('#comment_area').val().length>200){
+				confirm('输入内容已经超过200字！');
+		}else{
+			
+				var textareaVal = $('#comment_area').val();
+				if ( textareaVal==null || textareaVal=='请输入评价内容' ){
+						//如果为空或者为默认值，则提示填写内容
+						confirm('请说点什么吧！');
+				}else{
+						//如果有值，则：
+					    var vcomment    = $('#comment_area').val(),
+					    	vscore      = $('.grade_start .iStart').not('.iCur').length,
+					    	vproductid = $('#commment_list .pic_txt').attr('product_id'),
+					    	vcommentimages=[],
+					    	_phoneliLength = $('#uploadphones_list li');
+					    	
+					    //如果有上传图片，则拼成字符串
+				    	if( _phoneliLength.length>0 ){
+				    		for( var j=0;j<_phoneliLength.length;j++ ){
+				    			vcommentimages.push( _phoneliLength.eq(j).find('.pic_phone').attr('src') );
+				    		}
+				    		vcommentimages = vcommentimages.join();
+				    		vcommentimages.substring()
+				    	}else{
+				    		vcommentimages = '';
+				    		
+				    	}
+					    //console.log(vcommentimages)
+						$.ajax({
+							type: "GET",
+							timeout: 1000,
+							url: getTestUrl+'/rest/1.0/purchase',
+							dataType: "jsonp",
+							data:{
+								'method':'product.comment.data',
+								'field':JSON.stringify({
+									'member_info'   : getMemberInfo, //11303,
+									'product_id'    : vproductid	,
+									'comment'       : vcomment,
+									'score'         : vscore,
+									'comment_images': vcommentimages
+								})
+							},
+							jsonp: 'callback'
+						});	//-----end ajax
+						window.location.href = http+'/weixinservice/Buy/MyOrder.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&order_status=5';
+				}
+		}
+	}
+	
+	//删除图片事件
+	var DeleteUploadImg = function(obj)
+		{
+			$(obj).parents('li').remove();
+		}
+	
+	
+	
+	//#################################（上传图片--oss直传）
+	var oss_url = "http://img4.farmeasy.cn";
+    var bucket_type = "6";
+    var domain_url = "http://cs1.nongchangyun.cn";
+    //发表评价图片上传
+    var filters1 = {
+               mime_types : [ //允许上传图片和zip,rar文件以及视频文件
+                              { 
+                              	title : "Image files", 
+                              	extensions : "jpg,jpeg,gif,png,bmp" 
+                              },
+                              ],
+                              max_file_size : "5mb", //最大只能上传5mb的文件
+                              prevent_duplicates : false //不允许选取重复文件
+                          };
+    function apply(obj){
+   		var entId='2';//#{sessionTake.getEnterpriseInfoId()}    【获取到的企业ID】
+   		set_upload_param(uploader1, '', false,obj,entId);
+   	};
+
+   	var uploaded_file_url = "";
+   	var file_name = "";
+   	function callback() {
+   		if(uploaded_file_url!=""){
+   			//图片路径
+			alert(uploaded_file_url);
+   			//addAsset(uploaded_file_url,file_name);
+   			var _items = '<li><img class="pic_phone" src="'+uploaded_file_url+'" /><img class="pic_close" src="../images/Buy/close.png" onclick="DeleteUploadImg(this)" /></li>';
+   			$('#uploadphones_list').append(_items);
+   		}
+   	};
 </script>
+<script type="text/javascript" src="../js/oss_fileimg/krpanoPicUpload.js"></script>	
+<!--##   krpanoPicUpload.js是一定要放在最下面的      ##-->
+
+
+
+</body>
 </html>

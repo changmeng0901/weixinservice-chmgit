@@ -21,6 +21,30 @@ html,body{
 }
 }
 
+/*iphone4*/
+@media screen and (min-width: 0px) and (max-width: 320px) {
+    html{
+    	font-size: 26px;
+    }
+}
+/*iphone6*/
+@media screen and (min-width: 321px) and (max-width: 375px) {
+    html{
+    	font-size: 30px;
+    }
+}
+/*iphone6 plus*/
+@media screen and (min-width: 376px) and (max-width: 414px) {
+    html{
+    	font-size: 34px;
+    }
+}
+/*pc*/
+@media screen and (min-width: 415px) and (max-width: 3000px) {
+    html{
+    	font-size: 36px;
+    }
+}
 
 body{
 	background-color: #fff;

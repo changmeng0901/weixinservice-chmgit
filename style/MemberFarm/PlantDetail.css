@@ -1,5 +1,28 @@
 @charset "utf-8";
-
+/*iphone4*/
+@media screen and (min-width: 0px) and (max-width: 320px) {
+    html{
+    	font-size: 26px;
+    }
+}
+/*iphone6*/
+@media screen and (min-width: 321px) and (max-width: 375px) {
+    html{
+    	font-size: 30px;
+    }
+}
+/*iphone6 plus*/
+@media screen and (min-width: 376px) and (max-width: 414px) {
+    html{
+    	font-size: 34px;
+    }
+}
+/*pc*/
+@media screen and (min-width: 415px) and (max-width: 3000px) {
+    html{
+    	font-size: 36px;
+    }
+}
 
 html,body{
 	width: 100%;
@@ -239,14 +262,28 @@ input:focus{
 	display: block;
 }
 .sensor_chart{
-	padding: 0.38462rem 0.38462rem 0;
+	position:relative;
+	width:100%;
+	height:6.23077rem;
+	padding: 0.38462rem 0.38462rem 0-;
+	box-sizing:border-box;
+	overflow:hidden;
 }
 #sensor_nochart{
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
 	padding: 2.07692rem 0;
 	box-sizing: border-box;
 }
 #sensor_chart{
-	height: 6.23077rem;
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
 }
 .dayweekmonth{
 	width: 4.26rem;

@@ -1,3 +1,27 @@
+/*iphone4*/
+@media screen and (min-width: 0px) and (max-width: 320px) {
+    html{
+    	font-size: 16px;
+    }
+}
+/*iphone6*/
+@media screen and (min-width: 321px) and (max-width: 375px) {
+    html{
+    	font-size: 18px;
+    }
+}
+/*iphone6 plus*/
+@media screen and (min-width: 376px) and (max-width: 414px) {
+    html{
+    	font-size: 20px;
+    }
+}
+/*pc*/
+@media screen and (min-width: 415px) and (max-width: 3000px) {
+    html{
+    	font-size: 20px;
+    }
+}
 .success1,.success2{width: 18.125rem; height: auto; margin:0 auto; margin-top: 10%; background-color: #fff; border-radius: 5px;}
 .success1 .top{width: 100%; height: auto; text-align: center; font-size: 0.75rem; color: #ccc;}
 .success1 .top img,.success2 img{width: 3.125rem; height: 3.125rem; margin-top: 1.8125rem;}

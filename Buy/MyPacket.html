@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>我的红包</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="../style/Buy/reset.css">
+	<link rel="stylesheet" href="../style/Buy/my_order.css">
+</head>
+<body style="background:#f7f7f7;">
+	<div class="wrap_mypackets">
+		<ul class="items clearfix">
+			<li onclick="MyOrderUrl()"><a href="javascript:;"><p>我的订单</p></a></li>
+			<li class="cur"><a href="javascript:;"><p>我的红包</p></a></li>
+		</ul>
+		<div class="my_packets" id="my_packets"  style="display:none;">
+			
+			<ul class="coupon" id="redpacket_list" style="display: block;">
+				
+			</ul>
+		</div>
+		<div class="no_packets" id="no_packets" style="display:none;">
+			<img src="../images/Buy/money.png" />
+			<p>暂无红包哦~</p>
+		</div>
+		<div class="no_binding" id="no_binding" >
+			<img src="../images/Buy/bingding.png" style="width:1.625rem; height:2.5rem; margin:4.5rem 0 1rem;"/>
+			<p class="warn">你还没有绑定手机号</p>
+			<p>无法获得您的红包信息</p>
+			<div class="bdBtn" onclick="PromptlyBinding(this,'#registerPop')">立即绑定</div>
+		</div>
+		<!-- 注册弹窗 -->
+		<div class="mark_bind" onclick="MarkBindHide()"></div>
+		<div class="registerPop" id="registerPop">
+			<div class="member">
+				<div class="pen"><img src="../images/Buy/pen.png" alt=""></div>
+				<h4>注册会员账号</h4>
+				<ul class="register_ul">
+					<li class="info">
+						<input type="text" value="手机号" class="entry1" id="phoneVal">
+						<i class="icon1"></i>
+						<p class="tip_phonenumber">手机号不正确，请输入正确的手机号</p>
+					</li>
+					<li class="info">
+						<input type="text" value="验证码" class="entry2" id="securitycodeVal">
+						<i class="icon2"></i>
+						<span class="code fr" id="security_btn" code="" onclick="SecurityBtn()">验证码</span>
+						<span class="time_s60 fr" id="time_s60">10s</span>
+						<p class="tip_securitycode">验证码不正确</p>
+					</li>
+					<li class="regBtn" onclick="RegisterBinding()">注册并绑定</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../js/commons/jquery-1.11.3.min.js"></script>
+<script>
+	var iframeSearch = location.search.split('&');
+	var getEnterpriseId = iframeSearch[0].split('=')[1];
+	var getMemberInfo = iframeSearch[1].split('=')[1];
+	var http = 'http://192.168.21.166:8081';
+	var getTestUrl = 'http://192.168.21.207:8080';
+	
+	//点击我的订单--跳转到我的订单页面
+	var MyOrderUrl = function(){
+		window.location.href = http+'/weixinservice/Buy/MyOrder.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&order_status=1';
+	}
+	//红包请求接口，如下：
+	$.ajax({//---start  ajax
+		type: "GET",
+		timeout: 1000,
+		url: getTestUrl+'/rest/1.0/purchase',
+		dataType: "jsonp",
+		data:{
+			'method':'query.all.coupon',
+			'field':JSON.stringify({
+				'member_info'        : getMemberInfo, //11303,
+				'enterprise_info_id' : getEnterpriseId	
+			})
+		},
+		jsonp: 'callback',
+		success: function( response ) {
+			if ( response.invoke_result == 'INVOKE_SUCCESS' )
+			{
+				if ( response.coupon_list.length>0 ){
+					//有红包状态，红包盒子显示，无红包和未绑定盒子隐藏
+					$('#my_packets').show();
+					$('#no_packets').hide();
+					//$('#no_binding').hide();
+				}else{
+					//无红包状态，无红包盒子显示，有红包和未绑定盒子隐藏
+					$('#my_packets').hide();
+					$('#no_packets').show();
+					//$('#no_binding').hide();
+				}
+				
+			}
+		},
+		error: function(e) {
+			try {
+				console.log('我的红包接口请求失败！')
+			} catch (e) {}
+		}
+	});	//-----end ajax
+
+	//初始化红包列表函数
+	var InitRedPacketList = function( _data ){
+		var _list = '',
+			cardCur = '',
+			displayB = '',
+			$redpacketlist = $('#redpacket_list');
+			
+		for ( var k=0;k<_data.length;k++ )
+		{
+			//红包一共四种状态：红色class="card1"  绿色class="card2"  已使用class="cUsed"   过期class="cExpire"
+			//判断红包颜色    基数=红色  偶数=绿色
+			k%2==0 ? cardCur="card1" : cardCur="card2"
+			//判断红包是否已使用活着已过期       1=已使用   2=已过期
+			if( _data[k].can_use=="1" )
+			{
+				displayB = '<div class="selected" style="display:block;"><input type="checkbox"></div>';
+			}else
+			{
+				displayB = '<span class="unselected" style="display:block;"></span>';
+			}
+			//列表
+			_list += 
+				'<li class="card '+ cardCur +'" coupon_id="'+_data[k].coupon_id+'" can_use="'+_data[k].can_use+'">'+
+					'<i class="seal"></i>'+
+					'<div class="topPart">'+
+						'<div class="left fl">'+
+							'<p class="value"><span>￥</span>'+_data[k].money+'</p>'+
+							'<p class="useTime">有效期：'+_data[k].end_time+'</p>'+
+						'</div>'+
+						'<div class="right fr"><div class="rt_icons"></div></div>'+
+					'</div>'+
+					'<p class="tip">全站商品通用（个别商品除外）满'+_data[k].money+'使用</p>'+
+				'</li>';
+		}
+		$redpacketlist.append( _list );
+	}
+	
+ 	//$('.no_packets').height($(window).height());
+ 	//$('.no_binding').height($(window).height());
+ 	// 立即绑定按钮
+ 	var PromptlyBinding = function(obj,oParent)
+	 	{
+	 		$('.wrap_mypackets').addClass('overflowH');
+	 		$('.mark_bind').show();
+	 		$(oParent).show();
+	 	}
+ 	var MarkBindHide = function()
+	 	{
+	 		$('.wrap_mypackets').removeClass('overflowH');
+	 		$('.mark_bind').hide();
+	 		$('#registerPop').hide();
+	 	
+	 	}
+ 	//注册并绑定按钮
+ 	var phoneVal = $('#phoneVal').val(),
+ 		securitycodeVal = $('#securitycodeVal').val();
+ 	var RegisterBinding = function()
+	 	{
+	 		phoneVal = $('#phoneVal').val(),
+	 		securitycodeVal = $('#securitycodeVal').val();
+	 		
+	 		if( phoneVal == '手机号' || phoneVal == '' || !IsPhone(phoneVal) || phoneVal.length!=11 ){
+	 			
+	 			//如果手机号码不正确
+	 			$('#phoneVal').val( phoneVal );
+	 			$('#securitycodeVal').val( securitycodeVal );
+	 			$('.tip_phonenumber').show();//提示
+	 			$('.tip_securitycode').hide();//提示
+	 			
+	 		}else if( securitycodeVal=='验证码' ||　securitycodeVal=='' || securitycodeVal.length!=6 ){
+	 			
+	 			//如果验证码不正确
+	 			$('#phoneVal').val( phoneVal );
+	 			$('#securitycodeVal').val( securitycodeVal );
+	 			$('.tip_phonenumber').hide();//提示
+	 			$('.tip_securitycode').show();//提示
+	 			
+	 		}else{
+	 			
+	 			//如果注册并绑定成功，则重新刷新页面
+	 			window.location.reload(); 
+	 			
+	 		}
+	 	}
+ 	//验证码按钮----点击之后倒计时60s，且当弹框关闭后时间还继续走，目的防止二次点击
+ 	var SecurityBtn = function(){
+ 		phoneVal = $('#phoneVal').val();
+ 		if( phoneVal != '手机号' && phoneVal != '' && IsPhone(phoneVal) && phoneVal.length==11 ){
+ 			
+ 			$('.tip_phonenumber').hide();//提示
+	 		$('.tip_securitycode').hide();//提示
+ 			
+ 			$.ajax({
+				type: "GET",
+				timeout: 1000,
+				url: getTestUrl+'/rest/1.0/purchase',
+				dataType: "jsonp",
+				data:{
+					'method':'get.verification.data',
+					'field':JSON.stringify({
+						'phone' : $('#phoneVal').val()	
+					})
+				},
+				jsonp: 'callback'
+			});	//-----end ajax
+			
+			
+			var Stimer = null,
+ 				Mtime = 10;
+	 		//定时器
+	 		clearInterval( Stimer );
+	 		Stimer = setInterval(function(){
+	 			
+	 			if(Mtime==0){
+	 				clearInterval( Stimer );
+	 				Mtime = 10;
+	 				$('#security_btn').show();
+	 				$('#time_s60').hide();
+	 				$('#time_s60').html('10s');
+	 			}
+	 			Mtime--;
+	 			$('#time_s60').html(Mtime+'s')
+	 			
+	 		},1000)
+	 		$('#security_btn').hide();
+	 		$('#time_s60').show();
+			
+ 		}else{
+ 			
+ 			$('.tip_phonenumber').show();//提示
+	 		$('.tip_securitycode').hide();//提示
+ 			
+ 		}
+ 		
+		
+ 		
+ 	}
+ 	
+ 	//获取焦点和失去焦点
+ 	$('input[type=text],textarea').focus(function(){
+		var txt_value = $(this).val();
+		if(txt_value==this.defaultValue){
+			$(this).val("");          
+		};	
+	});
+	$('input[type=text],textarea').blur(function(){
+		var txt_value = $(this).val();
+		if(txt_value==""){
+			$(this).val(this.defaultValue);
+		};	     
+	});	
+ 	
+ 	//封装判断手机号函数
+	var IsPhone = function(inpurStr)
+	{
+		var partten = /^(13[0-9]|15[012356789]|17[01236789]|18[0-9]|14[57])[0-9]{8}$/;
+		if(partten.test(inpurStr))
+		{
+		   //alert('是电话号码');
+		   return true;
+		}
+		else
+		{
+		   //alert('不是电话号码');
+		   return false;
+		}
+	}
+ 	
+ 	
+</script>
+</html>

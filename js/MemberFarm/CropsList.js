@@ -8,7 +8,7 @@ var FontTimer,
     ParameterVerify,
     pageUrl,
 	http = 'http://192.168.21.187:8081';
-FontSize();
+//FontSize();
 
 // ?enterprise_info_id=2&verify=######&domain=http://app.frameasy.cn&phone=13693047153
 var iframeSearch = location.search.split("&");
@@ -128,17 +128,17 @@ $('.croplist_tabhd .items').each(function(index,elem){
 });
 
 $(window).resize(function(){
-	clearTimeout( FontTimer );
-	FontTimer = setTimeout( FontSize , 500 );
+	//clearTimeout( FontTimer );
+	//FontTimer = setTimeout( FontSize , 500 );
 });
 
 
 
 
 // 计算不同分辨率下的文字大小
-function FontSize(){
-	document.documentElement.style.fontSize = parseInt((document.documentElement.clientWidth>414?414:document.documentElement.clientWidth)/12)+'px';
-}
+//function FontSize(){
+	//document.documentElement.style.fontSize = parseInt((document.documentElement.clientWidth>414?414:document.documentElement.clientWidth)/12)+'px';
+//}
 
 // 种植信息函数
 function InitPlantData(_data){

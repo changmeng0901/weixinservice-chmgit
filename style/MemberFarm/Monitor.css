@@ -1,6 +1,28 @@
 @charset "utf-8";
-
-
+/*iphone4*/
+@media screen and (min-width: 0px) and (max-width: 320px) {
+    html{
+    	font-size: 26px;
+    }
+}
+/*iphone6*/
+@media screen and (min-width: 321px) and (max-width: 375px) {
+    html{
+    	font-size: 30px;
+    }
+}
+/*iphone6 plus*/
+@media screen and (min-width: 376px) and (max-width: 414px) {
+    html{
+    	font-size: 34px;
+    }
+}
+/*pc*/
+@media screen and (min-width: 415px) and (max-width: 3000px) {
+    html{
+    	font-size: 36px;
+    }
+}
 html,body{
 	width: 100%;
 	min-width: 100%;
@@ -265,7 +287,7 @@ input:focus{
 }
 .take_photos_hd .swiper-slide{
 	height: 100%;
-	background-color: red;
+	background-color: #c0c0c0;
 	overflow: hidden;
 }
 .take_photos_hd .swiper-slide img{
@@ -335,6 +357,7 @@ input:focus{
 
 .tab_content .no_information{
 	padding-top: 7rem;
+	padding-bottom:7rem;
 }
 
 

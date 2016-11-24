@@ -21,6 +21,30 @@ html,body{
 	overflow: hidden;
 }
 }
+/*iphone4*/
+@media screen and (min-width: 0px) and (max-width: 320px) {
+    html{
+    	font-size: 26px;
+    }
+}
+/*iphone6*/
+@media screen and (min-width: 321px) and (max-width: 375px) {
+    html{
+    	font-size: 30px;
+    }
+}
+/*iphone6 plus*/
+@media screen and (min-width: 376px) and (max-width: 414px) {
+    html{
+    	font-size: 34px;
+    }
+}
+/*pc*/
+@media screen and (min-width: 415px) and (max-width: 3000px) {
+    html{
+    	font-size: 36px;
+    }
+}
 body{
 	position: relative;
 }
@@ -28,27 +52,31 @@ body{
 input:focus{
 	outline:none
 }
+.textCenter{
+	text-align:center;
+	}
 .logo_wap{
-	width: 3.03846rem;
+	display:inline-block;
+	max-width:80%;
 	height: 3.03846rem;
 	margin: 1.42308rem auto;
-	padding: 0.15385rem;
 	background: url(../../images/commons/opacity_b30.png);
 	border-radius: 0.30769rem;
 	box-sizing: border-box;
+	text-align:center;
+	overflow:hidden;
 }
 .logo_wap img{
-	width: 100%;
+	max-width:100%;
 	height: 100%;
+	padding: 0.15385rem;
 	border-radius: 0.23077rem;
+	box-sizing:border-box;
 }
 .verify_wap{
 	padding: 0 0.96154rem;
 }
 .verify_hd{
-	border: 1px solid #e0e0e0;
-	border-radius: 0.15385rem;
-	background-color: #fff;
 }
 .verify_hd .line{
 	height: 1px;
@@ -58,8 +86,12 @@ input:focus{
 .verify_hd .items{
 	position: relative;
 	height: 1.46154rem;
+	border: 1px solid #e0e0e0;
+	border-radius: 0.15385rem;
+	margin-bottom: 0.4rem;
 	padding: 0.26923rem 0.38462rem;
 	box-sizing: border-box;
+	background-color:#fafafa;
 }
 .verify_hd .items .v_icon{
 	float: left;
@@ -80,7 +112,7 @@ input:focus{
 	line-height: 50px;
 	background: url(../../images/commons/opacity_b50.png);
 	border-radius: 5px;
-	box-sizing: border-box;;
+	box-sizing: border-box;
 	font-size: 16px;
 	font-style: normal;
 	text-align: center;
@@ -102,6 +134,7 @@ input:focus{
 	border: 0;
 	font-size: 0.46154rem;
 	color: #ccc;
+	background-color:#fafafa;
 }
 .verify_hd .items_yan{
 	height: 1.5rem;
@@ -116,6 +149,7 @@ input:focus{
 	border: 0;
 	font-size: 0.46154rem;
 	color: #ccc;
+	background-color:#fafafa;
 }
 .verify_hd .items_yan .yan_num{
 	float: right;
@@ -129,12 +163,45 @@ input:focus{
 	font-size: 0.42308rem;
 	color: #fff;
 }
+.verify_hd .items_code{
+	height: 1.5rem;
+}
+.verify_hd .items_code input{
+	float: left;
+	width: 3.65385rem;
+	height: 1rem;
+	line-height: 1rem;
+	padding: 0;
+	border: 0;
+	font-size: 0.46154rem;
+	color: #ccc;
+	background-color:#fafafa;
+}
+.verify_hd .items_code .yan_img{
+	float: right;
+	margin-right: 0.19231rem;
+	width:2rem;
+	height: 1rem;
+	box-sizing:border-box;
+}
+.verify_hd .items_code .yan_img img{
+	width:100%;
+	height:100%;
+	margin-top:0;
+	}
+.verify_hd .text_change{
+	padding-bottom:0.4rem;
+	text-align:right;
+	font-size:0.4rem;
+	}
+.verify_hd .text_change span{
+	color:#428bca;
+	}
 .verify_loginbtn{
 	display: block;
 	width: 100%;
 	height: 1.38462rem;
 	line-height: 1.38462rem;
-	margin-top: 0.92308rem;
 	padding: 0;
 	font-size: 0.61538rem; 
 	text-align: center;
@@ -162,14 +229,14 @@ input:focus{
 	background-size: 100% 100%;
 }
 .bg_field .verify_wap{
-	margin-top: 3.46154rem;
+	margin-top: 2.2rem;
 }
 .bg_field2{
 	background: url(../../images/MemberFarm/Login_bg2.jpg) no-repeat center top;
 	background-size: 100% 100%;
 }
 .bg_field2 .verify_wap{
-	margin-top: 0.96154rem;
+	margin-top: 0.96154rem-;
 }
 /*果树*/
 .bg_fruittrees{
@@ -177,14 +244,14 @@ input:focus{
 	background-size: 100% 100%;
 }
 .bg_fruittrees .verify_wap{
-	margin-top: 3.46154rem;
+	margin-top: 2.2rem;
 }
 .bg_fruittrees2{
 	background: url(../../images/MemberFarm/Login_bg4.jpg) no-repeat center top;
 	background-size: 100% 100%;
 }
 .bg_fruittrees2 .verify_wap{
-	margin-top: 0.96154rem;
+	margin-top: 0.96154rem-;
 }
 /*温室*/
 .bg_greenhouse{
@@ -192,14 +259,14 @@ input:focus{
 	background-size: 100% 100%;
 }
 .bg_greenhouse .verify_wap{
-	margin-top: 3.46154rem;
+	margin-top: 2.2rem;
 }
 .bg_greenhouse2{
 	background: url(../../images/MemberFarm/Login_bg6.jpg) no-repeat center top;
 	background-size: 100% 100%;
 }
 .bg_greenhouse2 .verify_wap{
-	margin-top: 0.96154rem;
+	margin-top: 0.96154rem-;
 }
 
 
