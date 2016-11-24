@@ -310,8 +310,26 @@ input:focus{
 	outline: none;
 }
 
+/*无信息样式*/
+.no_information{
+	padding: 1.07692rem 0;
+	background-color: #fff;
+	text-align: center;
+}
+.no_information .no_icon{
+	width: 1.23077rem;
+	height: 1.23077rem;
+}
+.no_information .no_tip{
+	margin-top: 0.38462rem;
+	font-size: 0.53846rem;
+	font-weight: bold;
+	color: #ccc;
+}
 
-
+.tab_content .no_information{
+	padding-top: 7rem;
+}
 
 
 

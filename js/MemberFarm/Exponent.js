@@ -219,8 +219,6 @@ if( iframeSearch[1].split('=')[0] == 'deviceId'){
         dataType: "jsonp",
         jsonp: 'callback',
         success: function(response) {
-            // 传感器7个数据
-            console.log(response.data_result)
             InitExponentData(response.data_result);
             // 饼图  成熟度分析
             $('.maturity_chart').attr('data-percent',matureExpVal);
@@ -236,7 +234,18 @@ if( iframeSearch[1].split('=')[0] == 'deviceId'){
                     }
                 });
             // 健康指数分析图表
-            ExponentChart(response.data_result.health.categories,response.data_result.health.series)
+            var $exponent_chart = $('#exponent_chart');
+            var nodata;
+            if( response.data_result.health.categories !=[] || response.data_result.health.series!=[]){
+                ExponentChart(response.data_result.health.categories,response.data_result.health.series)
+            }else{
+                nodata = 
+                '<div class="no_information" style="background:none;">'+
+                    '<img src="../images/MemberFarm/Monitor_nodata.png" class="no_icon">'+
+                    '<p class="no_tip">暂无数据</p>'+
+                '</div>';
+                $exponent_chart.append( nodata );
+            }
             
         },
         error: function(e) {
@@ -277,7 +286,8 @@ if( iframeSearch[1].split('=')[0] == 'deviceId'){
             dataType: "jsonp",
             jsonp: 'callback',
             success: function(response) {
-
+                // 传感器7个数据
+                InitDeviceData(response.data_result);
                 // 是否有折线图数据
                 hasChartData = response.data_result.hasChartData;
                 ChartData = response.data_result.ChartData;
@@ -438,45 +448,63 @@ function FontSize(){
 }
 // 初始化传感器数据函数
 function InitDeviceData(_data){
-    // 空气温度
-    !_data.airTemp == 'undefined' || !_data.airTemp =='' ? $('#airTemp').html(_data.airTemp+'℃') : $('#airTemp').html('--℃');
-    // 空气湿度
-    !_data.airHumidity == 'undefined' || !_data.airHumidity =='' ? $('#airHumidity').html(_data.airHumidity+'℃') : $('#airHumidity').html('--℃');
-    // 土壤湿度
-    !_data.soilHumidity == 'undefined' || !_data.soilHumidity =='' ? $('#soilHumidity').html(_data.soilHumidity+'%') : $('#soilHumidity').html('--%');
-    // 光照强度
-    !_data.illumination == 'undefined' || !_data.illumination =='' ? $('#illumination').html(_data.illumination+'lux') : $('#illumination').html('--lux');
-    // 二氧化塘
-    !_data.co2 == 'undefined' || !_data.co2 =='' ? $('#co2').html(_data.co2+'℃') : $('#co2').html('--℃');
-    // 土壤温度
-    !_data.soilTemp == 'undefined' || !_data.soilTemp =='' ? $('#soilTemp').html(_data.soilTemp+'℃') : $('#soilTemp').html('--℃');
-    // 空气露点
-    !_data.dewPoint == 'undefined' || !_data.dewPoint =='' ? $('#dewPoint').html(_data.dewPoint+'℃') : $('#dewPoint').html('--℃');
+    if( _data.hasDevice != false ){
+        // 空气温度
+        !_data.airTemp == 'undefined' || !_data.airTemp =='' ? $('#airTemp').html(_data.airTemp+'℃') : $('#airTemp').html('--℃');
+        // 空气湿度
+        !_data.airHumidity == 'undefined' || !_data.airHumidity =='' ? $('#airHumidity').html(_data.airHumidity+'℃') : $('#airHumidity').html('--℃');
+        // 土壤湿度
+        !_data.soilHumidity == 'undefined' || !_data.soilHumidity =='' ? $('#soilHumidity').html(_data.soilHumidity+'%') : $('#soilHumidity').html('--%');
+        // 光照强度
+        !_data.illumination == 'undefined' || !_data.illumination =='' ? $('#illumination').html(_data.illumination+'lux') : $('#illumination').html('--lux');
+        // 二氧化塘
+        !_data.co2 == 'undefined' || !_data.co2 =='' ? $('#co2').html(_data.co2+'℃') : $('#co2').html('--℃');
+        // 土壤温度
+        !_data.soilTemp == 'undefined' || !_data.soilTemp =='' ? $('#soilTemp').html(_data.soilTemp+'℃') : $('#soilTemp').html('--℃');
+        // 空气露点
+        !_data.dewPoint == 'undefined' || !_data.dewPoint =='' ? $('#dewPoint').html(_data.dewPoint+'℃') : $('#dewPoint').html('--℃');
+    }else{
+        // 空气温度
+        $('#airTemp').html('--℃');
+        // 空气湿度
+        $('#airHumidity').html('--℃');
+        // 土壤湿度
+        $('#soilHumidity').html('--%');
+        // 光照强度
+        $('#illumination').html('--lux');
+        // 二氧化塘
+        $('#co2').html('--℃');
+        // 土壤温度
+        $('#soilTemp').html('--℃');
+        // 空气露点
+        $('#dewPoint').html('--℃');
+    }
 }
 // 初始化指数数据函数
 function InitExponentData(_data){
+    var disease_list = '';
+    var harmfulDataLen = _data.disease.harmfulData;
+    var $disease_list = $('#disease_list');
+    var AvgHarmful,  //平均发病率
+        MaxHarmful,  //最大发病率
+        LastValue ,  //当前指数
+        AvgValue;    //平均指数
+
     // 实际种植天数
-    !_data.realPlantDay == 'undefined' || !_data.realPlantDay =='' ? $('#realPlantDay').html(_data.realPlantDay) : $('#realPlantDay').html('--');
+    !_data.maturity.realPlantDay == 'undefined' || !_data.maturity.realPlantDay =='' ? $('#realPlantDay').html(_data.maturity.realPlantDay) : $('#realPlantDay').html('--');
     // 已种植天数
-    !_data.alreadyDay == 'undefined' || !_data.alreadyDay =='' ? $('#alreadyDay').html(_data.alreadyDay) : $('#alreadyDay').html('--');
+    !_data.maturity.alreadyDay == 'undefined' || !_data.maturity.alreadyDay =='' ? $('#alreadyDay').html(_data.maturity.alreadyDay) : $('#alreadyDay').html('--');
     // 自然成熟度
-    if( !_data.matureExp == 'undefined' || !_data.matureExp =='' ){
-        matureExpVal = _data.matureExp;
-        $('#matureExp').html(_data.matureExp);
+    if( !_data.maturity.matureExp == 'undefined' || !_data.maturity.matureExp =='' ){
+        matureExpVal = _data.maturity.matureExp;
+        $('#matureExp').html(_data.maturity.matureExp);
     }else{
         matureExpVal = 0;
         $('#matureExp').html('--');
     }
-
-    // 平均发病概率
-    $('#avgHarmful').html( _data.disease.avgHarmful );
-    // 平均发病概率
-    $('#maxHarmful').html( _data.disease.maxHarmful );
-    var disease_list = '';
-    var harmfulDataLen = _data.disease.harmfulData;
-    var $disease_list = $('#disease_list');
-    if( !harmfulDataLen=='undefined' || !harmfulDataLen==[]){
-        // 有病虫害列表
+    
+    if( !harmfulDataLen=='undefined' || !harmfulDataLen==[]||_data.disease.showFlag != false){
+        // 有病虫害列表，5种颜色循环
         for( var i=0;i<harmfulDataLen.length;i++ ){
             var ColorValue = '';
             if(i%2 == 0){
@@ -503,13 +531,34 @@ function InitExponentData(_data){
                 '</div>'+
             '</li>';
         }
+        AvgHarmful = _data.disease.avgHarmful;
+        MaxHarmful = _data.disease.maxHarmful;
+    }else{
+        disease_list = 
+        '<div class="no_information" style="background:none;">'+
+            '<img src="../images/MemberFarm/Monitor_nodata.png" class="no_icon">'+
+            '<p class="no_tip">暂无数据</p>'+
+        '</div>';
+        AvgHarmful = 0;
+        MaxHarmful = 0;
     }
+    if(_data.health!='undefined'||_data.health!=''){
+        LastValue = _data.health.lastValue;
+        AvgValue = _data.health.avgValue;
+    }else{
+        LastValue = 0;
+        AvgValue = 0;
+    }
+    // 病害列表
     $disease_list.append( disease_list );
-
+    // 平均发病概率
+    $('#avgHarmful').html( AvgHarmful );
+    // 最大发病概率
+    $('#maxHarmful').html( MaxHarmful );
     // 当前指数
-    $('#lastValue').html( _data.health.lastValue );
+    $('#lastValue').html( LastValue );
     // 平均指数
-    $('#avgValue').html( _data.health.avgValue );          
+    $('#avgValue').html( AvgValue );          
 }
 
 // 传感器数据--图表

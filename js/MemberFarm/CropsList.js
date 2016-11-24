@@ -51,7 +51,7 @@ $.ajax({
             alert('请重新加载页面！');
         }else if(response.invoke_result == 'INVOKE_SUCCESS'){
             // 如果成功
-            if( response.data_result.realPlantList!=''||response.data_result.realPlantList!=[] ){
+            if( response.data_result!=''||response.data_result.realPlantList!=[] ){
                 
                 // 如果有数据则执行，如下：
                 InitPlantData(response.data_result.realPlantList);
@@ -141,12 +141,15 @@ function FontSize(){
 
 // 种植信息函数
 function InitPlantData(_data){
-
         var strong_list = '';
         var dl_list='';
         var $strong_list = $('#zhongzxx_content');
-        if(_data == '' || _data == 'undefined'){
-            strong_list = '<div class="nodata_block">暂无数据</div>';
+        if(_data == [] || _data == 'undefined'){
+            strong_list = 
+            '<div class="no_information" style="background:none;">'+
+                '<img src="../images/MemberFarm/CropsList_nodata1.png" class="no_icon">'+
+                '<p class="no_tip">暂无数据</p>'+
+            '</div>';
             $strong_list.append( strong_list );
         }else{
             for(var i=0;i<_data.length;i++){
@@ -186,9 +189,13 @@ function InitMonitorData(_data){
         var svideo = _data.device;
         var $monitor = $('#monitor');
         var $sensor = $('#sensor');
-        if(mvideo == '' || mvideo == 'undefined'){
+        if(mvideo == [] || mvideo == 'undefined'){
             // 监控暂无数据
-            monitor_list = '<div class="nodata_block" style="margin:0;">暂无数据</div>';
+            monitor_list = 
+            '<div class="no_information" style="background:none;">'+
+                '<img src="../images/MemberFarm/CropsList_nodata2.png" class="no_icon">'+
+                '<p class="no_tip">暂无数据</p>'+
+            '</div>';
             $monitor.append( monitor_list );
         }else{
             for(var i=0;i<mvideo.length;i++){
@@ -212,7 +219,11 @@ function InitMonitorData(_data){
         }
         if(svideo == '' || svideo == 'undefined'){
             // 传感器暂无数据
-            sensor_list = '<div class="nodata_block" style="margin:0;">暂无数据</div>';
+            sensor_list = 
+            '<div class="no_information" style="background:none;">'+
+                '<img src="../images/MemberFarm/CropsList_nodata2.png" class="no_icon">'+
+                '<p class="no_tip">暂无数据</p>'+
+            '</div>';
             $sensor.append( sensor_list );
         }else{
             for(var i=0;i<svideo.length;i++){

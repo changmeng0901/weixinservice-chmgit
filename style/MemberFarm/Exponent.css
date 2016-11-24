@@ -451,3 +451,6 @@ input:focus{
 	font-weight: bold;
 	color: #ccc;
 }
+#disease_list .no_information{
+	padding-top: 4rem;
+}
