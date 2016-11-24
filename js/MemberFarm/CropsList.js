@@ -251,7 +251,7 @@ function InitMonitorData(_data){
 var indexData,
     indexTime;
 indexData = 1;
-indexTime = 3;
+indexTime = 1;
 function VideoIdLink(obj){
     window.location.href="http://192.168.21.187/weixinservice/MemberFarm/Monitor.html?videoId="+$(obj).parents('.dl_dl').attr('videoid')+"&verify="+getVerify+"&domain="+getTestUrl+"&phone="+getPhone;
 }
