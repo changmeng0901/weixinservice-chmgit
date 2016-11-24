@@ -1,0 +1,11 @@
+.address{width: 100%; height: auto; margin-top: 1rem; border-top: 1px solid #e1e1e1; border-bottom: 1px solid #e1e1e1; padding-left: 0.625rem; background-color: #fff; box-sizing: border-box;}
+.address li{min-height: 2.6875rem; border-bottom: 1px solid #e1e1e1; padding-right: 0.625rem; }
+.address li .left{width: 1.525rem; min-height: 2.6875rem;}
+.address li .left img{width: 0.9rem; height: 0.6rem; margin-top: 2.5rem;}
+.address li .right img{width: 1.125rem; height: 1.125rem; margin-top: 2rem;}
+.address li .center{width:14.6875rem;}
+.address li.add{line-height: 2.6875rem; border: none;}
+.address li.add img{width: 0.9rem; height: 0.9rem; vertical-align: middle; margin-right: 0.625rem;}
+.address li.add .txt,.name{font-size: 0.9375rem; color: #333; font-weight: bold;}
+.name{line-height: 2rem;}
+.dizhi{font-size: 0.8125rem; color: #999; line-height: 1.3rem; margin-bottom: 0.625rem;}

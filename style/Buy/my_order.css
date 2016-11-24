@@ -1,0 +1,125 @@
+/*我的订单*/
+.my_order{width: 100%; height: auto;}
+.my_order .items li{float: left; width: 50%; height: 2.5rem; line-height: 2.5rem; font-size: 0.875rem; color: #333;}
+.my_order .items li p{width: 5rem; height: 2.5rem; box-sizing:border-box; margin: 0 auto; text-align: center; color: #333;}
+.my_order .items li.cur p{border-bottom: 2px solid #ff4d45; color: #ff4d45;}
+.my_order .details{display: none;}
+.my_order .details.current{display: block;}
+.binding{height: 2.125rem; line-height: 2.125rem; padding: 0 0.625rem; border-top: 0.625rem solid #f7f7f7; border-bottom: 0.625rem solid #f7f7f7; font-size: 0.75rem; color: #b2b2b2;}
+.binding img{width: 0.8125rem; height: 0.8125rem; margin-right: 0.3rem; vertical-align: -0.15rem;}
+.binding .now{width: 4.5rem; height: 1.4rem; line-height: 1.4rem; border: 1px solid #ff4d45; border-radius: 4px; text-align: center; color: #ff4d45; font-size: 0.75rem; margin-top: 0.32rem;}
+.my_order .news{width: 100%; height: 4.5rem; border-bottom: 0.375rem solid #f7f7f7;}
+.my_order .news li{float: left; width: 20%; text-align: center; height: 4.5rem;}
+.my_order .news li .pic{height: 1.8rem; margin-top: 1rem; position: relative; line-height: 2rem;}
+.my_order .news li .pic .order{width: 1.375rem; height: 1.3125rem; position: absolute; left: 50%; margin-left: -0.6875rem;}
+.my_order .news li.cur .pic .order{background-position: 0 0;}
+.my_order .news li .pic i{display: none; min-width: 0.8rem; min-height: 0.8rem; line-height: 0.8rem; background-color: #ff4d45; text-align: center; font-size: 0.625rem; color: #fff; border-radius: 50%; position: absolute; top: -0.4rem; left: 2.3rem;}
+.my_order .news li.cur .pic i{display: block;}
+.order1{background: url(../../images/Buy/order1.png) 0 -1.5625rem no-repeat; background-size: cover;}
+.order2{background: url(../../images/Buy/order2.png) 0 -1.5625rem no-repeat; background-size: cover;}
+.order3{background: url(../../images/Buy/order3.png) 0 -1.5625rem no-repeat; background-size: cover;}
+.order4{background: url(../../images/Buy/order4.png) 0 -1.5625rem no-repeat; background-size: cover;}
+.order5{background: url(../../images/Buy/order5.png) 0 -1.5625rem no-repeat; background-size: cover;}
+.my_order .news li p{font-size: 0.75rem; color: #5c5c5c;}
+.my_order .news li.cur p{color: #ff4d45;}
+.plants{width: 100%; height: auto;}
+.plants li{height: auto; border-bottom: 0.625rem solid #f7f7f7; }
+.plants li .wait{padding-right:0.625rem; text-align: right; font-size: 0.75rem; color: #ff4d45; height: 1.875rem; line-height: 1.875rem;}
+.plants li .middle{height: 4rem; background-color: #f7f7f7; padding: 0.625rem 0.625rem 0; }
+.plants li .middle .left{width: 3.25rem; height: 3.25rem; margin-right: 0.45rem;}
+.plants li .middle .left img{width: 100%; height: 100%;}
+.plants li .middle .center{width: 11.625rem; height: 4rem;}
+.plants li .middle .center h4{font-size: 0.75rem; color: #333; width: 11.65rem; font-weight: normal; height: 2.4rem; line-height: 1.2rem; overflow: hidden;}
+.plants li .middle .center p{font-size: 0.6875rem; color: #666666;}
+.plants li .middle .unit{width: 3rem; height: 4rem; line-height: 4rem; font-size: 0.6875rem; color: #666; text-align: right;}
+.plants li .border_line{padding-left: 0.625rem;}
+.plants li .total{height: 1.875rem; line-height: 1.875rem; border-bottom: 1px solid #e1e1e1; text-align: right; font-size: 0.75rem; color: #b2b2b2; padding-right: 0.6rem;}
+.plants li .total span{color:#ff4d45;}
+.plants li .btns{height: 2.25rem; line-height: 2.25rem; text-align: right; font-size: 0.75rem; padding-right: 0.625rem;}
+.plants li .btns .delte,.plants li .btns .seller{padding: 0.25rem 0.65rem; border: 1px solid #e1e1e1; border-radius: 4px; color: #ccc; margin-right: 0.25rem;}
+.plants li .btns .pay,.plants li .btns .contact,.plants li .btns .collect{padding: 0.25rem 0.65rem; border: 1px solid #ff4d45; border-radius: 4px; color: #ff4d45; }
+.plants li .btns .collect a{color: #ff4d45;}
+.no_order{width: 100%; height: auto; text-align: center;}
+.no_order img{margin-top: 2.5rem;}
+.no_order p{font-size: 0.875rem; color: #ccc; margin-top: 1.25rem;}
+.cancelBox,.service,.orderBox,.finishBox{position: absolute; top: 0; left: 0; z-index: 10; background: url(../../images/Buy/pop_bg.png) repeat; display: none;}
+.cancelBox .tip_box,.service .tip_box,.orderBox .tip_box,.finishBox .tip_box{width: 14rem; height: 7.7rem; border-radius: 5px; background: #fff; position: absolute; top: 20%; left: 50%; margin-left: -7rem; z-index: 20;}
+.cancelBox .tip_box h4,.orderBox .tip_box h4,.finishBox .tip_box h4{font-size: 0.9375rem; color: #333; height: 3.2rem; text-align: center; line-height: 4rem;}
+.cancelBox .tip_box p,.orderBox .tip_box p,.finishBox .tip_box p{font-size: 0.75rem; color: #333; height: 2rem; line-height: 1rem; text-align: center;}
+.cancelBox .tip_box ul li,.service .tip_box ul li,.orderBox .tip_box ul li,.finishBox .tip_box ul li{width: 50%; height: 2.5rem; line-height: 2.5rem; font-size: 0.875rem; color: #1f92c8; font-weight: bold; text-align: center; border-top: 1px solid #e1e1e1; float: left; box-sizing:border-box;}
+.cancelBox .tip_box ul li.cancel,.service .tip_box ul li.cancel,.orderBox .tip_box ul li.cancel,.finishBox .tip_box ul li.cancel{border-right: 1px solid #e1e1e1;}
+/*待发货*/
+.plants li .orderCode{padding-right:0.625rem; text-align: right; font-size: 0.75rem; color: #ff4d45; height: 1.875rem; line-height: 1.875rem; padding-left: 0.625rem;}
+.c99{color: #999;}
+.service .tip_box{height: 6.25rem; }
+.service .tip_box p{font-size: 1.125rem; color: #333; height: 3.75rem; line-height: 3.75rem; text-align: center; font-weight: bold;}
+/*发表评价页*/
+.commment{width: 100%; height: auto; background-color: #fff; margin-top: 0.625rem; padding-bottom: 0.625rem;}
+.commment .pic_txt{height: 4rem; padding-left: 0.625rem; padding-top: 0.625rem;}
+.commment .border_b{border-bottom: 1px solid #e1e1e1; height: 4rem; box-sizing:border-box;}
+.commment .pic_txt .left{width: 3.25rem; height: 3.25rem; margin-right: 0.45rem;}
+.commment .pic_txt .left img{width: 100%; height: 100%;}
+.commment .pic_txt .center{width: 11.625rem; height: 4rem;}
+.commment .pic_txt .center h4{font-size: 0.75rem; color: #333; width: 11.65rem; font-weight: normal; height: 2.4rem; line-height: 1.2rem; overflow: hidden;}
+.commment .pic_txt .center p{font-size: 0.6875rem; color: #666666;}
+.commment .pic_txt .unit{width: 3rem; height: 4rem; margin-right: 0.625rem; font-size: 0.6875rem; color: #666; text-align: right; padding-top: 1.4rem; box-sizing: border-box; line-height: 1.2rem;}
+.commment .pic_txt .unit .prize{font-size: 0.8125rem; color: #ff4d45;}
+.commment .grade{padding: 0 0.625rem; height: 2.5rem; line-height: 2.5rem; font-size: 0.75rem; color: #333;}
+.commment .grade img{width: 0.5rem; height: 0.5rem; margin-left: 0.25rem;}
+.commment textarea{width: 18.75rem; height: 3.5rem; display: block; margin: 0 auto; border: 1px solid #e1e1e1; border-radius: 4px; resize:none; font-size: 0.625rem; color: #ccc; padding: 0.4rem; box-sizing:border-box; font-family: "微软雅黑"; line-height: 0.9rem;}
+.commment .upload{padding: 0 0.625rem;}
+.commment .upload li{float: left; width: 3.4375rem; height: 3.4375rem; margin-right:0.625rem; margin-top: 0.625rem; position: relative; font-size: 0.625rem; color: #333; line-height: 3.4375rem;}
+.commment .upload li img{position: absolute; left: 0; top: 0; width: 100%; height: 100%;}
+.commment .upload li img.close{width: 0.9375rem; height: 0.9375rem; z-index: 5; left:2.25rem; top:0.25rem;}
+.commment .upload li input{position: absolute; left: 0; top: 0; width: 3.4375rem; height: 3.4375rem; z-index: 6; font-size: 0.625rem; opacity: 0;}
+.publish{position: fixed; left: 0; bottom: 0; width: 100%; height: 2.8125rem; border-top: 1px solid #e1e1e1; background-color: #fff;}
+.publish .p_btn{width: 4.375rem; height: 1.625rem; line-height: 1.625rem; text-align: center; font-size: 0.8rem; color: #fff; background-color: #ff4d45; margin: 0.6rem auto 0; border-radius: 4px;}
+/*我的红包*/
+.my_packets{width: 100%; height: auto;}
+.my_packets .items{background-color: #fff;}
+.my_packets .items li{float: left; width: 50%; height: 2.5rem; line-height: 2.5rem; font-size: 0.875rem; color: #333;}
+.my_packets .items li p{width: 5rem; height: 2.5rem; box-sizing:border-box; margin: 0 auto; text-align: center; color: #333;}
+.my_packets .items li.cur p{border-bottom: 2px solid #ff4d45; color: #ff4d45;}
+.my_packets .coupon{width: 100%; height: auto;}
+.my_packets .coupon .card{width: 18.125rem; height: 8rem; margin: 0.75rem auto 0; position: relative;}
+.my_packets .coupon .card1{background: url(../../images/Buy/card1.png) no-repeat; background-size: cover;}
+.my_packets .coupon .card2{background: url(../../images/Buy/card2.png) no-repeat; background-size: cover;}
+.my_packets .coupon .card3{background: url(../../images/Buy/card3.png) no-repeat; background-size: cover;}
+.my_packets .coupon .card4{background: url(../../images/Buy/card4.png) no-repeat; background-size: cover;}
+.my_packets .coupon .card .topPart{height: 5.875rem; padding: 0 1.25rem;}
+.my_packets .coupon .card .tip{height: 2.375rem; line-height: 2.3rem; text-align: center; font-size: 0.75rem; color: #fff;}
+.my_packets .coupon .card .topPart .left{width: 12.625rem; height: 5.875rem;}
+.my_packets .coupon .card .topPart .right{width: 3rem; height: 5.875rem; line-height: 5.875rem;}
+.my_packets .coupon .card .topPart .right img{width: 2.9rem; height: 2.9rem; vertical-align: middle;}
+.my_packets .coupon .card .value{font-size: 3.125rem; }
+.my_packets .coupon .card .value span{font-size: 1rem;}
+.my_packets .coupon .card .useTime{font-size: 0.75rem; color: #b2b2b2;}
+.my_packets .coupon .card1 .value{color: #ff8a91;}
+.my_packets .coupon .card2 .value{color: #6cd5bd;}
+.my_packets .coupon .card3 .value{color: #c7c7c7;}
+.my_packets .coupon .card4 .value{color: #FBC0C4;}
+.my_packets .coupon .card .seal{width: 6.875rem; height: 7rem; position: absolute; left: 6rem; top: 0.375rem;}
+.my_packets .coupon .card .seal1{background: url(../../images/Buy/seal1.png) no-repeat; background-size: cover; }
+.my_packets .coupon .card .seal2{background: url(../../images/Buy/seal2.png) no-repeat; background-size: cover; }
+.no_packets,.no_binding{width: 100%; height: auto; background: #fff; text-align: center; font-size: 0.875rem; color: #ccc; }
+.no_packets .items,.no_binding .items{background-color: #fff; border-bottom: 0.625rem solid #f7f7f7;}
+.no_packets .items li,.no_binding .items li{float: left; width: 50%; height: 2.5rem; line-height: 2.5rem; font-size: 0.875rem; color: #333;}
+.no_packets .items li p,.no_binding .items li p{width: 5rem; height: 2.5rem; box-sizing:border-box; margin: 0 auto; text-align: center; color: #333;}
+.no_packets .items li.cur p,.no_binding .items li.cur p{border-bottom: 2px solid #ff4d45; color: #ff4d45;}
+.no_packets img{width: 1.5rem; height: 1.6875rem; margin-top: 4.4375rem; margin-bottom: 1rem; }
+.no_binding p{font-size: 0.75rem;}
+.no_binding .warn{font-size: 0.9375rem; color: #333; height: 1.8rem;}
+.no_binding .bdBtn{width: 5.75rem; height: 1.5rem; border: 1px solid #ff4d45; font-size: 0.75rem; color: #ff4d45; line-height: 1.5rem; margin: 0.75rem auto 0; border-radius: 4px;}
+/*注册弹窗*/
+.registerPop{display: none; position: absolute; top: 0; left: 0; background: url(../../images/Buy/pop_bg.png) repeat; z-index: 5;}
+.registerPop .member{width: 17.75rem; height: 15.25rem; background: #fff; border-radius: 5px; position: absolute; left: 50%; margin-left: -8.875rem; top: 20%;}
+.registerPop .member .pen{width: 3.75rem; height: 3.75rem;  margin: -1.85rem auto 0;}
+.registerPop .member .pen img{width: 100%; height: 100%;}
+.registerPop .member h4{font-size: 0.9375rem; height: 3.3rem; line-height: 3rem; text-align: center; font-weight: normal; color: #333;}
+.registerPop .member .info{width: 15.75rem; height: 2.25rem; margin: 0 auto 0.8125rem; position: relative;}
+.registerPop .member .info .entry1,.registerPop .member .info .entry2{width: 100%; height: 2.25rem; line-height: 2.25rem; box-sizing:border-box; padding: 0 0.625rem 0 1.875rem; border: 1px solid #e1e1e1; border-radius: 4px; font-size: 0.9375rem; color: #b2b2b2; font-family: "微软雅黑";}
+.registerPop .member .info .entry2{width: 9.375rem;}
+.registerPop .member .info .code{width: 5.75rem; height: 2.25rem; line-height: 2.25rem; font-size: 0.9375rem; color: #62b30c; box-sizing:border-box; border: 1px solid #62b30c; border-radius: 4px; text-align: center;}
+.registerPop .member .regBtn{width: 15.75rem; margin: 0 auto; height: 2.25rem; line-height: 2.25rem; border-radius: 4px; text-align: center; background-color: #62b30c; color: #fff;}
+.registerPop .member .info .icon1,.registerPop .member .info .icon2{position: absolute; width: 0.75rem; height: 0.9375rem; left: 0.75rem; top: 0.625rem; background: url(../../images/Buy/entry1.png) no-repeat; background-size: cover;}
+.registerPop .member .info .icon2{background: url(../../images/Buy/entry2.png); background-size: cover;}

@@ -1,0 +1,135 @@
+body{ padding-bottom:2.8rem;}
+.swiper-wrapper .swiper-slide{width: 100%; height: 16rem;}
+.swiper-wrapper .swiper-slide img{width: 100%; height: auto;}
+.swiper-pagination-bullet{background:#fff; opacity: 0.8;}
+.swiper-pagination-bullet-active {background: #659b32;}
+.logo{position: absolute; width: 5rem-; height: 1.875rem; line-height: 1.875rem; font-size: 0.6875rem; color: #fff; border-radius: 1rem; background: url(../../images/Buy/logo_bg.png) repeat; border: 1px solid #e1e1e1; left: 0.625rem; top: 0.8125rem; z-index: 5;}
+.logo img{width: 1.375rem; height: 1.375rem; border-radius: 50%; vertical-align: -0.35rem; margin: 0 0.3rem;}
+.edit{position: absolute; width: 1.875rem; height: 1.875rem; line-height: 1.875rem; text-align: center; border-radius: 50%; background: url(../../images/Buy/logo_bg.png) repeat; border: 1px solid #e1e1e1; right: 0.625rem; top: 0.8125rem; z-index: 5;}
+.edit img{width: 1rem; height: 1rem; vertical-align: -0.1rem;}
+.title{padding: 0 0.625rem; border-bottom: 0.3125rem solid #f5f5f5; }
+.title .content{padding: 0.5rem 0 0; line-height: 1.5rem; font-size: 1rem; color: #3b3b3b;}
+.title .content .tip{font-size: 0.75rem; color: #999; }
+.title .content .tip i{padding: 0 0.25rem; background-color: #ff4d45; color: #fff; border-radius: 0.2rem; margin: 0 0.25rem;}
+.title .prize{font-size: 1.875rem; color: #ff4d45;}
+.title .prize i{font-size: 1.25rem;}
+.detail{padding-left: 0.5rem; border-bottom: 0.625rem solid #f5f5f5;}
+.detail .line{height: 2.75rem; line-height: 2.75rem; font-size: 0.875rem; color: #999; padding-right: 0.625rem;}
+.detail .line i{color: #333; margin-left: 0.45rem;}
+.detail #option_product{ display:inline-block; width:8rem; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; vertical-align:top;}
+.detail .inputBox{ height: 1.4rem; overflow: hidden; margin-top: 0.7rem;}
+.detail .inputBox span{width: 1.4rem; height: 1.4rem; line-height: 1.4rem;}
+.detail .inputBox span img{ width:100%; height:100%;}
+.detail .inputBox input{width: 2.275rem; height: 1.4rem; line-height: 1.4rem; text-align: center; font-size: 0.8125rem; color: #666;}
+.show{ height: auto; border-bottom: 0.625rem solid #f5f5f5; padding: 0 0.625rem;}
+.show h4{height: 2.625rem; line-height: 2.625rem; font-size: 0.875rem; color: #333; text-align: center;}
+.show h4 .line{background-color: #e2e2e2; width: 4rem; height: 1px; vertical-align: 0.3rem; margin: 0 0.3rem; display: inline-block;}
+.show .pic{height: 8.875rem; margin-bottom: 0.625rem; position: relative;}
+.show .pic img{width: 100%; height: 100%;}
+.show .pic p{position: absolute; font-size: 0.875rem; color: #fff; width: 6.3rem; height: 2.2rem; line-height: 2.2rem; border-top: 1px solid #fff; border-bottom: 1px solid #fff; text-align: center; left: 50%; top: 50%; margin-left: -3.15rem; margin-top: -1.1rem; z-index: 5;}
+.show .pic i{position: absolute; top: 0; left: 0;}
+.show .pic i.icon1{width: 1.4375rem; height: 1.4375rem; background: url(../../images/Buy/icon1.png) no-repeat; background-size: cover; z-index: 5;}
+.show .pic i.icon2{width: 1.4375rem; height: 1.4375rem; background: url(../../images/Buy/icon2.png) no-repeat; background-size: cover; z-index: 5;}
+.show .pic i.icon3{width: 1.4375rem; height: 1.4375rem; background: url(../../images/Buy/icon3.png) no-repeat; background-size: cover; z-index: 5;}
+.show .pic i.icon4{width: 1.4375rem; height: 1.4375rem; background: url(../../images/Buy/icon4.png) no-repeat; background-size: cover; z-index: 5;}
+.show .pic .mask{width: 100%; height: 8.875rem; background: rgba(0,0,0,0.3); position: absolute; top: 0; left: 0; z-index: 3;}
+.show .pic .phone{width: 4.6rem; height: 8.6rem; background: url(../../images/Buy/phone.png) no-repeat; background-size: cover; position: absolute; left: 50%; margin-left: -2.3rem; bottom: 0; padding:1.125rem 0.375rem 0 0.21875rem; box-sizing:border-box;}
+.show .map{height: 12rem;}
+.tabs{width: 100%; height: auto;}
+.tabs .item{height: 2.5rem;}
+.tabs .item li{float: left; width: 50%; height: 2.5rem; line-height: 2.5rem; font-size: 0.9375rem; color: #333; text-align: center; box-sizing: border-box; border-bottom: 1px solid #e1e1e1;}
+.tabs .item li.cur{color: #ff4d45; border-bottom: 0.1rem solid #ff4d45;}
+.tabs .details{display: none;}
+.tabs .details.current{display: block;}
+.goods_pic{width: 100%; height: auto; padding-bottom: 0.8rem; border-bottom: 0.625rem solid #f5f5f5;}
+.fruit li{float: left; width: 50%; border-top: 0.12rem solid #f5f5f5; height: 14.375rem; box-sizing:border-box;}
+.fruit li.right_b{border-right: 0.06rem solid #f5f5f5;}
+.fruit li.left_b{border-left: 0.06rem solid #f5f5f5;}
+.fruit li img{width: 100%; height: 9.6rem; }
+.fruit li h6{font-size: 0.75rem; color: #333; height: 2rem; line-height: 1rem; overflow: hidden; font-weight: normal; padding: 0 0.625rem;}
+.fruit li .prize{padding-left: 0.625rem; font-size: 0.875rem; color: #ff4d45; padding-top: 0.25rem;}
+.copyRight{color: #979996; font-size: 0.75rem; text-align: center; height: 3rem; line-height: 3rem; background-color: #f5f5f5; border-bottom: 0.25rem solid #eeeded-; box-sizing:border-box; margin-bottom: 2.8rem-;}
+.purchase{height: 2.8rem; position: fixed; bottom: 0; left: 0; z-index: 10;}
+.purchase li{float: left; height: 2.8rem;}
+.purchase li.nub1{width: 4rem; text-align: center; background-color: #fff; position: relative;}
+.purchase li.nub1 img{width: 1.25rem; height: 1.25rem; margin-top: 0.35rem;}
+.purchase li.nub1 i{position: absolute; font-size: 0.6rem; width: 0.8rem; height: 0.8rem; background-color: red; border-radius: 50%; color: #fff; line-height: 0.8rem; margin-left: -0.35rem; margin-top: 0.2rem;}
+.purchase li.nub1 p{font-size: 0.625rem; color: #333; line-height: 0.625rem;}
+.purchase li.nub2,.purchase li.nub3{width: 8rem; font-size: 1rem; line-height: 2.8rem; color: #fff; background-color: #ffc22c; text-align: center;}
+.purchase li.nub3{background-color: #ff4d45;}
+.evaluate{padding-left: 0.625rem; height: auto;}
+.evaluate li{border-bottom: 1px solid #e1e1e1; padding: 0.875rem 0;}
+.evaluate li .top_line{height: 2.1875rem; line-height: 2.1875rem;}
+.evaluate li .top_line .photo{width: 2.1875rem; height: 2.1875rem; border-radius: 50%;}
+.evaluate li .top_line .photo img{width: 100%; height: 100%; border-radius: 50%;}
+.evaluate li .top_line .tel{font-size: 0.875rem; color: #333; padding-left: 0.45rem;}
+.evaluate li .top_line .date{font-size: 0.75rem; color: #999; padding-right: 0.5rem;}
+.evaluate li .stars{padding: 0.5rem 0;}
+.evaluate .txt{font-size: 0.9rem; color: #333;}
+.evaluate li .pics{height: auto;}
+.evaluate li .pics img{width: 4rem; height: 4rem; margin-right: 0.55rem; margin-top: 0.3rem;}
+.no_evaluate{height: 12.5rem; text-align: center;}
+.no_evaluate img{width: 1.875rem; height: 1.5625rem; margin-top: 4rem; margin-bottom: 0.875rem; }
+.no_evaluate p{font-size: 0.75rem; color: #ccc;}
+/*规格页面样式*/
+.specification{width: 100%; height: auto; background-color: #fff; margin-bottom: 6rem;}
+.specification li{padding: 0.875rem 0; border-bottom: 1px solid #e1e1e1;}
+.specification li .left{width: 3.125rem; height: 3.125rem; border: 1px solid #e1e1e1; border-radius: 5px; overflow: hidden; margin: 0 0.46rem;}
+.specification li .left img{width: 100%; height: 100%; }
+.specification li .right{width: 15rem; height: auto;}
+.specification li .right h4{font-size: 0.6875rem; color: #333; font-weight: normal; height: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.specification li .right .num{font-size: 0.6875rem; color: #333; height: 1rem;}
+.specification li .right .prize{font-size: 0.9375rem; color: #ff4d45; font-weight: bold;}
+.specification li .right .correct{width: 1.125rem; height: 0.75rem; display: none;}
+.specification li.cur .right .correct{display: block;}
+.specification li .right .correct img{width: 100%; height: 100%;}
+.nums{width: 100%; height: 2.5rem; position: fixed; bottom: 0; left: 0;}
+.nums .topBox{height: 2.875rem; line-height: 2.875rem; background: #fff; padding: 0 0.625rem; font-size: 0.8125rem; color: #666;}
+.nums .sure{height: 2.5rem; line-height: 2.5rem; background-color: #ff4d45; font-size: 1rem; color: #fff; text-align: center;}
+.nums .topBox .inputBox{width: 7.125rem; height: 1.625rem; line-height: 1.625rem; border: 1px solid #e1e1e1; border-radius: 5px; overflow: hidden; margin-top: 0.6rem;}
+.nums .topBox .inputBox span{width: 2.125rem; height: 1.625rem; line-height: 1.625rem; text-align: center; background-color: #f7f7f7; font-size: 1rem;}
+.nums .topBox .inputBox input{width: 2.875rem; height: 1.625rem; line-height: 1.625rem; text-align: center; font-size: 0.8125rem; color: #666;}
+/*购物车*/
+.binding{height: 2.125rem; line-height: 2.125rem; padding: 0 0.625rem; border-top: 0.625rem solid #f7f7f7; border-bottom: 0.625rem solid #f7f7f7; font-size: 0.75rem; color: #b2b2b2;}
+.binding img{width: 0.8125rem; height: 0.8125rem; margin-right: 0.3rem; vertical-align: -0.15rem;}
+.binding .now{width: 4.5rem; height: 1.4rem; line-height: 1.4rem; border: 1px solid #ff4d45; border-radius: 4px; text-align: center; color: #ff4d45; font-size: 0.75rem; margin-top: 0.32rem;}
+.cart{width: 100%; height: auto; margin-bottom: 3.5rem;}
+.cart li{padding: 0.625rem; border-bottom: 1px solid #e1e1e1;}
+.cart li .left{width: 1.75rem; height: 2rem;}
+.cart li .right{width: 17rem; height: auto;}
+.cart li .right .pic{width: 5.625rem; height: 5.625rem; border-radius: 5px; margin-right: 0.375rem; overflow: hidden;}
+.cart li .right .pic img{width: 100%; height: 100%;}
+.cart li .right .text{width: 11rem; height: auto;}
+.cart li .right .text h4{font-size: 0.875rem; color: #333; font-weight: normal; height: 2.8rem; line-height: 1.4rem; overflow: hidden; }
+.cart li .right .text .num{font-size: 0.8125rem; color: #999; height: 1.5rem; line-height: 1.2rem;}
+.cart li .right .text .prize{font-size: 1.2rem; color: #ff4d45; }
+.cart li .right .inputBox{width: 7.125rem; height: 1.625rem; line-height: 1.625rem; border: 1px solid #e1e1e1; border-radius: 5px; overflow: hidden; margin-top: 0.6rem;}
+.cart li .right .inputBox span{width: 2.125rem; height: 1.625rem; line-height: 1.625rem; text-align: center; background-color: #f7f7f7; font-size: 1.2rem;}
+.cart li .right .inputBox input{width: 2.875rem; height: 1.625rem; line-height: 1.625rem; text-align: center; font-size: 0.8125rem; color: #666;}
+.cart li .right .delet{font-size: 0.9375rem; color: #609adb; margin-top: 0.8rem;}
+.selected{width: 1.125rem; height: 1.125rem; background: url(../../images/Buy/checkBox.png) no-repeat 0 -1.25rem; background-size: cover; margin-top: 2.25rem;}
+.selected.on_check{background-position: 0 0;}
+.selected input{opacity: 0;}
+.all_select{width: 100%; height: 2.875rem; box-shadow: 0 -0.25rem 0.25rem #f5f5f5; position: fixed; left: 0; bottom:0; background-color: #fff;}
+.all_select .left{width: 7.5rem; height: 2.875rem; line-height: 2.875rem; padding-left: 0.625rem; box-sizing:border-box; font-size: 0.8125rem; color: #333;}
+.all_select .total{width: 6.25rem; height: 2.875rem; text-align: right; padding-right: 0.25rem; box-sizing:border-box;}
+.all_select .total .sup{font-size: 0.8125rem; color: #808080;}
+.all_select .total .sup span{color: #ff4d45; font-size: 1.2rem;}
+.all_select .total .sub{font-size: 0.6875rem; color: #333;}
+.all_select .accounts{width: 6.25rem; height: 2.875rem; line-height: 2.875rem; background-color: #b3b3b3; font-size: 1.0625rem; color: #fff; text-align: center;}
+.all_select .accounts.cff{background-color: #ff4d45;}
+.del_pop{position: absolute; top: 0; left: 0; z-index: 10; background: url(../../images/Buy/pop_bg.png) repeat; display: none;}
+.del_pop .tip_box{width: 14rem; height: 7.7rem; border-radius: 5px; background: #fff; position: absolute; top: 20%; left: 50%; margin-left: -7rem;}
+.del_pop .tip_box h4{font-size: 0.9375rem; color: #333; height: 3.2rem; text-align: center; line-height: 4rem;}
+.del_pop .tip_box p{font-size: 0.75rem; color: #333; height: 2rem; line-height: 1rem; text-align: center;}
+.del_pop .tip_box ul li{width: 50%; height: 2.5rem; line-height: 2.5rem; font-size: 0.875rem; color: #1f92c8; font-weight: bold; text-align: center; border-top: 1px solid #e1e1e1; float: left; box-sizing:border-box;}
+.del_pop .tip_box p{font-size: 0.75rem; color: #333; height: 2rem; line-height: 1rem; text-align: center;}
+.del_pop .tip_box ul li.cancel{border-right: 1px solid #e1e1e1;}
+.no_content{width: 100%; height: auto; text-align: center;}
+.no_content img{width: 2rem; height: 2rem; margin-top: 30%; margin-bottom: 1rem;}
+.no_content p{font-size: 0.875rem; color: #ccc;}
+
+/*加载更多样式*/
+.tabs{ position:relative;}
+.load_more{ position:absolute; bottom:0; left:0; width:20rem; height:1.2rem; display:none;}
+.load_more p{ width:100%; height:100%; font-size:.7rem; line-height:1.2rem; text-align:center;}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>新增地址</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="../style/Buy/reset.css">
+	<link rel="stylesheet" href="../style/Buy/address.css">
+</head>
+<body style="background-color:#f7f7f7;">
+	<div class="bigBox">
+		<ul class="newAdd">
+			<li>
+				<span class="c33">收货人</span>
+				<input type="text" class="fr detail" value="收货人姓名">
+			</li>
+			<li>
+				<span class="c33">手机号码</span>
+				<input type="text" class="fr detail" value="收货人手机">
+			</li>
+			<li>
+				<span class="c33">收货人</span>
+				<span class="city fr">省，市，区</span>
+			</li>
+			<li style="border:0">
+				<span class="c33">收货人</span>
+				<input type="text" class="fr detail" value="街道，小区，门牌号">
+			</li>
+		</ul>
+	<p class="hold">保&nbsp;&nbsp;存</p>
+	</div>
+	
+	<!-- 选择地区 -->
+	<div class="popBox">
+		<div id="selectArea" class="smallBox">
+		    <div id="divsionSelect">
+		        <ul id="selected">
+		        	<li class="rows province">全国</li>
+		        	<li class="rows city">蚌埠</li>
+		        	<li class="rows town">蚌埠</li>
+		        </ul>
+		        <ul id="forselect">
+		          <li class="rows">全国</li>
+		          <li class="rows">安徽</li>
+		          <li class="rows">河北</li>
+		          <li class="rows">全国</li>
+		          <li class="rows">安徽</li>
+		          <li class="rows">河北</li>
+		          <li class="rows">全国</li>
+		          <li class="rows">安徽</li>
+		          <li class="rows">河北</li>
+		          <li class="rows">全国</li>
+		          <li class="rows">安徽</li>
+		          <li class="rows">河北</li>
+		        </ul>
+		    </div>
+		    <div class="btns clearfix">
+		        <a class="sure" href="">确定</a>
+		        <a class="reset" href="" >取消</a>       
+		    </div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../js/commons/jquery-1.11.3.min.js"></script>
+<script>
+	$(document).ready(function() {
+		//设置font-size
+	    var fontsize = 16 * $(window).width() / 320;
+	    $('html').css('font-size',fontsize);
+     	//rem设置结束
+     	$('input[type=text]').focus(function(){
+			var txt_value = $(this).val();
+			if(txt_value==this.defaultValue){
+				$(this).val("");          
+			};	
+		});
+		$('input[type=text]').blur(function(){
+			var txt_value = $(this).val();
+			if(txt_value==""){
+				$(this).val(this.defaultValue);
+			};	     
+		});	
+		$('.city').click(function() {
+			$('.popBox').fadeIn();
+    		$('.bigBox').css('display','none');
+		});
+    });
+</script>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>购物车</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="../style/Buy/reset.css">
+	<link rel="stylesheet" href="../style/Buy/product_detail.css">
+</head>
+<body>
+	<div class="binding">
+		<img src="../images/Buy/dele.png" alt="">绑定手机号可查看所有订单
+		<span class="now fr">立即绑定</span>
+	</div>
+	<!-- 购物车有内容 -->
+	<ul class="cart" >
+		<li class="clearfix">
+			<div class="left fl">
+				<div class="selected"><input type="checkbox" ></div>
+			</div>
+			<div class="right fl">
+				<div class="image_text clearfix">
+					<div class="pic fl"><img src="../images/Buy/productBanner1.jpg" alt=""></div>
+					<div class="text fl">
+						<h4>【纯天然绿色】车厘子 产自加拿大进口车厘子</h4>
+						<p class="num">500g</p>
+						<p class="prize">￥5.00</p>
+					</div>
+				</div>
+				<div class="inputBox fl">
+					<span class="fl">-</span><input type="text" value="1" class="fl"><span class="fr">＋</span>
+				</div>
+				<div class="delet fr">删除</div>
+			</div>
+		</li>
+		<li class="clearfix">
+			<div class="left fl">
+				<div class="selected"><input type="checkbox" ></div>
+			</div>
+			<div class="right fl">
+				<div class="image_text clearfix">
+					<div class="pic fl"><img src="../images/Buy/productBanner1.jpg" alt=""></div>
+					<div class="text fl">
+						<h4>【纯天然绿色】车厘子 产自加拿大进口车厘子</h4>
+						<p class="num">500g</p>
+						<p class="prize">￥5.00</p>
+					</div>
+				</div>
+				<div class="inputBox fl">
+					<span class="fl">-</span><input type="text" value="1" class="fl"><span class="fr">＋</span>
+				</div>
+				<div class="delet fr">删除</div>
+			</div>
+		</li>
+	</ul>
+	<!-- 无内容 -->
+	<div class="no_content" style="display:none;">
+		<img src="../images/Buy/cart.png" alt="">
+		<p>您的购物车是空的</p>
+	</div>
+	<div class="all_select">
+		<div class="left fl">
+			<div class="selected fl" id="all_select" style="margin-top: 0.85rem; margin-right: 0.25rem;"><input type="checkbox" ></div>
+			<span class="fl">全选</span>
+		</div>
+		<div class="total fl">
+			<p class="sup">合计<span>￥0.00</span></p>
+			<p class="sub">不含运费</p>
+		</div>
+		<div class="accounts fl">结算<span></span></div>
+	</div>
+	<!-- 删除弹窗 -->
+	<div class="del_pop">
+		<div class="tip_box">
+			<h4>提示</h4>
+			<p>确定删除所选的商品？</p>
+			<ul class="clearfix">
+				<li class="cancel">取消</li>
+				<li class="sure">确定</li>
+			</ul>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../js/commons/jquery-1.11.3.min.js"></script>
+<script>
+	$(document).ready(function() {
+	//设置font-size
+	    var fontsize = 16 * $(window).width() / 320;
+	    $('html').css('font-size',fontsize);
+     //rem设置结束
+ 	// 多选框
+ 	  // 多选框
+ 	 // 多选框
+ 	 var i = $('.selected').not("#all_select").length;
+ 	 var flag = 1;
+ 	  $(".selected").not("#all_select").on("click",function(){
+ 		var now= $('.on_check').not("#all_select").length;
+        if($(this).hasClass("on_check")){
+        	now--;
+        	jQuery(this).removeClass("on_check");
+        }else{	
+        	now++;
+        	$('.accounts').addClass('cff');
+        	jQuery(this).addClass("on_check");
+        }
+        $('.accounts span').html('（'+now+'）');
+        if(now==i){
+        	flag = 0;
+        	$('#all_select').addClass('on_check');
+        }else if(now==0){
+        	flag =1;
+        	$('.accounts').removeClass('cff');
+        	$('.accounts span').html('');
+        	$('#all_select').removeClass('on_check');
+        }else{
+        	flag =1;
+        	$('#all_select').removeClass('on_check');	
+        }
+      })
+       $('#all_select').click(function() {
+       	if(flag==1){
+       		$('.selected').addClass('on_check');
+       		$('.accounts').addClass('cff');
+       		$('.accounts span').html('（'+i+'）');
+       		$('#all_select').addClass('on_check');
+       		flag = 0;
+       	}else{
+       		$('.selected').removeClass('on_check');
+       		$('.accounts').removeClass('cff');
+       		$('.accounts span').html('');
+       		$('#all_select').removeClass('on_check');	
+       		flag = 1;
+       	}
+     });
+        // 删除弹框
+     var m = $(window).width();
+     var n = $(window).height();
+     $('.del_pop').css({
+     	'width':m,
+     	'height':n
+     });
+     $('.delet').click(function() {
+     	$('.del_pop').show();
+     });
+     $('.del_pop').click(function() {
+     	$(this).hide();
+     });
+    })
+</script>
+</html>

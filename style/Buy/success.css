@@ -1,0 +1,14 @@
+.success1,.success2{width: 18.125rem; height: auto; margin:0 auto; margin-top: 10%; background-color: #fff; border-radius: 5px;}
+.success1 .top{width: 100%; height: auto; text-align: center; font-size: 0.75rem; color: #ccc;}
+.success1 .top img,.success2 img{width: 3.125rem; height: 3.125rem; margin-top: 1.8125rem;}
+.success1 .top .state,.success2 .state{font-size: 0.875rem; color: #333; font-weight: bold; margin: 1rem 0 0.75rem;}
+.success1 .item{font-size: 0.8125rem;  color: #999; margin-top: 2.5rem;}
+.success1 .item li{height: 2.1875rem; padding: 0 0.75rem;}
+.success1 .order,.success2 .order{padding: 0.9rem 0 1.6rem; text-align: center;}
+.success1 .order a,.success2 .order a{font-size: 0.8125rem; color: #64bc34;}
+.success2{text-align:center;}
+.success2 .f22{font-size: 0.6875rem; color: #b2b2b2; line-height: 1.2rem;}
+.success2 .f24{font-size: 0.75rem; color: #ccc; height: 1.625rem;}
+.success2 .orderNub{font-size: 0.8125rem; color: #333; height: 2.4375rem;}
+.success2 .bingding{width: 9.375rem; height: 2.1875rem; line-height: 2.1875rem; background-color: #64bc34; font-size: 0.8125rem; margin: 1rem auto 0; border-radius: 5px;}
+.success2 .bingding a{color: #fff;}

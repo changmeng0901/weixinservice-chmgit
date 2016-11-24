@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>我的红包</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="../style/Buy/reset.css">
+	<link rel="stylesheet" href="../style/Buy/my_order.css">
+</head>
+<body style="background:#f7f7f7;">
+	<div class="my_packets"  style="display:none;">
+		<ul class="items clearfix">
+			<li><a href="my_order.html"><p>我的订单</p></a></li>
+			<li class="cur"><a href="packets.html"><p>我的红包</p></a></li>
+		</ul>
+		<ul class="coupon">
+			<li class="card card1">
+				<div class="topPart">
+					<div class="left fl">
+						<p class="value"><span>￥</span>10</p>
+						<p class="useTime">有效期：2016-09-30</p>
+					</div>
+					<div class="right fr">
+						<img src="../images/Buy/packet1.png" alt="">
+					</div>
+				</div>
+				<p class="tip">全站商品通用（个别商品除外）满80.00使用</p>
+			</li>
+			<li class="card card2">
+				<div class="topPart">
+					<div class="left fl">
+						<p class="value"><span>￥</span>10</p>
+						<p class="useTime">有效期：2016-09-30</p>
+					</div>
+					<div class="right fr">
+						<img src="../images/Buy/packet2.png" alt="">
+					</div>
+				</div>
+				<p class="tip">全站商品通用（个别商品除外）满80.00使用</p>
+			</li>
+			<li class="card card3">
+				<i class="seal seal1"></i>
+				<div class="topPart">
+					<div class="left fl">
+						<p class="value"><span>￥</span>10</p>
+						<p class="useTime">有效期：2016-09-30</p>
+					</div>
+					<div class="right fr">
+						<img src="../images/Buy/packet3.png" alt="">
+					</div>
+				</div>
+				<p class="tip">全站商品通用（个别商品除外）满80.00使用</p>
+			</li>
+			<li class="card card4">
+				<i class="seal seal2"></i>
+				<div class="topPart">
+					<div class="left fl">
+						<p class="value"><span>￥</span>10</p>
+						<p class="useTime">有效期：2016-09-30</p>
+					</div>
+					<div class="right fr">
+						<img src="../images/Buy/packet4.png" alt="">
+					</div>
+				</div>
+				<p class="tip">全站商品通用（个别商品除外）满80.00使用</p>
+			</li>
+		</ul>
+	</div>
+	<div class="no_packets" style="display:none;">
+		<ul class="items clearfix">
+			<li><a href="my_order.html"><p>我的订单</p></a></li>
+			<li class="cur"><a href="packets.html"><p>我的红包</p></a></li>
+		</ul>
+		<img src="../images/Buy/money.png" />
+		<p>暂无红包哦~</p>
+	</div>
+	<div class="no_binding" >
+		<ul class="items clearfix">
+			<li><a href="my_order.html"><p>我的订单</p></a></li>
+			<li class="cur"><a href="packets.html"><p>我的红包</p></a></li>
+		</ul>
+		<img src="../images/Buy/bingding.png" style="width:1.625rem; height:2.5rem; margin:4.5rem 0 1rem;"/>
+		<p class="warn">你还没有绑定手机号</p>
+		<p>无法获得您的红包信息</p>
+		<div class="bdBtn">立即绑定</div>
+	</div>
+	<!-- 注册弹窗 -->
+	<div class="registerPop">
+		<div class="member">
+			<div class="pen"><img src="../images/Buy/pen.png" alt=""></div>
+			<h4>注册会员账号</h4>
+			<ul>
+				<li class="info">
+					<input type="text" value="手机号" class="entry1">
+					<i class="icon1"></i>
+				</li>
+				<li class="info">
+					<input type="text" value="验证码" class="entry2">
+					<i class="icon2"></i>
+					<span class="code fr">验证码</span>
+				</li>
+				<li class="regBtn">注册并绑定</li>
+			</ul>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../js/commons/jquery-1.11.3.min.js"></script>
+<script>
+	$(document).ready(function() {
+		//设置font-size
+	    var fontsize = 16 * $(window).width() / 320;
+	    $('html').css('font-size',fontsize);
+     	//rem设置结束
+     	$('.no_packets').height($(window).height());
+     	$('.no_binding').height($(window).height());
+     	// 注册弹窗
+     	$('.registerPop').width($(window).width());
+     	$('.registerPop').height($(window).height());
+     	$('.bdBtn').click(function() {
+     		$('.registerPop').show();
+     	});
+     	$('.registerPop').click(function() {
+     		$(this).hide();
+     	});
+	});
+</script>
+</html>

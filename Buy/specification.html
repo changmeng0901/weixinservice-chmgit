@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>商品详情页-选择规格</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="../style/Buy/reset.css">
+	<link rel="stylesheet" href="../style/Buy/product_detail.css">
+</head>
+<body style="background-color: #f7f7f7;">
+	<ul class="specification" id="specification"></ul>
+	<div class="nums">
+		<div class="sure" id="NewProduct">确定</div>
+	</div>
+</body>
+<script type="text/javascript" src="../js/commons/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../js/commons/jquery.lazyload.js"></script>
+<script>
+$(document).ready(function() {
+	
+	//设置font-size
+	var fontsize = 16 * $(window).width() / 320;
+	$('html').css('font-size',fontsize);
+	//rem设置结束
+	
+	//图片懒加载
+	$("img").lazyload({
+		effect: "fadeIn"
+	});
+	
+	var LocationHttp = 'http://192.168.21.187:8081'; 
+	var makeParameterMethod,
+    makeParameterField,
+    ParameterMethod,
+    ParameterField,
+    pageUrl;
+	
+	//SEARCH
+	var iframeSearch = location.search.split("&");
+	var getProductId = iframeSearch[0].split("=")[1];
+	var getEnterpriseId = iframeSearch[1].split("=")[1];
+	var getTestUrl = iframeSearch[2].split("=")[1];
+	makeParameterMethod =  function (string) {
+		var Method = '&method=' + string;
+		return Method;
+	}
+	makeParameterField = function (ProductId,ID) { 
+		return encodeURI('&field={"'+ProductId+'":"'+ID+'"}');
+	}
+	//URL
+	ParameterMethod = makeParameterMethod('option.product.list.data');
+	ParameterField = makeParameterField('product_id',getProductId);
+	pageUrl = getTestUrl +"/rest/1.0/purchase?v=1.0&format=json"+ ParameterMethod + ParameterField;
+	console.log(pageUrl)
+	
+	//AJAX
+	$.ajax({
+		type: "GET",
+		timeout: 1000,
+		url: pageUrl,
+		dataType: "jsonp",
+		jsonp: 'callback',
+		success: function(response) {
+			
+			if( !response.option_product_list == '' || !response.option_product_list == [] || !response.option_product_list == 'undefined' ){
+				InitListData( response.option_product_list );		
+			}
+			
+		},
+		error: function(e) {
+			try {
+				console.log('规格页请求失败了吧！！')
+			} catch (e) {}
+		}
+	});
+	
+	
+	
+	//选择规格列表函数
+	var InitListData = function( _data ){
+		//数组
+		var _class = '',
+			_list = '',
+		$specification = $('#specification');
+		//循环，则：
+		for( var i=0; i< _data.length; i++ ){
+			i == 0 ?  _class = ' cur' : _class = ''
+			_list += 
+			'<li class="clearfix'+ _class +'" id="'+ _data[i].product_id +'">'+
+				'<div class="left fl">'+
+					'<img src="'+ _data[i].image_url +'" alt="">'+
+				'</div>'+
+				'<div class="right fl">'+
+					'<h4>'+ _data[i].product_name +'</h4>'+
+					'<p class="num">'+ _data[i].spec +'</p>'+
+					'<div>'+
+						'<span class="prize fl">￥'+ _data[i].product_price +'</span>'+
+						'<span class="correct fr"><img src="../images/Buy/correct.png" alt=""></span>'+
+					'</div>'+
+				'</div>'+
+			'</li>';
+		}
+		$specification.append( _list );
+		
+		//列表项点击事件
+		$specification.find('li').each(function(index, elem) {
+            $(elem).click(function(){
+				$(this).addClass('cur').siblings().removeClass('cur');
+			});
+        });
+	}
+	
+	//点击确定，调用产品详情页的接口：
+	$('#NewProduct').click(function(){
+		/*//URL
+		ParameterMethod = makeParameterMethod('product.info.data');
+		ParameterField = makeParameterField('product_id',$('#specification .cur'),'enterprise_info_id',getEnterpriseId);
+		pageUrl = getTestUrl +"/rest/1.0/purchase?v=1.0&format=json"+ ParameterMethod + ParameterField;
+		//AJAX
+		$.ajax({
+			type: "GET",
+			timeout: 1000,
+			url: pageUrl,
+			dataType: "jsonp",
+			jsonp: 'callback'
+		});*/
+		window.location.href = LocationHttp+'/weixinservice/Buy/product_detail.html?product_id='+$('#specification .cur').attr('id')+'&enterprise_info_id='+getEnterpriseId+'&domain='+getTestUrl
+	})
+	
+	
+});
+</script>
+</html>

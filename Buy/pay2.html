@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>待付款的订单</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="../style/Buy/reset.css">
+	<link rel="stylesheet" href="../style/Buy/pay.css">
+</head>
+<body style="background:#f7f7f7;">
+	
+	<div class="address">
+		<a href="info">
+			<!-- 无内容 -->
+			<p class="newAdd" style="display:none;">新增收货地址</p>
+			<!-- 有内容 -->
+			<p class="name">夏岩岩</p>
+			<p class="city">北京 北京市 朝阳区</p>
+			<p class="city">通惠河畔文化园区惠河南街1002-7</p>
+			<p class="city">18612104915</p>
+		</a>
+	</div>
+	<div class="pic_txt">
+		<div class="border_b">
+			<div class="left fl">
+				<img src="../images/Buy/productBanner1.jpg" alt="">
+			</div>
+			<div class="center fl">
+				<h4>【纯天然绿色】车厘子 产自加拿大进口车厘子</h4>
+				<p>500g</p>
+			</div>
+			<p class="unit fr">
+				<span>×1</span><br>
+				<span class="prize">￥5.00</span>
+			</p>
+		</div>
+		<div class="nHeight">
+			<span class="left">配送方式</span>
+			<span class="right fr">快递发货</span>
+		</div>
+		<div class="nHeight">
+			<span class="left">运费</span>
+			<span class="right fr cff">￥5.00</span>
+		</div>
+		<div class="nHeight">
+			<a href="">
+				<span class="left">买家留言</span>
+				<span class="right fr">点击给商家留言></span>
+			</a>
+		</div>
+		<div class="nHeight" style="border:0;">
+			<a href="">
+				<span class="left">合计</span>
+				<span class="right fr cff">￥10.00</span>
+			</a>
+		</div>
+	</div>
+	<div class="warpBox">
+		<div class="pic_txt">
+			<div class="nHeight red_packet">
+				<span class="left">红包</span>
+				<span class="right fr">使用红包></span>
+			</div>
+			<div class="nHeight" style="border:0;">
+				<a href="">
+					<span class="left">短信通知收件人</span>
+					<span class="fr note"><img src="../images/Buy/on.png" alt=""></span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="total">
+		<span class="left">合计：<i><em>￥</em>11.00</i></span>
+		<span class="fr right refer">提交订单</span>
+	</div>
+	<!-- 提交订单弹窗 -->
+	<div class="referPop">
+		<ul class="payment">
+			<li style="color:#56b331; font-weight:bold;">微信支付</li>
+			<li class="zan">暂不支付</li>
+		</ul>
+	</div>
+	<!-- 使用红包弹窗 -->
+	<div class="redPop"></div>
+	<div class="packetContent">
+		<div class="head">选择红包<i class="close">×</i></div>
+		<div class="content1" style="display:none;">
+			<img src="../images/Buy/number.png" alt="">
+			<p class="point">你还没有绑定手机号</p>
+			<p>无法获得您的红包信息</p>
+			<p class="bdBtn">立即绑定</p>
+		</div>
+		<div class="content2" style="display:none;">
+			<img src="../images/Buy/money.png" style="width:1.5rem; height:1.687rem;">
+			<p>暂无红包哦~</p>
+		</div>
+		<ul class="content3">
+			<li>
+				<div class="top">
+					<div class="left fl">
+						<div class="selected"><input type="checkbox"></div>
+					</div>
+					<div class="card card1">
+						<div class="topPart">
+							<div class="left fl">
+								<p class="value"><span>￥</span>10</p>
+								<p class="useTime">有效期：2016-09-30</p>
+							</div>
+							<div class="right fr">
+								<img src="../images/Buy/packet1.png" alt="">
+							</div>
+						</div>
+						<p class="tip">全站商品通用（个别商品除外）满80.00使用</p>
+					</div>
+				</div>
+				<div class="use">使&nbsp;&nbsp;用</div>
+			</li>
+			<li>
+				<div class="top">
+					<div class="left fl">
+						<div class="selected on_check"><input type="checkbox"></div>
+					</div>
+					<div class="card card2">
+						<div class="topPart">
+							<div class="left fl">
+								<p class="value"><span>￥</span>10</p>
+								<p class="useTime">有效期：2016-09-30</p>
+							</div>
+							<div class="right fr">
+								<img src="../images/Buy/packet1.png" alt="">
+							</div>
+						</div>
+						<p class="tip">全站商品通用（个别商品除外）满80.00使用</p>
+					</div>
+				</div>
+				<div class="use cur">使&nbsp;&nbsp;用</div>
+			</li>
+		</ul>
+	</div>
+</body>
+<script type="text/javascript" src="../js/commons/jquery-1.11.3.min.js"></script>
+<script>
+	$(document).ready(function() {
+		//设置font-size
+	    var fontsize = 16 * $(window).width() / 320;
+	    $('html').css('font-size',fontsize);
+     	//rem设置结束
+     	// 提交订单弹窗
+	     var m = $(window).width();
+	     var n = $(window).height();
+	     $('.referPop,.redPop').css({
+	     	'width' : m,
+	     	'height' : n
+	     })
+	     $('.refer').click(function() {
+	     	$('.referPop').show();
+	     });
+	     $('.payment').click(function(event) {
+	     	return false;
+	     });
+	     $('.referPop').click(function() {
+	     	$(this).hide();
+	     });
+	     // 选择红包弹窗
+	     $('.red_packet').click(function() {
+	     	$('body').css('overflow', 'hidden');
+	     	$('.redPop').show();
+	     	$('.packetContent').fadeIn();
+	     });
+	      $('.redPop').click(function() {
+	     	$(this).fadeOut();
+	     	$('.packetContent').hide();
+	     	$('body').css('overflow', 'auto');
+	     });
+	});
+</script>
+</html>

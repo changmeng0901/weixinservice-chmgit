@@ -1,0 +1,18 @@
+.newAdd{padding-left: 0.625rem; height: auto; border-bottom: 1px solid #e1e1e1; background-color: #fff;}
+.newAdd li{padding-right: 0.625rem; height: 2.4375rem; line-height: 2.4375rem; font-size: 0.875rem; color: #333; border-bottom: 1px solid #e1e1e1; }
+.newAdd li .detail{width: 14rem; text-align: right; font-size: 0.875rem; color: #ccc; height: 2.4375rem; line-height: 2.4375rem; font-family: "微软雅黑";}
+.newAdd li .city{color: #ccc;}
+.hold{width: 11.25rem; height: 2.1875rem; line-height: 2.1875rem; background-color: #ff4d45; font-size: 0.875rem; color: #fff; margin: 1.75rem auto 0; text-align: center; border-radius: 5px;}
+/*产地*/
+/*产地*/
+.popBox{width: 100%; height: auto; padding-bottom:3rem; display: none;}
+#selected, .vegetable, .standard{width: 100%; height: auto; color: #646464;}
+#forselect{width: 100%; height: auto; color: #646464;}
+#selected .rows, #forselect .rows, .vegetable li, .standard li{width: 100%; height: 3rem; line-height: 3rem; padding: 0 0.8rem; border-bottom: 1px solid #ddd; box-sizing: border-box; font-size: 1rem;}
+.btns {width: 100%; height: 3.85rem; text-align: center; position: fixed; bottom: 0; background: #fff;}
+.btns .reset, .btns .sure {display:block; width: 9rem; height: 2.75rem; text-align: center; line-height: 2.6rem; border-radius: 0.3125rem; font-size: 1.0625rem; display: inline-block; font-family: "微软雅黑"; font-weight: normal;}
+.btns .sure {background: #6ab74b; border: 1px solid #9fd08b;  box-sizing: border-box; color: #fff;}
+.btns .reset {color: #646464; border: 1px solid #dfdfdf; box-sizing: border-box;}
+#selected .province {background: #dfdfdf; color: #1a7ff1; font-weight: bold; font-size: 1rem;}
+#selected .city{ background:#efefef; color:#1a7ff1;}
+#selected .town{ background:#f8f8f8; color:#1a7ff1;}
