@@ -25,6 +25,9 @@ makeParameterMethod = function(string){
 makeParameterField = function(videoId,ID){
     return encodeURI('&field={"'+videoId+'":"'+ID+'"}');
 }
+makeParameterField2 = function(realPlantId,ID ,videoDuration,Duration){
+    return encodeURI('&field={"'+realPlantId+'":"'+ID+'","'+videoDuration+'":"'+Duration+'"}');
+}
 makeParameterVerify = function(string){
     var Verify = '&verify=' + string;
     return Verify;
@@ -105,7 +108,7 @@ function InitVideoData(_data){
     // 播放次数
     $('#video_play_times').html(_data.videos[0].video_play_times);
     // 视频时长
-    $('#video_duration').html(_data.videos[0].video_duration);
+    $('#video_duration').html(_data.videos[0].video_duration+1);
 
     // 把拼好的实况直播slide，添加到盒子里
     var devicesList = '';
@@ -208,7 +211,7 @@ function InitVideoData(_data){
                 // 3）视频追溯
                 // 视频追溯下的，重新生成对应的视频
                 // CreatVideo3(0 ,'http://farmeasy.cn/video/934/891/playlist.m3u8','../../images/MemberFarm/PlantDetail_temp1.jpg');
-                CreatVideo3(0 ,_data.videos[0].video_url,'../../images/MemberFarm/PlantDetail_temp1.jpg');
+                CreatVideo3(0 ,_data.videos[0].video_url,'../../images/MemberFarm/PlantDetail_temp1.jpg',_data.videos[0].video_duration);
 
             }
 
@@ -235,10 +238,24 @@ function CreatVideo2(videoItems,videoURL,imgURL){
     player = videojs("live-video"+videoItems);
     player.play();
 }
-function CreatVideo3(videoItems,videoURL,imgURL){
+function CreatVideo3(videoItems,videoURL,imgURL,videoDuration){
     player.dispose();//清理
     scriptAdd  = '<video id="track-video'+videoItems+'" class="video-js vjs-default-skin vjs-big-play-centered" style="width:100%;height:100%;" preload="auto" poster="'+imgURL+'" controls><source src="'+videoURL+'" type="application/x-mpegURL"/></video>';
     $("#TraceVideoBlock"+videoItems).html(scriptAdd);
     player = videojs("track-video"+videoItems);
     player.play();
+    if( iframeSearch[0].split('=')[0] == '?realPlantId'){
+    // 如果是从种植详情点进来的，才会有种植ID，否则不会请求
+        ParameterMethod = makeParameterMethod('phone.view.play.num');
+        ParameterField = makeParameterField2('realPlantId',getVideoId,'getVideoId',videoDuration)
+        ParameterVerify = makeParameterVerify(getVerify);
+        pageUrl = getTestUrl+'/rest/1.0/phoneView?v=1.0&format=json'+ParameterMethod+ParameterField2+ParameterVerify;;
+        $.ajax({
+            type: "GET",
+            timeout: 1000,
+            url: pageUrl,
+            dataType: "jsonp",
+            jsonp: 'callback'
+        });
+    }
 }
