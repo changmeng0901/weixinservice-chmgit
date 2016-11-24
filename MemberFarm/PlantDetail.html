@@ -17,7 +17,7 @@
 <i class="line_hui"></i>
 <div class="plant_title clear" style="margin-top:0;">
 	<h3>作物信息</h3>
-	<a class="text_link" id="view_monitor" href="#">
+	<a class="text_link" id="view_monitor" href="JavaScript:;">
 		<img src="../images/MemberFarm/PlantDetail_icon1.png" >监控
 	</a>
 </div>
@@ -27,20 +27,20 @@
 			<img id="plantImg" src="../images/MemberFarm/CropsList_pic1.png" >
 		</dt>
 		<dd class="dl_dd">
-			<strong class="crop_name" id="plantName">油菜</strong>
-			<p class="variety_name" id="breedName">小油菜珍妃</p>
-			<p class="plant_time" id="plantTime">2016/03/01-2016/08/11</p>
+			<strong class="crop_name" id="plantName"></strong>
+			<p class="variety_name" id="breedName"></p>
+			<p class="plant_time" id="plantTime"></p>
 		</dd>
 	</dl>
 </div>
 <div class="cropinfo_bd">
-	<p class="life_cycle"><span class="text_cycle" id="periodName">开花结果期</span><span class="text_day" id="alreayPlantDays">（第123天）</span></p>
+	<p class="life_cycle"><span class="text_cycle" id="periodName"></span><span class="text_day" id="alreayPlantDays"></span></p>
 	<div class="progress_block">
 		<div class="progress_bar" id="progress_bar">
 			<span class="progress_percent"></span>
 		</div>
 	</div>
-	<p class="present_cycle">目前处于<span class="text_cyle" id="text_cyle">采收期</span><span class="color_bloack">，还有<b id="remain">10</b>天采收结束</span></p>
+	<p class="present_cycle">目前处于<span class="text_cyle" id="text_cyle"></span><span class="color_bloack">，还有<b id="remain"></b>天采收结束</span></p>
 </div>
 <!-- 物联网设备-传感器数据 -->
 <div class="plant_title clear">
@@ -55,43 +55,43 @@
 			<div class="swiper_slide slide_active" dataType="1">
 				<p class="text_name">空气温度</p>
 				<img src="../images/MemberFarm/PlantDetail_kongqwd.png" class="icon_sen">
-				<p class="text_val" id="airTemp">20.5℃</p>
+				<p class="text_val" id="airTemp"></p>
 				<i class="line_arrow"></i>
 			</div>
 			<div class="swiper_slide" dataType="2">
 				<p class="text_name">空气湿度</p>
 				<img src="../images/MemberFarm/PlantDetail_kongqsd.png" class="icon_sen">
-				<p class="text_val" id="airHumidity">90%</p>
+				<p class="text_val" id="airHumidity"></p>
 				<i class="line_arrow"></i>
 			</div>
 			<div class="swiper_slide" dataType="3">
 				<p class="text_name">土壤湿度</p>
 				<img src="../images/MemberFarm/PlantDetail_tursd.png" class="icon_sen">
-				<p class="text_val" id="soilHumidity">50%</p>
+				<p class="text_val" id="soilHumidity"></p>
 				<i class="line_arrow"></i>
 			</div>
 			<div class="swiper_slide" dataType="4">
 				<p class="text_name">光照强度</p>
 				<img src="../images/MemberFarm/PlantDetail_guangzqd.png" class="icon_sen">
-				<p class="text_val" id="illumination">100lux</p>
+				<p class="text_val" id="illumination"></p>
 				<i class="line_arrow"></i>
 			</div>
 			<div class="swiper_slide" dataType="5">
 				<p class="text_name">二氧化碳</p>
 				<img src="../images/MemberFarm/PlantDetail_eryht.png" class="icon_sen">
-				<p class="text_val" id="co2">20.5℃</p>
+				<p class="text_val" id="co2"></p>
 				<i class="line_arrow"></i>
 			</div>
 			<div class="swiper_slide" dataType="6">
 				<p class="text_name">土壤温度</p>
 				<img src="../images/MemberFarm/PlantDetail_turwd.png" class="icon_sen">
-				<p class="text_val" id="soilTemp">20.5℃</p>
+				<p class="text_val" id="soilTemp"></p>
 				<i class="line_arrow"></i>
 			</div>
 			<div class="swiper_slide" dataType="7">
 				<p class="text_name">空气露点</p>
 				<img src="../images/MemberFarm/PlantDetail_kongqld.png" class="icon_sen">
-				<p class="text_val" id="dewPoint">20.5℃</p>
+				<p class="text_val" id="dewPoint"></p>
 				<i class="line_arrow"></i>
 			</div>
 		</div>
@@ -106,7 +106,7 @@
 	</div>
 	<!-- 天周月 -->
 	<div class="dayweekmonth" id="dayweekmonth">
-		<span class="sCur" timeType="1">天</span>
+		<span timeType="1">天</span>
 		<span class="sLine" timeType="2">周</span>
 		<span timeType="3">月</span>
 	</div>
@@ -123,10 +123,6 @@
 </div>
 <div class="farm_information" id="farm_information">
 	<!-- 农事信息 无信息 -->
-	<!-- <div class="no_information">
-		<img src="../images/MemberFarm/PlantDetail_icon4.png" class="no_icon">
-		<p class="no_tip">暂无农事信息</p>
-	</div> -->
 </div>
 
 <!-- 采收信息 -->
