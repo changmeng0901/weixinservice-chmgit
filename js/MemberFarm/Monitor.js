@@ -30,8 +30,14 @@ makeParameterVerify = function(string){
     return Verify;
 }
 ParameterMethod = makeParameterMethod('phone.view.monitoring');
-ParameterField = makeParameterField('videoId',getVideoId)
 ParameterVerify = makeParameterVerify(getVerify);
+if( iframeSearch[0].split('=')[0] == '?videoId'){
+    // videoId 说明是从列表页的监控点进来的
+    ParameterField = makeParameterField('videoId',getVideoId)
+}else{
+    // realPlantId 说明是从种植详情的监控按钮点进来的
+    ParameterField = makeParameterField('realPlantId',getVideoId)
+}
 pageUrl = getTestUrl+'/rest/1.0/phoneView?v=1.0&format=json'+ParameterMethod+ParameterField+ParameterVerify;
 console.log(pageUrl)
 // 本地 = http://192.168.21.187/weixinservice/MemberFarm/Monitor.html?videoId=916&verify=asdf&domain=http://192.168.21.188:8080
@@ -80,12 +86,18 @@ function FontSize(){
 // 初始化视频数据
 function InitVideoData(_data){
     // 地块名
-    $('#tunnelName').html(_data.tunnelName);
-    $('#tunnelName2').html(_data.tunnelName);
-    $('#tunnelName3').html(_data.tunnelName);
+    var tunnelName = tunnelName2 = tunnelName3=_data.tunnelName;
+    !tunnelName=='undefined'||!tunnelName==''? tunnelName=_data.tunnelName : tunnelName='--';
+    $('#tunnelName').html(tunnelName);
+    $('#tunnelName2').html(tunnelName2);
+    $('#tunnelName3').html(tunnelName3);
     // 作物
-    $('#plantName').html('种植作物：'+_data.plantName.substring(0,_data.plantName.length-1));
-    $('#plantName2').html('种植作物：'+_data.plantName.substring(0,_data.plantName.length-1));
+    var plantName = _data.plantName;
+    var plantName2 =  _data.plantName2;
+    !plantName=='undefined'||!plantName==''? plantName=_data.plantName.substring(0,_data.plantName.length-1) : plantName='--';
+    !plantName2=='undefined'||!plantName2==''? plantName2=_data.plantName.substring(0,_data.plantName.length-1) : plantName2='--';
+    $('#plantName').html('种植作物：'+plantName);
+    $('#plantName2').html('种植作物：'+plantName2);
     // 拍摄时间
     $('#take_time').html(_data.images[0].time);
     // 图片数量

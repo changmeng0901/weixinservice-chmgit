@@ -59,11 +59,11 @@ $.ajax({
 
 // 跳转到监控页面
 $('#view_monitor').click(function(){
-    window.location.href="http://192.168.21.187/weixinservice/MemberFarm/Monitor.html?videoId=916&domain=http://192.168.21.188:8080";
+    window.location.href="http://192.168.21.187/weixinservice/MemberFarm/Monitor.html?realPlantId="+getRealPlantId+"&verify=asdf&domain=http://192.168.21.188:8080&phone="+getPhone;
 });
 // 跳转到指数页面
 $('#view_exponent').click(function(){
-    window.location.href="http://192.168.21.187/weixinservice/MemberFarm/Exponent.html?enterpriseInfoId=2&realPlantId="+getRealPlantId+"&verify=asdf&domain=http://192.168.21.188:8080";
+    window.location.href="http://192.168.21.187/weixinservice/MemberFarm/Exponent.html?enterpriseInfoId=2&realPlantId="+getRealPlantId+"&verify=asdf&domain=http://192.168.21.188:8080&phone="+getPhone;
 });
 
 // 物联网设备-传感器数据ajax加载数据

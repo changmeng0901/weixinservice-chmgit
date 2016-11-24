@@ -5,85 +5,270 @@ var FontTimer,
     makeParameterFieldType,
     makeParameterVerify,
     pageUrl,
-    pageUrlType;
+    pageUrlType,
+    ParameterMethod,
+    ParameterMethodType,
+    ParameterField,
+    ParameterFieldType,
+    ParameterVerify,
+    ParameterVerifyType;
 FontSize();
 
 // ajax 
 var iframeSearch = location.search.split('&');
-// var getEnterpriseInfoId = iframeSearch[0].split("=")[1];
-// var getDeviceId = iframeSearch[1].split('=')[1];
-// var getDataType = iframeSearch[2].split('=')[1];
-// var getTimeType = iframeSearch[3].split('=')[1];
-// var getVerify = iframeSearch[4].split('=')[1];
-// var getTestUrl = iframeSearch[5].split("=")[1];
-// var getPhone = iframeSearch[6].split("=")[1];
+// Method
 makeParameterMethod = function(string){
     var Method = '&method=' + string;
     return Method;
 }
-makeParameterField = function( EnterpriseInfoId,ID, realPlantId,ID2){
-    return encodeURI('&field={"'+EnterpriseInfoId+'":"'+ID+'","'+realPlantId+'":"'+ID2+'"}');
+// Field 
+makeParameterField = function( PhoneNumber,Number, EnterpriseInfoId,ID, realPlantId,ID2){
+    return encodeURI('&field={"'+PhoneNumber+'":"'+Number+'","'+EnterpriseInfoId+'":"'+ID+'","'+realPlantId+'":"'+ID2+'"}');
 }
+// FieldType 带传感器类型和时间类型
 makeParameterFieldType = function(PhoneNumber,Number, EnterpriseInfoId,ID, DeviceId,D_ID, DataType,Type1, TimeType,Type2){
     return encodeURI('&field={"'+PhoneNumber+'":"'+Number+'","'+EnterpriseInfoId+'":"'+ID+'","'+DeviceId+'":"'+D_ID+'","'+DataType+'":"'+Type1+'","'+TimeType+'":"'+Type2+'"}');
 }
+// Verify
 makeParameterVerify = function(string){
     var Verify = '&verify=' + string;
     return Verify;
 }
-/*// 传感器数据接口
-ParameterMethodType = makeParameterMethod('phone.view.plant.device.data');
-ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'deviceId',getDeviceId,'dataType',getDataType,'timeType',getTimeType);
-ParameterVerifyType = makeParameterVerify(getVerify);
-pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
-// 本地 = http://192.168.21.187/weixinservice/MemberFarm/Exponent.html?enterpriseInfoId=2&deviceid=1045&dataType=1&timeType=3&verify=asdf&domain=http://192.168.21.188:8080&phone=13693047153
-// 拼完 = http://192.168.21.188:8080/rest/1.0/phoneView?v=1.0&format=json&method=phone.view.plant.device.data&field={"phone":"13693047153","enterpriseInfoId":"2","deviceid":"1045","dataType":"1","timeType":"3"}&verify=asdf
-console.log(pageUrlType)
-var hasChartData, //是否有折线图数据
-    ChartData,  //折线图数据集合
-    ChartTime;  //折线图数据时间
-$.ajax({
-    type: "GET",
-    timeout: 1000,
-    url: pageUrlType,
-    dataType: "jsonp",
-    jsonp: 'callback',
-    success: function(response) {
-        // 传感器7个数据
-        InitDeviceData(response.data_result);
-        // 是否有折线图数据
-        hasChartData = response.data_result.hasChartData;
-        ChartData = response.data_result.ChartData;
-        ChartTime = response.data_result.ChartTime;
-        if(hasChartData == true){
-            $('#sensor_chart').show();
-            $('#sensor_nochart').hide();
-            SensorChart(ChartData,ChartTime);
-        }else{
-            $('#sensor_chart').hide();
-            $('#sensor_nochart').show();
-        }
-        
 
-    },
-    error: function(e) {
-        try {
-            console.log('传感器数据,请求失败了吧！！')
-        } catch (e) {}
-    }
-});*/
-// 传感器数据--点击事件及切换图表内容
-$('#swiper_sensor .data_items').each(function(_index,elem){
-    $(elem).click(function(){
-        $('#swiper_sensor .data_items').removeClass('dCur');
-        $(this).addClass('dCur');
-        $('#dayweekmonth span').eq(getTimeType-1).addClass('sCur').siblings().removeClass('sCur');
-        var indexData = _index+1;
+
+
+// 指数数据交互
+/*
+1.判断是从物联网设备下传感器点击进去的时候，指数是拿不到realPlantId的---拿不到就不让指数点击
+2.从种植详情页，指数按钮点击进去时是可以拿到realPlantId的  ---拿到了，指数可以点击
+*/
+if( iframeSearch[1].split('=')[0] == 'deviceId'){
+    // 如果是点击传感器进来的，则：[不让指数点击]
+    var indexData,
+        indexTime;
+    $('.fixed_foot .fitems').eq(0).addClass('fCur').siblings().removeClass('fCur');
+    $('#sensor_main').show();
+    $('#exponent_mian').hide();
+    var getEnterpriseInfoId = iframeSearch[0].split("=")[1];
+    var getDeviceId = iframeSearch[1].split('=')[1];
+    var getDataType = iframeSearch[2].split('=')[1];
+    var getTimeType = iframeSearch[3].split('=')[1];
+    var getVerify = iframeSearch[4].split('=')[1];
+    var getTestUrl = iframeSearch[5].split("=")[1];
+    var getPhone = iframeSearch[6].split("=")[1];
+    // URL 从列表点击进来时传感器拿到的是====deviceId
+    indexData = getDataType;
+    indexTime = getTimeType;
+    ParameterMethodType = makeParameterMethod('phone.view.plant.device.data');
+    ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'deviceId',getDeviceId,'dataType',indexData,'timeType',indexTime);        
+    ParameterVerifyType = makeParameterVerify(getVerify);
+    pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
+    // 本地 = http://192.168.21.187/weixinservice/MemberFarm/Exponent.html?enterpriseInfoId=2&deviceid=1045&dataType=1&timeType=3&verify=asdf&domain=http://192.168.21.188:8080&phone=13693047153
+    // 拼完 = http://192.168.21.188:8080/rest/1.0/phoneView?v=1.0&format=json&method=phone.view.plant.device.data&field={"phone":"13693047153","enterpriseInfoId":"2","deviceid":"1045","dataType":"1","timeType":"3"}&verify=asdf
+    
+    // 传感器数据接口
+    $('#swiper_sensor .data_items').eq(indexData-1).addClass('dCur');
+    $('#dayweekmonth span').eq(indexTime-1).addClass('sCur').siblings().removeClass('sCur');
+    var hasChartData, //是否有折线图数据
+        ChartData,  //折线图数据集合
+        ChartTime;  //折线图数据时间
+    $.ajax({
+        type: "GET",
+        timeout: 1000,
+        url: pageUrlType,
+        dataType: "jsonp",
+        jsonp: 'callback',
+        success: function(response) {
+            // 传感器7个数据
+            InitDeviceData(response.data_result);
+            // 是否有折线图数据
+            hasChartData = response.data_result.hasChartData;
+            ChartData = response.data_result.ChartData;
+            ChartTime = response.data_result.ChartTime;
+            if(hasChartData == true){
+                $('#sensor_chart').show();
+                $('#sensor_nochart').hide();
+                SensorChart(ChartData,ChartTime);
+            }else{
+                $('#sensor_chart').hide();
+                $('#sensor_nochart').show();
+            }
+        },
+        error: function(e) {
+            try {
+                console.log('列表传感器点击进来的传感器数据,请求失败了吧！！')
+            } catch (e) {}
+        }
+    });
+
+    // swiper
+    $('#swiper_sensor .data_items').each(function(_index,elem){
+        $(elem).click(function(){
+            $('#swiper_sensor .data_items').removeClass('dCur');
+            $(this).addClass('dCur');
+            $('#dayweekmonth span').eq(getTimeType-1).addClass('sCur').siblings().removeClass('sCur');
+            // URL
+            indexData = $('#swiper_sensor .dCur').attr('datatype');
+            indexTime = $('#dayweekmonth .sCur').attr('timeType');
+            ParameterMethodType = makeParameterMethod('phone.view.plant.device.data');
+            ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'deviceId',getDeviceId,'dataType',indexData,'timeType',indexTime);        
+            ParameterVerifyType = makeParameterVerify(getVerify);
+            pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
+            // AJAX
+            $.ajax({
+                type: "GET",
+                timeout: 1000,
+                url: pageUrlType,
+                dataType: "jsonp",
+                jsonp: 'callback',
+                success: function(response) {
+
+                    // 是否有折线图数据
+                    hasChartData = response.data_result.hasChartData;
+                    ChartData = response.data_result.ChartData;
+                    ChartTime = response.data_result.ChartTime;
+                    if(hasChartData == true){
+                        $('#sensor_chart').show();
+                        $('#sensor_nochart').hide();
+                        SensorChart(ChartData,ChartTime);
+                    }else{
+                        $('#sensor_chart').hide();
+                        $('#sensor_nochart').show();
+                    }
+
+                },
+                error: function(e) {
+                    try {
+                        console.log('列表传感器点击进来的传感器数据,请求失败了吧！！')
+                    } catch (e) {}
+                }
+            });
+        });
+    });
+    // 天周月
+    $('#dayweekmonth span').click(function(){
+        $(this).addClass('sCur').siblings().removeClass('sCur');
+        indexData = $('#swiper_sensor .dCur').attr('datatype');
+        indexTime = $('#dayweekmonth .sCur').attr('timeType');
         // URL
-        ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'deviceId',getDeviceId,'dataType',indexData,'timeType',getTimeType);        
+        ParameterMethodType = makeParameterMethod('phone.view.plant.device.data');
+        ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'deviceId',getDeviceId,'dataType',indexData,'timeType',indexTime);        
+        ParameterVerifyType = makeParameterVerify(getVerify);
         pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
-        alert(indexData+'点击时类型'+getTimeType)
-        console.log(pageUrlType);
+        // AJAX
+        $.ajax({
+            type: "GET",
+            timeout: 1000,
+            url: pageUrlType,
+            dataType: "jsonp",
+            jsonp: 'callback',
+            success: function(response) {
+
+                // 是否有折线图数据
+                hasChartData = response.data_result.hasChartData;
+                ChartData = response.data_result.ChartData;
+                ChartTime = response.data_result.ChartTime;
+                // 有折线图数据时，日周月数据变换如下
+                
+                if(hasChartData == true){
+                    $('#sensor_chart').show();
+                    $('#sensor_nochart').hide();
+                    SensorChart(ChartData,ChartTime);
+                }else{
+                    $('#sensor_chart').hide();
+                    $('#sensor_nochart').show();
+                }
+
+            },
+            error: function(e) {
+                try {
+                    console.log('列表传感器点击进来的传感器数据,,请求失败了吧！！')
+                } catch (e) {}
+            }
+        });
+    });
+        
+   
+
+}else{
+    // 如果是点击指数进来的，则：[指数和传感器都可以点击切换]
+    $('.fixed_foot .fitems').eq(1).addClass('fCur').siblings().removeClass('fCur');
+    $('#sensor_main').hide();
+    $('#exponent_mian').show();
+    var getEnterpriseInfoId = iframeSearch[0].split("=")[1];
+    var getRealPlantId = iframeSearch[1].split('=')[1];
+    var getVerify = iframeSearch[2].split('=')[1];
+    var getTestUrl = iframeSearch[3].split("=")[1];
+    var getPhone = iframeSearch[4].split("=")[1];
+    // 1）指数接口数据接口
+    var indexData,
+        indexTime;
+    indexData = 1;
+    indexTime = 3;
+    ParameterMethod = makeParameterMethod('phone.view.exponent');
+    ParameterField = makeParameterField('pnone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'realPlantId',getRealPlantId);
+    ParameterVerify = makeParameterVerify(getVerify);
+    pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethod + ParameterField + ParameterVerify;
+    // 本地 = http://192.168.21.187/weixinservice/MemberFarm/Exponent.html?enterpriseInfoId=2&realPlantId=33174&verify=asdf&domain=http://192.168.21.188:8080&phone=13693047153
+    // 接口 = http://192.168.21.188:8080/rest/1.0/phoneView?v=1.0&format=json&method=phone.view.exponent&field={"phone":"13693047153","enterpriseInfoId":"2","enterpriseInfoId":"2","realPlantId":"33174"}&verify=asdf&
+    console.log(pageUrlType)
+    $.ajax({
+        type: "GET",
+        timeout: 1000,
+        url: pageUrlType,
+        dataType: "jsonp",
+        jsonp: 'callback',
+        success: function(response) {
+            // 传感器7个数据
+            console.log(response.data_result)
+            InitExponentData(response.data_result);
+            // 饼图  成熟度分析
+            $('.maturity_chart').attr('data-percent',matureExpVal);
+            var chart = window.chart = new EasyPieChart(document.querySelector('.maturity_chart'), {
+                    easing: 'easeOutElastic',
+                    delay: 3000,
+                    scaleColor: '#f9f9f9',  
+                    lineWidth: 25,
+                    trackColor: '#f9f9f9',  
+                    barColor : '#55bf3b',
+                    onStep: function(from, to, percent) {
+                        this.el.children[0].innerHTML = Math.round(percent);
+                    }
+                });
+            // 健康指数分析图表
+            ExponentChart(response.data_result.health.categories,response.data_result.health.series)
+            
+        },
+        error: function(e) {
+            try {
+                console.log('种植详情点进来的传感器和指数数据,请求失败了吧！！')
+            } catch (e) {}
+        }
+    });
+
+    // 三个分析切换效果
+    $('.exponent_head .items').each(function(_index,elem){
+        $('.exponent_head .items').eq(0).addClass('eCur').siblings().removeClass('eCur');
+        $('.exponent_body .tab_content').eq( 0 ).show().siblings().hide();
+        $(elem).click(function(){
+            $(elem).addClass('eCur').siblings().removeClass('eCur');
+            $('.exponent_body .tab_content').eq( _index ).show().siblings().hide();
+        });
+    }); 
+    // 2）传感器接口数据
+    // 传感器点击事件      ##数据类型和时间类型都传1过去##
+    $('.fixed_foot .fitems').eq(0).click(function(){
+        $('.fixed_foot .fitems').eq(0).addClass('fCur').siblings().removeClass('fCur');
+        $('#sensor_main').show();
+        $('#exponent_mian').hide();
+        // 传感器数据--点击事件及切换图表内容
+        $('#swiper_sensor .data_items').eq(0).addClass('dCur');
+        $('#dayweekmonth span').eq(2).addClass('sCur').siblings().removeClass('sCur');
+        // URL
+        ParameterMethodType = makeParameterMethod('phone.view.plant.device.data');
+        ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'realPlantId',getRealPlantId,'dataType',indexData,'timeType',indexTime);        
+        ParameterVerifyType = makeParameterVerify(getVerify);
+        pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
         // AJAX
         $.ajax({
             type: "GET",
@@ -109,178 +294,97 @@ $('#swiper_sensor .data_items').each(function(_index,elem){
             },
             error: function(e) {
                 try {
-                    console.log('传感器数据,请求失败了吧！！')
+                    console.log('种植详情点进来的传感器数据,请求失败了吧！！')
                 } catch (e) {}
             }
         });
-    });
-});
-// 天周月
-$('#dayweekmonth span').click(function(){
-    $(this).addClass('sCur').siblings().removeClass('sCur');
-    var indexData = $('#swiper_sensor .dCur').attr('datatype');
-    // URL
-    ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'deviceId',getDeviceId,'dataType',indexData,'timeType',$(this).attr('timeType'));        
-    pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
-    // AJAX
-    $.ajax({
-        type: "GET",
-        timeout: 1000,
-        url: pageUrlType,
-        dataType: "jsonp",
-        jsonp: 'callback',
-        success: function(response) {
+        // swiper
+        $('#swiper_sensor .data_items').each(function(_index,elem){
+            $(elem).click(function(){
+                $('#swiper_sensor .data_items').removeClass('dCur');
+                $(this).addClass('dCur');
+                indexData = $('#swiper_sensor .dCur').index();
+                $('#dayweekmonth span').eq(indexTime-1).addClass('sCur').siblings().removeClass('sCur');
+                // URL
+                ParameterMethodType = makeParameterMethod('phone.view.plant.device.data');
+                ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'realPlantId',getRealPlantId,'dataType',indexData,'timeType',indexTime);        
+                ParameterVerifyType = makeParameterVerify(getVerify);
+                pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
+                // AJAX
+                $.ajax({
+                    type: "GET",
+                    timeout: 1000,
+                    url: pageUrlType,
+                    dataType: "jsonp",
+                    jsonp: 'callback',
+                    success: function(response) {
 
-            // 是否有折线图数据
-            hasChartData = response.data_result.hasChartData;
-            ChartData = response.data_result.ChartData;
-            ChartTime = response.data_result.ChartTime;
-            // 有折线图数据时，日周月数据变换如下
-            
-            if(hasChartData == true){
-                $('#sensor_chart').show();
-                $('#sensor_nochart').hide();
-                SensorChart(ChartData,ChartTime);
-            }else{
-                $('#sensor_chart').hide();
-                $('#sensor_nochart').show();
-            }
+                        // 是否有折线图数据
+                        hasChartData = response.data_result.hasChartData;
+                        ChartData = response.data_result.ChartData;
+                        ChartTime = response.data_result.ChartTime;
+                        if(hasChartData == true){
+                            $('#sensor_chart').show();
+                            $('#sensor_nochart').hide();
+                            SensorChart(ChartData,ChartTime);
+                        }else{
+                            $('#sensor_chart').hide();
+                            $('#sensor_nochart').show();
+                        }
 
-        },
-        error: function(e) {
-            try {
-                console.log('传感器数据,请求失败了吧！！')
-            } catch (e) {}
-        }
-    });
-});
-
-// 指数数据交互
-/*
-1.判断是从物联网设备下传感器点击进去的时候，指数是拿不到realPlantId的---拿不到就不让指数点击
-2.从种植详情页，指数按钮点击进去时是可以拿到realPlantId的  ---拿到了，指数可以点击
-*/
-if( iframeSearch[1].split('=')[0] == 'deviceId'){
-    // 如果是点击传感器进来的，则：[不让指数点击]
-    $('.fixed_foot .fitems').eq(0).addClass('fCur').siblings().removeClass('fCur');
-    $('#sensor_main').show();
-    $('#exponent_mian').hide();
-    var getEnterpriseInfoId = iframeSearch[0].split("=")[1];
-    var getDeviceId = iframeSearch[1].split('=')[1];
-    var getDataType = iframeSearch[2].split('=')[1];
-    var getTimeType = iframeSearch[3].split('=')[1];
-    var getVerify = iframeSearch[4].split('=')[1];
-    var getTestUrl = iframeSearch[5].split("=")[1];
-    var getPhone = iframeSearch[6].split("=")[1];
-    // 传感器数据接口
-    ParameterMethodType = makeParameterMethod('phone.view.plant.device.data');
-    ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'deviceId',getDeviceId,'dataType',getDataType,'timeType',getTimeType);
-    ParameterVerifyType = makeParameterVerify(getVerify);
-    pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
-    // 本地 = http://192.168.21.187/weixinservice/MemberFarm/Exponent.html?enterpriseInfoId=2&deviceid=1045&dataType=1&timeType=3&verify=asdf&domain=http://192.168.21.188:8080&phone=13693047153
-    // 拼完 = http://192.168.21.188:8080/rest/1.0/phoneView?v=1.0&format=json&method=phone.view.plant.device.data&field={"phone":"13693047153","enterpriseInfoId":"2","deviceid":"1045","dataType":"1","timeType":"3"}&verify=asdf
-    console.log(pageUrlType)
-    var hasChartData, //是否有折线图数据
-        ChartData,  //折线图数据集合
-        ChartTime;  //折线图数据时间
-    $.ajax({
-        type: "GET",
-        timeout: 1000,
-        url: pageUrlType,
-        dataType: "jsonp",
-        jsonp: 'callback',
-        success: function(response) {
-            // 传感器7个数据
-            InitDeviceData(response.data_result);
-            // 是否有折线图数据
-            hasChartData = response.data_result.hasChartData;
-            ChartData = response.data_result.ChartData;
-            ChartTime = response.data_result.ChartTime;
-            if(hasChartData == true){
-                $('#sensor_chart').show();
-                $('#sensor_nochart').hide();
-                SensorChart(ChartData,ChartTime);
-            }else{
-                $('#sensor_chart').hide();
-                $('#sensor_nochart').show();
-            }
-            
-
-        },
-        error: function(e) {
-            try {
-                console.log('传感器数据,请求失败了吧！！')
-            } catch (e) {}
-        }
-    });
-
-}else{
-    // 如果是点击指数进来的，则：[指数和传感器都可以点击切换]
-    $('.fixed_foot .fitems').eq(1).addClass('fCur').siblings().removeClass('fCur');
-    $('#sensor_main').hide();
-    $('#exponent_mian').show();
-    var getEnterpriseInfoId = iframeSearch[0].split("=")[1];
-    var getRealPlantId = iframeSearch[1].split('=')[1];
-    var getVerify = iframeSearch[2].split('=')[1];
-    var getTestUrl = iframeSearch[3].split("=")[1];
-    // 传感器数据接口
-    ParameterMethod = makeParameterMethod('phone.view.exponent');
-    ParameterField = makeParameterField('enterpriseInfoId',getEnterpriseInfoId,'realPlantId',getRealPlantId);
-    ParameterVerify = makeParameterVerify(getVerify);
-    pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethod + ParameterField + ParameterVerify;
-    console.log(pageUrlType)
-    // 本地 = http://192.168.21.187/weixinservice/MemberFarm/Exponent.html?enterpriseInfoId=2&realPlantId=33174&verify=asdf&domain=http://192.168.21.188:8080
-    // 接口 = http://192.168.21.188:8080/rest/1.0/phoneView?v=1.0&format=json&method=phone.view.exponent&field={"enterpriseInfoId":"2","enterpriseInfoId":"2","realPlantId":"33174"}&verify=asdf
-    $.ajax({
-        type: "GET",
-        timeout: 1000,
-        url: pageUrlType,
-        dataType: "jsonp",
-        jsonp: 'callback',
-        success: function(response) {
-            // 传感器7个数据
-            InitExponentData(response.data_result);
-            // 是否有折线图数据
-            // hasChartData = response.data_result.hasChartData;
-            // ChartData = response.data_result.ChartData;
-            // ChartTime = response.data_result.ChartTime;
-            // if(hasChartData == true){
-            //     $('#sensor_chart').show();
-            //     $('#sensor_nochart').hide();
-            //     SensorChart(ChartData,ChartTime);
-            // }else{
-            //     $('#sensor_chart').hide();
-            //     $('#sensor_nochart').show();
-            // } 
-            // 饼图  成熟度分析
-            $('.maturity_chart').attr('data-percent',matureExpVal);
-            var chart = window.chart = new EasyPieChart(document.querySelector('.maturity_chart'), {
-                    easing: 'easeOutElastic',
-                    delay: 3000,
-                    scaleColor: '#f9f9f9',  
-                    lineWidth: 25,
-                    trackColor: '#f9f9f9',  
-                    barColor : '#55bf3b',
-                    onStep: function(from, to, percent) {
-                        this.el.children[0].innerHTML = Math.round(percent);
+                    },
+                    error: function(e) {
+                        try {
+                            console.log('种植详情点进来的传感器数据,请求失败了吧！！')
+                        } catch (e) {}
                     }
                 });
-            
-        },
-        error: function(e) {
-            try {
-                console.log('指数数据,请求失败了吧！！')
-            } catch (e) {}
-        }
-    });
+            });
+        });
+        // 天周月
+        $('#dayweekmonth span').click(function(){
+            $(this).addClass('sCur').siblings().removeClass('sCur');
+            var indexData = $('#swiper_sensor .dCur').attr('datatype');
+            // URL
+            ParameterMethodType = makeParameterMethod('phone.view.plant.device.data');
+            ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'realPlantId',getRealPlantId,'dataType',indexData,'timeType',$(this).attr('timeType'));        
+            ParameterVerifyType = makeParameterVerify(getVerify);
+            pageUrlType = getTestUrl +　"/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
+            // AJAX
+            $.ajax({
+                type: "GET",
+                timeout: 1000,
+                url: pageUrlType,
+                dataType: "jsonp",
+                jsonp: 'callback',
+                success: function(response) {
 
-    // 传感器和指数切换事件
-    $('.fixed_foot .fitems').eq(0).click(function(){
-        $('.fixed_foot .fitems').eq(0).addClass('fCur').siblings().removeClass('fCur');
-        $('#sensor_main').show();
-        $('#exponent_mian').hide();
+                    // 是否有折线图数据
+                    hasChartData = response.data_result.hasChartData;
+                    ChartData = response.data_result.ChartData;
+                    ChartTime = response.data_result.ChartTime;
+                    // 有折线图数据时，日周月数据变换如下
+                    
+                    if(hasChartData == true){
+                        $('#sensor_chart').show();
+                        $('#sensor_nochart').hide();
+                        SensorChart(ChartData,ChartTime);
+                    }else{
+                        $('#sensor_chart').hide();
+                        $('#sensor_nochart').show();
+                    }
+
+                },
+                error: function(e) {
+                    try {
+                        console.log('种植详情点进来的传感器数据,请求失败了吧！！')
+                    } catch (e) {}
+                }
+            });
+        });
         
     });
+    //指数点击事件 
     $('.fixed_foot .fitems').eq(1).click(function(){
         $('.fixed_foot .fitems').eq(1).addClass('fCur').siblings().removeClass('fCur');
         $('#sensor_main').hide();
@@ -297,54 +401,7 @@ var FarmSwiper
 FarmSwiper = new Swiper('#swiper_sensor',{
     pagination: '.pagination',
     loop:false
-  }) 
-
-
-// 传感器和指数切换效果
-/*$('.fixed_foot .fitems').each(function(_index,elem){
-    $('.fixed_foot .fitems').eq(0).addClass('fCur').siblings().removeClass('fCur');
-    $('#sensor_main').show();
-    $('.fixed_foot .fitems').eq(0).click(function(){
-        $('.fixed_foot .fitems').eq(0).addClass('fCur').siblings().removeClass('fCur');
-        $('#sensor_main').show();
-        $('#exponent_mian').hide();
-        
-    });
-    $('.fixed_foot .fitems').eq(1).click(function(){
-        $('.fixed_foot .fitems').eq(1).addClass('fCur').siblings().removeClass('fCur');
-        $('#sensor_main').hide();
-        $('#exponent_mian').show();
-    });
-});*/
-
-// 三个分析切换效果
-$('.exponent_head .items').each(function(_index,elem){
-    $('.exponent_head .items').eq(0).addClass('eCur').siblings().removeClass('eCur');
-    $('.exponent_body .tab_content').eq( 0 ).show().siblings().hide();
-    $(elem).click(function(){
-        $(elem).addClass('eCur').siblings().removeClass('eCur');
-        $('.exponent_body .tab_content').eq( _index ).show().siblings().hide();
-    });
-    // 第三个点击时，去加载健康指数分析
-    $('.exponent_head .items').eq(2).click(function(){
-        ExponentChart();// 健康指数分析
-    });
-});
-
-
-
-
-       
-/* // 饼图  成熟度分析
-var chart = window.chart = new EasyPieChart(document.querySelector('.maturity_chart'), {
-        easing: 'easeOutElastic',
-        delay: 3000,
-        lineWidth: 15,
-        onStep: function(from, to, percent) {
-            this.el.children[0].innerHTML = Math.round(percent);
-        }
-    });*/
-                 
+  })    
 
 
 // ---------------------------------------------------------------------------
@@ -354,16 +411,16 @@ $(window).resize(function(){
     var windowWidth = document.documentElement.clientWidth;
     var windowHeight= document.documentElement.clientHeight;
 
+    // 字号的计算
 	clearTimeout( FontTimer );
 	FontTimer = setTimeout( FontSize , 500 );
 
+    // 传感器图表计算
     $('#sensor_chart').css('height',$('#sensor_chart').width()*0.4);
-    SensorChart();// 传感器数据--图表
-    ExponentChart();// 健康指数分析
 
     // 重新计算
     $('#swiper_sensor .swiper-wrapper').css({
-    'width' : windowWidth * swiperTabLen
+        'width' : windowWidth * swiperTabLen
     })
     $('#swiper_sensor .swiper-slide').css({
         'width' : windowWidth
@@ -410,6 +467,7 @@ function InitExponentData(_data){
         matureExpVal = 0;
         $('#matureExp').html('--');
     }
+
     // 平均发病概率
     $('#avgHarmful').html( _data.disease.avgHarmful );
     // 平均发病概率
@@ -445,18 +503,13 @@ function InitExponentData(_data){
                 '</div>'+
             '</li>';
         }
-    }else{
-        // 无病虫害列表
-        disease_list = 
-        '<li>'+
-            '<div id="sensor_nochart" class="no_information">'+
-                '<img class="no_icon" src="../images/MemberFarm/PlantDetail_nodata1.png" />'+
-                '<p class="no_tip">暂无数据</p>'+
-            '</div>'+
-        '</li>';
     }
     $disease_list.append( disease_list );
-           
+
+    // 当前指数
+    $('#lastValue').html( _data.health.lastValue );
+    // 平均指数
+    $('#avgValue').html( _data.health.avgValue );          
 }
 
 // 传感器数据--图表
@@ -521,7 +574,7 @@ function SensorChart(chartData,chartTime){
 
 
 // 健康指数分析
-function ExponentChart(){
+function ExponentChart(categoriesData,seriesData){
     $('#exponent_chart').highcharts({
         chart: {
             type: 'areaspline'
@@ -538,12 +591,7 @@ function ExponentChart(){
             floating: true
         },
         xAxis: {
-            categories: [
-                '10月20',
-                '10月25',
-                '10月30',
-                '11月11'
-            ],
+            categories: categoriesData,
             plotBands: [{ // visualize the weekend
                 from: 4.5,
                 to: 6.5,
@@ -573,9 +621,6 @@ function ExponentChart(){
                 }
             }
         },
-        series: [{
-            name: 'John',
-            data: [5, 4, 10, 12]
-        }]
+        series: seriesData
     });
 }

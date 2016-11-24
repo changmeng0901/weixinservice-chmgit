@@ -374,7 +374,7 @@ input:focus{
 }
 #exponent_chart{
 	width: 100%;
-	height: 100%;
+	height: 14rem;
 }
 /*固定底部*/
 .fixed_foot{
