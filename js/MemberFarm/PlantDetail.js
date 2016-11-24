@@ -74,8 +74,9 @@ $.ajax({
     dataType: "jsonp",
     jsonp: 'callback',
     success: function(response) {
-        
+        // 传感器7个数据
         InitDeviceData(response.data_result);
+        // 是否有折线图数据
         hasChartData = response.data_result.hasChartData;
         ChartData = response.data_result.ChartData;
         ChartTime = response.data_result.ChartTime;
@@ -129,7 +130,8 @@ $('.swiper_sensor .swiper_slide').each(function(index,elem){
             dataType: "jsonp",
             jsonp: 'callback',
             success: function(response) {
-                
+
+                // 是否有折线图数据
                 hasChartData = response.data_result.hasChartData;
                 ChartData = response.data_result.ChartData;
                 ChartTime = response.data_result.ChartTime;
@@ -170,14 +172,33 @@ $('#dayweekmonth span').click(function(){
         dataType: "jsonp",
         jsonp: 'callback',
         success: function(response) {
-            
+
+            // 是否有折线图数据
             hasChartData = response.data_result.hasChartData;
             ChartData = response.data_result.ChartData;
             ChartTime = response.data_result.ChartTime;
+            // 有折线图数据时，日周月数据变换如下
+            
             if(hasChartData == true){
                 $('#sensor_chart').show();
                 $('#sensor_nochart').hide();
-                SensorChart(ChartData,ChartTime);
+                if( $('#dayweekmonth span').eq(0).hasClass('sCur') ){
+                    // alert(ChartTime)
+                    // ChartTime = ChartTime.replace(/ /g, "")
+                    // alert(ChartTime)
+                    // ChartTime = ChartTime.replace(/[]/g, "").split(' ')[0].split('-')[2].join('日，')
+                }else if( $('#dayweekmonth span').eq(1).hasClass('sCur') ){
+                    // alert(ChartTime)
+                    // ChartTime = ChartTime.replace(/[]/g, "").split(' ')[0].split('-')[2].join('日，')
+                    // alert('ni'+ChartTime)
+                    // SensorChart(ChartData,ChartTime);
+                }else{
+                    // alert(ChartTime)
+                    // ChartTime = ChartTime.replace(/[]/g, "")
+                    // alert(ChartTime)
+                    // SensorChart(ChartData,ChartTime);
+                }
+                 SensorChart(ChartData,ChartTime);
             }else{
                 $('#sensor_chart').hide();
                 $('#sensor_nochart').show();
@@ -327,13 +348,20 @@ function InitCropInfoData(_data){
 
 // 初始化传感器数据函数
 function InitDeviceData(_data){
-    $('#airTemp').html(_data.airTemp+'℃');
-    $('#airHumidity').html(_data.airHumidity+'%');
-    $('#soilHumidity').html(_data.soilHumidity+'%');
-    $('#illumination').html(_data.illumination+'lux');
-    $('#co2').html(_data.co2+'℃');
-    $('#soilTemp').html(_data.soilTemp+'℃');
-    $('#dewPoint').html(_data.dewPoint+'℃');
+    // 空气温度
+    !_data.airTemp == 'undefined' || !_data.airTemp =='' ? $('#airTemp').html(_data.airTemp+'℃') : $('#airTemp').html('--℃');
+    // 空气湿度
+    !_data.airHumidity == 'undefined' || !_data.airHumidity =='' ? $('#airHumidity').html(_data.airHumidity+'℃') : $('#airHumidity').html('--℃');
+    // 土壤湿度
+    !_data.soilHumidity == 'undefined' || !_data.soilHumidity =='' ? $('#soilHumidity').html(_data.soilHumidity+'%') : $('#soilHumidity').html('--%');
+    // 光照强度
+    !_data.illumination == 'undefined' || !_data.illumination =='' ? $('#illumination').html(_data.illumination+'lux') : $('#illumination').html('--lux');
+    // 二氧化塘
+    !_data.co2 == 'undefined' || !_data.co2 =='' ? $('#co2').html(_data.co2+'℃') : $('#co2').html('--℃');
+    // 土壤温度
+    !_data.soilTemp == 'undefined' || !_data.soilTemp =='' ? $('#soilTemp').html(_data.soilTemp+'℃') : $('#soilTemp').html('--℃');
+    // 空气露点
+    !_data.dewPoint == 'undefined' || !_data.dewPoint =='' ? $('#dewPoint').html(_data.dewPoint+'℃') : $('#dewPoint').html('--℃');
 }
 
 
