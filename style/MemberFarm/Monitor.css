@@ -76,6 +76,12 @@ input:focus{
 .monitor_tabbd .tab_content{
 	display: none;
 }
+.monitor_tabhd .items.unclick icon3{
+	background-image: url(../../images/MemberFarm/Monitor_iconno3_1.png);
+}
+.monitor_tabhd .items.unclick .text_text{
+	color:#e5e5e5;
+	}
 /*当前状态*/
 .monitor_tabhd .items.cCur{
 	background-color: #f7f7f7;

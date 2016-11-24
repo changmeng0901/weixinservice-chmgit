@@ -317,6 +317,7 @@ function InitVideoData(_data){
                 // 如果是从列表页点击进来的监控，则没有视频追溯，则不让点击
                 if( iframeSearch[0].split('=')[0] == '?videoId'){
                     $('.monitor_tabhd .items').eq(2).unbind();
+					$('.monitor_tabhd .items').eq(2).addClass('unclick');
                 }
             });
             // ---------------------
