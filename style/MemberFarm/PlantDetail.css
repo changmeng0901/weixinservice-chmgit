@@ -1,4 +1,5 @@
 @charset "utf-8";
+
 /*iphone4*/
 @media screen and (min-width: 0px) and (max-width: 320px) {
     html{
@@ -23,7 +24,6 @@
     	font-size: 36px;
     }
 }
-
 html,body{
 	width: 100%;
 	min-width: 100%;
@@ -89,7 +89,7 @@ input:focus{
 	line-height: 0.76923rem;
 	font-size: 0.44462rem;
 	color: #4bafdd;
-	text-decoration: underline;
+	text-decoration: none;
 }
 .plant_title .text_link img{
 	vertical-align: top;
@@ -211,7 +211,7 @@ input:focus{
 	overflow-y: hidden;
 }
 .swiper_sensor .swiper_slide{
-	position: relative;
+	position: relative-;
 	float: left;
 	height: 3.84615rem;
 	text-align: center;
@@ -238,25 +238,21 @@ input:focus{
 	overflow: hidden;
 }
 .swiper_sensor .line_arrow{
-	position: absolute;
-	left: 0;
-	bottom: 0;
 	display: none;
 	width: 100%;
 	height: 0.07692rem;
-	background-color: #6fac24;
+	border-bottom: 0.07692rem solid #6fac24;
+	text-align:center;
 }
-.swiper_sensor .line_arrow:after{
-	position: absolute;
-	left: 50%;
-	bottom: 0.07692rem;
-	display: block;
+.swiper_sensor .line_arrow .arrow{
+	display: inline-block;
 	border-style: solid solid solid solid;
 	border-width: 0 0.11538rem 0.11538rem 0.11538rem;
 	border-color: transparent transparent #6fac24 transparent; 
 	content: '';
 	height: 0;
 	overflow: hidden;
+	vertical-align: top;
 }
 .swiper_sensor .slide_active .line_arrow{
 	display: block;

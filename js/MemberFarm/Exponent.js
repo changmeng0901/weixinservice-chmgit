@@ -66,10 +66,9 @@ if( iframeSearch[1].split('=')[0] == 'deviceId'){
     pageUrlType = getTestUrl + "/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethodType + ParameterFieldType + ParameterVerifyType;
     // 本地 = http://192.168.21.187/weixinservice/MemberFarm/Exponent.html?enterpriseInfoId=2&deviceid=1045&dataType=1&timeType=3&verify=asdf&domain=http://192.168.21.188:8080&phone=13693047153
     // 拼完 = http://192.168.21.188:8080/rest/1.0/phoneView?v=1.0&format=json&method=phone.view.plant.device.data&field={"phone":"13693047153","enterpriseInfoId":"2","deviceid":"1045","dataType":"1","timeType":"3"}&verify=asdf
-    
     // 传感器数据接口
     $('#swiper_sensor .data_items').eq(indexData-1).addClass('dCur');
-    $('#dayweekmonth span').eq(indexTime-1).addClass('sCur').siblings().removeClass('sCur');
+    $('#dayweekmonth span').eq(0).addClass('sCur').siblings().removeClass('sCur');
     var hasChartData, //是否有折线图数据
         ChartData,  //折线图数据集合
         ChartTime;  //折线图数据时间
@@ -232,10 +231,10 @@ if( iframeSearch[1].split('=')[0] == 'deviceId'){
                     trackColor: '#f9f9f9',  
                     barColor : '#55bf3b',
                     onStep: function(from, to, percent) {
-                        //this.el.children[0].innerHTML = percent;
+//                        this.el.children[0].innerHTML = percent;
                     }
                 });
-			$('.maturity_chart .percent').html(matureExpVal);
+            $('.maturity_chart .percent').html(matureExpVal);
             // 健康指数分析图表
             var $exponent_chart = $('#exponent_chart');
             var nodata;
@@ -275,7 +274,8 @@ if( iframeSearch[1].split('=')[0] == 'deviceId'){
         $('#exponent_mian').hide();
         // 传感器数据--点击事件及切换图表内容
         $('#swiper_sensor .data_items').eq(0).addClass('dCur');
-        $('#dayweekmonth span').eq(2).addClass('sCur').siblings().removeClass('sCur');
+        $('#dayweekmonth span').eq(0).addClass('sCur').siblings().removeClass('sCur');
+
         // URL
         ParameterMethodType = makeParameterMethod('phone.view.plant.device.data');
         ParameterFieldType = makeParameterFieldType('phone',getPhone,'enterpriseInfoId',getEnterpriseInfoId,'realPlantId',getRealPlantId,'dataType',indexData,'timeType',indexTime);        
@@ -316,8 +316,12 @@ if( iframeSearch[1].split('=')[0] == 'deviceId'){
             $(elem).click(function(){
                 $('#swiper_sensor .data_items').removeClass('dCur');
                 $(this).addClass('dCur');
-                indexData = $('#swiper_sensor .dCur').index();
+//              indexData = $('#swiper_sensor .dCur').index();
+//              indexTime = $('#dayweekmonth .sCur').attr('timeType');
+                
+                indexData = $('#swiper_sensor .dCur').attr('datatype');
                 indexTime = $('#dayweekmonth .sCur').attr('timeType');
+                
 //                $('#dayweekmonth span').eq(indexTime-1).addClass('sCur').siblings().removeClass('sCur');
                 // URL
                 ParameterMethodType = makeParameterMethod('phone.view.plant.device.data');
@@ -409,13 +413,15 @@ if( iframeSearch[1].split('=')[0] == 'deviceId'){
 //可视区域宽高
 var windowWidth = document.documentElement.clientWidth;
 var windowHeight= document.documentElement.clientHeight;
+var bodyWidth= $('body').width();
 
 // swiper
 var FarmSwiper
 FarmSwiper = new Swiper('#swiper_sensor',{
     pagination: '.pagination',
     loop:false
-  })  
+  })    
+
 
 // ---------------------------------------------------------------------------
 // 浏览器变化时执行
@@ -423,20 +429,21 @@ $(window).resize(function(){
     //可视区域宽高
     var windowWidth = document.documentElement.clientWidth;
     var windowHeight= document.documentElement.clientHeight;
+    var bodyWidth= $('body').width();
 
     // 字号的计算
-	//clearTimeout( FontTimer );
-	//FontTimer = setTimeout( FontSize , 500 );
+//	clearTimeout( FontTimer );
+//	FontTimer = setTimeout( FontSize , 500 );
 
     // 传感器图表计算
     $('#sensor_chart').css('height',$('#sensor_chart').width()*0.4);
 
     // 重新计算
     $('#swiper_sensor .swiper-wrapper').css({
-        'width' : windowWidth * swiperTabLen
+        'width' : bodyWidth * swiperTabLen
     })
     $('#swiper_sensor .swiper-slide').css({
-        'width' : windowWidth
+        'width' : bodyWidth
     }) 
 
 });
@@ -447,25 +454,32 @@ $(window).resize(function(){
 
 // 计算不同分辨率下的文字大小
 //function FontSize(){
-	//document.documentElement.style.fontSize = parseInt((document.documentElement.clientWidth>414?414:document.documentElement.clientWidth)/12)+'px';
+//	document.documentElement.style.fontSize = parseInt((document.documentElement.clientWidth>414?414:document.documentElement.clientWidth)/12)+'px';
 //}
 // 初始化传感器数据函数
 function InitDeviceData(_data){
     if( _data.hasDevice != false ){
         // 空气温度
-        !_data.airTemp == 'undefined' || !_data.airTemp =='' ? $('#airTemp').html(_data.airTemp+'℃') : $('#airTemp').html('--℃');
+    	var airTemp = _data.airTemp+'';
+        airTemp == 'undefined' || airTemp =='' ? $('#airTemp').html('--℃') : $('#airTemp').html(airTemp+'℃');
         // 空气湿度
-        !_data.airHumidity == 'undefined' || !_data.airHumidity =='' ? $('#airHumidity').html(_data.airHumidity+'℃') : $('#airHumidity').html('--℃');
+        var airHumidity = _data.airHumidity+'';
+        airHumidity == 'undefined' || airHumidity =='' ?$('#airHumidity').html('--℃') : $('#airHumidity').html(airHumidity+'℃');
         // 土壤湿度
-        !_data.soilHumidity == 'undefined' || !_data.soilHumidity =='' ? $('#soilHumidity').html(_data.soilHumidity+'%') : $('#soilHumidity').html('--%');
+        var soilHumidity = _data.soilHumidity+'';
+        soilHumidity == 'undefined' || soilHumidity =='' ? $('#soilHumidity').html('--%') : $('#soilHumidity').html(soilHumidity+'%');
         // 光照强度
-        !_data.illumination == 'undefined' || !_data.illumination =='' ? $('#illumination').html(_data.illumination+'lux') : $('#illumination').html('--lux');
+        var illumination = _data.illumination+'';
+        illumination == 'undefined' || illumination =='' ? $('#illumination').html('--lux') : $('#illumination').html(illumination+'lux');
         // 二氧化塘
-        !_data.co2 == 'undefined' || !_data.co2 =='' ? $('#co2').html(_data.co2+'℃') : $('#co2').html('--℃');
+        var co2 = _data.co2+'';
+        co2 == 'undefined' || co2 =='' ? $('#co2').html('--℃') : $('#co2').html(_data.co2+'℃');
         // 土壤温度
-        !_data.soilTemp == 'undefined' || !_data.soilTemp =='' ? $('#soilTemp').html(_data.soilTemp+'℃') : $('#soilTemp').html('--℃');
+        var soilTemp = _data.soilTemp+'';
+        soilTemp == 'undefined' || soilTemp =='' ?$('#soilTemp').html('--℃')  : $('#soilTemp').html(soilTemp+'℃');
         // 空气露点
-        !_data.dewPoint == 'undefined' || !_data.dewPoint =='' ? $('#dewPoint').html(_data.dewPoint+'℃') : $('#dewPoint').html('--℃');
+        var dewPoint = _data.dewPoint+'';
+        dewPoint == 'undefined' || dewPoint =='' ?$('#dewPoint').html('--℃') : $('#dewPoint').html(dewPoint+'℃');
     }else{
         // 空气温度
         $('#airTemp').html('--℃');
@@ -645,23 +659,15 @@ function ExponentChart(categoriesData,seriesData){
         xAxis: {
             categories: categoriesData,
             plotBands: [{ // visualize the weekend
-                //from: 4.5,
-               // to: 6.5,
-                //color: 'rgba(68, 170, 213, .2)'
-            }],
-            //min: 0,
-    		//max: 100//标签个数-1
-    		//tickInterval: 0
-    		//max:10
+//                from: 4.5,
+//                to: 6.5,
+//                color: 'rgba(68, 170, 213, .2)'
+            }]
         },
-	    scrollbar: {//设置滚动条   
-	        enabled: true
-	    },
         yAxis: {
             title: {
                 text: ''
-            },
-            min:0
+            }
         },
         tooltip: {
             shared: true,

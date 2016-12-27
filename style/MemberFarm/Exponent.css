@@ -1,26 +1,5 @@
 @charset "utf-8";
 
-/*横屏样式*/
-@media all and (orientation : landscape){
-html,body{
-	min-width: 100%;
-	min-height: 100%;
-}
-body{
-	height: 19.38462rem;
-}
-}
-/*竖屏样式*/
-@media all and (orientation : portrait){
-html,body{
-	width: 100%;
-	height: 100%;
-	min-width: 100%;
-	min-height: 100%;
-	overflow: hidden;
-}
-}
-
 /*iphone4*/
 @media screen and (min-width: 0px) and (max-width: 320px) {
     html{
@@ -45,6 +24,28 @@ html,body{
     	font-size: 36px;
     }
 }
+
+/*横屏样式*/
+@media all and (orientation : landscape){
+html,body{
+	min-width: 100%;
+	min-height: 100%;
+}
+body{
+	height: 19.38462rem;
+}
+}
+/*竖屏样式*/
+@media all and (orientation : portrait){
+html,body{
+	width: 100%;
+	height: 100%;
+	min-width: 100%;
+	min-height: 100%;
+	overflow: hidden;
+}
+}
+
 
 body{
 	background-color: #fff;
@@ -167,27 +168,44 @@ input:focus{
 }
 .swiper-pagination-switch {
   display: inline-block;
-  width: 0.35294rem;
-  height: 0.35294rem;
+  width: 0.35294rem-;
+  height: 0.35294rem-;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: #555;
+  background: #ccc;
   margin: 0 0.14706rem;
   opacity: 0.8;
   cursor: pointer;
 }
 .swiper-active-switch {
-  background: #84b845;
+  background: #6fac24;
 }
 /**/
+.sensor_chart{
+	position:relative;
+	width:100%;
+	height:8.23077rem;
+	overflow:hidden;
+}
 .sensor_chart_wap{
 	padding: 0.38462rem;
 	background-color: #fff;
 }
 #sensor_chart{
-	height: 6.23077rem;
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height: 100%;
+	box-sizing: border-box;
 }
 #sensor_nochart{
-	height: 6.23077rem;
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height: 100%;
 	padding: 1.80692rem 0;
 	box-sizing: border-box;
 }
@@ -398,7 +416,7 @@ input:focus{
 }
 #exponent_chart{
 	width: 100%;
-	height: 14rem;
+	height: 12rem;
 }
 /*固定底部*/
 .fixed_foot{
@@ -458,6 +476,7 @@ input:focus{
 .fixed_foot .fitems.fCur .f_zhi{
 	background-image: url(../../images/MemberFarm/Exponent_zhiB.png);
 }
+
 .fixed_foot .fitems.unclick .f_zhi{
 	background-image: url(../../images/MemberFarm/Exponent_zhino.png);
 	}

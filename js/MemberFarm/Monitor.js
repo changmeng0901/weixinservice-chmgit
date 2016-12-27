@@ -15,6 +15,7 @@ var scriptAdd,
 
 
 // 传感器数据--列表平均分配宽度
+$('body,#wrapper').width($(window).width());
 var windowWidth = document.documentElement.clientWidth;
 var windowHeight= document.documentElement.clientHeight;
 var bodyWidth= $('body').width();
@@ -85,6 +86,7 @@ $('.monitor_tabbd .tab_content').eq(0).show().siblings().hide();
 // ---------------------------------------------------------------------------
 // 浏览器变化时执行
 $(window).resize(function(){
+	$('body,#wrapper').width($(window).width());
 	var windowWidth = document.documentElement.clientWidth;
 	var windowHeight= document.documentElement.clientHeight;
 	var bodyWidth= $('body').width();
@@ -325,6 +327,7 @@ function InitVideoData(_data){
 										$('#take_time').html(_data.images[ui.value].time);
 									}
 							});
+							$('#slider-range-max').draggable();
 						}
                         
                     }else{

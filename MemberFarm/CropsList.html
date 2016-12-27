@@ -10,22 +10,26 @@
 	<link rel="stylesheet" type="text/css" href="../style/commons/commons.css">
 	<link rel="stylesheet" type="text/css" href="../style/MemberFarm/CropsList.css">
 </head>
-<body>
+<body style="overflow:auto;">
 	<div class="croplist_tabhd">
 		<div class="items cCur">
-			<i class="icon_zhong"></i>种植信息
+			<a href="#zhongzxx_content" >
+				<i class="icon_zhong"></i>种植信息
+			</a>
 		</div>
 		<div class="items">
-			<i class="icon_wu"></i>物联网设备
+			<a href="#wulwsb_content" >
+				<i class="icon_wu"></i>物联网设备
+			</a>
 		</div>
 	</div>
 	<div class="croplist_tabbd">
-		<div class="crop_content" id="zhongzxx_content"></div>
-		<div class="crop_content" id="wulwsb_content">
+		<div class="crop_content" id="zhongzxx_content" name="zhongzxx_content" style="display:block;"></div>
+		<div class="crop_content" id="wulwsb_content" name="wulwsb_content">
 		<!-- 物联网设备 主体内容 -->
 			<strong class="text_title">监控</strong>
 			<div class="monitor mtf1 pl10 pr10" id="monitor"></div>
-			<strong class="text_title">传感器</strong>
+			<strong class="text_title">传感器/气象站</strong>
 			<div class="sensor mtf1 pl10 pr10" id="sensor"></div>
 		<!-- 物联网设备 主体内容 -->
 		</div>

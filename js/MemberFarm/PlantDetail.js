@@ -5,13 +5,16 @@ var FontTimer,
     makeParameterFieldType,
     makeParameterVerify,
     pageUrl,
-    pageUrlType,
-	http = '192.168.21.187:8081';
+    pageUrlType; 
 //FontSize();
-
 
 var windowWidth = document.documentElement.clientWidth;
 var windowHeight= document.documentElement.clientHeight;
+
+//图片懒加载
+$("img").lazyload({
+	effect: "fadeIn"
+});
 
 // 进度条计算
 var progress_block = $('.progress_block').width();
@@ -26,6 +29,9 @@ var getTimeType = iframeSearch[3].split('=')[1];
 var getVerify = iframeSearch[4].split('=')[1];
 var getTestUrl = iframeSearch[5].split("=")[1];
 var getPhone = iframeSearch[6].split("=")[1];
+
+var windowWidth = document.documentElement.clientWidth;
+var windowHeight= document.documentElement.clientHeight;
 makeParameterMethod = function(string){
     var Method = '&method=' + string;
     return Method;
@@ -46,7 +52,6 @@ ParameterVerify = makeParameterVerify(getVerify);
 pageUrl = getTestUrl + "/rest/1.0/phoneView?v=1.0&format=json" + ParameterMethod + ParameterField + ParameterVerify;
 $.ajax({
     type: "GET",
-    timeout: 1000,
     url: pageUrl,
     dataType: "jsonp",
     jsonp: 'callback',
@@ -63,13 +68,12 @@ $.ajax({
 });
 
 // 跳转到监控页面
-var LocationUrl = 'http://192.168.21.187:8081';
 $('#view_monitor').click(function(){
-    window.location.href= LocationUrl + "/weixinservice/MemberFarm/Monitor.html?realPlantId="+getRealPlantId+"&enterpriseInfoId="+ getEnterpriseInfoId +"&verify=asdf&domain="+getTestUrl+"&phone="+getPhone;
+    window.location.href= getTestUrl + "/phone/Monitor.html?realPlantId="+getRealPlantId+"&enterpriseInfoId="+ getEnterpriseInfoId +"&verify="+getVerify+"&domain="+getTestUrl+"&phone="+getPhone;
 });
 // 跳转到指数页面
 $('#view_exponent').click(function(){
-    window.location.href= LocationUrl + "/weixinservice/MemberFarm/Exponent.html?enterpriseInfoId="+getEnterpriseInfoId+"&realPlantId="+getRealPlantId+"&verify=asdf&domain="+getTestUrl+"&phone="+getPhone;
+    window.location.href= getTestUrl + "/phone/Exponent.html?enterpriseInfoId="+getEnterpriseInfoId+"&realPlantId="+getRealPlantId+"&verify="+getVerify+"&domain="+getTestUrl+"&phone="+getPhone;
 });
 
 // 物联网设备-传感器数据ajax加载数据
@@ -84,12 +88,11 @@ var hasChartData, //是否有折线图数据
     ChartTime;  //折线图数据时间
 $.ajax({
     type: "GET",
-    timeout: 1000,
     url: pageUrlType,
     dataType: "jsonp",
     jsonp: 'callback',
     success: function(response) {
-        // 传感器7个数据
+    	// 传感器7个数据
         if( response.invoke_result == 'INVOKE_SUCCESS' ){
 	        if( response.data_result != '' || response.data_result != undefined ){
 	        	InitDeviceData(response.data_result);
@@ -144,7 +147,6 @@ $('.swiper_sensor .swiper_slide').each(function(index,elem){
         // AJAX
         $.ajax({
             type: "GET",
-            timeout: 1000,
             url: pageUrlType,
             dataType: "jsonp",
             jsonp: 'callback',
@@ -186,7 +188,6 @@ $('#dayweekmonth span').click(function(){
     // AJAX
     $.ajax({
         type: "GET",
-        timeout: 1000,
         url: pageUrlType,
         dataType: "jsonp",
         jsonp: 'callback',
@@ -215,20 +216,29 @@ $('#dayweekmonth span').click(function(){
         }
     });
 });
-
-
+// 传感器数据图表，有无数据高度
+//$('#sensor_chart').css('height',$('#sensor_chart').width()*0.6);
+//$('#sensor_chart').css('width',$(window).width());
+//$('#sensor_nochart').css('height',$('#sensor_chart').width()*0.6);
+//$('#sensor_container').width($(window).width());
 
 
 // ---------------------------------------------------------------------------
 // 浏览器变化时执行
 $(window).resize(function(){
 
-	//clearTimeout( FontTimer );
-	//FontTimer = setTimeout( FontSize , 500 );
+//	clearTimeout( FontTimer );
+//	FontTimer = setTimeout( FontSize , 500 );
 
     // 进度条计算
     var progress_block = $('.progress_block').width();
     $('.progress_percent').css('width',progress_block);
+    // 传感器数据图表，有无数据高度
+//    $('#sensor_chart').css('height',$('#sensor_chart').width()*0.6);
+//    $('#sensor_chart').css('width',$(window).width());
+//    $('#sensor_nochart').css('height',$('#sensor_chart').width()*0.6);
+    // 传感器数据--图表
+    //SensorChart(response.ChartData,response.ChartTime);
 
 });
 
@@ -236,7 +246,7 @@ $(window).resize(function(){
 // ---------------------------------------------------------------------------
 // 计算不同分辨率下的文字大小
 //function FontSize(){
-	//document.documentElement.style.fontSize = parseInt((document.documentElement.clientWidth>414?414:document.documentElement.clientWidth)/12)+'px';
+//	document.documentElement.style.fontSize = parseInt((document.documentElement.clientWidth>414?414:document.documentElement.clientWidth)/12)+'px';
 //}
 
 // 初始化作物信息
@@ -247,8 +257,14 @@ function InitCropInfoData(_data){
 		$('#view_monitor').hide();
 	}
 
+	
+	
     // 作物信息
-    $('#plantImg').attr('src',_data.plantImg);
+	if(_data.plantImg==undefined || _data.plantImg==''){
+    	$('#plantImg').attr('src',"/asset/images/wt.png");
+    }else{
+    	$('#plantImg').attr('src',_data.plantImg);
+    }
     $('#plantName').html(_data.plantName);
     $('#breedName').html(_data.breedName);
     $('#plantTime').html(_data.plantBeginTime+'-'+_data.plantEndTime);
@@ -261,8 +277,8 @@ function InitCropInfoData(_data){
 		// 生命周期及天数
 	    $('#periodName').html(_data.periodName);
 	    $('#alreayPlantDays').html('（第'+_data.alreayPlantDays+'天）');
-	    $('#text_cyle').html(_data.periodName);
-	    $('#remain').html(_data.remain);
+	    //$('#text_cyle').html(_data.periodName);
+	    //$('#remain').html(_data.remain);
 	    $('#progress_bar').css('width',_data.grownProp+'%');
 	}
 
@@ -279,7 +295,7 @@ function InitCropInfoData(_data){
              var indexIn = i;
             for( var j=0;j<farmings[i].images.split(',').length;j++){
                if(farmings[i].images.split(',')[j] != ''){
-            	   imagesArr += '<img img_index="'+j+'" onclick="SwiperFn('+indexIn+','+j+')" src="'+farmings[i].images.split(',')[j]+'" />';
+            	   imagesArr += '<img img_index="'+j+'" onclick="$(\'.swiper_sensor\').hide();SwiperFn('+indexIn+','+j+')" src="'+farmings[i].images.split(',')[j]+'" />';
                    swiper_wrapper += 
                        '<div class="swiper-slide">'+
                            '<i class="text_empty"></i>'+
@@ -321,7 +337,7 @@ function InitCropInfoData(_data){
         // 无数据
         farmingsList = 
         '<div class="no_information">'+
-            '<img src="/asset/images/phone/PlantDetail_icon4.png" class="no_icon">'+
+            '<img src="../images/MemberFarm/PlantDetail_icon4.png" class="no_icon">'+
             '<p class="no_tip">暂无农事信息</p>'+
         '</div>';
         $farm_information.append( farmingsList );
@@ -337,7 +353,7 @@ function InitCropInfoData(_data){
             harvestsList += 
             '<li>'+
                 '<div class="crop_pic">'+
-                    '<img src="/asset/images/phone/PlantDetail_harvest.png" >'+
+                    '<img src="../images/MemberFarm/PlantDetail_harvest.png" >'+
                 '</div>'+
                 '<div class="harvest_det">'+
                     '<p class="text_name">'+harvests[i].name+'</p>'+
@@ -358,28 +374,37 @@ function InitCropInfoData(_data){
 // 初始化传感器数据函数
 function InitDeviceData(_data){
     // 空气温度
-    !_data.airTemp == 'undefined' || !_data.airTemp =='' ? $('#airTemp').html(_data.airTemp+'℃') : $('#airTemp').html('--℃');
+    var airTemp = _data.airTemp+'';
+    airTemp == 'undefined' || airTemp =='' ? $('#airTemp').html('--℃') : $('#airTemp').html(airTemp+'℃');
     // 空气湿度
-    !_data.airHumidity == 'undefined' || !_data.airHumidity =='' ? $('#airHumidity').html(_data.airHumidity+'℃') : $('#airHumidity').html('--℃');
+    var airHumidity = _data.airHumidity+'';
+    airHumidity == 'undefined' || airHumidity =='' ? $('#airHumidity').html('--℃') : $('#airHumidity').html(airHumidity+'℃');
     // 土壤湿度
-    !_data.soilHumidity == 'undefined' || !_data.soilHumidity =='' ? $('#soilHumidity').html(_data.soilHumidity+'%') : $('#soilHumidity').html('--%');
+    var soilHumidity = _data.soilHumidity+'';
+    soilHumidity == 'undefined' || soilHumidity =='' ? $('#soilHumidity').html('--%') : $('#soilHumidity').html(soilHumidity+'%');
     // 光照强度
-    !_data.illumination == 'undefined' || !_data.illumination =='' ? $('#illumination').html(_data.illumination+'lux') : $('#illumination').html('--lux');
+    var illumination = _data.illumination+'';
+    illumination == 'undefined' || illumination ==''  ? $('#illumination').html('--lux'): $('#illumination').html(illumination+'lux') ;
     // 二氧化塘
-    !_data.co2 == 'undefined' || !_data.co2 =='' ? $('#co2').html(_data.co2+'℃') : $('#co2').html('--℃');
+    var co2 = _data.co2+'';
+    co2 == 'undefined' || co2 =='' ? $('#co2').html('--℃') : $('#co2').html(co2+'℃');
     // 土壤温度
-    !_data.soilTemp == 'undefined' || !_data.soilTemp =='' ? $('#soilTemp').html(_data.soilTemp+'℃') : $('#soilTemp').html('--℃');
+    var soilTemp = _data.soilTemp+'';
+    soilTemp == 'undefined' || soilTemp =='' ? $('#soilTemp').html('--℃') : $('#soilTemp').html(soilTemp+'℃');
     // 空气露点
-    !_data.dewPoint == 'undefined' || !_data.dewPoint =='' ? $('#dewPoint').html(_data.dewPoint+'℃') : $('#dewPoint').html('--℃');
+    var dewPoint = _data.dewPoint+'';
+    dewPoint == 'undefined' || dewPoint =='' ? $('#dewPoint').html('--℃') : $('#dewPoint').html(dewPoint+'℃');
 }
 
 
 // swiper农事图片
 function SwiperFn(swiperId,imgIndex){
+    $('body').attr('style','overflow:hidden');
     var farmpicLen = $('#farm_piclist'+swiperId+' img').length;
-    $('#swiper_farmpic'+swiperId).height( windowHeight );
-    $('body').addClass('overflowH');
+    $('#swiper_farmpic'+swiperId).width( $('body').width() );
+    $('#swiper_farmpic'+swiperId).height( $('body').height() );
     $('#swiper_farmpic'+swiperId).show();
+    
     var FarmSwiper = new Swiper('#swiper_farmpic'+swiperId,{
         loop : false,
         initialSlide : imgIndex,
@@ -392,10 +417,10 @@ function SwiperFn(swiperId,imgIndex){
             $('#swiper_farmpic'+swiperId+' .n_total').html( farmpicLen );  
         }
       });
-            
     $('#swiper_farmpic'+swiperId).click(function(){
         $('body').removeClass('overflowH');
         $('#swiper_farmpic'+swiperId).hide();
+        $(".swiper_sensor").show();
     });
 }
 

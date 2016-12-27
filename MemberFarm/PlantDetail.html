@@ -10,8 +10,12 @@
 	<link rel="stylesheet" type="text/css" href="../style/swiper/idangerous.swiper2.7.6.css">
 	<link rel="stylesheet" type="text/css" href="../style/commons/commons.css">
 	<link rel="stylesheet" type="text/css" href="../style/MemberFarm/PlantDetail.css">
+	<style>
+	html,body{max-width:100%; height:100px; overflow:hidden;}
+	</style>
 </head>
-<body>
+<body style="overflow-y:auto-;">
+<div id="warpper" style="height:100%;overflow-y:auto;">
 
 <!-- 作物信息 -->
 <i class="line_hui"></i>
@@ -33,15 +37,15 @@
 		</dd>
 	</dl>
 </div>
-<div class="cropinfo_bd">
+<div class="cropinfo_bd" >
 	<p class="life_cycle"><span class="text_cycle" id="periodName"></span><span class="text_day" id="alreayPlantDays"></span></p>
 	<div class="progress_block">
 		<div class="progress_bar" id="progress_bar">
 			<span class="progress_percent"></span>
 		</div>
 	</div>
-	<p class="present_cycle">目前处于<span class="text_cyle" id="text_cyle"></span><span class="color_bloack">，还有<b id="remain"></b>天采收结束</span></p>
-</div>
+	<p class="present_cycle"><!-- 目前处于<span class="text_cyle" id="text_cyle"></span><span class="color_bloack">，还有<b id="remain"></b>天采收结束</span> --></p>
+</div> 
 <!-- 物联网设备-传感器数据 -->
 <div class="plant_title clear">
 	<h3>物联网设备-传感器数据</h3>
@@ -49,75 +53,89 @@
 		<img src="../images/MemberFarm/PlantDetail_icon2.png" >指数
 	</a>
 </div>
-<div class="sensor_data_wap">
-	<div class="sensor_container" id="sensor_container">
+<div class="sensor_data_wap" style="overflow:hidden;">
+	<div class="sensor_container" id="sensor_container" style="max-width:100%;">
 		<div class="swiper_sensor">
 			<div class="swiper_slide slide_active" dataType="1">
 				<p class="text_name">空气温度</p>
 				<img src="../images/MemberFarm/PlantDetail_kongqwd.png" class="icon_sen">
 				<p class="text_val" id="airTemp"></p>
-				<i class="line_arrow"></i>
+				<div class="line_arrow">
+					<i class="arrow"></i>
+				</div>
 			</div>
 			<div class="swiper_slide" dataType="2">
 				<p class="text_name">空气湿度</p>
 				<img src="../images/MemberFarm/PlantDetail_kongqsd.png" class="icon_sen">
 				<p class="text_val" id="airHumidity"></p>
-				<i class="line_arrow"></i>
+				<div class="line_arrow">
+					<i class="arrow"></i>
+				</div>
 			</div>
 			<div class="swiper_slide" dataType="3">
 				<p class="text_name">土壤湿度</p>
 				<img src="../images/MemberFarm/PlantDetail_tursd.png" class="icon_sen">
 				<p class="text_val" id="soilHumidity"></p>
-				<i class="line_arrow"></i>
+				<div class="line_arrow">
+					<i class="arrow"></i>
+				</div>
 			</div>
 			<div class="swiper_slide" dataType="4">
 				<p class="text_name">光照强度</p>
 				<img src="../images/MemberFarm/PlantDetail_guangzqd.png" class="icon_sen">
 				<p class="text_val" id="illumination"></p>
-				<i class="line_arrow"></i>
+				<div class="line_arrow">
+					<i class="arrow"></i>
+				</div>
 			</div>
 			<div class="swiper_slide" dataType="5">
 				<p class="text_name">二氧化碳</p>
 				<img src="../images/MemberFarm/PlantDetail_eryht.png" class="icon_sen">
 				<p class="text_val" id="co2"></p>
-				<i class="line_arrow"></i>
+				<div class="line_arrow">
+					<i class="arrow"></i>
+				</div>
 			</div>
 			<div class="swiper_slide" dataType="6">
 				<p class="text_name">土壤温度</p>
 				<img src="../images/MemberFarm/PlantDetail_turwd.png" class="icon_sen">
 				<p class="text_val" id="soilTemp"></p>
-				<i class="line_arrow"></i>
+				<div class="line_arrow">
+					<i class="arrow"></i>
+				</div>
 			</div>
 			<div class="swiper_slide" dataType="7">
 				<p class="text_name">空气露点</p>
 				<img src="../images/MemberFarm/PlantDetail_kongqld.png" class="icon_sen">
 				<p class="text_val" id="dewPoint"></p>
-				<i class="line_arrow"></i>
+				<div class="line_arrow">
+					<i class="arrow"></i>
+				</div>
 			</div>
 		</div>
 	</div>
 	<!-- 数据图表 -->
-    <div style="padding:0.38462rem;">
-        <div class="sensor_chart">
-            <div id="sensor_chart"></div>
-            <div id="sensor_nochart" class="no_information">
-                <img class="no_icon" src="../images/MemberFarm/PlantDetail_nodata1.png" />
-                <p class="no_tip">暂无数据</p>
-            </div>
-        </div>
-        <!-- 天周月 -->
-        <div class="dayweekmonth" id="dayweekmonth">
-            <span timeType="1">天</span>
-            <span class="sLine" timeType="2">周</span>
-            <span timeType="3">月</span>
-        </div>
-        <!--<div class="plant_title clear" style="border:0;">
-            <p class="text_tip">作物正在最适宜的环境中最终成长！</p>
-            <a class="text_link" id="contact_customer" href="#">
-                <img src="../images/MemberFarm/PlantDetail_icon3.png" >联系客服
-            </a>
-        </div>-->
-    </div>
+	<div style="padding:0.38462rem;">
+		<div class="sensor_chart">
+			<div id="sensor_chart"></div>
+			<div id="sensor_nochart" class="no_information">
+				<img class="no_icon" src="../images/MemberFarm/PlantDetail_nodata1.png" />
+				<p class="no_tip">暂无数据</p>
+			</div>
+		</div>
+		<!-- 天周月 -->
+		<div class="dayweekmonth" id="dayweekmonth">
+			<span timeType="1">天</span>
+			<span class="sLine" timeType="2">周</span>
+			<span timeType="3">月</span>
+		</div>
+		<!-- <div class="plant_title clear" style="border:0;">
+			<p class="text_tip">作物正在最适宜的环境中最终成长！</p>
+			<a class="text_link" id="contact_customer" href="#">
+				<img src="../images/MemberFarm/PlantDetail_icon3.png" >联系客服
+			</a>
+		</div> -->
+	</div>
 </div>
 <!-- 农事信息 -->
 <div class="plant_title clear">
@@ -137,15 +155,15 @@
 	<img src="../images/MemberFarm/PlantDetail_icon5.png" class="no_icon">
 	<p class="no_tip">暂无采收信息</p>
 </div>
-<!-- 主体内容结束 -->
 
+</div>
+<!-- 主体内容结束 -->
 <!-- ****************************************************************************************** -->
 <!-- @@ 农事信息~~农事图片swiper @@ -->
-
-
 <script type="text/javascript" src="../js/commons/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="../js/swiper/idangerous.swiper2.7.6.min.js"></script>
 <script type="text/javascript" src="../js/highcharts/highcharts.js"></script>
+<script type="text/javascript" src="../js/lazyload/jquery.lazyload.js"></script>
 <script type="text/javascript" src="../js/MemberFarm/PlantDetail.js"></script>
 </body>
 </html>
