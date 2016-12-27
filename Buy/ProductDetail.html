@@ -130,6 +130,7 @@
         <li class="nub2" id="AddCart">加入购物车</li>
         <li class="nub3" id="BuyNow">立即购买</li>  
     </ul>
+    <div class="no_purchase">商品已下架</div>
     
     <!-- 注册弹窗 -->
 	<div class="mark_bind" onclick="MarkBindHide()"></div>
@@ -431,7 +432,10 @@
 		cookieinfo = utf8to16(cookieinfo);
 		weixin_info = JSON.parse( cookieinfo );
 	    getMemberInfo = weixin_info.member_info_id;
-	    getEnterpriseId = weixin_info.enterprise_info_id;
+	    var getEnterpriseId22 = weixin_info.enterprise_info_id;
+	    if( getEnterpriseId!=getEnterpriseId22 ){
+	    	setCookie("weixin_info_pay","");
+	    }
 	    //如果已经登录过，则我的订单按钮显示，点击跳转到我的订单页面，否则按钮隐藏
 	    if( getMemberInfo==''||getMemberInfo==null||getMemberInfo==undefined ){
 			$('#enter_myorder').hide();
