@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>地址列表</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="/asset/css/purchase/reset.css">
+	<link rel="stylesheet" href="/asset/css/purchase/addressList.css">
+</head>
+<body style="background-color:#f7f7f7;">
+	<ul class="address address_list" id="address_list"></ul>
+    <ul class="address" id="add_address">
+		<li class="add clearfix">
+			<a href="javascript:;">
+			<img src="/asset/images/purchase/buy/add.png" alt="">
+			<span class="txt">新增地址</span>
+			<span class="fr">&gt;</span>
+			</a>
+		</li>
+	</ul>
+    <div class="submitaddress" >完成</div>
+</body>
+<script type="text/javascript" src="/asset/js/purchase/jquery-1.11.3.min.js"></script>
+<script>
+	var base64EncodeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";  
+	var base64DecodeChars = new Array(-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1, -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1);  
+	/** 
+	 * base64编码 
+	 * @param {Object} str 
+	 */  
+	function base64encode(str){  
+		var out, i, len;  
+		var c1, c2, c3;  
+		len = str.length;  
+		i = 0;  
+		out = "";  
+		while (i < len) {  
+			c1 = str.charCodeAt(i++) & 0xff;  
+			if (i == len) {  
+				out += base64EncodeChars.charAt(c1 >> 2);  
+				out += base64EncodeChars.charAt((c1 & 0x3) << 4);  
+				out += "==";  
+				break;  
+			}  
+			c2 = str.charCodeAt(i++);  
+			if (i == len) {  
+				out += base64EncodeChars.charAt(c1 >> 2);  
+				out += base64EncodeChars.charAt(((c1 & 0x3) << 4) | ((c2 & 0xF0) >> 4));  
+				out += base64EncodeChars.charAt((c2 & 0xF) << 2);  
+				out += "=";  
+				break;  
+			}  
+			c3 = str.charCodeAt(i++);  
+			out += base64EncodeChars.charAt(c1 >> 2);  
+			out += base64EncodeChars.charAt(((c1 & 0x3) << 4) | ((c2 & 0xF0) >> 4));  
+			out += base64EncodeChars.charAt(((c2 & 0xF) << 2) | ((c3 & 0xC0) >> 6));  
+			out += base64EncodeChars.charAt(c3 & 0x3F);  
+		}  
+		return out;  
+	}
+	/** 
+	 * base64解码 
+	 * @param {Object} str 
+	 */  
+	function base64decode(str){  
+		var c1, c2, c3, c4;  
+		var i, len, out;  
+		len = str.length;  
+		i = 0;  
+		out = "";  
+		while (i < len) {  
+			/* c1 */  
+			do {  
+				c1 = base64DecodeChars[str.charCodeAt(i++) & 0xff];  
+			}  
+			while (i < len && c1 == -1);  
+			if (c1 == -1)   
+				break;  
+			/* c2 */  
+			do {  
+				c2 = base64DecodeChars[str.charCodeAt(i++) & 0xff];  
+			}  
+			while (i < len && c2 == -1);  
+			if (c2 == -1)   
+				break;  
+			out += String.fromCharCode((c1 << 2) | ((c2 & 0x30) >> 4));  
+			/* c3 */  
+			do {  
+				c3 = str.charCodeAt(i++) & 0xff;  
+				if (c3 == 61)   
+					return out;  
+				c3 = base64DecodeChars[c3];  
+			}  
+			while (i < len && c3 == -1);  
+			if (c3 == -1)   
+				break;  
+			out += String.fromCharCode(((c2 & 0XF) << 4) | ((c3 & 0x3C) >> 2));  
+			/* c4 */  
+			do {  
+				c4 = str.charCodeAt(i++) & 0xff;  
+				if (c4 == 61)   
+					return out;  
+				c4 = base64DecodeChars[c4];  
+			}  
+			while (i < len && c4 == -1);  
+			if (c4 == -1)   
+				break;  
+			out += String.fromCharCode(((c3 & 0x03) << 6) | c4);  
+		}  
+		return out;  
+	}  
+	/** 
+	 * utf16转utf8 
+	 * @param {Object} str 
+	 */  
+	function utf16to8(str){  
+		var out, i, len, c;  
+		out = "";  
+		len = str.length;  
+		for (i = 0; i < len; i++) {  
+			c = str.charCodeAt(i);  
+			if ((c >= 0x0001) && (c <= 0x007F)) {  
+				out += str.charAt(i);  
+			}  
+			else   
+				if (c > 0x07FF) {  
+					out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));  
+					out += String.fromCharCode(0x80 | ((c >> 6) & 0x3F));  
+					out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));  
+				}  
+				else {  
+					out += String.fromCharCode(0xC0 | ((c >> 6) & 0x1F));  
+					out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));  
+				}  
+		}  
+		return out;  
+	}  
+	/** 
+	 * utf8转utf16 
+	 * @param {Object} str 
+	 */  
+	function utf8to16(str){  
+		var out, i, len, c;  
+		var char2, char3;  
+		out = "";  
+		len = str.length;  
+		i = 0;  
+		while (i < len) {  
+			c = str.charCodeAt(i++);  
+			switch (c >> 4) {  
+				case 0:  
+				case 1:  
+				case 2:  
+				case 3:  
+				case 4:  
+				case 5:  
+				case 6:  
+				case 7:  
+					// 0xxxxxxx  
+					out += str.charAt(i - 1);  
+					break;  
+				case 12:  
+				case 13:  
+					// 110x xxxx 10xx xxxx  
+					char2 = str.charCodeAt(i++);  
+					out += String.fromCharCode(((c & 0x1F) << 6) | (char2 & 0x3F));  
+					break;  
+				case 14:  
+					// 1110 xxxx10xx xxxx10xx xxxx  
+					char2 = str.charCodeAt(i++);  
+					char3 = str.charCodeAt(i++);  
+					out += String.fromCharCode(((c & 0x0F) << 12) | ((char2 & 0x3F) << 6) | ((char3 & 0x3F) << 0));  
+					break;  
+			}  
+		}  
+		return out;  
+	} 
+
+	//------------------------cookie相关
+	function getCookie(c_name){
+		if (document.cookie.length>0){
+			c_start=document.cookie.indexOf(c_name + "=")
+			if (c_start!=-1){ 
+				c_start=c_start + c_name.length+1 
+				c_end=document.cookie.indexOf(";",c_start)
+				if (c_end==-1) c_end=document.cookie.length
+				return unescape(document.cookie.substring(c_start,c_end))
+			} 
+		}
+		return ""
+	}
+	
+	function setCookie(c_name,value,expiredays){
+		var exdate=new Date()
+		exdate.setDate(exdate.getDate()+expiredays)
+		document.cookie=c_name+ "=" +escape(value)+
+		((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+	}
+
+	//var http = 'http://szq.s1.natapp.cc';
+	var http = '';
+	var getTestUrl = '';
+		//getTestUrl = 'http://192.168.21.219:8080';
+		//getTestUrl = 'http://192.168.21.187:8081';
+	var iframeSearch = location.search.split("&");
+	//var getMemberInfo = iframeSearch[0].split("=")[1];
+	//var getTestUrl = iframeSearch[1].split("=")[1];
+	
+	var cookieinfo = getCookie("weixin_info_pay");
+		cookieinfo = base64decode(cookieinfo);
+		cookieinfo = utf8to16(cookieinfo);
+		weixin_info = JSON.parse( cookieinfo );
+    var getMemberInfo = weixin_info.member_info_id;
+    var getEnterpriseId = weixin_info.enterprise_info_id;
+    var yjgmAddressCookie;//地址信息cookie
+	
+	$.ajax({//---start ajax
+		type: "GET",
+		url: getTestUrl+'/rest/1.0/purchase',
+		data:{
+			'method':'query.address.data',
+			'field':JSON.stringify({
+				'member_info' : getMemberInfo	
+			})
+		},
+		dataType: "jsonp",
+		jsonp: 'callback',
+		success: function( response ) {
+			
+			//如果地址列表有数据，则执行函数：
+			if( response.address_list.length>0 )
+			{
+				InitAddressData( response.address_list )
+			}
+					
+		},
+		error: function(e) {
+			console.log('地址列表页失败了吧！！')
+		}
+	});//----end ajax
+	
+	
+	//判断如果地址超过10个，则不让在添加了
+	$('#add_address').click(function(){
+		if( $('#address_list li').length >= 10 ){
+			alert('您的地址已经超过最大限制');
+		}else{
+			window.location.href = http+'/purchase/address.html?domain='+getTestUrl;	
+		}	
+	});
+	
+
+//地址列表数据
+var InitAddressData = function ( _data ){
+	console.log(_data)
+	var _list = '',
+		_class = '';
+	var $address_list = $('#address_list');
+	
+	var addrcookie = getCookie('yjgmAddressCookie');
+		
+	var addrid = -1,
+		addrreceiver = '',
+		addraddressid='';
+	
+	if( addrcookie != ''&& addrcookie!=null && addrcookie != undefined){
+		addrcookie  = JSON.parse( addrcookie );
+		addrid = addrcookie.address_id;
+		addrreceiver = addrcookie.receiver;
+		addrpnone = addrcookie.phone_num;
+		addraddress = addrcookie.address;
+	}
+	
+	//循环
+	for( var j=0;j<_data.length;j++ ){
+		//_data[j].address_id == addrid ? _class = ' iCur' : _class = '';
+		if ( _data[j].address_id == addrid ){
+			_class = ' iCur';
+		}else{
+			_class = '';
+		}
+			addraddressid = _data[j].address_id;
+			addrreceiver = _data[j].receiver;
+			addrpnone = _data[j].phone;
+			addraddress = _data[j].address;
+		_list += 
+		'<li class="clearfix'+ _class +'" phoneNum="'+ addrpnone +'" addressId="'+ addraddressid +'">'+
+			'<div class="selectadd fl" onclick="ClickFn(this)">'+
+				'<div class="fl left"><img src="/asset/images/purchase/buy/correct.png" alt=""></div>'+
+				'<div class="center fl">'+
+					'<p class="name">'+ addrreceiver +'</p>'+
+					'<p class="dizhi">'+ addraddress +'</p>'+
+				'</div>'+
+			'</div>'+
+			'<div class="right fr" onclick="EditAddress(this)"><img src="/asset/images/purchase/buy/dizhi.png" alt=""></div>'+
+		'</li>';	
+	}
+	//添加到列表的最后
+	$address_list.append( _list );
+	
+	if(_data.length==0){
+		$address_list.attr('adlength','no');
+	}else{
+		$address_list.attr('adlength','yes');
+	}
+}
+var ClickFn = function(obj){
+	$(obj).parents('li').addClass('iCur').siblings().removeClass('iCur');
+}
+//编辑地址函数
+var EditAddress = function(obj){
+	//点击编辑地址--跳转到编辑地址页
+	var address_id = $(obj).parents('li').attr('addressid');
+	var receiver = $(obj).parents('li').find('.name').html();
+	var phone_num = $(obj).parents('li').attr('phoneNum');
+	var address = $(obj).parents('li').find('.dizhi').html();
+	
+	yjgmAddressCookie = {
+			'address_id' : address_id ,
+			'receiver' : receiver ,
+			'phone_num' : phone_num,
+			'address' : address
+		};
+		yjgmAddressCookie = JSON.stringify( yjgmAddressCookie );
+	setCookie('editAddressCookie',yjgmAddressCookie);
+
+	window.location.href = http+'/purchase/address.html?domain='+getTestUrl;	
+}
+
+
+
+
+//完成按钮
+//如果没有地址，则提示您还没有添加收货地址，如果有就返回待付款的订单页面
+$('.submitaddress').click(function(){
+	
+	if($('#address_list .iCur').length==0){
+		confirm('您还没有收货地址')
+	}else{
+			yjgmAddressCookie = {
+				'address_id' : $('#address_list .iCur').attr('addressid') ,
+				'receiver' : $('#address_list .iCur .name').html() ,
+				'phone_num' : $('#address_list .iCur').attr('phonenum') ,
+				'address' : $('#address_list .iCur .dizhi').html()
+			};
+			yjgmAddressCookie = JSON.stringify( yjgmAddressCookie );
+		setCookie('yjgmAddressCookie',yjgmAddressCookie);
+		
+		//window.location.href = http+'/purchase/PaymentOrders.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&domain='+getTestUrl;
+		history.go(-1);
+		
+	}
+	
+});
+
+
+</script>
+</html>
