@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="initial-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
+<meta name="format-detection" content="telephone=no" />
+	<title>市场价格</title>
+	<script type="text/javascript">
+	var ResizeSize = function (){
+			var _html = document.documentElement;
+			var _width = _html.getBoundingClientRect().width;
+			//var _width = document.body.clientWidth;
+			if(_width>=640){
+				_width=640
+			}
+			var _scale = _width/16 +'px';
+			_html.style.fontSize = _scale;
+		}
+	ResizeSize();
+	window.onresize = function (){
+		ResizeSize();
+	}
+	</script>
+	<link rel="stylesheet" type="text/css" href="../style/commons/commons.css">
+	<link rel="stylesheet" type="text/css" href="../style/MarketPrice/PriceList.css">
+</head>
+<body class="category_body">
+	<div class="category_wapper">
+		<div class="category_content">
+			<!--搜索-->
+			<div class="category_search">
+				<div class="public_search">
+					<span class="icon_octicon"></span>
+					<input class="form_control" type="text" value="输入关键词" />
+				</div>
+			</div>
+			<!--品类主体-->
+			<div class="category_list">
+				<!--左侧一级菜单-->
+				<ul class="level_once">
+					<li class="o_item oCur"><i class="i_shucai"></i>蔬菜</li>
+					<li class="o_item"><i class="i_shuiguo"></i>水果</li>
+					<li class="o_item"><i class="i_liangshi"></i>粮食作物</li>
+					<li class="o_item"><i class="i_jingji"></i>经济作物</li>
+					<li class="o_item"><i class="i_chaye"></i>茶叶</li>
+					<li class="o_item"><i class="i_lvhua"></i>绿化植物</li>
+					<li class="o_item"><i class="i_qita"></i>其他</li>
+				</ul>
+				<!--右侧二级菜单-->
+				<div class="level_second" style="display:block;">
+					<p class="second_title">全蔬菜</p>
+					<ul class="second_list">
+						<li class="s_item">
+							<p class="lei_name">豆类</p>
+							<div class="lei_list" onoff="true">
+								<p class="lei_crop cCur">豆角</p>
+								<p class="lei_crop">架豆</p>
+							</div>
+						</li>
+						<li class="s_item">
+							<p class="lei_name">叶菜类</p>
+							<div class="lei_list" onoff="true">
+								<p class="lei_crop cCur">大白菜</p>
+								<p class="lei_crop">香菜</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="level_second">
+					<p class="second_title">水果</p>
+					<ul class="second_list">
+						<li class="s_item">
+							<p class="lei_name">豆类</p>
+							<div class="lei_list" onoff="true">
+								<p class="lei_crop">豆角</p>
+								<p class="lei_crop">架豆</p>
+							</div>
+						</li>
+						<li class="s_item">
+							<p class="lei_name">叶菜类</p>
+							<div class="lei_list" onoff="true">
+								<p class="lei_crop">大白菜</p>
+								<p class="lei_crop">香菜</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="level_second">
+					<p class="second_title">粮食作物</p>
+					<ul class="second_list">
+						<li class="s_item">
+							<p class="lei_name">豆类</p>
+							<div class="lei_list" onoff="true">
+								<p class="lei_crop">豆角</p>
+								<p class="lei_crop">架豆</p>
+							</div>
+						</li>
+						<li class="s_item">
+							<p class="lei_name">叶菜类</p>
+							<div class="lei_list" onoff="true">
+								<p class="lei_crop">大白菜</p>
+								<p class="lei_crop">香菜</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="level_second">
+					<p class="second_title">经济作物</p>
+					<ul class="second_list">
+						<li class="s_item">
+							<p class="lei_name">豆类</p>
+							<div class="lei_list" onoff="true">
+								<p class="lei_crop">豆角</p>
+								<p class="lei_crop">架豆</p>
+							</div>
+						</li>
+						<li class="s_item">
+							<p class="lei_name">叶菜类</p>
+							<div class="lei_list" onoff="true">
+								<p class="lei_crop">大白菜</p>
+								<p class="lei_crop">香菜</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="level_second">
+					<p class="second_title">茶叶</p>
+					<ul class="second_list">
+						<li class="s_item">
+							<p class="lei_name">豆类</p>
+							<div class="lei_list" onoff="true">
+								<p class="lei_crop">豆角</p>
+								<p class="lei_crop">架豆</p>
+							</div>
+						</li>
+						<li class="s_item">
+							<p class="lei_name">叶菜类</p>
+							<div class="lei_list" onoff="true">
+								<p class="lei_crop">大白菜</p>
+								<p class="lei_crop">香菜</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="level_second">
+					<p class="second_title">绿化植物</p>
+					<ul class="second_list">
+						<li class="s_item">
+							<p class="lei_name">豆类</p>
+							<div class="lei_list" onoff="true">
+								<p class="lei_crop">豆角</p>
+								<p class="lei_crop">架豆</p>
+							</div>
+						</li>
+						<li class="s_item">
+							<p class="lei_name">叶菜类</p>
+							<div class="lei_list" onoff="true">
+								<p class="lei_crop">大白菜</p>
+								<p class="lei_crop">香菜</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="level_second">
+					<p class="second_title">其他</p>
+					<ul class="second_list">
+						<li class="s_item">
+							<p class="lei_name">豆类</p>
+							<div class="lei_list" onoff="true">
+								<p class="lei_crop">豆角</p>
+								<p class="lei_crop">架豆</p>
+							</div>
+						</li>
+						<li class="s_item">
+							<p class="lei_name">叶菜类</p>
+							<div class="lei_list" onoff="true">
+								<p class="lei_crop">大白菜</p>
+								<p class="lei_crop">香菜</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--品类主体-->
+		</div>
+		<div class="fixed_sure" onclick="GoBack()">
+			<span class="btn_success">确定</span>
+		</div>
+	</div>
+	
+<script type="text/javascript" src="../js/commons/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="../js/MarketPrice/CategorySelect.js"></script>
+</body>
+</html>

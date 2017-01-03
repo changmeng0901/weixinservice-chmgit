@@ -1,0 +1,513 @@
+
+/*去除默认样式*/
+a{
+    text-decoration: none;
+}
+input,button,textarea,select{
+    font-family: "微软雅黑";
+}
+
+/*定义的变量*/
+@root:40rem;
+@color_fff:#fff;
+@color_333:#333;
+@color_666:#666;
+@color_999:#999;
+@color_1a:#1a1a1a;
+@color_e8:#e8e8e8;
+@bg_fff:#fff;
+.ellipsis{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.box-sizing{
+    box-sizing: border-box;
+}
+.overflow(@inhert){
+    overflow: @inhert;
+}
+
+/*横屏*/
+@media all and (orientation : landscape) { 
+
+body{
+    height: 100%;
+   .overflow(hidden);
+}
+
+} 
+/*竖屏*/
+@media all and (orientation : portrait){ 
+
+body{
+    height: 100%;
+    .overflow(hidden);
+}
+
+}
+html{
+    height: 100%;
+}
+body{
+    position: relative;
+    min-width: inherit;
+    max-width: 640px;
+    margin: auto;
+    background: #fafafa;
+    font-family: "微软雅黑";
+}
+.pricelist_wapper{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    .overflow(auto);
+    .box-sizing;
+    -webkit-overflow-scrolling: touch;
+}
+.pricelist_head{
+    width: 100%;
+    height: 346/@root;
+    .banner{
+        height: 184/@root;
+    }
+    .banner img{
+        width: 100%;
+        min-height: 100%;
+        height: 100%;
+    }
+}
+.search_keyword{
+    height: 90/@root;
+    padding: 16/@root 20/@root;
+    .box-sizing;
+    .search_block{
+        position: relative;
+        height: 58/@root;
+        padding: 8/@root 8/@root 8/@root 56/@root;
+        border: 1px solid #eee;
+        border-radius: 5px;
+        background: @bg_fff;
+        .overflow(hidden);
+       .box-sizing;
+        .icon_sea{
+            position: absolute;
+            z-index: 0;
+            left: 15/@root;
+            top: 14/@root;
+            width: 29/@root;
+            height: 29/@root;
+            background: url(../../images/MarketPrice/icon_search.png) no-repeat;
+            background-size: 100% 100%;
+        }
+        .ipt_txt{
+            width: 100%;
+            height: 100%;
+            line-height: 100%-;
+            border: 0;
+            .box-sizing;
+            font-size: 27/@root;
+            color: #ccc;
+        }
+        .i_clear{
+            position: absolute;
+            z-index: 0;
+            right: 10/@root;
+            top: 20/@root;
+            display: none;
+            width: 15/@root;
+            height: 15/@root;
+        }
+    }
+}
+.filter_conditions{
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+     background: @bg_fff;
+    .overflow(hidden);
+    li{
+        position: relative;
+        float: left;
+        width: 25%;
+        height: 68/@root;
+        line-height: 68/@root;
+        text-align: center;
+        font-size: 22/@root;
+        color: @color_666;
+        cursor: pointer;
+    }
+    .i_site:after,
+    .i_category:after,
+    .i_time:after{
+        position: absolute;
+        right: 20/@root;
+        top: 32/@root;
+        content: '';
+        border-style: solid solid solid solid;
+        border-width: 8/@root 8/@root 8/@root 8/@root;
+        border-color: #ccc transparent transparent transparent;
+    }
+}
+/*主体*/
+.pricelist_body{
+    margin-top: -2px;
+} 
+.crop_list{
+    margin-top: -1px;
+    background: @bg_fff;
+    dl{
+        padding: 30/@root 25/@root;
+        border-top: 1px solid #eee;
+        .overflow(hidden);
+    }
+    dt{
+        float: left;
+        width: 122/@root;
+        height: 122/@root;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        .overflow(hidden);
+    }
+    dt img{
+        width: 100%;
+        height: 100%;
+    }
+    dd{
+        position: relative;
+        padding-left: 150/@root;
+        height: 122/@root;
+    }
+    .crop_name{
+        height: 36/@root;
+        line-height: 36/@root;
+        font-size: 30/@root;
+        a{
+            color:@color_1a;
+        }
+        .ellipsis;
+    }
+    .crop_price{
+        height: 26/@root;
+        line-height: 26/@root;
+        margin: 18/@root 0;
+        .c_txt{
+            width: 112/@root;
+            font-size: 22/@root;
+            color: @color_999;
+        }
+        .c_weight{
+            font-size: 22/@root;
+            color: #f96b15;
+        }
+    }
+    .crop_YLOVEY{
+        height: 26/@root;
+        line-height: 26/@root;
+        .c_txt{
+            width: 112/@root;
+            font-size: 22/@root;
+            color: @color_999;
+        }
+        .c_weight{
+            font-size: 22/@root;
+            color: #90b901;
+        }
+    }
+    .attention{
+        position: absolute;
+        right: 5/@root;
+        bottom: 0;
+        z-index: 0;
+        width: 32/@root;
+        height: 29/@root;
+        background-image: url(../../images/MarketPrice/icon_attention1.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+    .attention.aCur{
+        background-image: url(../../images/MarketPrice/icon_attention2.png);
+    }
+} 
+.tip_attention{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: none;
+    width: 200/@root;
+    height: 74/@root;
+    line-height: 74/@root;
+    border-radius: 8/@root;
+    margin: -37/@root 0 0 -100/@root;
+    font-size: 28/@root;
+    text-align: center;
+    color: #fff;
+    background: rgba(0,0,0,0.5);
+}
+
+
+/*位置选择页面样式*/
+.site_wapper{
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: #fff;
+    .special_txt{
+        font-size: 28/@root;
+        margin-bottom: -1px;
+        padding: 26/@root 40/@root;
+        border-bottom: 1px solid #ededed;
+        color: #53b9f3;
+    }
+}
+.site_list .sitem{
+    font-size: 28/@root;
+    padding: 26/@root 40/@root;
+    border-top: 1px solid #ededed;
+    color: #333;
+}
+.site_list .sitem:hover,
+.site_list .sitem.sCur{
+    background: #f1f1f1;
+}
+
+
+/*品类选择页面样式*/
+.category_wapper{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 100/@root;
+    .box-sizing;
+    .overflow(hidden);
+    background:@bg_fff;
+    
+    color: @color_333; 
+    .fixed_sure{
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100/@root;
+        padding: 14/@root 20/@root;
+        border-top: 1px solid @color_e8;
+        .box-sizing;
+        box-shadow: 0 0 10px 3px #f2f2f2;
+    }
+    .btn_success{
+        display: block;
+        height: 72/@root;
+        line-height: 72/@root;
+        background: #93c31c;
+        border-radius: 10/@root;
+        text-align: center;
+        font-size: 30/@root;
+        color:@color_fff;
+    }
+}
+.category_content{
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    .category_search{
+        padding: 20/@root;
+        border-bottom: 1px solid @color_e8;
+        .public_search{
+            position: relative;
+            height: 60/@root;
+            line-height: 60/@root;
+            padding: 0  20/@root 0 60/@root;
+            border-radius: 8/@root;
+            background: #f7f7f7;
+            .icon_octicon{
+                position: absolute;
+                left: 18/@root;
+                top: 15/@root;
+                z-index: 1;
+                width: 30/@root;
+                height: 30/@root;
+                background: url(../../images/MarketPrice/icon_search.png);
+                background-size: 100% 100%;
+            }
+            .form_control{
+                width: 100%;
+                height: 100%;
+                border: 0;
+                background: rgba(255,255,255,0);
+                font-size: 26/@root;
+                font-family: "微软雅黑";
+                color: #ccc;
+            }
+        }
+    }
+    /*一级菜单*/
+    .level_once{
+        position: relative;
+        z-index: 1;
+        float: left;
+        width: 200/@root;
+        min-height: 100%;
+        .box-sizing;
+        .o_item{
+            position: relative;
+            padding: 20/@root 0 20/@root 30/@root;
+            font-size: 26/@root;
+            border-right: 1px solid @color_e8;
+            .box-sizing;
+            background: url(../../images/MarketPrice/icon_line.jpg) repeat-x 0 bottom;
+            i{
+                display: inline-block;
+                width: 28/@root;
+                height: 28/@root;
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                vertical-align: top;
+                margin: 3/@root 5/@root 0 0;
+            }
+            .i_shucai{
+                background-image: url(../../images/MarketPrice/icon_shucai0.png);
+            }
+            .i_shuiguo{
+                background-image: url(../../images/MarketPrice/icon_shuiguo0.png);
+            }
+            .i_liangshi{
+                background-image: url(../../images/MarketPrice/icon_liangshi0.png);
+            }
+            .i_jingji{
+                background-image: url(../../images/MarketPrice/icon_jingji0.png);
+            }
+            .i_chaye{
+                background-image: url(../../images/MarketPrice/icon_chaye0.png);
+            }
+            .i_lvhua{
+                background-image: url(../../images/MarketPrice/icon_lvhua0.png);
+            }
+            .i_qita{
+                background-image: url(../../images/MarketPrice/icon_qita0.png);
+            }
+        }
+        .o_item.oCur{
+            border-right: 1px solid #fff;
+            color: #8fc320;
+            .i_shucai{
+                background-image: url(../../images/MarketPrice/icon_shucai1.png);
+            }
+            .i_shuiguo{
+                background-image: url(../../images/MarketPrice/icon_shuiguo1.png);
+            }
+            .i_liangshi{
+                background-image: url(../../images/MarketPrice/icon_liangshi1.png);
+            }
+            .i_jingji{
+                background-image: url(../../images/MarketPrice/icon_jingji1.png);
+            }
+            .i_chaye{
+                background-image: url(../../images/MarketPrice/icon_chaye1.png);
+            }
+            .i_lvhua{
+                background-image: url(../../images/MarketPrice/icon_lvhua1.png);
+            }
+            .i_qita{
+                background-image: url(../../images/MarketPrice/icon_qita1.png);
+            }
+        }
+        .o_item.oCur:before{
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            width: 5px;
+            height: 100%;
+            border-left: 4/@root solid #8fc320;
+            content: '';
+            .overflow(hidden);
+        }
+    }
+    /*二级菜单*/
+    .level_second:before{
+        position: absolute;
+        left: 200/@root;
+        top: 0;
+        z-index: 0;
+        width: 5px;
+        border-left: 1px solid @color_e8;
+        height: 100%;
+        margin-left: -1px;
+        content: '';
+        .overflow(hidden);
+    }
+    .level_second{
+        position: relative;
+        height: 100%;
+        min-height: 100%;
+        padding-left: 226/@root;
+        display: none;
+        .box-sizing;
+        .second_title{
+            padding: 20/@root 0;
+            font-size: 26/@root;
+        }
+        .s_item{
+            background: url(../../images/MarketPrice/icon_line.jpg) repeat-x 0 0;
+        }
+        .lei_name{
+            padding: 20/@root 0;
+            font-size: 26/@root;
+            color: @color_999; 
+        }
+        .lei_crop{
+            position: relative;
+            padding: 20/@root 30/@root;
+            font-size: 26/@root;
+            word-break: break-all;
+        }
+        .lei_crop.cCur:after{
+            position: absolute;
+            right: 30/@root;
+            top: 50%;
+            content: '';
+            width: 26/@root;
+            height: 18/@root;
+            margin-top: -9/@root;
+            background: url(../../images/MarketPrice/icon_gou.png) 0 center;
+            background-size: cover;
+            .overflow(hidden);
+        }
+    }
+}
+/*日期选择页面样式*/
+.date .datetimepicker-inline{
+    width: 100%;
+    .box-sizing;
+    margin-left: 0;
+}
+.date .table-condensed{
+    position: relative;
+    width: 100%;
+}
+.date .table-condensed .prev{
+    position: absolute;
+    left: 25%;
+}
+.date .table-condensed .next{
+    position: absolute;
+    right: 25%;
+}
+.date .table-condensed .icon-arrow-left{
+    background-image: url(../../images/MarketPrice/icon_prev.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+.date .table-condensed .icon-arrow-right{
+    background-image: url(../../images/MarketPrice/icon_next.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+.datetimepicker thead tr:first-child th:hover, 
+.datetimepicker tfoot tr:first-child th:hover{
+    background: none;
+}
+

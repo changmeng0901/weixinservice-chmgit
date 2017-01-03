@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="initial-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
+<meta name="format-detection" content="telephone=no" />
+	<title>市场价格</title>
+	<script type="text/javascript">
+	var ResizeSize = function (){
+			var _html = document.documentElement;
+			var _width = _html.getBoundingClientRect().width;
+			//var _width = document.body.clientWidth;
+			if(_width>=640){
+				_width=640
+			}
+			var _scale = _width/16 +'px';
+			_html.style.fontSize = _scale;
+		}
+	ResizeSize();
+	window.onresize = function (){
+		ResizeSize();
+	}
+	</script>
+	<link rel="stylesheet" type="text/css" href="../style/commons/commons.css">
+	<link type="text/css" rel="stylesheet" href="../style/bootstrap/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="../style/bootstrap/bootstrap-datetimepicker.css" />
+	<link rel="stylesheet" type="text/css" href="../style/MarketPrice/PriceList.css">
+</head>
+<body>
+	    <div class="input-append date" id="iDay" data-date="" data-date-format="dd-mm-yyyy"> </div>            
+	
+<script type="text/javascript" src="../js/commons/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="../js/bootstrap/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript">
+	//日历控件
+	$("#iDay").datetimepicker({
+		// 控制显示格式，默认为空，显示小时分钟 
+	    format: "yyyy-mm-dd",  
+	    autoclose: true,
+	    weekStart: 1,
+	   //startDate: "2014-08-14",
+	    language:  'zh-CN',
+	    startView: 2,
+	    minView: 2,
+	    maxView: 4,     
+	    pickerPosition: "bottom-left"
+	});
+	$('#iDay').datetimepicker().on('changeDate', function(ev){
+		alert('返回上一页');
+		history.go(-1);
+	});
+
+</script>
+</body>
+</html>

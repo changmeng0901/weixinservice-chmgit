@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="initial-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
+<meta name="format-detection" content="telephone=no" />
+	<title>市场价格</title>
+	<script type="text/javascript">
+	var ResizeSize = function (){
+			var _html = document.documentElement;
+			var _width = _html.getBoundingClientRect().width;
+			//var _width = document.body.clientWidth;
+			if(_width>=640){
+				_width=640
+			}
+			var _scale = _width/16 +'px';
+			_html.style.fontSize = _scale;
+		}
+	ResizeSize();
+	window.onresize = function (){
+		ResizeSize();
+	}
+	</script>
+	<link rel="stylesheet" type="text/css" href="../style/commons/commons.css">
+	<link rel="stylesheet" type="text/css" href="../style/MarketPrice/PriceList.css">
+</head>
+<body class="pricelist_body">
+	<div class="pricelist_wapper">
+		<!--头部-->
+		<div class="pricelist_head">
+			<div class="banner">
+				<img src="../images/MarketPrice/img_banner.jpg"/>
+			</div>
+			<div class="search_keyword">
+				<form>
+					<div class="search_block">
+						<span class="icon_sea"></span>
+						<input id="search_result" class="ipt_txt" type="text" value="搜索关键词"/>
+						<img id="i_clear" class="i_clear" src="../images/MarketPrice/icon_close.png"/>
+					</div>
+				</form>
+			</div>
+			<ul class="filter_conditions">
+				<li class="i_site" onclick="GotoSiteSelect()">地点</li>
+				<li class="i_category" onclick="GotoCategorySelect()">品类</li>
+				<li class="i_time" onclick="GotoDateSelect()">时间</li>
+				<li class="i_attention">关注</li>
+			</ul>
+		</div>
+		<!--主体-->
+		<div class="pricelist_body">
+			<div class="crop_list">
+				<dl class="c_item">
+					<dt>
+						<a href="#">
+							<img src="../images/MarketPrice/img_pic1.jpg"/>
+						</a>
+					</dt>
+					<dd>
+						<p class="crop_name">
+							<a href="#">大黄瓜</a>
+						</p>
+						<p class="crop_price">
+							<span class="c_txt">市场均价</span>
+							<span class="c_weight">￥30.10/公斤</span>
+						</p>
+						<p class="crop_YLOVEY">
+							<span class="c_txt">本来生活</span>
+							<span class="c_weight">￥--</span>
+						</p>
+						<i class="attention" onclick="attention(this)"></i>
+					</dd>
+				</dl>
+			</div>
+		</div>
+		<!--已关注活已取消-->
+		<p class="tip_attention">已关注</p>
+	</div>
+	
+<script type="text/javascript" src="../js/commons/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="../js/MarketPrice/PriceList.js"></script>
+</body>
+</html>

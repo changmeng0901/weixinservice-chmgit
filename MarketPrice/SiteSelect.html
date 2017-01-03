@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="initial-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
+<meta name="format-detection" content="telephone=no" />
+	<title>市场价格</title>
+	<script type="text/javascript">
+	var ResizeSize = function (){
+			var _html = document.documentElement;
+			var _width = _html.getBoundingClientRect().width;
+			//var _width = document.body.clientWidth;
+			if(_width>=640){
+				_width=640
+			}
+			var _scale = _width/16 +'px';
+			_html.style.fontSize = _scale;
+		}
+	ResizeSize();
+	window.onresize = function (){
+		ResizeSize();
+	}
+	</script>
+	<link rel="stylesheet" type="text/css" href="../style/commons/commons.css">
+	<link rel="stylesheet" type="text/css" href="../style/MarketPrice/PriceList.css">
+</head>
+<body>
+	<div class="site_wapper">
+		<p class="special_txt">全国<p>
+		<ul class="site_list">
+			<li class="sitem sCur">北京</li>
+			<li class="sitem">上海</li>
+			<li class="sitem">天津</li>
+		</ul>
+	</div>
+	
+<script type="text/javascript" src="../js/commons/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+	//省市区选择
+	$('.site_list .sitem').click(function(){
+		$(this).addClass('sCur').siblings().removeClass('sCur');
+	});
+
+</script>
+</body>
+</html>

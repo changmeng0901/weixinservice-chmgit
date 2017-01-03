@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="initial-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
+<meta name="format-detection" content="telephone=no" />
+	<title>市场价格</title>
+	<script type="text/javascript">
+	var ResizeSize = function (){
+			var _html = document.documentElement;
+			var _width = _html.getBoundingClientRect().width;
+			//var _width = document.body.clientWidth;
+			if(_width>=640){
+				_width=640
+			}
+			var _scale = _width/16 +'px';
+			_html.style.fontSize = _scale;
+		}
+	ResizeSize();
+	window.onresize = function (){
+		ResizeSize();
+	}
+	</script>
+	<link rel="stylesheet" type="text/css" href="../style/commons/commons.css">
+	<link rel="stylesheet" type="text/css" href="../style/MarketPrice/PriceDetail.css">
+</head>
+<body class="pricedetail_body">
+	<div class="pricedetail_wapper">
+	<div class="pricedetail_container">
+		<!-- 头部 -->
+		<div class="crop_pic">
+			<img src="../images/MarketPrice/img_pic1.jpg@120w_120h_1e_1c.src"/>
+		</div>
+		<p class="crop_name">大黄瓜</p>
+		<div class="contrast_price">
+			<div class="c_item c_first">
+				<p class="c_name"><img src="../images/MarketPrice/icon_jiage1.png" />市场均价</p>
+				<p class="c_weight color_jun">￥30.10/公斤</p>
+			</div>
+			<div class="c_item">
+				<p class="c_name"><img src="../images/MarketPrice/icon_benlai.png" />本来生活</p>
+				<p class="c_weight color_ben">￥39.60/公斤</p>
+			</div>
+		</div>
+		<!-- 主体 -->
+		<div class="contrast_tab">
+			<div class="tab_head">
+				<div class="t_item tCur">价格趋势</div>
+				<div class="t_item">趋势对比</div>
+			</div>
+			<div class="tab_content jgqs_cont" style="display: block;">
+				<!-- 价格趋势 -->
+				<div id="jgqs_charts"></div>
+				<!-- 价格趋势 -->
+			</div>
+			<div class="tab_content qsdb_cont">
+				<!-- 趋势对比 -->
+				<ul class="has_trend_contrast">
+					<li class="t_item">
+						<p class="trade_name">北京八里桥农产品批发</p>
+						<table width="100%">
+							<tr>
+								<td>价格</td>
+								<td>较昨天涨跌</td>
+								<td>较去年同期涨跌</td>
+							</tr>
+							<tr>
+								<td class="color_price"><span>￥3.4</span></td>
+								<td class="color_yesterday"><span>3.21%</span>&nbsp;↓</td>
+								<td class="color_lastyear"><span>3.21%</span>&nbsp;↑</td>
+							</tr>
+						</table>
+					</li>
+				</ul>
+				<!-- 趋势对比 -->
+			</div>
+		</div>
+		<!-- 主体 -->
+	</div>
+	</div>
+	
+<script type="text/javascript" src="../js/commons/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="../js/highcharts/highcharts.js"></script>
+<script type="text/javascript" src="../js/MarketPrice/PriceDetail.js"></script>
+</body>
+</html>

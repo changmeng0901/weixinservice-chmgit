@@ -1,0 +1,235 @@
+
+/*去除默认样式*/
+a{
+    text-decoration: none;
+}
+input,button,textarea,select{
+    font-family: "微软雅黑";
+}
+
+/*定义的变量*/
+@root:40rem;
+@color_fff:#fff;
+@color_333:#333;
+@color_666:#666;
+@color_999:#999;
+@color_1a:#1a1a1a;
+@color_e8:#e8e8e8;
+@bg_fff:#fff;
+.ellipsis{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.box-sizing{
+    box-sizing: border-box;
+}
+.overflow(@inhert){
+    overflow: @inhert;
+}
+
+/*横屏*/
+@media all and (orientation : landscape) { 
+
+body{
+    height: 100%;
+   .overflow(hidden);
+}
+
+} 
+/*竖屏*/
+@media all and (orientation : portrait){ 
+
+body{
+    height: 100%;
+    .overflow(hidden);
+}
+
+}
+html{
+    height: 100%;
+}
+body{
+    position: relative;
+    min-width: inherit;
+    max-width: 640px;
+    margin: auto;
+    background: #fff;
+    font-family: "微软雅黑";
+    color: @color_333;
+}
+.pricedetail_wapper{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    .overflow(auto);
+    .box-sizing;
+    -webkit-overflow-scrolling: touch;
+}
+.pricedetail_container{
+    padding-top: 178/@root;
+    background-image: url(../../images/MarketPrice/bg_pricedetaile1.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    }
+/*头部--作物信息*/
+.crop_pic{
+    width: 126/@root;
+    height: 126/@root;
+    border: 3/@root solid #fff;
+    border-radius: 10/@root;
+    margin: auto;
+    background: @bg_fff;
+    box-shadow: 0 5px 10px 0px #c0c0c0;
+    .overflow(hidden);
+    .box-sizing;
+    
+}
+.crop_name{
+    padding: 36/@root 20/@root;
+    font-size: 28/@root;
+    font-weight: bold;
+    word-break: break-all;
+    text-align: center;
+}
+.contrast_price{
+    width: 96%;
+    border-top: 1px dashed @color_e8;
+    margin: auto;
+    padding: 20/@root 0;
+    .overflow(hidden);
+    .c_first{
+        border-right: 1px dashed @color_e8;
+    }
+    .c_item{
+        float: left;
+        width: 50%;
+        text-align: center;
+        .box-sizing;
+    }
+    .c_name{
+        line-height: 30/@root;
+        padding: 10/@root 0;
+        font-size: 24/@root;
+        img{
+            display: inline-block;
+            width: 30/@root;
+            height: 30/@root;
+            vertical-align: top;
+        }
+    }
+    .c_weight{
+        line-height: 30/@root;
+        padding: 10/@root 0;
+        font-size: 20/@root;
+        font-weight: bold;
+    }
+    .color_jun{
+        color: #f96b15;
+    }
+    .color_ben{
+        color: #90b901;
+    }
+}
+/*价格主体--价格趋势 趋势对比*/
+.contrast_tab{
+    border-top: 1px solid @color_e8;
+    .tab_head{
+        background: #fafafa;
+        .overflow(hidden);
+        .t_item{
+            position: relative;
+            float: left;
+            width: 50%;
+            height: 80/@root;
+            line-height: 80/@root;
+            font-size: 24/@root;
+            text-align: center;
+        }
+        .t_item.tCur{
+            color: #63a8eb;
+        }
+        .t_item.tCur:after{
+            position: absolute;
+            left: 10%;
+            bottom: 0;
+            width: 80%;
+            height: 2/@root;
+            content: '';
+            background: #63a8eb;
+            .overflow(hidden);
+        }
+        .t_item.tCur:before{
+            position: absolute;
+            left: 50%;
+            margin-left: -6/@root;
+            bottom: 2/@root;
+            border-style: solid solid solid solid;
+            border-width: 6/@root 6/@root 6/@root 6/@root;
+            border-color: transparent transparent #63a8eb transparent;
+            content: '';
+            .overflow(hidden);
+        }
+    }
+    .tab_content{
+        display: none;
+    }
+    .jgqs_cont{
+        padding: 40/@root 20/@root;
+    }
+    .qsdb_cont{
+        padding: 20/@root 20/@root 5/@root;
+    }
+    #jgqs_charts{
+        height: 400/@root;
+    }
+}
+.has_trend_contrast {
+    .t_item{
+        margin-bottom: 15/@root;
+        padding: 20/@root;
+        border: 1px solid @color_e8;
+        border-radius: 5/@root;
+        box-shadow: 0 3px 5px 0px #e7e7e7;
+        .trade_name{
+            position: relative;
+            height: 30/@root;
+            line-height: 30/@root;
+            padding-left: 36/@root;
+            .ellipsis;
+            font-size: 20/@root;
+            font-weight: bold;
+        }
+        .trade_name:before{
+            position: absolute;
+            left: 0;
+            top: 3/@root;
+            width:24/@root ;
+            height: 24/@root;
+            background-image: url(../../images/MarketPrice/icon_site1.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            .overflow(hidden);
+            content: '';
+        }
+        table{
+            margin-top: 20/@root;
+        }
+        td{
+            padding: 6/@root;
+            text-align: center;
+            font-size: 20/@root;
+            color: @color_999;
+        }
+        .color_price{
+            color: #6bbafe;
+        }
+        .color_yesterday{
+            color: #9fbe7d;
+        }
+        .color_lastyear{
+            color: #de7070;
+        }
+    }
+}
+
