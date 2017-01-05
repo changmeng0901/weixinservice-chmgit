@@ -28,8 +28,11 @@
     <link type="text/css" rel="stylesheet" href="../style/bootstrap/bootstrap-datetimepicker.css" />
 	<link rel="stylesheet" type="text/css" href="../style/MarketPrice/PriceList.css">
 </head>
-<body>
-	    <div class="input-append date" id="iDay" data-date="" data-date-format="dd-mm-yyyy"> </div>            
+<body style="background: #fff;">
+	    <div class="input-append date" id="iDay" data-date="" data-date-format="dd-mm-yyyy">
+	    	<input size="26" type="text" value="" readonly>
+	    	<span class="add-on"><i class="icon-th"></i></span>
+	    </div>            
 	
 <script type="text/javascript" src="../js/commons/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap/bootstrap.min.js"></script>
@@ -49,8 +52,11 @@
 	    maxView: 4,     
 	    pickerPosition: "bottom-left"
 	});
+	
+	$("#iDay").datetimepicker('show');
 	$('#iDay').datetimepicker().on('changeDate', function(ev){
-		alert('返回上一页');
+		var _val = $('.date input').val();
+		alert(_val);
 		history.go(-1);
 	});
 

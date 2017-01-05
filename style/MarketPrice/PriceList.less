@@ -477,30 +477,53 @@ body{
     }
 }
 /*日期选择页面样式*/
-.date .datetimepicker-inline{
+#iDay{
+    position: relative;
+    height: 40px;
+    margin-top: -40px;
+}
+#iDay input{
+    width: 100%;
+    height: 40px;
+    border: 0;
+}
+#iDay .add-on{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 14px;
+    height: 14px;
+}
+#iDay .add-on .icon-th{
+    margin: 0;
+}
+.datetimepicker {
     width: 100%;
     .box-sizing;
     margin-left: 0;
+    margin-top: 0;
+    border: 1px solid #fff;
+    box-shadow: none;
 }
-.date .table-condensed{
+.datetimepicker .table-condensed{
     position: relative;
     width: 100%;
 }
-.date .table-condensed .prev{
+.datetimepicker .table-condensed .prev{
     position: absolute;
     left: 25%;
 }
-.date .table-condensed .next{
+.datetimepicker .table-condensed .next{
     position: absolute;
     right: 25%;
 }
-.date .table-condensed .icon-arrow-left{
+.datetimepicker .table-condensed .icon-arrow-left{
     background-image: url(../../images/MarketPrice/icon_prev.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: 0 0;
 }
-.date .table-condensed .icon-arrow-right{
+.datetimepicker .table-condensed .icon-arrow-right{
     background-image: url(../../images/MarketPrice/icon_next.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
