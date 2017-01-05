@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>我的订单</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="/asset/css/purchase/reset.css">
+	<link rel="stylesheet" href="/asset/css/purchase/my_order.css">
+</head>
+<body>
+	<div class="wrap_myorder">
+	<div class="my_order">
+			<ul class="items clearfix">
+				<li class="cur"><a href="javascript:;"><p>我的订单</p></a></li>
+				<li onclick="MyPacketUrl()"><a href="javascript:;"><p>我的红包</p></a></li>
+				<!--<li><a href="javascript:;"><p>我的红包</p></a></li>-->
+			</ul>
+			<!--立即绑定-->
+			<div class="binding" id="binding" style="display: none;">
+				<img onclick="DeleteBindingPhone('#binding')" src="/asset/images/purchase/buy/dele.png" />绑定手机号可查看所有订单
+				<span class="now fr" onclick="PromptlyBinding(this,'#registerPop')">立即绑定</span>
+			</div>
+			<!--我的订单头部列表-->
+			<ul class="news" id="order_menulist">
+				<li class="payment_item">
+					<div class="pic">
+						<span class="order order1"></span>
+						<i></i>
+					</div>
+					<p>待付款</p>
+				</li>
+				<li class="sendgood_item">
+					<div class="pic">
+						<span class="order order2"></span>
+						<i></i>
+					</div>
+					<p>待发货</p>
+				</li>
+				<li class="shipments_item">
+					<div class="pic">
+						<span class="order order3"></span>
+						<i></i>
+					</div>
+					<p>已发货</p>
+				</li>
+				<li class="evaluate_item">
+					<div class="pic">
+						<span class="order order4"></span>
+						<i></i>
+					</div>
+					<p>待评价</p>
+				</li>
+				<li class="completed_item">
+					<div class="pic">
+						<span class="order order5"></span>
+						<i></i>
+					</div>
+					<p>已完成</p>
+				</li>
+			</ul>
+			<!--我的订单5种状态内容集合-->
+			<div class="payment_content">
+				<div class="details">
+				<!--待付款内容-->
+					<ul class="plants" id="has_payment"></ul>
+					<!-- 无内容 -->
+					<div class="no_order" id="no_payment" style="display:none;">
+						<img src="/asset/images/purchase/buy/order.png" style="width: 2rem; height: 2.2rem;">
+						<p>您还没有待付款的订单</p>
+					</div>
+				<!--待付款内容-->	
+				</div>
+			
+				<div class="details">
+				<!--待发货内容-->
+					<ul class="plants" id="has_sendgood"></ul>
+					<!-- 无内容 -->
+					<div class="no_order" id="no_sendgood" style="display:none;">
+						<img src="/asset/images/purchase/buy/goods.png" style="width:2.25rem; height:2rem;">
+						<p>您没有待发货的订单</p>
+					</div>
+				<!--待发货内容-->
+				</div>
+				<div class="details">
+				<!--已发货内容-->
+					<ul class="plants" id="has_shipments"></ul>
+					<!-- 无内容 -->
+					<div class="no_order" id="no_shipments" style="display:none;">
+						<img src="/asset/images/purchase/buy/collect.png" style="width:2.1875rem; height:1.6875rem;">
+						<p>您没有已发货的订单</p>
+					</div>
+				<!--已发货内容-->
+				</div>
+				<div class="details">
+				<!--待评价内容-->
+					<ul class="plants" id="has_evaluate"></ul>
+					<!-- 无内容 -->
+					<div class="no_order" id="no_evaluate" style="display:none;">
+						<img src="/asset/images/purchase/buy/text.png" style="width:1.75rem; height:1.4375rem;">
+						<p>您没有待评价的订单</p>
+					</div>
+				<!--待评价内容-->
+				</div>
+				<div class="details">
+				<!--已完成内容-->
+					<ul class="plants" id="has_completed"></ul>
+					<!-- 无内容 -->
+					<div class="no_order" id="no_completed" style="display:none;">
+						<img src="/asset/images/purchase/buy/finish.png" style="width:1.5625rem; height:1.75rem;">
+						<p>您没有已完成的订单</p>
+					</div>
+				<!--已完成内容-->
+				</div>
+			</div>
+			<!--我的订单5种状态内容集合-->
+	</div>
+	</div>
+	
+	
+	<!-- ############################################################################################## -->
+	<!-- 取消弹框 -->
+	<div class="mark_opa5" onclick="MarkClickClose(this)"></div>
+	<div class="modal_box cancelBox" id="cancelModal">
+		<h4>提示</h4>
+		<p>确定取消订单吗？</p>
+		<ul class="clearfix">
+			<li class="cancel" onclick="CancelPayment('#cancelModal','.mark_opa5')">取消</li>
+			<li class="sure" onclick="SurePayment(this)">确定</li>
+		</ul>
+	</div>
+	<!-- 确认收货弹框 -->
+	<div class="modal_box confirmBox" id="confirmModal">
+		<h4>提示</h4>
+		<p>请您在收到货后确认收货，确定？</p>
+		<ul class="clearfix">
+			<li class="cancel">取消</li>
+			<li class="sure">确定</li>
+		</ul>
+	</div>
+	<!-- 联系客服弹框 -->
+	<!--<div class="modal_box service" id="serviceModal">
+		<p>185-1169-1995</p>
+		<ul class="clearfix">
+			<li class="cancel">取消</li>
+			<li class="sure"><a style="display: block;" href="tel:+1008611">呼叫</a></li>
+		</ul>
+	</div>-->
+	<!-- 删除订单弹框 -->
+	<div class="modal_box orderBox" id="orderModal">
+		<h4>提示</h4>
+		<p>确定删除订单吗？</p>
+		<ul class="clearfix">
+			<li class="cancel">取消</li>
+			<li class="sure">确定</li>
+		</ul>
+	</div>
+	<!-- 完成交易的删除订单弹框 -->
+	<div class="modal_box finishBox" id="finishModal">
+		<h4>提示</h4>
+		<p>确定删除此订单吗？</p>
+		<ul class="clearfix">
+			<li class="cancel">取消</li>
+			<li class="sure">确定</li>
+		</ul>
+	</div>
+	
+	
+<!-- 提交订单弹窗 -->
+<div class="referPop">
+	<ul class="payment">
+		<li style="color:#56b331; font-weight:bold;" id="WeChat_pay">微信支付</li>
+		<li class="zan" id="notto_pay">暂不支付</li>
+	</ul>
+</div>	
+<!-- 注册弹窗 -->
+<div class="mark_bind" onclick="MarkBindHide()"></div>
+<div class="registerPop" id="registerPop">
+	<div class="member">
+		<div class="pen"><img src="/asset/images/purchase/buy/pen.png" alt=""></div>
+		<h4>注册会员账号</h4>
+		<ul class="register_ul">
+			<li class="info">
+				<input type="text" value="手机号" class="entry1" id="phoneVal">
+				<i class="icon1"></i>
+				<p class="tip_phonenumber">请输入正确的手机号！</p>
+			</li>
+			<li class="info">
+				<input type="text" value="验证码" class="entry2" id="securitycodeVal">
+				<i class="icon2"></i>
+				<span class="code fr" id="security_btn" code="" onclick="SecurityBtn()">验证码</span>
+				<span class="time_s60 fr" id="time_s60">60s</span>
+				<p class="tip_securitycode">请输入正确验证码！</p>
+			</li>
+			<li class="regBtn" onclick="RegisterBinding()">注册并绑定</li>
+		</ul>
+	</div>
+</div>
+<!-- 注册弹窗 -->
+
+</body>
+
+
+
+<script type="text/javascript" src="/asset/js/purchase/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/asset/js/purchase/jquery.lazyload.js"></script>
+<script type="text/javascript">
+
+	var base64EncodeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";  
+	var base64DecodeChars = new Array(-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1, -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1);  
+	/** 
+	 * base64编码 
+	 * @param {Object} str 
+	 */  
+	function base64encode(str){  
+		var out, i, len;  
+		var c1, c2, c3;  
+		len = str.length;  
+		i = 0;  
+		out = "";  
+		while (i < len) {  
+			c1 = str.charCodeAt(i++) & 0xff;  
+			if (i == len) {  
+				out += base64EncodeChars.charAt(c1 >> 2);  
+				out += base64EncodeChars.charAt((c1 & 0x3) << 4);  
+				out += "==";  
+				break;  
+			}  
+			c2 = str.charCodeAt(i++);  
+			if (i == len) {  
+				out += base64EncodeChars.charAt(c1 >> 2);  
+				out += base64EncodeChars.charAt(((c1 & 0x3) << 4) | ((c2 & 0xF0) >> 4));  
+				out += base64EncodeChars.charAt((c2 & 0xF) << 2);  
+				out += "=";  
+				break;  
+			}  
+			c3 = str.charCodeAt(i++);  
+			out += base64EncodeChars.charAt(c1 >> 2);  
+			out += base64EncodeChars.charAt(((c1 & 0x3) << 4) | ((c2 & 0xF0) >> 4));  
+			out += base64EncodeChars.charAt(((c2 & 0xF) << 2) | ((c3 & 0xC0) >> 6));  
+			out += base64EncodeChars.charAt(c3 & 0x3F);  
+		}  
+		return out;  
+	}
+	/** 
+	 * base64解码 
+	 * @param {Object} str 
+	 */  
+	function base64decode(str){  
+		var c1, c2, c3, c4;  
+		var i, len, out;  
+		len = str.length;  
+		i = 0;  
+		out = "";  
+		while (i < len) {  
+			/* c1 */  
+			do {  
+				c1 = base64DecodeChars[str.charCodeAt(i++) & 0xff];  
+			}  
+			while (i < len && c1 == -1);  
+			if (c1 == -1)   
+				break;  
+			/* c2 */  
+			do {  
+				c2 = base64DecodeChars[str.charCodeAt(i++) & 0xff];  
+			}  
+			while (i < len && c2 == -1);  
+			if (c2 == -1)   
+				break;  
+			out += String.fromCharCode((c1 << 2) | ((c2 & 0x30) >> 4));  
+			/* c3 */  
+			do {  
+				c3 = str.charCodeAt(i++) & 0xff;  
+				if (c3 == 61)   
+					return out;  
+				c3 = base64DecodeChars[c3];  
+			}  
+			while (i < len && c3 == -1);  
+			if (c3 == -1)   
+				break;  
+			out += String.fromCharCode(((c2 & 0XF) << 4) | ((c3 & 0x3C) >> 2));  
+			/* c4 */  
+			do {  
+				c4 = str.charCodeAt(i++) & 0xff;  
+				if (c4 == 61)   
+					return out;  
+				c4 = base64DecodeChars[c4];  
+			}  
+			while (i < len && c4 == -1);  
+			if (c4 == -1)   
+				break;  
+			out += String.fromCharCode(((c3 & 0x03) << 6) | c4);  
+		}  
+		return out;  
+	}  
+	/** 
+	 * utf16转utf8 
+	 * @param {Object} str 
+	 */  
+	function utf16to8(str){  
+		var out, i, len, c;  
+		out = "";  
+		len = str.length;  
+		for (i = 0; i < len; i++) {  
+			c = str.charCodeAt(i);  
+			if ((c >= 0x0001) && (c <= 0x007F)) {  
+				out += str.charAt(i);  
+			}  
+			else   
+				if (c > 0x07FF) {  
+					out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));  
+					out += String.fromCharCode(0x80 | ((c >> 6) & 0x3F));  
+					out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));  
+				}  
+				else {  
+					out += String.fromCharCode(0xC0 | ((c >> 6) & 0x1F));  
+					out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));  
+				}  
+		}  
+		return out;  
+	}  
+	/** 
+	 * utf8转utf16 
+	 * @param {Object} str 
+	 */  
+	function utf8to16(str){  
+		var out, i, len, c;  
+		var char2, char3;  
+		out = "";  
+		len = str.length;  
+		i = 0;  
+		while (i < len) {  
+			c = str.charCodeAt(i++);  
+			switch (c >> 4) {  
+				case 0:  
+				case 1:  
+				case 2:  
+				case 3:  
+				case 4:  
+				case 5:  
+				case 6:  
+				case 7:  
+					// 0xxxxxxx  
+					out += str.charAt(i - 1);  
+					break;  
+				case 12:  
+				case 13:  
+					// 110x xxxx 10xx xxxx  
+					char2 = str.charCodeAt(i++);  
+					out += String.fromCharCode(((c & 0x1F) << 6) | (char2 & 0x3F));  
+					break;  
+				case 14:  
+					// 1110 xxxx10xx xxxx10xx xxxx  
+					char2 = str.charCodeAt(i++);  
+					char3 = str.charCodeAt(i++);  
+					out += String.fromCharCode(((c & 0x0F) << 12) | ((char2 & 0x3F) << 6) | ((char3 & 0x3F) << 0));  
+					break;  
+			}  
+		}  
+		return out;  
+	} 
+
+	//------------------------cookie相关
+	function getCookie(c_name){
+		if (document.cookie.length>0){
+			c_start=document.cookie.indexOf(c_name + "=")
+			if (c_start!=-1){ 
+				c_start=c_start + c_name.length+1 
+				c_end=document.cookie.indexOf(";",c_start)
+				if (c_end==-1) c_end=document.cookie.length
+				return unescape(document.cookie.substring(c_start,c_end))
+			} 
+		}
+		return ""
+	}
+	
+	function setCookie(c_name,value,expiredays){
+		var exdate=new Date()
+		exdate.setDate(exdate.getDate()+expiredays)
+		document.cookie=c_name+ "=" +escape(value)+
+		((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+	}
+	
+	function delCookie(name){
+		var exp = new Date();
+		exp.setTime(exp.getTime() - 1);
+		var cval=getCookie(name);
+		if(cval!=""&&cval!=null)
+		document.cookie= name + "="+cval+";expires="+exp.toGMTString();
+	}
+	
+	
+	var http = '';
+	var getTestUrl = '';
+	//var http = 'http://szq.s1.natapp.cc'; 	
+	var iframeSearch = location.search.split('&');
+	//var getEnterpriseId = iframeSearch[0].split('=')[1];
+	//var getMemberInfo = iframeSearch[1].split('=')[1];
+	var getOrderStatus = iframeSearch[2].split('=')[1];
+	//var getTestUrl = iframeSearch[3].split('=')[1];
+	
+	var getMemberInfo='',
+		getEnterpriseId='';
+	
+	var cookieinfo = getCookie("weixin_info_pay");
+	if(cookieinfo!=''&&cookieinfo!=null&&cookieinfo!=undefined){
+		
+		cookieinfo = base64decode(cookieinfo);
+		cookieinfo = utf8to16(cookieinfo);
+		weixin_info = JSON.parse( cookieinfo );
+	    getMemberInfo = weixin_info.member_info_id;
+	    getEnterpriseId = weixin_info.enterprise_info_id;
+	    
+	    //绑定手机号判断
+	    if(weixin_info.phone!=null&&weixin_info.phone!=''&&weixin_info.phone!=undefined){
+			//已绑定手机号
+			$('.binding').hide();
+		}else{
+			//未绑定手机号
+			$('.binding').show();
+		}
+    }
+    
+    //把商品信息清空
+    //setCookie('spOrderCookie','');
+    delCookie('spOrderCookie');
+    delCookie('yjgmAddressCookie');
+    
+    
+	
+	//图片懒加载
+	$("img").lazyload({
+		effect: "fadeIn"
+	});
+	
+	
+    //【我的红包点击接口】
+	var MyPacketUrl = function()
+		{
+			window.location.href = http+'/purchase/MyPacket.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&domain='+getTestUrl;
+		}
+	
+ 	
+	//一：【代付款】
+	var PaymentClickFn = function()
+		{
+			$.ajax({//---start  ajax
+				type: "GET",
+				url: getTestUrl+'/rest/1.0/purchase',
+				dataType: "jsonp",
+				data:{
+					'method':'query.order.data',
+					'field':JSON.stringify({
+						'enterprise_info_id' : getEnterpriseId	,
+						'member_info'        : getMemberInfo	,
+						'order_status'       : 1//getOrderStatus	
+					})
+				},
+				jsonp: 'callback',
+				success: function( response ) {
+					
+					if(response.invoke_result == 'INVOKE_SUCCESS')
+					{
+						if( response.order_list !=''&& response.order_list !=null &&response.order_list !=undefined)
+						{
+							//返回我的订单所有状态的对应的数量
+							InitStatesTotal(response.order_list);
+							if ( response.order_list.order_list.length > 0 )
+							{
+								//有数据
+								//$('#order_menulist li i').hide();
+								//$('.payment_item i').fadeIn();//数量
+								$('.payment_item i').html( response.order_list.no_pay_order_count );
+								$('#has_payment').show();//有待付款盒子
+								$('#no_payment').hide();//无待付款盒子
+								InitPaymentData( response.order_list.order_list );
+							}else{
+								//无数据
+								//$('#order_menulist li i').hide();
+								//$('.payment_item i').fadeOut();//数量
+								$('#has_payment').hide();//有待付款盒子
+								$('#no_payment').show();//无待付款盒子
+							}
+						}
+					}
+					
+				},
+				error: function(e) {
+					try {
+						console.log('代付款列表请求失败了吧！！')
+					} catch (e) {}
+				}
+			});	//-----end ajax
+		}
+		
+		
+	//二：【待发货】
+	var SendGoodClickFn = function()
+		{
+			$.ajax({//---start  ajax
+				type: "GET",
+				url: getTestUrl+'/rest/1.0/purchase',
+				dataType: "jsonp",
+				data:{
+					'method':'query.order.data',
+					'field':JSON.stringify({
+						'enterprise_info_id' : getEnterpriseId	,
+						'member_info'        : getMemberInfo	,
+						'order_status'       : 2	
+					})
+				},
+				jsonp: 'callback',
+				success: function( response ) {
+					if(response.invoke_result == 'INVOKE_SUCCESS')
+					{
+						//联系客服
+						if( response.phone !=''&& response.phone !=null && response.phone !=undefined){
+							tel_phone = 'tel:'+response.phone;
+						}else{
+							tel_phone = 'javascript:;'
+						}
+						if( response.order_list !=''&& response.order_list !=null &&response.order_list !=undefined)
+						{
+							//返回我的订单所有状态的对应的数量
+							InitStatesTotal(response.order_list);
+							if ( response.order_list.order_list.length > 0 )
+							{
+								//有数据
+								//$('#order_menulist li i').hide();
+								//$('.sendgood_item i').fadeIn();//数量
+								$('.sendgood_item i').html( response.order_list.wait_shipping_order_count );
+								$('#has_sendgood').show();//有待发货盒子
+								$('#no_sendgood').hide();//无待发货盒子
+								InitSendgoodData( response.order_list.order_list );
+							}else{
+								//无数据
+								//$('#order_menulist li i').hide();
+								//$('.sendgood_item i').fadeOut();//数量
+								$('#has_sendgood').hide();//有待发货盒子
+								$('#no_sendgood').show();//无待发货盒子
+							}
+						}
+					}
+					
+				},
+				error: function(e) {
+					try {
+						console.log('待发货列表请求失败了吧！！')
+					} catch (e) {}
+				}
+			});	//-----end ajax
+		}
+	//三：【已发货】
+	var ShipmentsClickFn = function()
+		{
+			$.ajax({//---start  ajax
+				type: "GET",
+				url: getTestUrl+'/rest/1.0/purchase',
+				dataType: "jsonp",
+				data:{
+					'method':'query.order.data',
+					'field':JSON.stringify({
+						'enterprise_info_id' : getEnterpriseId	,
+						'member_info'        : getMemberInfo	,
+						'order_status'       : 3	
+					})
+				},
+				jsonp: 'callback',
+				success: function( response ) {
+					if(response.invoke_result == 'INVOKE_SUCCESS')
+					{
+						if( response.order_list !=''&& response.order_list !=null &&response.order_list !=undefined)
+						{
+							//返回我的订单所有状态的对应的数量
+							InitStatesTotal(response.order_list);
+							if ( response.order_list.order_list.length > 0 )
+							{
+								//有数据
+								//$('#order_menulist li i').hide();
+								//$('.shipments_item i').fadeIn();//数量
+								$('.shipments_item i').html( response.order_list.delivering_order_count );
+								$('#has_shipments').show();//有已发货盒子
+								$('#no_shipments').hide();//无已发货盒子
+								InitShipmentsData( response.order_list.order_list );
+							}else{
+								//无数据
+								//$('#order_menulist li i').hide();
+								//$('.shipments_item i').fadeOut();//数量
+								$('#has_shipments').hide();//有已发货盒子
+								$('#no_shipments').show();//无已发货盒子
+							}
+						}
+					}
+					
+				},
+				error: function(e) {
+					try {
+						console.log('已发货列表请求失败了吧！！')
+					} catch (e) {}
+				}
+			});	//-----end ajax
+		}
+	//四：【待评价】
+	var EvaluateClickFn = function()
+		{
+			$.ajax({//---start  ajax
+				type: "GET",
+				url: getTestUrl+'/rest/1.0/purchase',
+				dataType: "jsonp",
+				data:{
+					'method':'query.order.data',
+					'field':JSON.stringify({
+						'enterprise_info_id' : getEnterpriseId	,
+						'member_info'        : getMemberInfo	,
+						'order_status'       : 4	
+					})
+				},
+				jsonp: 'callback',
+				success: function( response ) {
+					if(response.invoke_result == 'INVOKE_SUCCESS')
+					{
+						if( response.order_list !=''&& response.order_list !=null && response.order_list !=undefined)
+						{
+							//返回我的订单所有状态的对应的数量
+							InitStatesTotal(response.order_list);
+							if ( response.order_list.order_list.length > 0 )
+							{
+								//有数据
+								//$('#order_menulist li i').hide();
+								//$('.evaluate_item i').fadeIn();//数量
+								$('.evaluate_item i').html( response.order_list.not_evaluated_order_count );
+								$('#has_evaluate').show();//有待评价盒子
+								$('#no_evaluate').hide();//无待评价盒子
+								InitEvaluateData( response.order_list.order_list );
+							}else{
+								//无数据
+							//	$('#order_menulist li i').hide();
+								//$('.evaluate_item i').fadeOut();//数量
+								$('#has_evaluate').hide();//有待评价盒子
+								$('#no_evaluate').show();//无待评价盒子
+							}
+						}
+					}
+					
+				},
+				error: function(e) {
+					try {
+						console.log('待评价列表请求失败了吧！！')
+					} catch (e) {}
+				}
+			});	//-----end ajax
+		}
+	//五：【已完成】
+	var CompletedClickFn = function()
+		{
+			$.ajax({//---start  ajax
+				type: "GET",
+				url: getTestUrl+'/rest/1.0/purchase',
+				dataType: "jsonp",
+				data:{
+					'method':'query.order.data',
+					'field':JSON.stringify({
+						'enterprise_info_id' : getEnterpriseId	,
+						'member_info'        : getMemberInfo	,
+						'order_status'       : 5	
+					})
+				},
+				jsonp: 'callback',
+				success: function( response ) {
+					if(response.invoke_result == 'INVOKE_SUCCESS')
+					{
+						if( response.order_list !=''&& response.order_list !=null && response.order_list !=undefined)
+						{
+							//返回我的订单所有状态的对应的数量
+							InitStatesTotal(response.order_list);
+							if ( response.order_list.order_list.length > 0 )
+							{
+								//有数据
+								//$('#order_menulist li i').hide();
+								//$('.completed_item i').fadeIn();//数量
+								$('.completed_item i').html( response.order_list.deliver_done_order_count );
+								$('#has_completed').show();//有已完成盒子
+								$('#no_completed').hide();//无已完成盒子
+								InitCompletedData( response.order_list.order_list );
+							}else{
+								//无数据
+								//$('#order_menulist li i').hide();
+								//$('.completed_item i').fadeOut();//数量
+								$('#has_completed').hide();//有已完成盒子
+								$('#no_completed').show();//无已完成盒子
+							}
+						}
+					}
+					
+				},
+				error: function(e) {
+					try {
+						console.log('已完成列表请求失败了吧！！')
+					} catch (e) {}
+				}
+			});	//-----end ajax
+		}
+	
+	//初始化待付款列表数据（1）
+	var InitPaymentData = function( _data )
+		{
+			var _paymentList = '',
+				$has_payment = $('#has_payment');
+				$has_payment.html('');
+//			console.log(_paymentList)	
+			for ( var k=0;k<_data.length;k++ )
+			{
+				//判断是否显示支付按钮，no_pay=1位不显示，0显示
+				var fukuanbtn = '';
+				if(_data[k].not_pay=="1"){
+					fukuanStates = 'none';
+				}else{
+					fukuanStates = 'block';
+				}
+				if ( _data[k].product_list.length>0 )
+				{
+					var product_list = '';
+					for ( var j=0;j<_data[k].product_list.length;j++ )
+					{
+						var disStates = '';
+						
+						//up_frame_flag  up_frame_flag商品是否下架   1没有下架   0或者''下架
+						if( _data[k].product_list[j].up_frame_flag == '1' ){
+							disStates = 'none';
+						}else{
+							disStates = 'block';
+						}
+						//待付款商品列表
+						product_list +=  
+							'<div class="middle" onclick="productClickFn(this)" product_id="'+_data[k].product_list[j].product_id+'" price="'+_data[k].product_list[j].price+'">'+
+								'<div class="left fl">'+
+									'<i class="shelves_notice" style="display:'+disStates+';">已下架</i>'+
+									'<img src="'+_data[k].product_list[j].product_image+'@150w_150h_1e_1c.src" alt="">'+
+								'</div>'+
+								'<div class="center fl">'+
+									'<h4>'+_data[k].product_list[j].product_name+'</h4>'+
+									'<p>'+_data[k].product_list[j].product_unit+'</p>'+
+								'</div>'+
+								'<div class="fr">'+
+									'<p class="unit">×'+_data[k].product_list[j].product_num+'</p>'+
+								'</div>'+
+							'</div>';
+					}
+				}
+				//待付款列表
+				_paymentList += 
+					'<li order_info_id="'+_data[k].order_info_id+'" order_code="'+_data[k].order_code+'">'+
+						'<p class="wait">等待买家付款</p>'+
+						'<div class="product_list">'+product_list+'</div>'+
+						'<div class="border_line" style="display:'+fukuanStates+';"><p class="total">合计：<span>￥'+_data[k].payment_account+'</span>（含运费：￥'+_data[k].deliver_account+'）</p></div>'+
+						'<div class="btns">'+
+							'<span class="delte" onclick="DeletePayment(this,'+_data[k].order_info_id+')">取消</span>'+
+							'<span class="pay" onclick="EnterPayment(this)" style="display:'+fukuanStates+';">付款</span>'+
+						'</div>'+
+					'</li>';
+			}
+			$has_payment.html('');
+			$has_payment.append( _paymentList );
+		}
+	//返回我的订单所有状态的对应的数量
+	var InitStatesTotal = function(_data){
+		if(_data.no_pay_order_count=='0'){
+			$('.payment_item i').hide();
+		}else{
+			$('.payment_item i').fadeIn();
+		}
+		$('.payment_item i').html(_data.no_pay_order_count);
+		
+		if(_data.wait_shipping_order_count=='0'){
+			$('.sendgood_item i').hide();
+		}else{
+			$('.sendgood_item i').fadeIn();
+		}
+		$('.sendgood_item i').html(_data.wait_shipping_order_count);
+		
+		if(_data.delivering_order_count=='0'){
+			$('.shipments_item i').hide();
+		}else{
+			$('.shipments_item i').fadeIn();
+		}
+		$('.shipments_item i').html(_data.delivering_order_count);
+		
+		if(_data.not_evaluated_order_count=='0'){
+			$('.evaluate_item i').hide();
+		}else{
+			$('.evaluate_item i').fadeIn();
+		}
+		$('.evaluate_item i').html(_data.not_evaluated_order_count);
+		
+		if(_data.deliver_done_order_count=='0'){
+			$('.completed_item i').hide();
+		}else{
+			$('.completed_item i').fadeIn();
+		}
+		$('.completed_item i').html(_data.deliver_done_order_count);
+	}
+	//初始化待发货列表数据（2）
+	var tel_phone='';
+	var InitSendgoodData = function( _data )
+		{
+			var _sendgoodList = '',
+				$has_sendgood = $('#has_sendgood');
+				$has_sendgood.html('');
+				
+			for ( var k=0;k<_data.length;k++ ){
+				if ( _data[k].product_list.length>0 )
+				{
+					var product_list = '';
+					for ( var j=0;j<_data[k].product_list.length;j++ )
+					{
+						//待发货商品列表
+						product_list +=  
+							'<div class="middle" onclick="productClickFn(this)" product_id="'+_data[k].product_list[j].product_id+'" price="'+_data[k].product_list[j].price+'">'+
+								'<div class="left fl">'+
+									'<img src="'+_data[k].product_list[j].product_image+'@150w_150h_1e_1c.src" alt="">'+
+								'</div>'+
+								'<div class="center fl">'+
+									'<h4>'+_data[k].product_list[j].product_name+'</h4>'+
+									'<p>'+_data[k].product_list[j].product_unit+'</p>'+
+								'</div>'+
+								'<p class="unit fr">×'+_data[k].product_list[j].product_num+'</p>'+
+							'</div>';
+					}
+				}
+				//待发货列表
+				_sendgoodList += 
+					'<li order_info_id="'+_data[k].order_info_id+'">'+
+						'<p class="orderCode"><span class="fl c99">订单编码：'+_data[k].order_code+'</span><span class="fr">买家已付款</span></p>'+
+						product_list+
+						'<div class="border_line"><p class="total">合计：<span>￥'+_data[k].payment_account+'</span>（含运费：￥'+_data[k].deliver_account+'）</p></div>'+
+						'<div class="btns">'+
+							'<a class="contact" href="'+tel_phone+'">联系客服</a>'+
+						'</div>'+
+					'</li>';
+			}
+			$has_sendgood.html('');
+			$has_sendgood.append( _sendgoodList );
+			
+		}
+	//初始化已发货列表数据（3）
+	var InitShipmentsData = function( _data )
+		{
+			var _shipmentsList = '',
+				$has_shipments = $('#has_shipments');
+				$has_shipments.html('');
+				
+			for ( var k=0;k<_data.length;k++ ){
+				if ( _data[k].product_list.length>0 )
+				{
+					var product_list = '';
+					for ( var j=0;j<_data[k].product_list.length;j++ )
+					{
+						//已发货商品列表
+						product_list +=  
+							'<div class="middle" onclick="productClickFn(this)" product_id="'+_data[k].product_list[j].product_id+'" price="'+_data[k].product_list[j].price+'">'+
+								'<div class="left fl">'+
+									'<img src="'+_data[k].product_list[j].product_image+'@150w_150h_1e_1c.src" alt="">'+
+								'</div>'+
+								'<div class="center fl">'+
+									'<h4>'+_data[k].product_list[j].product_name+'</h4>'+
+									'<p>'+_data[k].product_list[j].product_unit+'</p>'+
+								'</div>'+
+								'<p class="unit fr">×'+_data[k].product_list[j].product_num+'</p>'+
+							'</div>';
+					}
+				}
+				//已发货列表
+				_shipmentsList += 
+					'<li order_info_id="'+_data[k].order_info_id+'">'+
+						'<p class="orderCode"><span class="fl c99">订单编码：'+_data[k].order_code+'</span><span class="fr">卖家已发货</span></p>'+
+						product_list+
+						'<div class="border_line"><p class="total">合计：<span>￥'+_data[k].payment_account+'</span>（含运费：￥'+_data[k].deliver_account+'）</p></div>'+
+						'<div class="btns">'+
+							'<span class="collect">确认收货</span>'+
+						'</div>'+
+					'</li>';
+			}
+			$has_shipments.html('');
+			$has_shipments.append( _shipmentsList );
+			
+			//########################（已发货）
+		    //确认收货按钮 -----点击确定进入当前页面的待评价状态
+		    $('#has_shipments .collect').click(function(){ 
+		    	$('#confirmModal').show();
+		    	$('#confirmModal').attr('order_info_id',$(this).parents('li').attr('order_info_id'));
+		     	$('.mark_opa5').show();
+		    	$('.mark_opa5').attr('order_info_id',$(this).parents('li').attr('order_info_id'));
+		    	
+		    });
+		    $('#confirmModal .cancel').click(function(){//取消
+		    	$('#confirmModal').hide();
+		    	$('#confirmModal').attr('order_info_id','');
+		    	$('.mark_opa5').hide();
+		    	$('.mark_opa5').attr('order_info_id','');
+		    });
+		    $('#confirmModal .sure').click(function(){//确定
+		    	$.ajax({
+					type: "GET",
+					url: getTestUrl+'/rest/1.0/purchase',
+					dataType: "jsonp",
+					data:{
+						'method':'confirm.receipt.data',
+						'field':JSON.stringify({
+							'order_id' : $('#confirmModal').attr('order_info_id')
+						})
+					},
+					jsonp: 'callback',
+					success:function(){
+						
+						$('#confirmModal').hide();
+				      	$('#confirmModal').attr('order_info_id','');
+				      	$('.mark_opa5').hide();
+				      	$('.mark_opa5').attr('order_info_id','');
+				      	
+						$('.evaluate_item').addClass('cur').siblings().removeClass('cur');
+						$('.payment_content .details').eq(3).show().siblings().hide();
+						EvaluateClickFn();
+						getOrderStatus = 4;
+						window.location.href = http+'/purchase/MyOrder.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&order_status='+getOrderStatus+'&domain='+getTestUrl;
+						//window.location.reload();
+					}
+				});	
+		    })
+		}
+	//初始化待评价列表数据（4）
+	var InitEvaluateData = function( _data )
+		{
+			var _evaluateList = '',
+				$has_evaluate = $('#has_evaluate');
+				$has_evaluate.html('');
+				
+			for ( var k=0;k<_data.length;k++ ){
+				if ( _data[k].product_list.length>0 )
+				{
+					var product_list = '';
+					for ( var j=0;j<_data[k].product_list.length;j++ )
+					{
+						var commentstate = '';
+						if( _data[k].product_list[j].product_comment_id != '' ){
+							//如果没有评价过，则没有评论ID，所以评价按钮显示，相反评价过了则隐藏评价按钮
+							commentstate ='hidden;'
+						}else{
+							commentstate ='visible;'
+						}
+						//待评价商品列表
+						product_list +=  
+							'<div class="middle" product_id="'+_data[k].product_list[j].product_id+'" order_product_id="'+_data[k].product_list[j].order_product_id+'" product_comment_id="'+_data[k].product_list[j].product_comment_id+'" price="'+_data[k].product_list[j].price+'">'+
+								'<div class="fl" onclick="productClickFn2(this)">'+
+									'<div class="left fl">'+
+										'<img src="'+_data[k].product_list[j].product_image+'@150w_150h_1e_1c.src" alt="">'+
+									'</div>'+
+									'<div class="center fl">'+
+										'<h4>'+_data[k].product_list[j].product_name+'</h4>'+
+										'<p>'+_data[k].product_list[j].product_unit+'</p>'+
+									'</div>'+
+								'</div>'+
+								'<div class="fr">'+
+									'<p class="unit">×'+_data[k].product_list[j].product_num+'</p>'+
+									'<p class="text_comment" style="visibility:'+commentstate+';">评价</p>'+
+								'</div>'+
+							'</div>';
+					}
+				}
+				//待评价列表
+				_evaluateList += 
+					'<li order_info_id="'+_data[k].order_info_id+'">'+
+						'<p class="orderCode"><span class="fl c99">订单编码：'+_data[k].order_code+'</span><span class="fr">交易成功</span></p>'+
+						product_list+
+						'<div class="border_line"><p class="total">合计：<span>￥'+_data[k].payment_account+'</span>（含运费：￥'+_data[k].deliver_account+'）</p></div>'+
+						'<div class="btns">'+
+							'<span class="seller orderDel">删除订单</span>'+
+						'</div>'+
+					'</li>';
+			}
+			$has_evaluate.html('');
+			$has_evaluate.append( _evaluateList );
+			
+			//########################（待评价）
+		    $('.plants .orderDel').click(function() {//删除订单按钮
+		     	$('#orderModal').show();
+		     	$('#orderModal').attr('order_info_id',$(this).parents('li').attr('order_info_id'));
+		     	$('.mark_opa5').show();
+		    	$('.mark_opa5').attr('order_info_id',$(this).parents('li').attr('order_info_id'));
+		    });
+		    $('#orderModal .cancel').click(function(){//取消
+		    	$('#orderModal').hide();
+		    	$('#orderModal').attr('order_info_id','');
+		    	$('.mark_opa5').hide();
+		    	$('.mark_opa5').attr('order_info_id','');
+		    });
+		    $('#orderModal .sure').click(function(){//确定
+		      	$.ajax({//---start  ajax
+					type: "GET",
+					url: getTestUrl+'/rest/1.0/purchase',
+					dataType: "jsonp",
+					data:{
+						'method':'delete.order.data',
+						'field':JSON.stringify({
+							'order_id' : $(this).parents('#orderModal').attr('order_info_id')		
+						})
+					},
+					jsonp: 'callback'
+				});	//-----end ajax  
+		      	$('#has_evaluate').find('li[order_info_id="'+$(this).parents('#orderModal').attr('order_info_id')+'"]').remove();
+		      	$('#orderModal').hide();
+		      	$('#orderModal').attr('order_info_id','');
+		      	$('.mark_opa5').hide();
+		      	$('.mark_opa5').attr('order_info_id','');
+		      	//数量
+		      	$('.evaluate_item i').html(Number($('.evaluate_item i').html())-1);
+		      	if( $('#has_evaluate li').length==0 ){
+		      		$('#has_evaluate').hide();
+		      		$('#no_evaluate').show();
+		      		$('.evaluate_item i').hide();
+		      	}
+		    });
+		    //评价按钮----   点击评价对单个商品评价---跳转至评价页面
+		    $('#has_evaluate .text_comment').click(function(){ //点击确定跳转至评价页面
+		    	window.location.href = http+'/purchase/Comment.html?enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&order_product_id='+$(this).parents('.middle').attr('order_product_id')+'&domain='+getTestUrl;
+		    });
+		}
+	//初始化已完成列表数据（5）
+	var InitCompletedData = function( _data )
+		{
+			var _completedList = '',
+				$has_completed = $('#has_completed');
+				$has_completed.html('');
+			
+			for ( var k=0;k<_data.length;k++ ){
+				if ( _data[k].product_list.length>0 )
+				{
+					var product_list = '';
+					for ( var j=0;j<_data[k].product_list.length;j++ )
+					{
+						//已完成商品列表
+						product_list +=  
+							'<div class="middle" onclick="productClickFn(this)" product_id="'+_data[k].product_list[j].product_id+'" price="'+_data[k].product_list[j].price+'">'+
+								'<div class="left fl">'+
+									'<img src="'+_data[k].product_list[j].product_image+'@150w_150h_1e_1c.src" alt="">'+
+								'</div>'+
+								'<div class="center fl">'+
+									'<h4>'+_data[k].product_list[j].product_name+'</h4>'+
+									'<p>'+_data[k].product_list[j].product_unit+'</p>'+
+								'</div>'+
+								'<p class="unit fr">×'+_data[k].product_list[j].product_num+'</p>'+
+							'</div>';
+					}
+				}
+				//已完成列表
+				_completedList += 
+					'<li order_info_id="'+_data[k].order_info_id+'">'+
+						'<p class="orderCode"><span class="fl c99">订单编码：'+_data[k].order_code+'</span><span class="fr">订单已签收</span></p>'+
+						product_list+
+						'<div class="border_line"><p class="total">合计：<span>￥'+_data[k].payment_account+'</span>（含运费：￥'+_data[k].deliver_account+'）</p></div>'+
+						'<div class="btns">'+
+							'<span class="seller finishDel">删除</span>'+
+						'</div>'+
+					'</li>';
+			}
+			$has_completed.html('');
+			$has_completed.append( _completedList );
+			
+			 //########################（已完成）
+		    $('#has_completed .finishDel').click(function() {//删除按钮
+		     	$('#finishModal').show();
+		    	$('#finishModal').attr('order_info_id',$(this).parents('li').attr('order_info_id'));
+		    	$('.mark_opa5').show();
+		    	$('.mark_opa5').attr('order_info_id',$(this).parents('li').attr('order_info_id'));
+		    });
+		    $('#finishModal .cancel').click(function(){//取消
+		    	$('#finishModal').hide();
+		    	$('#finishModal').attr('order_info_id','');
+		    	$('.mark_opa5').hide();
+		    	$('.mark_opa5').attr('order_info_id','');
+		    });
+		    $('#finishModal .sure').click(function(){//确定
+		    	$.ajax({//---start  ajax
+					type: "GET",
+					url: getTestUrl+'/rest/1.0/purchase',
+					dataType: "jsonp",
+					data:{
+						'method':'delete.order.data',
+						'field':JSON.stringify({
+							'order_id' : $(this).parents('#finishModal').attr('order_info_id')		
+						})
+					},
+					jsonp: 'callback'
+				});	//-----end ajax  
+		      	$('#has_completed').find('li[order_info_id="'+$(this).parents('#finishModal').attr('order_info_id')+'"]').remove();
+		      	$('#finishModal').hide();
+		      	$('#finishModal').attr('order_info_id','');
+		      	$('.mark_opa5').hide();
+		      	$('.mark_opa5').attr('order_info_id','');
+		      	//数量
+		      	$('.completed_item i').html(Number($('.completed_item i').html())-1);
+		      	if( $('#has_completed li').length==0 ){
+		      		$('#has_completed').hide();
+		      		$('#no_completed').show();
+		      		$('.completed_item i').hide();
+		      	}
+		    });
+		}
+	
+	//点击商品--跳转到商品详情页
+	var productClickFn = function(obj){
+ 		window.location.href = http+'/purchase/ProductDetail.html?enterprise_info_id='+getEnterpriseId+'&product_id='+$(obj).attr('product_id')+'&domain='+getTestUrl;
+ 	}
+ 	var productClickFn2 = function(obj){
+ 		window.location.href = http+'/purchase/ProductDetail.html?enterprise_info_id='+getEnterpriseId+'&product_id='+$(obj).parent().attr('product_id')+'&domain='+getTestUrl;
+ 	}
+	
+ 	// 取消弹框
+ 	var bodyW = $('body').width();
+ 	var bodyH = $('body').height();
+ 	$('.mark_opa5').css({
+     	'width':bodyW,
+     	'height':bodyH
+    });
+    //########################（待付款）
+    var myordercode='';
+    var EnterPayment = function(obj){//等待买家付款--付款按钮--点击跳页（“查看订单页” 或叫 “订单详情页” 或 “立即支付页面”）
+    	myordercode = $(obj).parents('li').attr('order_code');
+    	window.location.href = http+'/purchase/OrderDetail.html?order_id='+$(obj).parents('li').attr('order_info_id')+'&enterprise_info_id='+getEnterpriseId+'&member_info='+getMemberInfo+'&order_status=1'+'&domain='+getTestUrl;
+    }
+    
+    var DeletePayment = function(obj,orderId){ // 等待买家付款--取消按钮
+    	$('.wrap_myorder').addClass('overflowH');
+    	$('#cancelModal').show();
+    	$('.mark_opa5').show();
+    	$('.mark_opa5,#cancelModal').attr('order_info_id',orderId);
+    }
+    var CancelPayment = function(oModal,oMark){// 取消
+    	$('.wrap_myorder').removeClass('overflowH');
+    	$(oModal).hide();
+    	$(oMark).hide();
+    	$(oModal).attr('order_info_id','');
+    	$(oMark).attr('order_info_id','');
+    }
+    var SurePayment = function(obj){// 确定
+    	//console.log($(obj).parents('#cancelModal').attr('order_info_id'))
+    	$.ajax({//---start  ajax
+			type: "GET",
+			url: getTestUrl+'/rest/1.0/purchase',
+			dataType: "jsonp",
+			data:{
+				'method':'delete.order.data',
+				'field':JSON.stringify({
+					'order_id' : $(obj).parents('#cancelModal').attr('order_info_id')		
+				})
+			},
+			jsonp: 'callback'
+		});	//-----end ajax  
+		$('.wrap_myorder').removeClass('overflowH');
+		$('#has_payment').find('li[order_info_id="'+$(obj).parents('#cancelModal').attr('order_info_id')+'"]').remove();
+		$('#cancelModal').hide();
+		$('#cancelModal').attr('order_info_id','');
+    	$('.mark_opa5').hide();
+    	$('.mark_opa5').attr('order_info_id','');
+    	//数量
+    	$('.payment_item i').html(Number($('.payment_item i').html())-1);
+    	if( $('#has_payment li').length==0 ){
+      		$('#has_payment').hide();
+      		$('#no_payment').show();
+      		$('.payment_item i').hide();
+      	}
+    }
+    
+    //------------------------切换   及   默认显示状态     (从getOrderStatus值判断)-------------------------------------------------
+    	// 默认显示状态     (从getOrderStatus值判断)
+		$('#order_menulist li').eq(getOrderStatus-1).addClass('cur').siblings().removeClass('cur');
+		$('.payment_content .details').eq(getOrderStatus-1).show().siblings().hide();
+		if(getOrderStatus==1){
+			PaymentClickFn();
+		}else if(getOrderStatus==2){
+			SendGoodClickFn();
+		}else if(getOrderStatus==3){
+			ShipmentsClickFn();
+		}else if(getOrderStatus==4){
+			EvaluateClickFn();
+		}else if(getOrderStatus==5){
+			CompletedClickFn();
+		}
+		//切换
+    	$('#order_menulist li').eq(0).click(function(){
+    		$(this).addClass('cur').siblings().removeClass('cur');
+    		$('.payment_content .details').eq(0).show().siblings().hide();
+    		PaymentClickFn();
+    	});
+    	$('#order_menulist li').eq(1).click(function(){
+    		$(this).addClass('cur').siblings().removeClass('cur');
+    		$('.payment_content .details').eq(1).show().siblings().hide();
+    		SendGoodClickFn();
+    	});
+    	$('#order_menulist li').eq(2).click(function(){
+    		$(this).addClass('cur').siblings().removeClass('cur');
+    		$('.payment_content .details').eq(2).show().siblings().hide();
+    		ShipmentsClickFn();
+    	});
+    	$('#order_menulist li').eq(3).click(function(){
+    		$(this).addClass('cur').siblings().removeClass('cur');
+    		$('.payment_content .details').eq(3).show().siblings().hide();
+    		EvaluateClickFn();
+    	});
+    	$('#order_menulist li').eq(4).click(function(){
+    		$(this).addClass('cur').siblings().removeClass('cur');
+    		$('.payment_content .details').eq(4).show().siblings().hide();
+    		CompletedClickFn();
+    	});
+    //---------------------------切换   及   默认显示状态     (从getOrderStatus值判断)----------------------------------------------
+    
+    //点击遮罩黑幕，则对应的模态框关闭
+    var MarkClickClose = function(obj){
+	    $(obj).hide();
+	    $('.modal_box[order_info_id="'+$(obj).attr('order_info_id')+'"]').hide();
+	    $('.wrap_myorder').removeClass('overflowH');
+	}
+    
+   	
+   	//------------------------------------------------------winxin 支付
+    function save(order_code){ //order_code订单编号
+		var cookieinfo = getCookie("weixin_info_pay");
+		var openid = "";
+		if(cookieinfo != null){
+			cookieinfo = base64decode(cookieinfo);
+			cookieinfo = utf8to16(cookieinfo);
+			weixin_info = JSON.parse(cookieinfo);
+			openid = weixin_info.openid;
+			
+			//调起支付
+			$("#btnSubmit").attr("disabled", true); 
+		    $.ajax({
+		        url : getTestUrl + "/rest/1.0/purchase?method=wechat.pay",
+		        data : {'field':JSON.stringify({'enterprise_info_id':getEnterpriseId,'open_id':openid,'order_code':order_code})},
+		        type : "get",
+		        dataType : "jsonp",
+		        success : function(data){
+		        	if(data.invoke_result == 'INVOKE_SUCCESS'){
+		                calc(data.weixin_pay_result);
+		            }else{
+			            alert("支付失败，请稍后重试")
+			        }
+		        }
+		    });
+		}else{
+			alert("登陆超时，请重新登陆后支付");
+		}
+	}
+	
+	function calc(data){
+		if (typeof (WeixinJSBridge) == "undefined"){
+			   if(document.addEventListener){
+			       document.addEventListener('WeixinJSBridgeReady', onBridgeReady(data), false);
+			   }else if (document.attachEvent){
+			       document.attachEvent('WeixinJSBridgeReady', onBridgeReady(data)); 
+			       document.attachEvent('onWeixinJSBridgeReady', onBridgeReady(data));
+			   }
+			}else{
+				onBridgeReady(data);
+			}
+	}
+	
+	function onBridgeReady(data){
+		var app_id = data.appId;
+		var pay_sign = data.paySign;
+		var nonce_Str = data.nonceStr;
+		var package_id = data.packageId;
+		var time_stamp = data.timeStamp;
+		   WeixinJSBridge.invoke(
+		       'getBrandWCPayRequest', {
+		           "appId" : app_id,     //公众号名称，由商户传入     
+		           "paySign": pay_sign,         //时间戳，自1970年以来的秒数     
+		           "nonceStr" : nonce_Str, //随机串     
+		           "package" : package_id,     
+		           "signType" : "MD5",         //微信签名方式：     
+		           "timeStamp" : time_stamp //微信签名 
+		       },
+		       function(res){     
+		           if(res.err_msg == "get_brand_wcpay_request:ok" ) {// 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。 
+			           //把订单编号存在cookie跳转到支付成功页面
+			           alert(1)
+			       }
+		       }
+		   ); 
+		}
+    
+	//------------------------------------------------------winxin 支付
+   	
+    //------------------------------------------------------绑定手机号
+    //删除绑定手机号
+ 	var DeleteBindingPhone = function(oParent){
+ 		$(oParent).remove();
+ 	}
+	// 立即绑定按钮
+ 	var PromptlyBinding = function(obj,oParent)
+	 	{
+	 		$('.wrap_cart').addClass('overflowH');
+	 		$('.mark_bind').show();
+	 		$(oParent).show();
+	 	}
+ 	var MarkBindHide = function()
+	 	{
+	 		$('.wrap_cart').removeClass('overflowH');
+	 		$('.mark_bind').hide();
+	 		$('#registerPop').hide();
+	 	
+	 	}	
+	//注册并绑定按钮
+ 	var phoneVal = $('#phoneVal').val(),
+ 		securitycodeVal = $('#securitycodeVal').val();
+ 	var RegisterBinding = function()
+	 	{
+	 		phoneVal = $('#phoneVal').val(),
+	 		securitycodeVal = $('#securitycodeVal').val();
+	 		$('.tip_phonenumber').hide();//提示
+	 		$('.tip_securitycode').hide();//提示
+	 		
+	 		if( phoneVal == '手机号' || phoneVal == '' || !IsPhone(phoneVal) || phoneVal.length!=11 ){
+	 			
+	 			//如果手机号码不正确
+	 			$('#phoneVal').val( phoneVal );
+	 			$('#securitycodeVal').val( securitycodeVal );
+	 			$('.tip_phonenumber').show();//提示
+	 			$('.tip_securitycode').hide();//提示
+	 			
+	 		}else if( securitycodeVal=='验证码' ||　securitycodeVal=='' || securitycodeVal.length!=6 ){
+	 			
+	 			//如果验证码不正确
+	 			$('#phoneVal').val( phoneVal );
+	 			$('#securitycodeVal').val( securitycodeVal );
+	 			$('.tip_phonenumber').hide();//提示
+	 			$('.tip_securitycode').show();//提示
+	 			
+	 		}else{
+	 			
+	 			//如果注册并绑定成功，则重新刷新页面
+	 			$.ajax({
+			        type: "GET",
+					url: getTestUrl+'/rest/1.0/purchase',
+					dataType: "jsonp",
+					data:{
+						'method':'bingding.phone.data',
+						'field':JSON.stringify({
+							'enterprise_info_id' : getEnterpriseId	,
+							'memeber_info'       : getMemberInfo,
+							'phone'              : phoneVal,
+							'code'               : securitycodeVal
+						})
+					},
+					jsonp: 'callback',
+					success: function( response ) {
+						
+						if( response.result == 'failed' ){
+							alert(response.message)
+						}else{
+							
+							window.location.reload(); 
+							
+						}
+						
+					},
+					error: function(e) {
+						console.log('！')
+					}
+			    });
+	 			
+	 		}
+	 	}
+ 	//验证码按钮----点击之后倒计时60s，且当弹框关闭后时间还继续走，目的防止二次点击
+ 	var SecurityBtn = function(){
+ 		phoneVal = $('#phoneVal').val();
+ 		if( phoneVal != '手机号' && phoneVal != '' && IsPhone(phoneVal) && phoneVal.length==11 ){
+ 			
+ 			$('.tip_phonenumber').hide();//提示
+	 		$('.tip_securitycode').hide();//提示
+ 			
+ 			$.ajax({
+				type: "GET",
+				url: getTestUrl+'/rest/1.0/purchase',
+				dataType: "jsonp",
+				data:{
+					'method':'get.verification.data',
+					'field':JSON.stringify({
+						'phone' : $('#phoneVal').val()	
+					})
+				},
+				jsonp: 'callback'
+			});	//-----end ajax
+			
+			var Stimer = null,
+ 				Mtime = 60;
+	 		//定时器
+	 		clearInterval( Stimer );
+	 		Stimer = setInterval(function(){
+	 			
+	 			if(Mtime==0){
+	 				clearInterval( Stimer );
+	 				Mtime = 60;
+	 				$('#security_btn').show();
+	 				$('#time_s60').hide();
+	 				$('#time_s60').html('60s');
+	 			}
+	 			Mtime--;
+	 			$('#time_s60').html(Mtime+'s')
+	 			
+	 		},1000)
+	 		$('#security_btn').hide();
+	 		$('#time_s60').show();
+			
+ 		}else{
+ 			
+ 			$('.tip_phonenumber').show();//提示
+	 		$('.tip_securitycode').hide();//提示
+ 			
+ 		}
+ 		
+ 	}
+ 	
+ 	//获取焦点和失去焦点
+ 	$('input[type=text],textarea').focus(function(){
+		var txt_value = $(this).val();
+		if(txt_value==this.defaultValue){
+			$(this).val("");          
+		};	
+	});
+	$('input[type=text],textarea').blur(function(){
+		var txt_value = $(this).val();
+		if(txt_value==""){
+			$(this).val(this.defaultValue);
+		};	     
+	});	
+ 	
+ 	//封装判断手机号函数
+	var IsPhone = function(inpurStr)
+	{
+		var partten = /^(13[0-9]|15[012356789]|17[01236789]|18[0-9]|14[57])[0-9]{8}$/;
+		if(partten.test(inpurStr))
+		{
+		   //alert('是电话号码');
+		   return true;
+		}
+		else
+		{
+		   //alert('不是电话号码');
+		   return false;
+		}
+	} 
+    //------------------------------------------------------绑定手机号
+    
+</script>
+</html>
