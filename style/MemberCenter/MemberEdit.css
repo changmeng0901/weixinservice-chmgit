@@ -1,0 +1,216 @@
+/*去除默认样式*/
+a {
+  text-decoration: none;
+}
+input,
+button,
+textarea,
+select {
+  font-family: "微软雅黑";
+}
+/*定义的变量*/
+.ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.box-sizing {
+  box-sizing: border-box;
+}
+/*横屏*/
+/*竖屏*/
+html {
+  height: 100%;
+  max-width: 640px;
+  margin: auto;
+}
+body {
+  position: relative;
+  min-width: inherit;
+  width: 100%;
+  background: #f7f7f7;
+  font-family: "微软雅黑";
+  color: #333;
+  overflow: auto;
+}
+/*会员中心编辑页面样式*/
+.mt20 {
+  margin-top: 0.4rem;
+}
+.mem_edit_dl {
+  position: relative;
+  padding: 0.36rem 0.6rem 0.36rem 3.6rem;
+  border-bottom: 1px solid #ededed;
+  border-top: 1px solid #ededed;
+  margin-bottom: -1px;
+  background: #fff;
+  font-size: 0.56rem;
+}
+.mem_edit_dl dt {
+  position: absolute;
+  left: 0.6rem;
+  top: 0.32rem;
+  z-index: 1;
+  width: 3.6rem;
+  height: 1.04rem;
+  line-height: 1.04rem;
+  font-weight: normal;
+  color: #1a1a1a;
+}
+.mem_edit_dl dd {
+  height: 1.76rem;
+  height: 1.04rem;
+  line-height: 1.04rem;
+}
+.mem_edit_dl .ipt_txt,
+.mem_edit_dl .text_site {
+  float: right;
+  width: 90%;
+  height: 1.04rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: right;
+  color: #999;
+}
+/*上传图片*/
+.fileBtn {
+  width: 2rem;
+  height: 2rem;
+}
+.fileBtn .file_images {
+  width: 100%;
+  height: 100%;
+}
+.mem_edit_dl100 dt,
+.mem_edit_dl100 dd {
+  height: 2rem;
+  line-height: 2rem;
+}
+/*固定底部*/
+.mb137 {
+  margin-bottom: 2.74rem;
+}
+.fixed_save_wap {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 100%;
+  height: 2.44rem;
+  margin-top: -2.44rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid #e8e8e8;
+  background: #fff;
+  box-sizing: border-box;
+}
+.fixed_save_block {
+  width: 100%;
+  max-width: 640px;
+  margin: auto;
+  overflow: hidden;
+}
+.fixed_save_block .btn_success,
+.fixed_save_block .btn_default {
+  display: block;
+  width: 100% ;
+  height: 1.64rem;
+  line-height: 1.64rem;
+  text-align: center;
+  font-size: 0.72rem;
+  border-radius: 0.24rem;
+  border: 1px solid #fff;
+  box-sizing: border-box;
+}
+.fixed_save_block .btn_success {
+  background: #6fac24;
+  color: #fff;
+  border: 1px solid #6fac24;
+}
+.fixed_save_block .btn_default {
+  background: #fff;
+  color: #8f8f8f;
+  border: 1px solid #d1d1d1;
+}
+.fixed_save_block .plr2520 {
+  width: 50%;
+  padding-left: 0.5rem;
+  padding-right: 0.4rem;
+  box-sizing: border-box;
+}
+.fixed_save_block .plr2025 {
+  width: 50%;
+  padding-left: 0.4rem;
+  padding-right: 0.5rem;
+  box-sizing: border-box;
+}
+/*SUI Mobile省市区插件重置样式*/
+.black_mark {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+.page-group .page,
+.page-group {
+  position: inherit;
+}
+.page-group {
+  left: inherit;
+  width: 80%;
+  float: right;
+}
+.page-group input {
+  width: 100%;
+  height: 1.04rem;
+  line-height: 1rem;
+  padding: 0;
+  background: none;
+  text-align: right;
+  font-size: 0.56rem;
+  color: #999;
+  border: 0;
+  background: #fff;
+  text-indent: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.page-group input:focus {
+  text-indent: 0;
+  padding: 0;
+}
+.picker-modal .bar-nav {
+  height: 1.48rem;
+  padding: 0;
+  background: #f7f7f7;
+}
+.picker-modal .bar-nav .pull-left,
+.picker-modal .bar-nav .pull-right {
+  height: 1.48rem;
+  line-height: 1.48rem;
+  padding: 0 0.3rem;
+  background: none;
+  font-size: 0.48rem;
+  color: #007aff;
+}
+.picker-modal .bar-nav:after {
+  height: 0;
+}
+.picker-modal.modal-in {
+  background: #fff;
+}
+.picker-item {
+  font-size: 0.76rem;
+}
+.city-picker .col-province,
+.city-picker .col-city {
+  width: 50%;
+}
+.city-picker .col-district {
+  width: 0;
+}

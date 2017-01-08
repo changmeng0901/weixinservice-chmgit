@@ -1,0 +1,292 @@
+
+/*去除默认样式*/
+a{
+    text-decoration: none;
+}
+input,button,textarea,select{
+    font-family: "微软雅黑";
+}
+
+/*定义的变量*/
+@root:50rem;
+@color_fff:#fff;
+@color_333:#333;
+@color_666:#666;
+@color_999:#999;
+@color_1a:#1a1a1a;
+@color_e8:#e8e8e8;
+@bg_fff:#fff;
+.ellipsis{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.box-sizing{
+    box-sizing: border-box;
+}
+.overflow(@inhert){
+    overflow: @inhert;
+}
+
+/*横屏*/
+@media all and (orientation : landscape) { 
+
+} 
+/*竖屏*/
+@media all and (orientation : portrait){ 
+
+}
+html{
+    height: 100%;
+    max-width: 640px;
+    margin: auto;
+}
+body{
+    position: relative;
+    min-width: inherit;
+    width: 100%;
+    background: #fff;
+    font-family: "微软雅黑";
+    color: @color_333;
+}
+
+/*会员中心样式*/
+.member_body{
+    background-image:url(../../images/MemberCenter/bg_member720.png);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    color: @color_333           ;
+}
+.line_space15{
+    height: 15/@root;
+    background: #f7f7f7;
+}
+.member_head_info{
+    position: relative;
+    padding-top: 86/@root;
+    .text_edit{
+        position: absolute;
+        right: 30/@root;
+        top: 20/@root;
+        z-index: 1;
+        height: 38/@root;
+        line-height: 38/@root;
+        padding: 0 20/@root;
+        background-image: url(../../images/MemberCenter/bg_opacityw50.png);
+        background-repeat: repeat;
+        border-radius: 5/@root;
+        font-size: 24/@root;
+        color: #2c4919;
+    }
+    .text_name{
+        margin: 0 auto;
+        text-align: center;
+    }
+    .nickname{
+        position: relative;
+        display: inline-block;
+        height: 78/@root;
+        line-height: 78/@root;
+        padding: 0 5/@root;
+        word-break: break-all;
+        vertical-align: top;
+        font-size: 30/@root;
+        font-weight: bold;
+    }
+    .limits{
+        position: absolute;
+        left: 100%;
+        width: 110/@root;
+        height: 28/@root;
+        line-height: 28/@root;
+        margin-top: 24/@root;
+        background-image: url(../../images/MemberCenter/bg_limits.png);
+        background-repeat: repeat;
+        background-size: 100% 100%;
+        font-size: 18/@root;
+        color: @color_fff;
+        word-break: normal;
+        text-align: center;
+    }
+}
+.member_head{
+    width: 150/@root;
+    height: 150/@root;
+    margin: auto;
+    padding: 5/@root;
+    background-image: url(../../images/MemberCenter/bg_opacityw50.png);
+    background-repeat: repeat;
+    border-radius: 50%;
+    .box-sizing;
+    .overflow(hidden);
+    img{
+        width: 100%;
+        height: 100%;
+        border: 2/@root solid #fff;
+        border-radius:50%;
+        .box-sizing;
+    }
+}
+.integral_block{
+    border-top: 1px solid @color_e8;
+    padding: 10/@root 0;
+    .overflow(hidden);
+    .integral_lt{
+        float: left;
+        width: 50%;
+        padding: 14/@root 0 14/@root 40/@root;
+        border-right: 1px solid @color_e8;
+        .box-sizing;
+        img{
+            float: left;
+            width: 60/@root;
+            height: 60/@root;
+            vertical-align: top;
+        }
+        .p_txt{
+            height: 34/@root;
+            line-height: 34/@root;
+            padding-left: 86/@root;
+            font-size: 28/@root;
+        }
+        .p_integral{
+            padding-top: 6/@root;
+            padding-left: 86/@root;
+            font-size: 20/@root;
+            color: #ff7d4f;
+        }
+    }
+    .download_rt{
+        float: right;
+        width: 50%;
+        padding: 14/@root 0 14/@root 40/@root;
+        .box-sizing;
+        img{
+            float: left;
+            width: 60/@root;
+            height: 60/@root;
+            vertical-align: top;
+        }
+        .p_txt{
+            height: 60/@root;
+            line-height: 60/@root;
+            padding-left: 86/@root;
+            font-size: 28/@root;
+        }
+    }
+}
+/*联系信息*/
+.contact_info{
+    .dl_dl{ 
+        position: relative;
+        height: 80/@root;
+        line-height: 80/@root;
+        padding: 0 30/@root 0 230/@root;
+        border-top: 1px solid @color_e8;
+        font-size: 24/@root;
+    }
+    .dl_dt{
+        position: absolute;
+        left: 0;
+        width: 230/@root;
+        height: 80/@root;
+        line-height: 80/@root;
+        padding-left: 30/@root;
+        color: @color_666;
+        .box-sizing;
+        img{
+            width: 36/@root;
+            height: 36/@root;
+            vertical-align: top;
+            margin: 22/@root 22/@root 0 0;
+        }
+    }
+    .dl_dd{
+        .ellipsis;
+        text-align: right;
+    }
+}
+/*会员活动*/
+.member_activities{
+    padding: 14/@root 0;
+    .h_title{
+        position: relative;
+        height: 40/@root;
+        line-height: 40/@root;
+        margin: 0 30/@root;
+        padding-left: 20/@root;
+        font-size: 28/@root;
+    }
+    .h_title:before{
+        position: absolute;
+        left: 0;
+        top: 5/@root;
+        width: 6/@root;
+        height: 30/@root;
+        background: #6bbcef;
+        border-radius: 3/@root;
+        content: '';
+        .overflow(hidden);
+    }
+}
+.has_activities {
+    dl{
+        padding: 20/@root 30/@root;
+        border-bottom: 1px solid @color_e8;
+    }
+    dt{
+        position: relative;
+        z-index: 1;
+        float: left;
+        width: 210/@root;
+        height: 120/@root;
+        padding-right: 20/@root;
+        .box-sizing;
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+    dd{
+        position: relative;
+    }
+    .p_cont{
+        height: 76/@root;
+        line-height: 38/@root;
+        font-size: 24/@root;
+        .overflow(hidden);
+    }
+    .p_time{
+        margin-top: 16/@root;
+        font-size: 22/@root;
+        color: @color_999;
+    }
+    .Willnum{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        padding: 10/@root;
+        font-size: 18/@root;
+        background: #6fac24;
+        border-radius: 8/@root;
+        color: #fff;
+    }
+}
+.no_activities{
+    padding: 60/@root 0;
+    text-align: center;
+    img{
+        width: 65/@root;
+        height: 62/@root;
+    }
+    .p_txt{
+        margin-top: 20/@root;
+        font-size: 24/@root;
+        color: @color_999;
+    }
+}
+
+
+    
+

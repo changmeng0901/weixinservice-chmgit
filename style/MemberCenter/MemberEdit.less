@@ -1,0 +1,238 @@
+
+/*去除默认样式*/
+a{
+    text-decoration: none;
+}
+input,button,textarea,select{
+    font-family: "微软雅黑";
+}
+
+/*定义的变量*/
+@root:50rem;
+@color_fff:#fff;
+@color_333:#333;
+@color_666:#666;
+@color_999:#999;
+@color_1a:#1a1a1a;
+@color_e8:#e8e8e8;
+@bg_fff:#fff;
+.ellipsis{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.box-sizing{
+    box-sizing: border-box;
+}
+.overflow(@inhert){
+    overflow: @inhert;
+}
+
+/*横屏*/
+@media all and (orientation : landscape) { 
+
+} 
+/*竖屏*/
+@media all and (orientation : portrait){ 
+
+}
+html{
+    height: 100%;
+    max-width: 640px;
+    margin: auto;
+}
+body{
+    position: relative;
+    min-width: inherit;
+    width: 100%;
+    background: #f7f7f7;
+    font-family: "微软雅黑";
+    color: @color_333;
+    overflow: auto;
+}
+
+/*会员中心编辑页面样式*/
+.mt20{
+    margin-top: 20/@root;
+}
+.mem_edit_dl{
+    position: relative;
+    padding: 18/@root 30/@root 18/@root 180/@root;
+    border-bottom: 1px solid #ededed;
+    border-top: 1px solid #ededed;
+    margin-bottom: -1px;
+    background: @color_fff;
+    font-size: 28/@root;
+}
+.mem_edit_dl{
+     dt{
+        position: absolute;
+        left: 30/@root;
+        top: 16/@root;
+        z-index: 1;
+        width: 180/@root;
+        height: 52/@root;
+        line-height: 52/@root;
+        font-weight: normal;
+        color: #1a1a1a;
+    }
+    dd{
+        height: 88/@root;
+        height: 52/@root;
+        line-height: 52/@root;
+    }
+    .ipt_txt,
+    .text_site{
+        float: right;
+        width: 90%;
+        height: 52/@root;
+        padding: 0;
+        border: 0;
+        background: none;
+        text-align: right;
+        color: @color_999;
+    }
+}
+/*上传图片*/
+.fileBtn{
+    width: 100/@root;
+    height: 100/@root;
+}
+.fileBtn .file_images{
+    width: 100%;
+    height: 100%;
+}
+.mem_edit_dl100 dt,
+.mem_edit_dl100 dd{
+    height: 100/@root;
+    line-height: 100/@root;
+}
+/*固定底部*/
+.mb137{
+    margin-bottom: 137/@root;
+}
+.fixed_save_wap{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+    width: 100%;
+    height: 122/@root;
+    margin-top: -122/@root;
+    padding-top: 20/@root;
+    border-top: 1px solid @color_e8;
+    background: #fff;
+    .box-sizing;
+}
+.fixed_save_block{
+    width: 100%;
+    max-width: 640px;
+    margin: auto;
+    .overflow(hidden);
+    .btn_success,
+    .btn_default{
+        display: block;
+        width:100% ;
+        height: 82/@root;
+        line-height: 82/@root;
+        text-align: center;
+        font-size: 36/@root;
+        border-radius: 12/@root;
+        border: 1px solid #fff;
+        .box-sizing;
+    }
+    .btn_success{
+        background: #6fac24;
+        color: #fff;
+        border: 1px solid #6fac24;
+    }
+    .btn_default{
+        background: #fff;
+        color: #8f8f8f;
+        border: 1px solid #d1d1d1;
+    }
+    .plr2520{
+        width: 50%;
+        padding-left: 25/@root;
+        padding-right: 20/@root;
+        .box-sizing;
+    }
+    .plr2025{
+        width: 50%;
+        padding-left: 20/@root;
+        padding-right: 25/@root;
+        .box-sizing;
+    }
+}
+/*SUI Mobile省市区插件重置样式*/
+.black_mark{
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.5;
+    filter:alpha(opacity=50);
+}
+.page-group .page, .page-group{
+    position: inherit;
+}
+.page-group{
+    left: inherit;
+    width: 80%;
+    float: right;
+}
+.page-group input{
+    width: 100%;
+    height: 52/@root;
+    line-height: 50/@root;
+    padding: 0;
+    background: none;
+    text-align: right;
+    font-size: 28/@root;
+    color: @color_999;
+    border: 0;
+    background: #fff;
+    text-indent: 0;
+    .box-sizing;
+    .overflow(hidden);
+}
+.page-group input:focus{
+    text-indent: 0;
+    padding: 0;
+}
+.picker-modal .bar-nav {
+    height: 74/@root;
+    padding: 0;
+    background: #f7f7f7;
+    .pull-left,
+    .pull-right{
+        height: 74/@root;
+        line-height: 74/@root;
+        padding: 0 15/@root;
+        background: none;
+        font-size: 24/@root;
+        color: #007aff;
+    }
+}
+.picker-modal .bar-nav:after{
+    height: 0;
+}
+.picker-modal.modal-in{
+    background: #fff;
+}
+.picker-item{
+    font-size: 38/@root;
+}
+.city-picker .col-province,
+.city-picker .col-city{
+    width: 50%;
+}
+.city-picker .col-district{
+    width: 0;
+}
+
+    
+

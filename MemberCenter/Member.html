@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="initial-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
+<meta name="format-detection" content="telephone=no" />
+	<title>会员中心</title>
+	<script type="text/javascript">
+	var ResizeSize = function (){
+			var _html = document.documentElement;
+			var _width = _html.getBoundingClientRect().width;
+			//var _width = document.body.clientWidth;
+			if(_width>=640){
+				_width=640
+			}
+			var _scale = _width/15 +'px';
+			_html.style.fontSize = _scale;
+		}
+	ResizeSize();
+	window.onresize = function (){
+		ResizeSize();
+	}
+	</script>
+	<link rel="stylesheet" type="text/css" href="../style/commons/commons.css">
+	<link rel="stylesheet" type="text/css" href="../style/MemberCenter/Member.css">
+</head>
+<body class="member_body">
+	<!-- 头部信息 -->
+	<div class="member_head_info">
+		<a href="javascript:;" class="text_edit" onclick="SaveEdit()">编辑</a>
+		<div class="member_head">
+			<img src="../images/MemberCenter/img_head.png" />
+			<!--<img src="../images/MemberCenter/img_head.png@120w_120h_1e_1c.src" />-->
+		</div>
+		<div class="text_name">
+			<p class="nickname">自然之心<span class="limits">企业管理员</span></p>
+		</div>
+		<dl class="integral_block">
+			<dd class="integral_lt">
+				<img src="../images/MemberCenter/icon_score.png"/>
+				<p class="p_txt">积分</p>
+				<p class="p_integral">14.010</p>
+			</dd>
+			<dd class="download_rt">
+				<img src="../images/MemberCenter/icon_download.png"/>
+				<p class="p_txt">APP下载</p>
+			</dd>
+		</dl>
+	</div>
+	<div class="line_space15"></div>
+	<!-- 联系信息 -->
+	<div class="contact_info">
+		<dl class="dl_dl" style="border: 0;">
+			<dt class="dl_dt"><img src="../images/MemberCenter/icon_pnone.png"/>联系电话</dt>
+			<dd class="dl_dd">13210110101</dd>
+		</dl>
+		<dl class="dl_dl">
+			<dt class="dl_dt"><img src="../images/MemberCenter/icon_company.png"/>所属企业</dt>
+			<dd class="dl_dd">北京市农业人家有限公司</dd>
+		</dl>
+		<dl class="dl_dl">
+			<dt class="dl_dt"><img src="../images/MemberCenter/icon_linkman.png"/>联系人</dt>
+			<dd class="dl_dd">张三</dd>
+		</dl>
+		<dl class="dl_dl">
+			<dt class="dl_dt"><img src="../images/MemberCenter/icon_site.png"/>企业所在地</dt>
+			<dd class="dl_dd">北京  北京</dd>
+		</dl>
+	</div>
+	
+	<div class="line_space15"></div>
+	<!-- 会员活动 -->
+	<div class="member_activities">
+		<h4 class="h_title">活动</h4>
+		<!-- 有活动样板 -->
+		<div class="has_activities">
+			<dl>
+				<dt>
+					<img src="../images/MemberCenter/img_huodong.jpg" />
+					<!--<img src="../images/MemberCenter/img_head.png@163w_103h_1e_1c.src" />-->
+				</dt>
+				<dd>
+					<div class="p_cont"><p>“义田杯”2016-2017年度最具人 气智慧农场评选大赛，强势来袭</p></div>
+					<p class="p_time">2016/03/01-2016/04/01</p>
+					<p class="Willnum">报名(10人)</p>
+				</dd>
+			</dl>
+		</div>
+		<!-- 没有活动样板 -->
+		<div class="no_activities" style="display: none;">
+			<img src="../images/MemberCenter/icon_noactivities.png" />
+			<p class="p_txt">暂无会员活动！</p>
+		</div>
+	</div>
+	<!-- 会员活动 -->
+	
+<script type="text/javascript" src="../js/commons/jquery-1.10.2.min.js"></script>
+<script>
+	//点击编辑进入编辑页面
+	var SaveEdit = function(){
+		window.location.href = 'MemberEdit.html'
+	}
+</script>
+</body>
+</html>

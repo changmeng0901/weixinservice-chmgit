@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="initial-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
+<meta name="format-detection" content="telephone=no" />
+	<title>个人中心</title>
+	<script type="text/javascript">
+	var ResizeSize = function (){
+			var _html = document.documentElement;
+			var _width = _html.getBoundingClientRect().width;
+			//var _width = document.body.clientWidth;
+			if(_width>=640){
+				_width=640
+			}
+			var _scale = _width/15 +'px';
+			_html.style.fontSize = _scale;
+		}
+	ResizeSize();
+	window.onresize = function (){
+		ResizeSize();
+	}
+	</script>
+	<link rel="stylesheet" type="text/css" href="../js/SUIMobile/sm.css">
+    <link rel="stylesheet" type="text/css" href="../js/SUIMobile/sm-extend.css">
+	<link rel="stylesheet" type="text/css" href="../style/commons/commons.css">
+	<link rel="stylesheet" type="text/css" href="../style/MemberCenter/MemberEdit.css">
+</head>
+<body class="memberedit_body">
+	<dl class="mem_edit_dl mem_edit_dl100 mt20">
+		<dt>头像</dt>
+		<dd>
+			<div class="upload_pictures" id="container">
+				<div id="selectfiles" class="fileBtn fr" style="width: 85px-;">
+					<img class="file_images" src="../images/MemberCenter/icon_btnfile.jpg" />
+				</div>
+				<!--上传图片的存储及请求事件-->
+				<div id="ossfile1"></div>
+				<a style="display: none" id="postfiles1" href="javascript:void(0);" class='btn' onclick="apply(18);"></a>
+				<a style="display: none" id="callback" href="javascript:void(0);" class='btn' onclick="callback();"></a>
+				<input type="hidden" id="commentFileUrl" name="commentFileUrl" />
+				<!--上传图片的存储及请求事件-->
+			</div>
+		</dd>
+	</dl>
+	<dl class="mem_edit_dl">
+		<dt>昵称</dt>
+		<dd>
+			<input class="ipt_txt" type="text" value="请输入昵称" />
+		</dd>
+	</dl>
+	<dl class="mem_edit_dl">
+		<dt>联系电话</dt>
+		<dd>
+			<input class="ipt_txt" type="text" value="请输入联系电话" />
+		</dd>
+	</dl>
+	<dl class="mem_edit_dl mt20">
+		<dt>企业名称</dt>
+		<dd>
+			<input class="ipt_txt" type="text" value="请输入企业名称" />
+		</dd>
+	</dl>
+	<dl class="mem_edit_dl">
+		<dt>联系人</dt>
+		<dd>
+			<input class="ipt_txt" type="text" value="请输入联系人" />
+		</dd>
+	</dl>
+	<dl class="mem_edit_dl">
+		<dt>企业所在地</dt>
+		<dd>
+			<div class="page-group">
+    		<div class="page page-current" id="page-1483599435692">
+    			<input type="text" placeholder="" id="city-picker" value="北京 朝阳" readonly="">
+    		</div>
+    		</div>
+		</dd>
+	</dl>
+	<!-- 固定底部  -->
+	<div class="fixed_save_wap">
+    	<div class="fixed_save_block">
+    		<div class="fl plr2520">
+        		<span class="btn_success">保存</span>
+        	</div>
+        	<div class="fr plr2025">
+        		<span class="btn_default">取消</span>
+        	</div>
+        </div>
+    </div>
+	
+<script type="text/javascript" src="../js/commons/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="../js/oss_fileimg/lib/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script src="../js/SUIMobile/hm.js"></script>
+<script src="../js/SUIMobile/zepto.js"></script>
+<script src="../js/SUIMobile/sm.js"></script>
+<script src="../js/SUIMobile/picker.js"></script>
+
+<script src="../js/SUIMobile/sm-extend.js"></script>
+<script src="../js/SUIMobile/sm-city-picker.js"></script>
+<script>
+
+	$(window).resize(function(){
+		FixedSave();
+	});
+	
+	//固定底部 计算
+	var FixedSave = function(){
+			var windowH = $(window).height();
+			$('.fixed_save_wap').css('top',windowH);
+		}
+		FixedSave();
+	
+	//#################################（上传图片--oss直传）
+	var oss_url = "http://img4.farmeasy.cn";
+    var bucket_type = "6";
+    var domain_url = "http://cs1.nongchangyun.cn";
+    //发表评价图片上传
+    var filters1 = {
+               mime_types : [ //允许上传图片和zip,rar文件以及视频文件
+                              { 
+                              	title : "Image files", 
+                              	extensions : "jpg,jpeg,gif,png,bmp" 
+                              },
+                              ],
+                              max_file_size : "5mb", //最大只能上传5mb的文件
+                              prevent_duplicates : false //不允许选取重复文件
+                          };
+    function apply(obj){
+   		var entId='2';//#{sessionTake.getEnterpriseInfoId()}    【获取到的企业ID】
+   		set_upload_param(uploader1, '', false,obj,entId);
+   	};
+
+   	var uploaded_file_url = "";
+   	var file_name = "";
+   	function callback() {
+   		if(uploaded_file_url!=""){
+   			//图片路径
+			alert(uploaded_file_url);
+   			//addAsset(uploaded_file_url,file_name);
+   			$('.file_images').attr('src',uploaded_file_url);
+   		}
+   	};
+</script>
+<script type="text/javascript" src="../js/MemberCenter/memberPicUpload.js"></script>	
+</body>
+</html>
