@@ -1,0 +1,565 @@
+
+/*去除默认样式*/
+a{
+    text-decoration: none;
+}
+input,button,textarea,select{
+    font-family: "微软雅黑";
+}
+
+/*定义的变量*/
+@root:40rem;
+@color_fff:#fff;
+@color_333:#333;
+@color_666:#666;
+@color_999:#999;
+@color_1a:#1a1a1a;
+@color_e8:#e8e8e8;
+@bg_fff:#fff;
+.ellipsis{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.box-sizing{
+    box-sizing: border-box;
+}
+.overflow(@inhert){
+    overflow: @inhert;
+}
+
+/*横屏*/
+@media all and (orientation : landscape) { 
+
+} 
+/*竖屏*/
+@media all and (orientation : portrait){ 
+
+}
+html{
+    height: 100%;
+    max-width: 640px;
+    margin: auto;
+}
+body{
+    position: relative;
+    min-width: inherit;
+    width: 100%;
+    background: #fff;
+    font-family: "微软雅黑";
+    color: @color_333;
+}
+
+/*绿色履历介绍页面样式*/
+.introduce_body{
+    background: @color_fff;
+    color: @color_333;
+    overflow-x: hidden;
+}
+.introduce_header{
+    background: #f8fcf9;
+}
+.introduce_img01{
+    width: 100%;
+}
+.introduce_text01{
+    display: block;
+    width: 467/@root;
+    margin: 92/@root auto 8/@root;
+}
+.why_trace{
+    position: relative;
+    width: 560/@root;
+    margin: 30/@root auto 15/@root;
+    padding: 30/@root 46/@root 25/@root 46/@root;
+    border: 1px solid #edf7f1;
+    border-radius: 10/@root;
+    box-shadow: 0 0 10/@root 3/@root #edf7f1;
+    .box-sizing;
+    .txt_title{
+        display: block;
+        width: 340/@root;
+        margin: 0 auto 25/@root;
+    }
+    .txt_cont{
+        line-height: 36/@root;
+        font-size: 24/@root;
+        color: @color_666;
+        word-break: break-all;
+    }
+    .img_lt1,
+    .img_lt2,
+    .img_rt1,
+    .img_rt2{
+        position: absolute;
+        background-size: auto 100%;
+        background-repeat: no-repeat;
+    }
+    .img_lt1{
+        left: -41/@root;
+        top: -34/@root;
+        width: 57/@root;
+        height: 25/@root;
+        background-image: url(../../images/panorama/introduce_trace5.png);
+        background-position: right top;
+    }
+    .img_lt2{
+        left: -41/@root;
+        bottom: 43/@root;
+        width: 32/@root;
+        height: 62/@root;
+        background-image: url(../../images/panorama/introduce_trace1.png);
+        background-position: right top;
+    }
+    .img_rt1{
+        right: -40/@root;
+        top: 242/@root;
+        width: 48/@root;
+        height: 43/@root;
+        background-image: url(../../images/panorama/introduce_trace2.png);
+    }
+    .img_rt2{
+        right: 5/@root;
+        bottom: 100/@root;
+        width: 21/@root;
+        height: 16/@root;
+        background-image: url(../../images/panorama/introduce_trace4.png);
+    }
+}
+/*营销传播功能*/
+.spread_block{
+    position: relative;
+    margin-top: 50/@root;
+    .txt_img{
+        width: 531/@root;
+        margin: 0 0 46/@root 30/@root;
+    }
+    .txt_cont{
+        width: 470/@root;
+        line-height: 36/@root;
+        margin: auto;
+        font-size: 24/@root;
+        color: @color_666;
+        word-break: break-all;
+    }
+    .txt_line{
+        width: 100%;
+        margin: 5/@root auto 20/@root;
+    }
+    .txt_tip{
+        display: block;
+        width: 560/@root;
+        margin: 0 auto 48/@root;
+    }
+    .txt_zuhe{
+        width: 100%;
+    }
+    .img_lt1,
+    .img_rt1,
+    .img_rt2{
+        position: absolute;
+        background-size: auto 100%;
+        background-repeat: no-repeat;
+    }
+    .img_lt1{
+        left: 0;
+        bottom: 454/@root;
+        width: 34/@root;
+        height: 43/@root;
+        background-image: url(../../images/panorama/introduce_trace5.png);
+        background-position: right top;
+    }
+    .img_rt1{
+        right: 0;
+        top: 74/@root;
+        width: 62/@root;
+        height: 56/@root;
+        background-image: url(../../images/panorama/introduce_trace5.png);
+        background-position: left top;
+        opacity: 0.2;
+        filter:alpha(opacity=20);
+    }
+    .img_rt2{
+        right: 0;
+        top: 278/@root;
+        width: 36/@root;
+        height: 60/@root;
+        background-image: url(../../images/panorama/introduce_trace1.png);
+        background-position: left top;
+    }
+}
+/*营销场景*/
+.scene_block{
+    position: relative;
+    padding-top: 100/@root;
+    .img_lt1,
+    .img_lt2,
+    .img_lt3,
+    .img_rt1,
+    .img_rt2,
+    .img_rt3,
+    .img_rt4{
+        position: absolute;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+    .img_lt1{
+        left: 20/@root;
+        top: 26/@root;
+        width: 21/@root;
+        height: 16/@root;
+        background-image: url(../../images/panorama/introduce_trace6.png);
+        background-position: right top;
+    }
+    .img_lt2{
+        left: 24/@root;
+        top: 500/@root;
+        width: 52/@root;
+        height: 62/@root;
+        background-image: url(../../images/panorama/introduce_trace1.png);
+        background-position: right top;
+    }
+    .img_lt3{
+        left: 0;
+        bottom: 10/@root;
+        width: 34/@root;
+        height: 43/@root;
+        background-image: url(../../images/panorama/introduce_trace3.png);
+        background-position: right top;
+    }
+    .img_rt1{
+        right: 0;
+        top: 400/@root;
+        width: 35/@root;
+        height: 24/@root;
+        background-image: url(../../images/panorama/introduce_trace5.png);
+        background-position: left top;
+        background-size: auto 100%;
+        opacity: 0.5;
+        filter: alpha(opacity=50);
+    }
+    .img_rt2{
+        right: 0;
+        top: 554/@root;
+        width: 41/@root;
+        height: 43/@root;
+        background-image: url(../../images/panorama/introduce_trace2.png);
+        background-position: left top;
+        background-size: auto 100%;
+    }
+    .img_rt3{
+        right: 38/@root;
+        top: 700/@root;
+        width: 21/@root;
+        height: 16/@root;
+        background-image: url(../../images/panorama/introduce_trace4.png);
+        background-position: right top;
+    }
+    .img_rt4{
+        right: 0;
+        bottom: 26/@root;
+        width: 52/@root;
+        height: 62/@root;
+        background-image: url(../../images/panorama/introduce_trace1.png);
+        background-position: right top;
+    }
+    dl{
+        min-height: 500/@root;
+        padding-left: 172/@root;
+        padding-right: 68/@root;
+        .box-sizing;
+    }
+    dt{
+        position: absolute;
+        top: 64/@root;
+        left: 53/@root;
+    }
+    .txt_title{
+        width: 38/@root;
+        vertical-align: top;
+    }
+    .scene_kuang{
+        position: relative;
+        width: 100%;
+        height: 200/@root;
+        margin-bottom: 98/@root;
+        border: 2/@root solid #269e85;
+        .box-sizing;
+        .txt_img{
+            position: absolute;
+            bottom: 14/@root;
+            height: 40/@root;
+        }
+        .pic_block{
+            position: absolute;
+            top: 50%;
+            width: 224/@root;
+            height: 248/@root;
+            margin-top: -124/@root;
+            border: 2/@root solid @color_fff;
+            box-shadow: 0 0 10/@root #dbd8e3;
+            .box-sizing;
+            .overflow(hidden);
+            img{
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+    .scene_kuang.c_lt{
+        .txt_img{
+            left: 14/@root;
+        }
+        .pic_block{
+            right: 28/@root;
+        }
+    }
+    .scene_kuang.c_rt{
+        .txt_img{
+            right: 14/@root;
+        }
+        .pic_block{
+            left: 14/@root;
+        }
+    }
+}
+
+/*客户案例*/
+.case_block{
+    margin-top: 10/@root;
+    .txt_title{
+        display: block;
+        width: 100%;
+        margin-bottom: 60/@root;
+    }
+    dl{
+        position: relative;
+    }
+    dt{
+        display: block;
+        width: 100%;
+        height: 420/@root;
+        box-shadow: 0 0 10/@root #dcdcdc;
+        .box-sizing;
+        .overflow(hidden);
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+    dd{
+        padding: 32/@root 0 90/@root;
+        p{
+            line-height: 36/@root;
+            font-size: 22/@root;
+            word-break: break-all;
+        }
+        h3 img{
+            display: block; 
+            margin: 0 auto 22/@root;       
+        }
+        .txt_cc{
+            line-height: 38/@root;
+            font-size: 23/@root;
+            text-align: center;
+            color: @color_666;
+        }   
+    }
+    .chunyu{
+        h3 img{
+            width: 285/@root;
+        }
+        .icon_l1,
+        .icon_r1,
+        .icon_c1{
+            position: absolute;
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+        }
+        .icon_l1{
+            left: 0;
+            bottom: 60/@root;
+            width: 50/@root;
+            height: 26/@root;
+            background-image: url(../../images/panorama/introduce_trace8.png);
+            background-position: right top;
+        }
+        .icon_r1{
+            right: -11/@root;
+            bottom: 130/@root;
+            width: 52/@root;
+            height: 62/@root;
+            background-image: url(../../images/panorama/introduce_trace1.png);
+        }
+        .icon_c1{
+            left: 50%;
+            bottom: 54/@root;
+            width: 148/@root;
+            height: 8/@root;
+            margin-left: -74/@root;
+            background-image: url(../../images/panorama/introduce_trace9.png);
+        }
+    }
+    .shenquangu{
+        h3 img{
+            width: 175/@root;
+        }
+        .icon_l1,
+        .icon_c1{
+            position: absolute;
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+        }
+        .icon_l1{
+            left: 0;
+            bottom: 216/@root;
+            width: 43/@root;
+            height: 62/@root;
+            background-image: url(../../images/panorama/introduce_trace1.png);
+            background-position: right top;
+        }
+        .icon_c1{
+            left: 50%;
+            bottom: 54/@root;
+            width: 148/@root;
+            height: 8/@root;
+            margin-left: -74/@root;
+            background-image: url(../../images/panorama/introduce_trace9.png);
+        }
+    }
+    .hasilu{
+        h3 img{
+            width: 394/@root;
+        }
+        .icon_l1,
+        .icon_l2,
+        .icon_l3,
+        .icon_r1,
+        .icon_c1{
+            position: absolute;
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+        }
+        .icon_l1{
+            left: 0;
+            bottom: 306/@root;
+            width: 42/@root;
+            height: 42/@root;
+            background-image: url(../../images/panorama/introduce_trace10.png);
+            background-position: right top;
+        }
+        .icon_l2{
+            left: 117/@root;
+            bottom: 240/@root;
+            width: 10/@root;
+            height: 10/@root;
+            background-image: url(../../images/panorama/introduce_trace7.png);
+        }
+        .icon_l3{
+            left: 39/@root;
+            bottom: 194/@root;
+            width: 21/@root;
+            height: 16/@root;
+            background-image: url(../../images/panorama/introduce_trace6.png);
+            background-position: right top;
+        }
+        .icon_c1{
+            left: 30/@root;
+            bottom: 54/@root;
+            width: 148/@root;
+            height: 8/@root;
+            background-image: url(../../images/panorama/introduce_trace9.png);
+        }
+    }
+    .jiuqushan{
+        h3 img{
+            width: 248/@root;
+        }
+        dd{
+            padding-top: 107/@root;
+        }
+        .icon_c1,
+        .icon_c2,
+        .icon_r1,
+        .icon_r2,
+        .icon_r3,
+        .icon_r4{
+            position: absolute;
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+        }
+        .icon_r1{
+            right: 0;
+            bottom: 346/@root;
+            width: 21/@root;
+            height: 42/@root;
+            background-image: url(../../images/panorama/introduce_trace3.png);
+            background-position: left top;
+        }
+        .icon_r2{
+            right: 16/@root;
+            bottom: 263/@root;
+            width: 21/@root;
+            height: 16/@root;
+            background-image: url(../../images/panorama/introduce_trace4.png);
+        }
+        .icon_r3{
+            right: 0;
+            bottom: 56/@root;
+            width: 47/@root;
+            height: 61/@root;
+            background-image: url(../../images/panorama/introduce_trace1.png);
+            background-position: left top;
+        }
+        .icon_r4{
+            right: 92/@root;
+            bottom: 318/@root;
+            width: 11/@root;
+            height: 11/@root;
+            background-image: url(../../images/panorama/introduce_trace7.png);
+            background-position: left top;
+        }
+        .icon_c1{
+            left: 56/@root;
+            bottom: 364/@root;
+            width: 148/@root;
+            height: 8/@root;
+            background-image: url(../../images/panorama/introduce_trace9.png);
+        }
+        .icon_c2{
+            right: 100/@root;
+            bottom: 22/@root;
+            width: 148/@root;
+            height: 19/@root;
+            background-image: url(../../images/panorama/introduce_trace11.png);
+        }
+    }
+}
+/*二维码*/
+.code_block{
+    height: 529/@root;
+    .box-sizing;
+    padding-top: 20/@root;
+    background-image: url(../../images/panorama/introduce_bg1.png);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center bottom; 
+    .p_text{
+        display: block;
+        width: 345/@root;
+        height: 64/@root;
+        margin: 0 auto 172/@root;
+    }
+    .get_panorama{
+        display: block;
+        width: 342/@root;
+        height: 80/@root;
+        margin: auto;
+        border-radius: 40/@root;
+        box-shadow: 0 10/@root 20/@root #31432c;
+        background-image: url(../../images/panorama/introduce_btn1.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+}

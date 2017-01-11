@@ -1,0 +1,245 @@
+/*去除默认样式*/
+a {
+  text-decoration: none;
+}
+input,
+button,
+textarea,
+select {
+  font-family: "微软雅黑";
+}
+/*定义的变量*/
+.ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.box-sizing {
+  box-sizing: border-box;
+}
+/*横屏*/
+@media all and (orientation: landscape) {
+  .no_resume_list1 .nodata_center {
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .no_resume_list2 .nodata_center {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+/*竖屏*/
+@media all and (orientation: portrait) {
+  .no_resume_list {
+    height: 23.7rem;
+  }
+  .no_resume_list1 .nodata_center {
+    margin-top: 7.25rem;
+  }
+  .no_resume_list2 .nodata_center {
+    margin-top: 6.75rem;
+  }
+}
+html {
+  height: 100%;
+  max-width: 640px;
+  margin: auto;
+}
+body {
+  position: relative;
+  min-width: inherit;
+  width: 100%;
+  background: #fff;
+  font-family: "微软雅黑";
+  color: #333;
+}
+/*绿色履历列表页面样式*/
+input {
+  margin: 0;
+  padding: 0;
+}
+.resumelist_body {
+  background: #efefef;
+  color: #333;
+  overflow-x: hidden;
+}
+.search_header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+.search_block {
+  position: relative;
+  width: 100%;
+  max-width: 16rem;
+  margin: auto;
+  height: 1.95rem;
+  padding: 0.35rem 3.5rem 0.375rem 0.5rem;
+  background: #fff;
+  border-bottom: 1px solid #e8e8e8;
+  box-sizing: border-box;
+}
+.search_block .sort_btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.625rem;
+  width: 2.5rem;
+  padding-right: 0.6rem;
+  height: 0.675rem;
+  line-height: 0.675rem;
+  font-size: 0.5rem;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: auto 100%;
+  background-image: url(../../images/resume/resumelist_down.png);
+  box-sizing: border-box;
+  text-align: right;
+}
+.search_block .sort_btn.arrow_up {
+  background-image: url(../../images/resume/resumelist_up.png);
+}
+.public_search {
+  position: relative;
+  width: 100%;
+  padding: 0 0.5rem 0 1.45rem;
+  border: 1px solid #e8e8e8;
+  border-radius: 0.6rem;
+  box-sizing: border-box;
+}
+.public_search .octicon_search {
+  position: absolute;
+  left: 0.45rem;
+  top: 0.275rem;
+  width: 0.6rem;
+  height: 0.6rem;
+  background-image: url(../../images/resume/resumelist_search.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.public_search .ipt_control {
+  width: 100%;
+  height: 1.175rem;
+  line-height: 1.175rem;
+  border: 0;
+  font-size: 0.525rem;
+  color: #999;
+  outline: none;
+}
+.resume_main {
+  padding-top: 1.95rem;
+  box-sizing: border-box;
+}
+.resume_list {
+  padding: 0.25rem 0.125rem 0.25rem 0.125rem;
+  overflow: hidden;
+}
+.resume_list .re_item {
+  width: 100%;
+  padding: 0.125rem;
+  box-sizing: border-box;
+}
+.resume_list .re_info {
+  border: 1px solid #e8e8e8;
+  background: #fff;
+}
+.resume_list .re_pic {
+  height: 7.15rem;
+  padding: 0.5rem 0.5rem 0.175rem;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.resume_list .re_pic img {
+  width: 100%;
+  height: 100%;
+}
+.resume_list .re_name {
+  max-height: 2.5rem;
+  line-height: 1.25rem;
+  margin: 0.35rem 0;
+  padding: 0 0.5rem;
+  font-size: 0.75rem;
+  overflow: hidden;
+}
+.resume_list .re_foot {
+  border-top: 1px solid #e8e8e8;
+  padding: 0.5rem;
+  overflow: hidden;
+}
+.resume_list .re_foot p {
+  float: left;
+  width: 33.333%;
+  height: 0.75rem;
+  line-height: 0.75rem;
+  font-size: 0.5rem;
+  color: #666;
+  overflow: hidden;
+}
+.resume_list .re_foot i {
+  float: left;
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-right: 0.25rem;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.resume_list .re_foot i.i_use {
+  background-image: url(../../images/resume/resumelist_use.png);
+}
+.resume_list .re_foot i.i_opt {
+  background-image: url(../../images/resume/resumelist_opt.png);
+}
+.resume_list .re_foot i.i_view {
+  background-image: url(../../images/resume/resumelist_view.png);
+}
+.resume_list.more_list .re_item {
+  float: left;
+  width: 33.3333%;
+  padding: 0.125rem;
+}
+.resume_list.more_list .re_pic {
+  height: 3.9rem;
+  padding: 0.175rem;
+}
+.resume_list.more_list .re_name {
+  height: 1.7rem;
+  line-height: 0.85rem;
+  margin: 0.2rem 0;
+  padding: 0 0.35rem;
+  font-size: 0.65rem;
+}
+.resume_list.more_list .re_foot {
+  padding: 0.5rem 0.35rem 0.25rem;
+}
+.resume_list.more_list .re_foot p {
+  float: none;
+  width: 100%;
+  margin-bottom: 0.2rem;
+}
+/*无数据*/
+.no_resume_list {
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #fff;
+}
+.nodata_center {
+  text-align: center;
+  font-size: 0.6rem;
+  color: #b9b8b8;
+}
+.nodata_center img {
+  width: 5.5rem;
+  height: 5.5rem;
+}
+.nodata_center .txt_link {
+  color: #85b9ee;
+}
+.nodata_center .txt_phone {
+  font-size: 0.75rem;
+  color: #6ae26a;
+  vertical-align: bottom;
+}
+.nodata_center p {
+  margin-top: 1.25rem;
+  line-height: 0.9rem;
+}

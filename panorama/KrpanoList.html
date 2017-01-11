@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="initial-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
+<meta name="format-detection" content="telephone=no" />
+	<title>四季田景列表</title>
+	<script type="text/javascript">
+	var ResizeSize = function (){
+			var _html = document.documentElement;
+			var _width = _html.getBoundingClientRect().width;
+			//var _width = document.body.clientWidth;
+			if(_width>=640){
+				_width=640
+			}
+			var _scale = _width/16 +'px';
+			_html.style.fontSize = _scale;
+		}
+	ResizeSize();
+	window.onresize = function (){
+		ResizeSize();
+	}
+	</script>
+	<link rel="stylesheet" type="text/css" href="../style/commons/commons.css">
+	<link rel="stylesheet" type="text/css" href="../style/panorama/KrpanoList.css">
+</head>
+<body class="krpanolist_body">
+	<div class="search_header">
+		<div class="search_block">
+			<div class="public_search">
+				<span class="octicon_search"></span>
+				<input class="ipt_control" type="text" placeholder="请输入分组名称搜索">
+			</div>
+		</div>
+	</div>
+	<div class="krpano_main">
+		<div class="krpano_block" style="display: none;">
+			<div class="krpano_info">
+				<p class="company_name">九曲山茶业</p>
+				<!--四季田景列表中有1张图板式 -->
+				<div class="krpano_list list1">
+					<span class="sitem"><img src="../images/panorama/introduce_img.jpg"/></span>
+					<!--<span class="sitem"><img src="../images/panorama/introduce_img.jpg@540w_538h_1e_1c.src"/></span>-->
+				</div>
+				<!--四季田景列表中有2-4张图板式-->
+				<div class="krpano_list list4" style="display: none;">
+					<span class="sitem"><img src="../images/panorama/introduce_img.jpg"/></span>
+					<span class="sitem"><img src="../images/panorama/introduce_img.jpg"/></span>
+					<!--<span class="sitem"><img src="../images/panorama/introduce_img.jpg@266w_260h_1e_1c.src"/></span>-->
+				</div>
+				<!--四季田景列表中有5张图以上板式-->
+				<div class="krpano_list list9" style="display: none;">
+					<span class="sitem"><img src="../images/panorama/introduce_img.jpg"/></span>
+					<span class="sitem"><img src="../images/panorama/introduce_img.jpg"/></span>
+					<span class="sitem"><img src="../images/panorama/introduce_img.jpg"/></span>
+					<span class="sitem"><img src="../images/panorama/introduce_img.jpg"/></span>
+					<!--<span class="sitem"><img src="../images/panorama/introduce_img.jpg@175w_168h_1e_1c.src"/></span>-->
+				</div>
+				<!--企业信息-->
+				<dl class="enterprise_info">
+					<dd class="info_lt">
+						<img src="../images/panorama/krpanolist_img2.png"/>
+					</dd>
+					<dd class="info_ct fl">
+						<p class="txt_total">共计：12张</p>
+						<p class="txt_time">2016-12-12 17:30</p>
+					</dd>
+					<dd class="info_rt fr">1314</dd>
+				</dl>
+			</div>
+		</div>
+		
+		
+		<!--未购买提示 -->
+		<div class="no_krpano_list no_krpano_list1" style="display: none;">
+			<div class="nodata_center">
+				<img src="../images/panorama/krpanolist_nodata.png"/>
+				<p> 您还未购买四季田景，<br />
+				请拨打客服电话<a class="txt_phone" href="javascript:;">400-8199-586</a>联系我们吧~</p>
+			</div>
+		</div>
+		<!--未创建提示 -->
+		<div class="no_krpano_list no_krpano_list2" style="display: block;">
+			<div class="nodata_center">
+				<img src="../images/panorama/krpanolist_nodata.png"/>
+				<p> 抱歉，您还未完成四季田景的拍摄或上传，<br />
+				请登录义田帮手<a class="txt_link" href="http://www.farmeasy.cn">www.farmeasy.cn</a><br />
+				或联系您的服务顾问给您制作吧<br />
+				客服专线<a class="txt_phone" href="javascript:;">400-8199-586</a></p>
+			</div>
+		</div>
+		<!--未创建提示 -->
+	</div>
+	
+	
+<script type="text/javascript" src="../js/commons/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+	
+</script>
+
+</body>
+</html>

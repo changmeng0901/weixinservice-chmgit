@@ -1,0 +1,277 @@
+
+/*去除默认样式*/
+a{
+    text-decoration: none;
+}
+input,button,textarea,select{
+    font-family: "微软雅黑";
+}
+
+/*定义的变量*/
+@root:40rem;
+@color_fff:#fff;
+@color_333:#333;
+@color_666:#666;
+@color_999:#999;
+@color_1a:#1a1a1a;
+@color_e8:#e8e8e8;
+@bg_fff:#fff;
+.ellipsis{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.box-sizing{
+    box-sizing: border-box;
+}
+.overflow(@inhert){
+    overflow: @inhert;
+}
+
+/*横屏*/
+@media all and (orientation : landscape) { 
+    .no_krpano_list1 .nodata_center{
+        margin-top: 100/@root;
+        margin-bottom: 100/@root;
+    }
+    .no_krpano_list2 .nodata_center{
+        margin-top: 80/@root;
+        margin-bottom: 80/@root;
+    }
+} 
+/*竖屏*/
+@media all and (orientation : portrait){ 
+    .no_krpano_list{
+        height: 948/@root;
+    }
+    .no_krpano_list1 .nodata_center{
+        margin-top: 290/@root;
+    }
+    .no_krpano_list2 .nodata_center{
+        margin-top: 270/@root;
+    }
+}
+html{
+    height: 100%;
+    max-width: 640px;
+    margin: auto;
+}
+body{
+    position: relative;
+    min-width: inherit;
+    width: 100%;
+    background: @color_fff;
+    font-family: "微软雅黑";
+    color: @color_333;
+}
+
+/*四季田景列表页面样式*/
+input{
+    margin: 0;
+    padding: 0;
+}
+.krpanolist_body{
+    background: #f9f9f9;
+    color: @color_333;
+    overflow-x: hidden;
+}
+.search_header{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+.search_block{
+    position: relative;
+    width: 100%;
+    max-width: 640/@root;
+    margin: auto;
+    height: 78/@root;
+    padding:14/@root 20/@root 15/@root;
+    background: @color_fff;
+    border-bottom: 1px solid @color_e8;
+    .box-sizing;
+}
+.public_search{
+    position: relative;
+    width: 100%;
+    padding: 0 20/@root 0 58/@root;
+    border: 1px solid @color_e8;
+    border-radius: 24/@root;
+    .box-sizing;
+    .octicon_search{
+        position: absolute;
+        left: 18/@root;
+        top: 11/@root;
+        width: 24/@root;
+        height: 24/@root;
+        background-image: url(../../images/panorama/krpanolist_search.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+    .ipt_control{
+        width: 100%;
+        height: 47/@root;
+        line-height: 47/@root;
+        border: 0;
+        font-size: 21/@root;
+        color: @color_999;
+        outline: none;
+    }
+}
+.krpano_main{
+    padding-top: 78/@root;
+    .box-sizing;
+}
+.krpano_block{
+    padding: 20/@root;
+    .overflow(hidden);
+    .krpano_info{
+        padding: 0 20/@root;
+        border: 1px solid #f0f0f0;
+        box-shadow: 0 0 10/@root #f0f0f0;
+        background: @color_fff;
+    }
+    .company_name{
+        position: relative;
+        height: 68/@root;
+        line-height: 68/@root;
+        padding-left: 55/@root;
+        font-size: 28/@root;
+        .ellipsis;
+        &:before{
+            position: absolute;
+            left: 14/@root;
+            top: 18/@root;
+            width: 30/@root;
+            height: 30/@root;
+            background-image: url(../../images/panorama/krpanolist_icon1.jpg);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            content: '';
+        }
+    }
+}
+
+.krpano_list{
+    border: 1px solid @color_e8;
+    padding: 8/@root 0 0 8/@root;
+    background: #fafafa;
+    .overflow(hidden);
+    .sitem{
+        float: left;
+        width: 33.333%;
+        height: 176/@root;
+        padding: 0 8/@root 8/@root 0;
+        .box-sizing;
+    }
+    img{
+        width: 100%;
+        height: 100%;
+    }
+}
+.enterprise_info{
+    position: relative;
+    height: 68/@root;
+    margin: 15/@root 0;
+    padding-left: 88/@root;
+    .box-sizing;
+    .overflow(hidden);
+    .info_lt{
+        position: absolute;
+        left: 12/@root;
+        top: 3/@root;
+        width: 62/@root;
+        height: 62/@root;
+        border: 1px solid @color_e8;
+        border-radius: 50%;
+        .overflow(hidden);
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .info_ct{
+        width: 300/@root;
+        color: #bbb;
+    }
+    .txt_total{
+        line-height: 34/@root;
+        font-size: 26/@root;
+    }
+    .txt_time{
+        padding-top: 10/@root;
+        font-size: 20/@root;
+    }
+    .info_rt{
+        position: relative;
+        min-width: 80/@root;
+        padding-top: 38/@root;
+        line-height: 30/@root;
+        font-size: 20/@root;
+        text-align: center;
+        &:before{
+            position: absolute;
+            left: 50%;
+            top: 8/@root;
+            width: 30/@root;
+            height: 22/@root;
+            margin-left: -15/@root;
+            background-image: url(../../images/panorama/krpanolist_icon2.png);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            content: '';
+        }
+    }
+}
+/*四季田景列表中有1张图板式*/
+.krpano_list.list1{
+    padding: 8/@root 0 0 8/@root;
+    .sitem{
+        width: 100%;
+        height: 546/@root;
+    }
+}
+/*四季田景列表中有2-4张图板式*/
+.krpano_list.list4{
+    padding: 8/@root 0 0 8/@root;
+    .sitem{
+        width: 50%;
+        height: 268/@root;
+    }
+}
+/*四季田景列表中有5张图以上板式*/
+.krpano_list.list9{
+    padding: 8/@root 0 0 8/@root;
+    .sitem{
+        width: 33.333%;
+        height: 176/@root;
+    }
+}
+/*无数据*/
+.no_krpano_list{
+    .box-sizing;
+    .overflow(hidden);
+    background: #fff;
+}
+.nodata_center{
+    text-align: center;
+    font-size: 24/@root;
+    color: #b9b8b8;
+    img{
+        width: 220/@root;
+        height: 220/@root;
+    }
+    .txt_link{
+        color: #85b9ee;
+    }
+    .txt_phone{
+        font-size: 30/@root;
+        color: #6ae26a;
+        vertical-align: bottom;
+    }
+    p{
+        margin-top: 50/@root;
+        line-height: 36/@root;
+    }
+}

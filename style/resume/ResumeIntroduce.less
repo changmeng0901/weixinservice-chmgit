@@ -1,0 +1,372 @@
+
+/*去除默认样式*/
+a{
+    text-decoration: none;
+}
+input,button,textarea,select{
+    font-family: "微软雅黑";
+}
+
+/*定义的变量*/
+@root:40rem;
+@color_fff:#fff;
+@color_333:#333;
+@color_666:#666;
+@color_999:#999;
+@color_1a:#1a1a1a;
+@color_e8:#e8e8e8;
+@bg_fff:#fff;
+.ellipsis{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.box-sizing{
+    box-sizing: border-box;
+}
+.overflow(@inhert){
+    overflow: @inhert;
+}
+
+/*横屏*/
+@media all and (orientation : landscape) { 
+
+} 
+/*竖屏*/
+@media all and (orientation : portrait){ 
+
+}
+html{
+    height: 100%;
+    max-width: 640px;
+    margin: auto;
+}
+body{
+    position: relative;
+    min-width: inherit;
+    width: 100%;
+    background: #fff;
+    font-family: "微软雅黑";
+    color: @color_333;
+}
+
+/*绿色履历介绍页面样式*/
+.introduce_body{
+    background: @color_fff;
+    color: @color_333;
+    overflow-x: hidden;
+}
+.introduce_img01{
+    width: 100%;
+}
+.introduce_text01{
+    display: block;
+    width: 490/@root;
+    margin: 50/@root auto 30/@root;
+}
+.why_trace{
+    position: relative;
+    width: 560/@root;
+    margin: auto auto 15/@root;
+    padding: 20/@root 40/@root 0 40/@root;
+    border: 1px solid #edf7f1;
+    border-radius: 10/@root;
+    box-shadow: 0 0 10/@root 3/@root #edf7f1;
+    .box-sizing;
+    dt{
+        display: block;
+        width: 100%;
+        img{
+            width: 289/@root;
+            height: 59/@root;
+            margin-bottom: 15/@root;
+        }
+    }
+    dd{
+        margin-bottom: 40/@root;
+        font-size: 24/@root;
+        color: @color_666;
+    }
+    .img_lt,
+    .img_rt1,
+    .img_rt2,
+    .img_rt3{
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+    .img_lt{
+        position: absolute;
+        left: -43/@root;
+        top: 125/@root;
+        width: 38/@root;
+        height: 43/@root;
+        background-image: url(../../images/resume/introduce_trace1.png);
+    }
+    .img_rt1{
+        position: absolute;
+        right: -40/@root;
+        top: 400/@root;
+        width: 25/@root;
+        height: 43/@root;
+        background-image: url(../../images/resume/introduce_trace2.png);
+    }
+    .img_rt2{
+        position: absolute;
+        right: -21/@root;
+        top: 552/@root;
+        width: 21/@root;
+        height: 16/@root;
+        background-image: url(../../images/resume/introduce_trace3.png);
+    }
+    .img_rt3{
+        position: absolute;
+        right: 60/@root;
+        top: 496/@root;
+        width: 10/@root;
+        height: 11/@root;
+        background-image: url(../../images/resume/introduce_trace4.png);
+    }
+}
+.trace_zoology{
+    position: relative;
+    padding: 39/@root 0 57/@root 0;
+    .icon_t,
+    .icon_b{
+        position: absolute;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+    .icon_t{
+        left: 0;
+        top: 0;
+        width: 107/@root;
+        height: 39/@root;
+        background-image: url(../../images/resume/introduce_trace5.png);
+    }
+    .icon_b{
+        left: 20/@root;
+        bottom: 0;
+        width: 51/@root;
+        height: 57/@root;
+        background-image: url(../../images/resume/introduce_trace6.png);
+    }
+    img{
+        width: 100%;
+        vertical-align: top;
+    }
+}
+/*客户案例*/
+.case_block{
+    margin-top: 10/@root;
+    background: #f8fcf9;
+    h2{
+        margin-bottom: 50/@root;
+        text-align: center;
+        img{
+            width: 232/@root;
+            height: 35/@root;
+            vertical-align: top;
+        }
+    }
+    h3{
+        margin-bottom: 15/@root;
+        text-align: center;
+    }
+    dl{
+        position: relative;
+        width: 562/@root;
+        margin: auto;
+        padding-bottom: 30/@root;
+    }
+    dt{
+        display: block;
+        width: 100%;
+        height: 286/@root;
+        border: 3/@root solid #66d0ba;
+        padding: 12/@root;
+        background: #f8fcf9;
+        .box-sizing;
+        .overflow(hidden);
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+    dd{
+        padding: 25/@root 30/@root;
+        background: #f0fbf8;
+        p{
+            line-height: 36/@root;
+            font-size: 22/@root;
+            word-break: break-all;
+        }
+    }
+    .beicai{
+        dt img{
+            width: 260/@root;
+            height: 256/@root;
+        }
+        h3 img{
+            width: 102/@root;
+            height: 28/@root;
+        }
+        .icon_r1,
+        .icon_r2{
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+        .icon_r1{
+            position: absolute;
+            right: -40/@root;
+            top: 90/@root;
+            width: 25/@root;
+            height: 43/@root;
+            background-image: url(../../images/resume/introduce_trace2.png);
+        }
+        .icon_r2{
+            position: absolute;
+            right: -21/@root;
+            top: 240/@root;
+            width: 21/@root;
+            height: 16/@root;
+            background-image: url(../../images/resume/introduce_trace3.png);
+        }
+    }
+    .ziteng{
+        h3 img{
+            width: 211/@root;
+            height: 28/@root;
+        }
+        .icon_r1,
+        .icon_r2{
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+        .icon_r1{
+            position: absolute;
+            left: -40/@root;
+            top: 68/@root;
+            width: 25/@root;
+            height: 43/@root;
+            background-image: url(../../images/resume/introduce_trace7.png);
+        }
+        .icon_r2{
+            position: absolute;
+            left: -21/@root;
+            top: 220/@root;
+            width: 21/@root;
+            height: 16/@root;
+            background-image: url(../../images/resume/introduce_trace8.png);
+        }
+    }
+    .yuding{
+        h3 img{
+            width: 139/@root;
+            height: 28/@root;
+        }
+        .icon_r1{
+            position: absolute;
+            right: -40/@root;
+            top: 0;
+            width: 30/@root;
+            height: 62/@root;
+            background-image: url(../../images/resume/introduce_trace6.png);
+            background-size: auto 100%;
+            background-repeat: no-repeat;
+        }
+    }
+}
+/*合作伙伴*/
+.partners_block{
+    margin: 50/@root 0;
+    padding: 0 20/@root;
+    background-image: url(../../images/resume/introduce_bg1.jpg);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    .p_txt1{
+        width: 409/@root;
+        height: 108/@root;
+        margin: 0 0 50/@root 15/@root;
+    }
+    .partners_imgs{
+        background: @color_fff;
+        box-shadow: 0 0 20/@root #d8dcd9;
+        .overflow(hidden);
+    }
+    .i_item{
+        float: left;
+        width: 25%;
+        padding: 20/@root 10/@root;
+        .box-sizing;
+        img{
+            width: 100%;
+            vertical-align: top;
+        }
+    }
+}
+/*二维码*/
+.code_block{
+    margin: 50/@root 0 0;
+    padding: 60/@root 20/@root 146/@root;
+    background-image: url(../../images/resume/introduce_bg2.jpg);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center bottom; 
+    .code_center{
+        position: relative;
+        width: 426/@root;
+        height: 426/@root;
+        margin: 0 auto;
+        padding-top: 188/@root;
+        border-radius: 50%;
+        .box-sizing;
+        box-shadow: 0 0 60/@root #d7d7d7;
+        background-image: url(../../images/resume/introduce_code1.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        img{
+            display: block;
+            width: 126/@root;
+            height: 126/@root;
+            margin: 0 auto;
+        }
+        .icon_l1,
+        .icon_l2{
+            position: absolute;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+        .icon_l1{
+            left: -40/@root;
+            top: 68/@root;
+            width: 33/@root;
+            height: 43/@root;
+            background-image: url(../../images/resume/introduce_trace9.png);
+        }
+        .icon_l2{
+            left: -21/@root;
+            top: 220/@root;
+            width: 21/@root;
+            height: 16/@root;
+            background-image: url(../../images/resume/introduce_trace8.png);
+        }
+    }
+    .p_text{
+        display: block;
+        width: 409/@root;
+        height: 64/@root;
+        margin: 76/@root auto 60/@root;
+    }
+    .get_resume{
+        display: block;
+        width: 342/@root;
+        height: 80/@root;
+        margin: auto;
+        border-radius: 40/@root;
+        box-shadow: 0 0 20/@root #d7d7d7;
+        background-image: url(../../images/resume/introduce_btn1.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+}

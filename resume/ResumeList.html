@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="initial-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
+<meta name="format-detection" content="telephone=no" />
+	<title>绿色履历列表</title>
+	<script type="text/javascript">
+	var ResizeSize = function (){
+			var _html = document.documentElement;
+			var _width = _html.getBoundingClientRect().width;
+			//var _width = document.body.clientWidth;
+			if(_width>=640){
+				_width=640
+			}
+			var _scale = _width/16 +'px';
+			_html.style.fontSize = _scale;
+		}
+	ResizeSize();
+	window.onresize = function (){
+		ResizeSize();
+	}
+	</script>
+	<link rel="stylesheet" type="text/css" href="../style/commons/commons.css">
+	<link rel="stylesheet" type="text/css" href="../style/resume/ResumeList.css">
+</head>
+<body class="resumelist_body">
+	<div class="search_header">
+		<div class="search_block">
+			<div class="public_search">
+				<span class="octicon_search"></span>
+				<input class="ipt_control" type="text" placeholder="请输入查询内容">
+			</div>
+			<div class="sort_btn">浏览量</div>
+		</div>
+	</div>
+	<div class="resume_main">
+		<!--履历列表1~5的板式 -->
+		<ul class="resume_list" style="display: none;">
+			<li class="re_item">
+				<div class="re_info">
+					<div class="re_pic">
+						<img src="../images/resume/resumelist_img1.jpg"/>
+						<!--1到5张图片大小<img src="../images/resume/resumelist_img1.jpg@604w_272h_1e_1c.src"/>-->
+						<!--6张以上图片大小<img src="../images/resume/resumelist_img1.jpg@184w_142h_1e_1c.src"/>-->
+					</div>
+					<p class="re_name">水面4-水蜜桃-阳山水蜜桃</p>
+					<div class="re_foot">
+						<p><i class="i_use"></i>134次使用</p>
+						<p><i class="i_opt"></i>934次点赞</p>
+						<p><i class="i_view"></i>1344次浏览</p>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<!--履历列表6个以上的板式 -->
+		<ul class="resume_list more_list" style="display: none;">
+			<li class="re_item">
+				<div class="re_info">
+					<div class="re_pic">
+						<img src="../images/resume/resumelist_img1.jpg"/>
+						<!--1到5张图片大小<img src="../images/resume/resumelist_img1.jpg@604w_272h_1e_1c.src"/>-->
+						<!--6张以上图片大小<img src="../images/resume/resumelist_img1.jpg@184w_142h_1e_1c.src"/>-->
+					</div>
+					<p class="re_name">水面4-水蜜桃-阳山水蜜桃</p>
+					<div class="re_foot">
+						<p><i class="i_use"></i>134次使用</p>
+						<p><i class="i_opt"></i>934次点赞</p>
+						<p><i class="i_view"></i>1344次浏览</p>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<!--未购买提示 -->
+		<div class="no_resume_list no_resume_list1" style="display: none;">
+			<div class="nodata_center">
+				<img src="../images/resume/resumelist_nodata.png"/>
+				<p> 您还未购买绿色履历，<br />
+				请拨打客服电话<a class="txt_phone" href="javascript:;">400-8199-586</a>联系我们吧~</p>
+			</div>
+		</div>
+		<!--未创建提示 -->
+		<div class="no_resume_list no_resume_list2">
+			<div class="nodata_center">
+				<img src="../images/resume/resumelist_nodata.png"/>
+				<p> 抱歉您还未创建绿色履历，<br />
+				请登录义田帮手<a class="txt_link" href="http://www.farmeasy.cn">www.farmeasy.cn</a>制作吧！<br />
+				如需帮助请联系您的服务顾问<br />
+				或致电客服专线<a class="txt_phone" href="javascript:;">400-8199-586</a></p>
+			</div>
+		</div>
+		<!--未创建提示 -->
+	</div>
+	
+	
+<script type="text/javascript" src="../js/commons/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+	
+</script>
+
+</body>
+</html>
