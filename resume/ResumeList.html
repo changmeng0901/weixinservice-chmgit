@@ -97,7 +97,35 @@
 	
 <script type="text/javascript" src="../js/commons/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
-	
+	document.onkeydown=function(event){
+		var e = event || window.event || arguments.callee.caller.arguments[0];
+		if(e.keyCode==13){
+			myJsonData();
+		}
+	}; 
+	//加载数据
+	function myJsonData(){
+		var search=$("[type='text']").val();
+		var browseSort="";
+		if($('.sort_btn').attr('class').indexOf('arrow_up')==-1){
+			browseSort="down";
+		}else{
+			browseSort="up";
+		}
+		alert(browseSort);
+		alert(search)
+		/*$.ajax({
+			url : "../AddedServices/data",
+			data : {'method':'resume','enterpriseInfoId':'85','search':search,'browseSort':browseSort},
+			type : 'post',
+			dataType : 'json',
+			success : function(data){
+				showData(data.result);
+			},
+			error : function() {
+			}
+		});*/
+	}
 </script>
 
 </body>
