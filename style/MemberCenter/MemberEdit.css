@@ -34,6 +34,9 @@ body {
   overflow: auto;
 }
 /*会员中心编辑页面样式*/
+.memberedit_body {
+  padding-bottom: 2.44rem;
+}
 .mt20 {
   margin-top: 0.4rem;
 }
