@@ -23,6 +23,8 @@
 		ResizeSize();
 	}
 	</script>
+	<link type="text/css" rel="stylesheet" href="../style/bootstrap/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="../style/bootstrap/bootstrap-select.min.css">
 	<link rel="stylesheet" type="text/css" href="../style/commons/commons.css" />
 	<link rel="stylesheet" type="text/css" href="../style/marketing/CardAdd.css" />
 </head>
@@ -30,28 +32,35 @@
 	<div class="cardadd_main">
 		<!--基地联系信息-->
 		<ul class="card_box">
-			<li>
+			<li class="clear">
 				<img class="icon28" src="../images/marketing/icon_basename.png" />
 				<div class="con_right">
 					<p class="txt_name">基地名称</p>
-					<input class="txt_ipt color4d" type="text" value="北京北菜园蔬菜基地" />
+					<!--<input class="txt_ipt color4d" type="text" value="北京北菜园蔬菜基地" />-->
+					<div class="selectpicker_basename">
+					<select class="selectpicker">
+					    <option>Mustard</option>
+					    <option>Ketchup</option>
+					    <option>Relish</option>
+					</select>
+					</div>
 				</div>
 			</li>
-			<li>
+			<li class="clear">
 				<img class="icon28" src="../images/marketing/icon_linkman.png" />
 				<div class="con_right">
 					<p class="txt_name">联系人</p>
 					<input class="txt_ipt" type="text" value="请填写" />
 				</div>
 			</li>
-			<li>
+			<li class="clear">
 				<img class="icon28" src="../images/marketing/icon_contact.png" />
 				<div class="con_right">
 					<p class="txt_name">联系方式</p>
 					<input class="txt_ipt" type="text" value="请填写" />
 				</div>
 			</li>
-			<li>
+			<li class="clear">
 				<img class="icon28" src="../images/marketing/icon_remark.png" />
 				<div class="con_right" style="border: 0;">
 					<p class="txt_name">基地介绍</p>
@@ -127,13 +136,13 @@
 		<div class="line14"></div>
 		<!--基地供应产品-->
 		<ul class="card_box" style="margin-bottom: 0;">
-			<li>
+			<li class="clear">
 				<img class="icon28" src="../images/marketing/icon_jdgycp.png" />
 				<div class="con_right" style="border: none;">
 					<p class="txt_name">基地供应产品</p>
 				</div>
 			</li>
-			<li>
+			<li class="clear">
 				<div class="file_dd clear">
 					<a class="link_supplyproducts" href="SupplyProducts.html">
 						<img src="../images/marketing/btn_addsupplyproducts.png"/>
@@ -192,6 +201,8 @@
 	
 
 <script type="text/javascript" src="../js/commons/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap/bootstrap-select.min.js"></script>
 <script type="text/javascript" src="../js/oss_fileimg/lib/plupload-2.1.2/js/plupload.full.min.js"></script>
 <script type="text/javascript" src="../js/marketing/CardAdd.js"></script>
 <script type="text/javascript" src="../js/oss_fileimg/CardPicUpload.js"></script>	

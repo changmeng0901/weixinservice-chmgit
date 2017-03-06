@@ -59,6 +59,14 @@ function CreateMyCardFn(){
 	window.location.href = 'CardAddlist.html';
 }
 
+//(6)基地名称选择
+$('.selectpicker_basename .selectpicker').selectpicker({
+	multiple: false,
+	//header: "选择一项",
+	noneSelectedText: "请选择",
+	selectedList: 1
+});
+
 
 //(4-1)删除图片事件
 var DeleteUploadImg = function(obj)
