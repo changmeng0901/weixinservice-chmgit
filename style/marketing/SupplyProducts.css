@@ -1,0 +1,616 @@
+/*去除默认样式*/
+a {
+  text-decoration: none;
+}
+input,
+button,
+textarea,
+select {
+  font-family: "微软雅黑";
+}
+/*定义的变量*/
+.ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.box-sizing {
+  box-sizing: border-box;
+}
+.clear:after{
+	display: block;
+	clear: both;
+	content: '';
+	height: 0;
+	zoom: 1;
+}
+.overflowH{
+	overflow: hidden;
+}
+.mark_w50,
+.mark_b50{
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 10;
+	display: none;
+	opacity: 0.5;
+	filter:alpha(opacity=50);
+}
+.mark_w50{
+	background: #fff;
+}
+.mark_b50{
+	background: #000;
+}
+/*横屏*/
+@media all and (orientation: landscape) {
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+	.initials{
+		bottom: 0.1rem;
+		font-size: 0.12rem;
+	}
+	.initials li{
+		line-height: 0.15rem;
+	}
+}
+/*竖屏*/
+@media all and (orientation: portrait) {
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+	.initials{
+		bottom: 0.53rem;
+		font-size: 0.18rem;
+	}
+	.initials li{
+		line-height: 0.26rem;
+	}
+}
+html,body {
+  max-width: 640px;
+  margin: auto;
+  height: 100%;
+}
+.supply_body {
+  position: relative;
+  min-width: inherit;
+  background: #fff;
+  font-family: "微软雅黑";
+  color: #333;
+}
+.supply_main{
+	height: 100%;
+	overflow-y: auto;
+}
+.card_box{
+	background: #fff;
+	margin-bottom: 0.14rem;
+}
+.card_box > li{
+}
+.card_box .icon28{
+	width: 0.28rem;
+	height: 0.28rem;
+	margin: 0.28rem 0 0 0.2rem;
+	vertical-align: top;
+}
+.card_box .con_right{
+	position: relative;
+	float: right;
+	width: 5.74rem;
+	height: 0.82rem;
+	line-height: 0.82rem;
+	padding: 0 0.2rem 0 1.4rem;
+	border-bottom: 1px solid #ededed;
+	box-sizing: border-box;
+}
+.card_box .con_right .txt_name{
+	position: absolute;
+	left: 0;
+	top: 0;
+	font-size: 0.25rem;
+	font-weight: bold;
+	color: #4c4c4c;
+}
+.card_box .con_right .txt_ipt{
+	width: 100%;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	border: 0;
+	padding: 0;
+	font-size: 0.24rem;
+	text-align: right;
+	color: #ccc;
+}
+.card_box .con_right .color4d{
+	color: #4db6f7;
+}
+.card_box .remark_textarea{
+	display: block;
+	width: 6.0rem;
+	height: 1.88rem;
+	margin: 0 auto 0.3rem;
+	padding: 0.14rem 0.2rem;
+	border: 0;
+	box-sizing: border-box;
+	background: #fafafa;
+	resize: none;
+	font-size: 0.22rem;
+	color: #ccc;
+}
+.card_box .select_cropname{
+	float: right;
+	width: 3.3rem;
+	height: 0.82rem;
+	line-height: 0.82rem;
+	font-size: 0.24rem;
+	text-align: right;
+	color: #ccc;
+}
+.card_file .base_site{
+	width: 6.0rem;
+	height: 0.62rem;
+	line-height: 0.62rem;
+	margin: 0.2rem auto;
+	background-color: #fafafa;
+	font-size: 0.24rem;
+}
+.card_file .base_site img{
+	width: 0.21rem;
+	height: 0.28rem;
+	margin: 0.18rem 0.16rem 0 0.08rem;
+	vertical-align: top;
+}
+.card_file .file_dd,
+.card_box .file_dd{
+	padding: 0 0.2rem 0.2rem 0.66rem;
+}
+.card_title{
+	font-size: 0.25rem;
+	font-weight: bold;
+	color: #4c4c4c;
+}
+.card_file .icon28{
+	margin-right: 0.2rem;
+}
+.card_file dt{
+	height: 0.82rem;
+	line-height: 0.82rem;
+	font-weight: normal;
+}
+.card_file .txt_tip{
+	padding-top: 0.34rem;
+	line-height: 0.2rem;
+	font-size: 0.15rem;
+	color: #ff7700;
+}
+.card_file .txt_name{
+	font-size: 0.25rem;
+	font-weight: bold;
+	color: #4c4c4c;
+}
+.mycard_box{
+	padding: 0 0 0.5rem 0;
+	background-color: #fff;
+}
+.iStarTime,
+.iEndTime{
+	float: left;
+	width: 1.7rem;
+	height: 0.52rem;
+	margin-top: 0.14rem;
+}
+.iStarTime input,
+.iEndTime input{
+	height: 100%;
+	padding: 0 0.1rem;
+	line-height: 0.5rem;
+	vertical-align: top;
+	font-size: 0.21rem;
+	color: #333;
+}
+.form_datetime .add-on{
+	top: 50%;
+	margin-top: -7px;
+	opacity: 0;
+	filter:alpha(opacity=0);
+}
+.txt_line{
+	float: left;
+	width: 0.3rem;
+	height: 0.52rem;
+	line-height: 0.52rem;
+	margin-top: 0.14rem;
+	text-align: center;
+}
+.btn_mycard{
+	width: 5.9rem;
+	height: 0.7rem;
+	line-height: 0.7rem;
+	margin: 0 auto;
+	border-radius: 0.1rem;
+	background-color: #39c553;
+	text-align: center;
+	font-size: 0.32rem;
+	font-weight: bold;
+	color: #fff;
+}
+/*产品追溯*/
+.trace_titleh3{
+	position: relative;
+	height: 0.34rem;
+	line-height: 0.34rem;
+	font-size: 0.25rem;
+	font-weight: bold;
+	text-indent: 0.2rem;
+	margin: 0.14rem 0;
+}
+.trace_titleh3:after{
+	position: absolute;
+	left: 1.3rem;
+	right: 0;
+	top: 50%;
+	height: 1px;
+	border-top: 1px solid #ededed;
+	content: '';
+	overflow: hidden;
+}
+.trace_cont_list,
+.newtrace_box{
+	position: relative;
+	width: 6.0rem;
+	margin: 0 auto;
+}
+.newtrace_box{
+	height: 1.7rem;
+}
+.trace_cont_list:before,
+.newtrace_box:before{
+	position: absolute;
+	left: 0.38rem;
+	top: 0.38rem;
+	bottom: 0;
+	width: 1px;
+	border-left: 1px solid #ededed;
+	content: '';
+	overflow: hidden;
+}
+.newtrace_box:before{
+	top: 0;
+}
+.trace_cont_list .t_item{
+	position: relative;
+	padding: 0 0 0.4rem 0.74rem;
+}
+.trace_cont_list .t_item:before{
+	position: absolute;
+	left: 0.3rem;
+	top: 0.16rem;
+	width: 0.17rem;
+	height: 0.17rem;
+	background-image: url(../../images/marketing/icon_dot17.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	content: '';
+	overflow: hidden;
+}
+.trace_cont_box{
+	position: relative;
+	padding: 0.2rem 0;
+	background: #f7f7f7;
+}
+.trace_cont_box:before{
+	position: absolute;
+	left: 0;
+	top: 0.16rem;
+	margin-left: -0.12rem;
+	border-width: 0.12rem 0.12rem 0.12rem 0;
+	border-style: solid solid solid solid;
+	border-color: transparent #f7f7f7 transparent transparent;
+	content: '';
+	overflow: hidden;
+}
+.trace_cont_box .btn_delete{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 0.32rem;
+	height: 0.32rem;
+	padding: 0.07rem;
+	box-sizing: border-box;
+	border-radius: 0 0 0 0.05rem;
+	background-color: #eb7979;
+	background-image: url(../../images/marketing/icon_delete18.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 56.25% 56.25%;
+}
+.trace_cont_box dl{
+	padding-top: 0.3rem;
+}
+.trace_cont_box dt{
+	float: left;
+	width: 1.54rem;
+	line-height: 0.52rem;
+	padding-right: 0.3rem;
+	box-sizing: border-box;
+	text-align: right;
+	font-size: 0.24rems;
+	color: #4c4c4c;
+}
+.trace_cont_box .input_text{
+	width: 3.4rem;
+	height: 0.52rem;
+	padding: 0 0.2rem;
+	border: 0.01rem solid #ededed;
+	border-radius: 0.08rem;
+	box-sizing: border-box;
+	font-size: 0.24rem;
+	color: #333;
+}
+.btn_newtrace{
+	position: relative;
+	height: 0.52rem;
+	margin: 0 0 0.4rem 0.74rem;
+	padding: 0 0.2rem;
+	border: 0;
+	border-radius: 0.05rem;
+	background-color: #5bb95c;
+	font-size: 0.22rem;
+	text-indent: 0.34rem;
+	color: #fff;
+}
+.btn_newtrace:before{
+	position: absolute;
+	left: 0.2rem;
+	top: 0.16rem;
+	width: 0.22rem;
+	height: 0.22rem;
+	background-image: url(../../images/marketing/icon_newtrace.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	content: '';
+	overflow: hidden;
+}
+/*作物种类*/
+.crop_species_box{
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 10;
+	width: 100%;
+	min-height: 100%;
+	overflow-y: auto;
+	background-color: #fff;
+}
+.species_list .level1{
+	position: relative;
+	line-height: 0.56rem;
+	padding: 0.16rem 0.28rem;
+	font-size: 0.29rem;
+	font-weight: bold;
+	color: #4c4c4c;
+}
+.species_list .level1:after{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	z-index: 1;
+	width: 6.12rem;
+	content: '';
+	height: 0;
+	zoom: 0;
+	border-top: 1px solid #ededed;
+}
+.species_list .level1 .icon56{
+	width: 0.56rem;
+	height: 0.56rem;
+	margin-right: 0.2rem;
+	vertical-align: top;
+}
+.species_list .level1 .arrow_rt{
+	float: right;
+	width: 0.12rem;
+	height: 0.21rem;
+	margin-top: 0.175rem;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 100% 100%;
+	background-image: url(../../images/marketing/icon_arrow_right03.png);
+}
+
+/*作物搜索及按拼音排序*/
+.crop_sort_box{
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 10;
+	width: 100%;
+	height: 100%;
+	padding-top: 0.88rem;
+	box-sizing: border-box;
+	background-color: #fff;
+	overflow-y: auto;
+}
+.serach_box{/*#####搜索*/
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	z-index: 2;
+	height: 0.88rem;
+	padding: 0.17rem 0.2rem;
+	border-bottom: 1px solid #e8e8e8;
+	box-sizing: border-box;
+	background: #fff;
+}
+.serach_box .form_search{
+	position: relative;
+	float: left;
+	width: 100%;
+	padding: 0 0.2rem 0 0.6rem;
+	border: 1px solid #dcdcdc;
+	border-radius: 0.25rem;
+	box-sizing: border-box;
+}
+.serach_box .form_search input{
+	width: 100%;
+	height: 0.48rem;
+	line-height: 0.48rem;
+	padding: 0;
+	border: 0;
+	color: #999;
+}
+.serach_box .form_search .os_iocn{
+	position: absolute;
+	left: 0.18rem;
+	top: 0.12rem;
+	width: 0.24rem;
+	height: 0.24rem;
+	background: url(../../images/marketing/icon_search.png) no-repeat 0 0;
+	background-size: 100% 100%;
+}
+#letter{/*#####内容*/
+	width: 100px;
+	height: 100px;
+	border-radius: 5px;
+	font-size: 75px;
+	color: #555;
+	text-align: center;
+	line-height: 100px;
+	background: rgba(145,145,145,0.6);
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	margin:-50px 0px 0px -50px;
+	z-index: 99;
+	display: none;
+}
+#letter img{
+	width: 50px;
+	height: 50px;
+	float: left;
+	margin:25px 0px 0px 25px;
+}
+.sort_box{
+	width: 100%;
+	padding-top: 0;
+	height: 100%;
+	overflow-y: auto;
+}
+.sort_list{
+	position: relative;
+	padding:0.14rem 0.3rem;
+	position: relative;
+	overflow: hidden;
+}
+.sort_list:after{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 5.9rem;
+	height: 0;
+	border-top: 1px solid #eee;
+	content: '';
+	overflow: hidden;
+}
+
+.sort_list .num_logo{
+	float: left;
+	width: 0.9rem;
+	height: 0.9rem;
+	margin-right: 0.3rem;
+	border: 0.02rem solid #58ca38;
+	border-radius: 50%;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+.sort_list .num_logo img{
+	width: 0.9rem;
+	height: 0.9rem;
+}
+.sort_list .num_name{
+	height: 0.38rem;
+	line-height: 0.38rem;
+	margin-top: 0.15rem;
+	font-size: 0.3rem;
+  color: #000;
+}
+.sort_list .name_pinyin{
+	height: 0.24rem;
+	line-height: 0.24rem;
+	font-size: 0.2rem;
+	color: #666;
+}
+.sort_letter{
+	position: relative;
+	height: 0.3rem;
+	line-height: 0.3rem;
+	padding-left: 0.2rem;
+	background-color: #f7f7f7;
+	color:#666;
+	font-size: 0.16rem;
+}
+.initials{
+	position: absolute;
+	right: 0px;
+	z-index: 99;
+	width: 0.2rem;
+	padding-right: 0.14rem;
+	background: rgba(145,145,145,0);
+	text-align: center;
+	color: #dcdcdc;
+}
+.initials li img{
+	width: 14px;
+}
+.initials li.cur{
+	color: #59c936;
+}
+/*上传图片*/
+.file_block{
+	display: inline-block;
+}
+.file_block p{
+	font-size: 0.15rem;
+	color: #f00;
+	word-break: break-all;
+}
+.file_block li .pic_phone{position: absolute; left: 0; top: 0; width: 100%; height: 100%;}
+.upload{padding: 0.625rem-; overflow: hidden;}
+.upload_pictures{ display: inline-block; vertical-align: top; width: 1.26rem; height: 1.26rem; margin:0 0.12rem 0.12rem 0; position: relative; background-image:url(../../images/marketing/btn_file.jpg); background-repeat: no-repeat; background-size: 100% 100%;}
+.upload_pictures .fileBtn{position: absolute; left: 0; top: 0; width: 3.4375rem;min-width: 100%; max-width: 100%; height: 3.4375rem; z-index: 6; font-size: 0.625rem; opacity: 0;}
+.upload_pictures input[type=file]{ z-index:8;}
+.uploadProduct_list li{
+	width: 1.24rem;
+	height: 1.24rem;
+}
+.uploadTrace_list li{
+	width: 2.6rem;
+	height: 1.5rem;
+}
+.uploadProduct_list li,
+.uploadTrace_list li{
+	position: relative;
+	margin: 0 0.1rem 0.1rem 0;
+	display: inline-block;
+	vertical-align: top;
+}
+.uploadProduct_list .pic_close,
+.uploadTrace_list .pic_close{
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 1;
+	width: 0.28rem;
+	height: 0.28rem;
+}

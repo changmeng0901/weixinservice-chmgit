@@ -1,0 +1,208 @@
+/*去除默认样式*/
+a {
+  text-decoration: none;
+}
+input,
+button,
+textarea,
+select {
+  font-family: "微软雅黑";
+}
+/*定义的变量*/
+.ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.box-sizing {
+  box-sizing: border-box;
+}
+.clear:after{
+	display: block;
+	clear: both;
+	content: '';
+	height: 0;
+	zoom: 1;
+}
+/*横屏*/
+@media all and (orientation: landscape) {
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+}
+/*竖屏*/
+@media all and (orientation: portrait) {
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+}
+html,body {
+  max-width: 640px;
+  margin: auto;
+  height: 100%;
+}
+body {
+  position: relative;
+  min-width: inherit;
+  background: #f7f7f7;
+  font-family: "微软雅黑";
+  color: #333;
+}
+.card_body{
+	padding-top: 0.79rem;
+	box-sizing: border-box;
+}
+.card_list_main{
+	height: 100%;
+	overflow-y: auto;
+}
+/*搜索*/
+.serach_box{
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	z-index: 2;
+	height: 0.79rem;
+	padding: 0.14rem 0.2rem;
+	border-bottom: 1px solid #e8e8e8;
+	box-sizing: border-box;
+	background: #fff;
+}
+.serach_box .form_search{
+	position: relative;
+	float: left;
+	width: 4.92rem;
+	padding: 0 0.2rem 0 0.6rem;
+	border: 1px solid #dcdcdc;
+	border-radius: 0.25rem;
+	box-sizing: border-box;
+}
+.serach_box .form_search input{
+	width: 100%;
+	height: 0.46rem;
+	line-height: 0.46rem;
+	padding: 0;
+	border: 0;
+	color: #999;
+}
+.serach_box .form_search .os_iocn{
+	position: absolute;
+	left: 0.18rem;
+	top: 0.12rem;
+	width: 0.24rem;
+	height: 0.24rem;
+	background: url(../../images/marketing/icon_search.png) no-repeat 0 0;
+	background-size: 100% 100%;
+}
+.serach_box .btn_views{
+	float: right;
+	width: 0.94rem;
+	height: 0.48rem;
+	line-height: 0.48rem;
+	font-size: 0.2rem;
+}
+.serach_box .btn_views span{
+	display: inline-block;
+	width: 0.12rem;
+	height: 0.2rem;
+	margin: 0.14rem 0 0 0.05rem;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 100% 100%;
+	background-image: url(../../images/marketing/views_down.png);
+	vertical-align: top;
+	transition: .5s;
+}
+.serach_box .btn_views.bdown span{
+	background-image: url(../../images/marketing/views_up.png);
+}
+/*列表*/
+.card_list{
+	padding: 0.18rem 0.2rem 0;
+}
+.card_list .c_item{
+	height: 3.0rem;
+	margin-bottom: 0.18rem;
+	box-shadow: 2px 3px 5px #999;
+	border-radius: 0.08rem;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-image: url(../../images/marketing/bg_vip.png);
+}
+.card_list dl{
+	display: table;
+	width: 100%;
+	padding: 0.16rem;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+.card_list dt{
+	display:table-cell; 
+	padding-right: 0.2rem;
+}
+.card_list dd{
+	display:table-cell; 
+	vertical-align: middle;
+}
+.card_list .base_pic{
+	width: 2.26rem;
+	height: 1.76rem;
+	border: 0.03rem solid #fff;
+	border-radius: 0.05rem;
+	vertical-align: top;
+}
+.card_list .base_name{
+	line-height: 0.4rem;
+	max-height: 0.8rem;
+	font-size: 0.28rem;
+	font-weight: bold;
+	overflow: hidden;
+}
+.card_list .views_total{
+	height: 0.3rem;
+	line-height: 0.3rem;
+	margin-top: 0.14rem;
+	font-size: 0.2rem;
+	color: #666;
+}
+.card_list .views_total img{
+	width: 0.26rem;
+	height: 0.13rem;
+	margin: 0.08rem 0.06rem 0 0;
+	vertical-align: top;
+}
+.card_list .card_foot{
+	padding-top: 0.35rem;
+	text-align: right;
+}
+.card_list .card_foot .btn_edit,
+.card_list .card_foot .btn_delete{
+	display: inline-block;
+	vertical-align: top;
+	line-height: 0.36rem;
+	margin: 0 0.2rem;
+	font-size: 0.22rem;
+	color: #fefefe;
+}
+.card_list .card_foot img{
+	width: 0.22rem;
+	height: 0.22rem;
+	margin: 0.07rem 0.05rem 0 0;
+	vertical-align: top;
+}
+.link_addcrop{
+	position: absolute;
+	left: 0.2rem;
+	bottom: 0.7rem;
+	width: 1.43rem;
+	height: 1.43rem;
+}
+.link_addcrop img{
+	width: 100%;
+	height: 100%;
+}
+

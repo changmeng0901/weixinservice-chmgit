@@ -27,7 +27,7 @@ function send_request(obj,entId)
   
     if (xmlhttp!=null)
     {
-        serverUrl = 'http://192.168.21.101:8080/testUpload?type='+obj+'&id='+entId;
+        serverUrl = 'http://192.168.21.165:8080/testUpload?type='+obj+'&id='+entId;
         xmlhttp.open( "GET", serverUrl, false );
         xmlhttp.send( null );
         return xmlhttp.responseText;

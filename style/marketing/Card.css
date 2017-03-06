@@ -211,8 +211,8 @@ body {
 /*农场风光*/
 .farm_scenery{
 	position: relative;
-	padding-top: 1.92rem;
-	height: 5.5rem;
+	padding-top: 0.12rem;
+	height: 3.7rem;
 	background: url(../../images/marketing/bg_scenery.jpg) no-repeat;
 	background-size: 100% auto;
 	box-sizing: border-box;

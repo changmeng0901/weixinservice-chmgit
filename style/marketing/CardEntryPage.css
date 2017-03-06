@@ -1,0 +1,74 @@
+/*去除默认样式*/
+a {
+  text-decoration: none;
+}
+input,
+button,
+textarea,
+select {
+  font-family: "微软雅黑";
+}
+/*定义的变量*/
+.ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.box-sizing {
+  box-sizing: border-box;
+}
+/*横屏*/
+@media all and (orientation: landscape) {
+  
+}
+/*竖屏*/
+@media all and (orientation: portrait) {
+  
+}
+html {
+  max-width: 640px;
+  margin: auto;
+  height: 100%;
+}
+body {
+  position: relative;
+  min-width: inherit;
+  height: 100%;
+  font-family: "微软雅黑";
+  color: #333;
+  overflow: hidden;
+}
+.entrypage_body {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.entrypage_wrap{
+	padding: 3.94rem 0 0;
+  background: url(../../images/marketing/bg_entrypage.jpg) no-repeat;
+  background-size: 100% auto;
+}
+.entrypage_main{
+	width: 5.77rem;
+	height: 10.98rem;
+	box-sizing: border-box;
+	margin: 0 auto 0.3rem;
+	padding: 0.97rem 0.34rem;
+	background-image: url(../../images/marketing/bg_entrypage_iphone.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+  background-size: 100% auto;
+}
+.create_card{
+	position: absolute;
+	right: 0.22rem;
+	bottom: 1.26rem;
+	width: 1.16rem;
+	height: 1.16rem;
+	border-radius: 50%;
+	box-shadow: 0 5px 5px #87c1e4;
+}
+.create_card img{
+	width: 100%;
+	height: 100%;
+}

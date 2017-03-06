@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="initial-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
+<meta name="format-detection" content="telephone=no" />
+	<title>数字名片</title>
+	<script type="text/javascript">
+	var ResizeSize = function (){
+			var _html = document.documentElement;
+			var _width = _html.getBoundingClientRect().width;
+			//var _width = document.body.clientWidth;
+			if(_width>=640){
+				_width=640
+			}
+			var _scale = _width/6.4 +'px';
+			_html.style.fontSize = _scale;
+		}
+	ResizeSize();
+	window.onresize = function (){
+		ResizeSize();
+	}
+	</script>
+	<link rel="stylesheet" type="text/css" href="../style/commons/commons.css" />
+	<link rel="stylesheet" type="text/css" href="../style/marketing/CardEntryPage.css" />
+</head>
+<body>
+<div class="entrypage_body">
+	<div class="entrypage_wrap">
+		<div class="entrypage_main">
+			<a class="create_card" href="CardAdd.html">
+				<img src="../images/marketing/btn_createcard.png" />
+			</a>
+			<iframe src="Card.html" width="100%" height="100%" scrolling="yes" frameborder="0" framespacing="0"></iframe>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

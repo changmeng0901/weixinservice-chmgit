@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="initial-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
+<meta name="format-detection" content="telephone=no" />
+	<title>数字名片</title>
+	<script type="text/javascript">
+	var ResizeSize = function (){
+			var _html = document.documentElement;
+			var _width = _html.getBoundingClientRect().width;
+			//var _width = document.body.clientWidth;
+			if(_width>=640){
+				_width=640
+			}
+			var _scale = _width/6.4 +'px';
+			_html.style.fontSize = _scale;
+		}
+	ResizeSize();
+	window.onresize = function (){
+		ResizeSize();
+	}
+	</script>
+	<link rel="stylesheet" type="text/css" href="../style/commons/commons.css" />
+	<link rel="stylesheet" type="text/css" href="../style/marketing/CardAdd.css" />
+</head>
+<body class="cardadd_body">
+	<div class="cardadd_main">
+		<!--基地联系信息-->
+		<ul class="card_box">
+			<li>
+				<img class="icon28" src="../images/marketing/icon_basename.png" />
+				<div class="con_right">
+					<p class="txt_name">基地名称</p>
+					<input class="txt_ipt color4d" type="text" value="北京北菜园蔬菜基地" />
+				</div>
+			</li>
+			<li>
+				<img class="icon28" src="../images/marketing/icon_linkman.png" />
+				<div class="con_right">
+					<p class="txt_name">联系人</p>
+					<input class="txt_ipt" type="text" value="请填写" />
+				</div>
+			</li>
+			<li>
+				<img class="icon28" src="../images/marketing/icon_contact.png" />
+				<div class="con_right">
+					<p class="txt_name">联系方式</p>
+					<input class="txt_ipt" type="text" value="请填写" />
+				</div>
+			</li>
+			<li>
+				<img class="icon28" src="../images/marketing/icon_remark.png" />
+				<div class="con_right" style="border: 0;">
+					<p class="txt_name">基地介绍</p>
+				</div>
+				<div class="clear">
+					<textarea class="remark_textarea">请您简单介绍一下基地的历史、实力或特色</textarea>
+				</div>
+			</li>
+		</ul>
+		<div class="line14"></div>
+		<!--基地相册和荣誉-->
+		<div class="card_box" style="margin-bottom: 0;">
+			<dl class="card_file">
+				<dd style="overflow: hidden;">
+					<p class="base_site ellipsis"><img src="../images/marketing/icon_site2.png" />北京延庆八达岭经济开发区</p>
+				</dd>
+				<dt class="card_title">
+					<img class="fl icon28" src="../images/marketing/icon_basephoto.png" />
+					<p class="txt_name fl">基地相册</p>
+					<p class="txt_tip">（上传您基地的实景图片）</p>
+				</dt>
+				<dd class="file_dd">
+					<div class="upload">
+						<ul class="uploadbase_list" id="uploadbase_list">
+							
+						</ul>
+						<div class="file_block">
+							<div class="upload_pictures" id="container">
+								<div id="selectfiles" class="fileBtn" style="width: 85px">选择文件</div>
+								<!--上传图片的存储及请求事件-->
+								<div id="ossfile1"></div>
+								<a style="display: none" id="postfiles1" href="javascript:void(0);" class='btn' onclick="apply(18);"></a>
+								<a style="display: none" id="callback" href="javascript:void(0);" class='btn' onclick="callback();"></a>
+								<input type="hidden" id="commentFileUrl" name="commentFileUrl" />
+								<!--上传图片的存储及请求事件-->
+							</div>
+							<p class="text_upload">图片标准：388x262（像素）</p>
+							<p class="text_upload">支持格式：jpg,png,jpeg,bmp,3gp</p>
+						</div>
+					</div>
+				</dd>
+			</dl>
+		</div>
+		<div class="card_box">
+			<dl class="card_file">
+				<dt class="card_title">
+					<img class="fl icon28" src="../images/marketing/icon_basehonor.png" />
+					<p class="txt_name fl">基地荣誉</p>
+					<p class="txt_tip">（上传您的营业执照、公众号、企业荣誉、产品认证、产品检测图片）</p>
+				</dt>
+				<dd class="file_dd">
+					<div class="upload">
+						<ul class="uploadhonor_list" id="uploadhonor_list">
+							
+						</ul>
+						<div class="file_block">
+							<div class="upload_pictures" id="container">
+								<div id="selectfiles" class="fileBtn" style="width: 85px">选择文件</div>
+								<!--上传图片的存储及请求事件-->
+								<div id="ossfile1"></div>
+								<a style="display: none" id="postfiles1" href="javascript:void(0);" class='btn' onclick="apply(18);"></a>
+								<a style="display: none" id="callback" href="javascript:void(0);" class='btn' onclick="callbackHonor();"></a>
+								<input type="hidden" id="commentFileUrl" name="commentFileUrl" />
+								<!--上传图片的存储及请求事件-->
+							</div>
+							<p class="text_upload">图片标准：200x296（像素）</p>
+							<p class="text_upload">支持格式：jpg,png,jpeg,bmp,3gp</p>
+						</div>
+					</div>
+				</dd>
+			</dl>
+		</div>
+		<div class="line14"></div>
+		<!--基地供应产品-->
+		<ul class="card_box" style="margin-bottom: 0;">
+			<li>
+				<img class="icon28" src="../images/marketing/icon_jdgycp.png" />
+				<div class="con_right" style="border: none;">
+					<p class="txt_name">基地供应产品</p>
+				</div>
+			</li>
+			<li>
+				<div class="file_dd clear">
+					<a class="link_supplyproducts" href="SupplyProducts.html">
+						<img src="../images/marketing/btn_addsupplyproducts.png"/>
+					</a>
+				</div>
+			</li>
+		</ul>
+		<div class="supply_product_list">
+			<dl class="t_item">
+				<dt>
+					<img src="../images/marketing/temp_supply_crop.png" />
+				</dt>
+				<dd>
+					<p class="crop_name ellipsis">西红柿西红柿西红柿西红柿西红柿西红柿西红柿西红柿</p>
+					<div class="supply_border">
+						<p class="supply_weight">·&nbsp;供应量&nbsp;<span class="txt_bold">1000kg</span></p>
+						<p class="supply_time">·&nbsp;供应时间&nbsp;<span class="txt_bold">2017.01.10 - 2017.05.30</span></p>
+					</div>
+					<i class="btn_delete"></i>
+				</dd>
+			</dl>
+			<dl class="t_item">
+				<dt>
+					<img src="../images/marketing/temp_supply_crop.png" />
+				</dt>
+				<dd>
+					<p class="crop_name ellipsis">西红柿西红柿西红柿西红柿西红柿西红柿西红柿西红柿</p>
+					<div class="supply_border">
+						<p class="supply_weight">·&nbsp;供应量&nbsp;<span class="txt_bold">1000kg</span></p>
+						<p class="supply_time">·&nbsp;供应时间&nbsp;<span class="txt_bold">2017.01.10 - 2017.05.30</span></p>
+					</div>
+					<i class="btn_delete"></i>
+				</dd>
+			</dl>
+		</div>
+		<!--生成我的数字名片-->
+		<div class="mycard_box">
+			<div class="btn_mycard" onclick="CreateMyCardFn()">生成我的数字名片</div>
+		</div>
+	</div>
+	<!--主体结束-->
+	<!--实时预览板块-->
+	<div class="fixed_preview" id="fixed_preview">
+		<img src="../images/marketing/fixed_preview.png"/>
+	</div>
+	<div class="mark_w50"></div>
+	<div class="live_preview" id="live_preview">
+		<img class="icon_title" src="../images/marketing/icon_preview.png" />
+		<span class="close_view"></span>
+		<span class="view_screen view_small" onoff="small"></span>
+		<div class="preview_body">
+			<iframe frameborder="0" framespacing="0" width="100%" height="100%" scrolling="no" src="Card.html"></iframe>
+		</div>
+	</div>
+	
+	
+
+<script type="text/javascript" src="../js/commons/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="../js/oss_fileimg/lib/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="../js/marketing/CardAdd.js"></script>
+<script type="text/javascript" src="../js/oss_fileimg/CardPicUpload.js"></script>	
+<!--##   krpanoPicUpload.js是一定要放在最下面的      ##-->
+</body>
+</html>

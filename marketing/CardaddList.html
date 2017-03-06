@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
 <meta name="format-detection" content="telephone=no" />
-	<title>数字名片</title>
+	<title>名片夹</title>
 	<script type="text/javascript">
 	var ResizeSize = function (){
 			var _html = document.documentElement;
@@ -24,571 +24,56 @@
 	}
 	</script>
 	<link rel="stylesheet" type="text/css" href="../style/commons/commons.css" />
-	<link rel="stylesheet" type="text/css" href="../js/swiper/swiper-3.4.0.min.css" />
-	<link rel="stylesheet" type="text/css" href="../style/marketing/default_skin.css" />
-	<link rel="stylesheet" type="text/css" href="../style/marketing/Card.css" />
+	<link rel="stylesheet" type="text/css" href="../style/marketing/CardAddlist.css" />
 </head>
 <body class="card_body">
-<div class="card_main">
-	<!--农场风光swiper-->
-	<div class="swiper-container swiper_scenery" id="swiper_scenery">
-		<div class="swiper-wrapper">
-			<div class="swiper-slide">
-				<div class="con_center">
-					<img src="../images/marketing/1.jpg"/>
-					<p class="txt_con">图1</p>
-					<p class="txt_total">1/3</p>
-				</div>
-			</div>
-			<div class="swiper-slide">
-				<div class="con_center">
-					<img src="../images/marketing/2.jpg"/>
-					<p class="txt_con">图2</p>
-					<p class="txt_total">2/3</p>
-				</div>
-			</div>
-			<div class="swiper-slide">
-				<div class="con_center">
-					<img src="../images/marketing/4.jpg"/>
-					<p class="txt_con">图3</p>
-					<p class="txt_total">3/3</p>
-				</div>
-			</div>
+	<div class="serach_box clear">
+		<div class="form_search">
+			<span class="os_iocn"></span>
+			<input type="text" value="请输入数字名片名称搜索" />
 		</div>
+		<div class="btn_views" onoff="up" onclick="ViewsSortFn(this,'bdown')">浏览量<span></span></div>
 	</div>
-	<!--生产追溯swiper-->
-	<div class="swiper-container swiper_trace" id="swiper_trace0">
-		<div class="swiper-wrapper">
-			<div class="swiper-slide">
-				<div class="con_center">
-					<img src="../images/marketing/temp_trace4.jpg"/>
-					<p class="txt_con">图1</p>
-					<p class="txt_total">1/6</p>
+	<div class="card_list_main">
+		<ul class="card_list">
+			<li class="c_item">
+				<dl>
+					<dt>
+						<img class="base_pic" src="../images/marketing/temp_trace1.jpg"/>
+					</dt>
+					<dd>
+						<p class="base_name">北京延庆北菜园有机蔬菜基地采摘园</p>
+						<p class="views_total"><img src="../images/marketing/icon_views.png" />1344次浏览</p>
+					</dd>
+				</dl>
+				<div class="card_foot clear">
+					<a class="btn_edit" href="CardAdd.html"><img src="../images/marketing/icon_edit.png" />编辑</a>
+					<span class="btn_delete" onclick="DeleteVIPFn(this)"><img src="../images/marketing/icon_delete.png" />删除</span>
 				</div>
-			</div>
-			<div class="swiper-slide">
-				<div class="con_center">
-					<img src="../images/marketing/temp_honor2.jpg"/>
-					<p class="txt_con">图2</p>
-					<p class="txt_total">2/6</p>
+			</li>
+			<li class="c_item">
+				<dl>
+					<dt>
+						<img class="base_pic" src="../images/marketing/temp_trace1.jpg"/>
+					</dt>
+					<dd>
+						<p class="base_name">北京延庆北菜园有机蔬菜基地采摘园</p>
+						<p class="views_total"><img src="../images/marketing/icon_views.png" />1344次浏览</p>
+					</dd>
+				</dl>
+				<div class="card_foot clear">
+					<a class="btn_edit" href="CardAdd.html"><img src="../images/marketing/icon_edit.png" />编辑</a>
+					<span class="btn_delete" onclick="DeleteVIPFn(this)"><img src="../images/marketing/icon_delete.png" />删除</span>
 				</div>
-			</div>
-			<div class="swiper-slide">
-				<div class="con_center">
-					<img src="../images/marketing/temp_honor3.jpg"/>
-					<p class="txt_con">图3</p>
-					<p class="txt_total">3/6</p>
-				</div>
-			</div>
-			<div class="swiper-slide">
-				<div class="con_center">
-					<img src="../images/marketing/temp_trace1.jpg"/>
-					<p class="txt_con">图4</p>
-					<p class="txt_total">4/6</p>
-				</div>
-			</div>
-			<div class="swiper-slide">
-				<div class="con_center">
-					<img src="../images/marketing/temp_trace2.jpg"/>
-					<p class="txt_con">图5</p>
-					<p class="txt_total">5/6</p>
-				</div>
-			</div>
-			<div class="swiper-slide">
-				<div class="con_center">
-					<img src="../images/marketing/temp_trace3.jpg"/>
-					<p class="txt_con">图6</p>
-					<p class="txt_total">6/6</p>
-				</div>
-			</div>
-		</div>
+			</li>
+		</ul>
 	</div>
-	<div class="swiper-container swiper_trace" id="swiper_trace1">
-		<div class="swiper-wrapper">
-			<div class="swiper-slide">
-				<div class="con_center">
-					<img src="../images/marketing/temp_trace4.jpg"/>
-					<p class="txt_con">图1</p>
-					<p class="txt_total">1/6</p>
-				</div>
-			</div>
-			<div class="swiper-slide">
-				<div class="con_center">
-					<img src="../images/marketing/temp_honor2.jpg"/>
-					<p class="txt_con">图2</p>
-					<p class="txt_total">2/6</p>
-				</div>
-			</div>
-			<div class="swiper-slide">
-				<div class="con_center">
-					<img src="../images/marketing/temp_honor3.jpg"/>
-					<p class="txt_con">图3</p>
-					<p class="txt_total">3/6</p>
-				</div>
-			</div>
-			<div class="swiper-slide">
-				<div class="con_center">
-					<img src="../images/marketing/temp_trace1.jpg"/>
-					<p class="txt_con">图4</p>
-					<p class="txt_total">4/6</p>
-				</div>
-			</div>
-			<div class="swiper-slide">
-				<div class="con_center">
-					<img src="../images/marketing/temp_trace2.jpg"/>
-					<p class="txt_con">图5</p>
-					<p class="txt_total">5/6</p>
-				</div>
-			</div>
-			<div class="swiper-slide">
-				<div class="con_center">
-					<img src="../images/marketing/temp_trace3.jpg"/>
-					<p class="txt_con">图6</p>
-					<p class="txt_total">6/6</p>
-				</div>
-			</div>
-		</div>
+	<div class="link_addcrop" id="link_addcrop">
+		<img src="../images/marketing/link_addcard.png" />
 	</div>
-	<!--荣誉swiper-->
-	<div class="swiper-container swiper_honor" id="swiper_honor">
-		<div class="swiper-wrapper">
-			<div class="swiper-slide">
-				<div class="con_center">
-					<img src="../images/marketing/temp_honor1.jpg"/>
-					<p class="txt_con">图1</p>
-					<p class="txt_total">1/3</p>
-				</div>
-			</div>
-			<div class="swiper-slide">
-				<div class="con_center">
-					<img src="../images/marketing/temp_honor2.jpg"/>
-					<p class="txt_con">图2</p>
-					<p class="txt_total">2/3</p>
-				</div>
-			</div>
-			<div class="swiper-slide">
-				<div class="con_center">
-					<img src="../images/marketing/temp_honor3.jpg"/>
-					<p class="txt_con">图3</p>
-					<p class="txt_total">3/3</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- 农场地图板块 -->
-	<div class="map_wrap" id="big_map">
-		<img class="temp_map" src="../images/marketing/temp_map.jpg"/>
-		<div class="fixed_head">
-			<p class="txt_site"><img src="../images/marketing/icon_point.png"/><span class="txt_province">北京</span>&sdot;延庆</p>
-			<p class="txt_area">农场面积：120亩</p>
-		</div>
-		<div class="weather_block">
-			<dl class="weather_con">
-				<dt>
-					<img src="../images/marketing/icon_weather01.png"/>
-				</dt>
-				<dd>
-					<div>
-						<p class="txt_zhishu"><img src="../images/marketing/icon_zhishu.png" />无污染</p>
-						<p class="txt_tianqi">晴转小雨</p>
-					</div>
-				</dd>
-			</dl>
-		</div>
-		<div class="map_block">
-			<img src="../images/marketing/temp_map2.jpg"/>
-		</div>
-		<div class="btn_screen" onoff="false">
-			<img width="100%" height="100%" src="../images/marketing/btn_fullscreen.png"/>
-		</div>
-		<div class="btn_pano">
-			<img width="100%" height="100%" src="../images/marketing/btn_pano.png"/>
-		</div>
-		<div class="btn_aerial">
-			<img width="100%" height="100%" src="../images/marketing/btn_aerial.png"/>
-		</div>
-	</div>
-	<!-- 农场风光板块  -->
-	<div class="farm_scenery">
-		<div id="scenery-phase" class="phase-row" data-title="Illustrations" data-coloroverlap="light">
-			<div id="scenery-slider" class="sky-carousel sc-no-select">
-				<div class="sky-carousel-wrapper">
-					<ul class="sky-carousel-container">
-						<li>
-							<img src="../images/marketing/1.jpg" alt="" class="sc-image">
-							<div class="sc-content">
-								<p>北菜园</p>
-							</div>
-						</li>
-						<li>
-							<img src="../images/marketing/2.jpg" alt="" class="sc-image">
-							<div class="sc-content">
-								<p>和合谷</p>
-							</div>
-						</li>
-						<li>
-							<img src="../images/marketing/4.jpg" alt="" class="sc-image">
-							<div class="sc-content">
-								<p>奥科美</p>
-							</div>
-						</li>
-					</ul>
-				</div>
-				<canvas class="sc-overlay sc-overlay-left" width="300" height="1"></canvas>
-				<canvas class="sc-overlay sc-overlay-right" width="300" height="1"></canvas>
-			</div>
-		</div>
-		<div class="scenery_dot">
-			<span></span>
-			<span></span>
-			<span></span>
-		</div>
-		<!--农场风光轮播结束-->
-	</div>
-	<div class="farm_introduce">
-		<div class="title_head clear">
-			<h3><img src="../images/marketing/icon_ncqh.jpg" />农场气候</h3>
-		</div>
-		<div class="more_body climate_box" style="display: block;">
-			<dl>
-				<dt>
-					<p class="txt_num">32.6m</p>
-					<p class="txt_date">海拔<span class="txt_hb">低海拔</span></p>
-				</dt>
-				<dd>
-					<img class="txt_icon" src="../images/marketing/icon_haiba.png" />
-				</dd>
-			</dl>
-			<dl class="ml40">
-				<dt>
-					<p class="txt_num">1022m</p>
-					<p class="txt_date">累计降水量<span class="txt_hb">水涝</span></p>
-				</dt>
-				<dd>
-					<img class="txt_icon" src="../images/marketing/icon_jiangshui.png" />
-				</dd>
-			</dl>
-			<dl>
-				<dt>
-					<p class="txt_num">12.8℃</p>
-					<p class="txt_date">平均温度<span class="txt_hb">中</span></p>
-				</dt>
-				<dd>
-					<img class="txt_icon" src="../images/marketing/icon_pingwen.png" />
-				</dd>
-			</dl>
-			<dl class="ml40">
-				<dt>
-					<p class="txt_num">10.3℃</p>
-					<p class="txt_date">平均昼夜温差<span class="txt_hb">高</span></p>
-				</dt>
-				<dd>
-					<img class="txt_icon" src="../images/marketing/icon_zhouwen.png" />
-				</dd>
-			</dl>
-		</div>
-		<!--农场介绍-->
-		<div class="title_head clear">
-			<h3><img src="../images/marketing/icon_ncjs.jpg" />农场介绍</h3>
-			<a class="btn_more" onclick="ViewMoreFn(this,'dq_top','.introduce_box')" href="javascript:;">查看更多<i></i></a>
-		</div>
-		<div class="more_body introduce_box">农场介绍内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
-		<!--配套能力和服务-->
-		<div class="title_head clear">
-			<h3><img src="../images/marketing/icon_ncjs.jpg" />配套能力和服务</h3>
-			<a class="btn_more" onclick="ViewMoreFn(this,'dq_top','.service_box')" href="javascript:;">查看更多<i></i></a>
-		</div>
-		<div class="more_body service_box">
-			<p class="text_chain">社区直供</p>
-			<p class="text_chain">预冷处理</p>
-			<p class="text_chain">电商</p>
-			<p class="text_chain">代发快递</p>
-			<p class="text_chain">冷链运输</p>
-		</div>
-		<!--公司下属其它农场-->
-		<div class="title_head clear">
-			<h3><img src="../images/marketing/icon_ncjs.jpg" />公司下属其它农场</h3>
-			<a class="btn_more" onclick="ViewMoreFn(this,'dq_top','.otherfarm_box')" href="javascript:;">查看更多<i></i></a>
-		</div>
-		<div class="more_body otherfarm_box">
-			<ul>
-				<li class="item_belongs">
-					<p class="ellipsis">北京北菜园有机农场北京北菜园有机农场北京北菜园有机农场</p>
-					<i></i>
-				</li>
-				<li class="item_belongs">
-					<p class="ellipsis">北京北菜园有机农场</p>
-					<i></i>
-				</li>
-			</ul>
-		</div>
-		<!--公司下属其它农场-->
-	</div>
-	<!--可供应产品-->
-	<div class="farm_supply">
-		<h2 class="title_h2">可供应产品</h2>
-		<dl class="supply_box supply_box0">
-			<dt>
-				<div class="crop_pic">
-					<!--<img src="../images/marketing/temp_supply_crop.png@126w_126h_1e_1c.src" />-->
-					<img src="../images/marketing/temp_supply_crop.png" />
-					<p>有机</p>
-				</div>
-				<a class="buy_link" href="javascript:;">购买</a>
-				<div class="txt_cropname"><span class="txt_name ellipsis">车厘子车厘子车厘子车厘子</span><span class="txt_miaoshu">5cm中果</span></div>
-				<div class="txt_total">
-					<p><span>供应量</span><strong>1000kg</strong></p>
-					<p><span>供应时间</span> <strong>2017.01.10 - 2017.05.30</strong></p>
-				</div>
-				<i class="btn_down btn_up" onclick="ViewMoreFn(this,'btn_up','.supply_box0 dd')"></i>
-			</dt>
-			<dd style="display: block;">
-				<img class="trace_sign" src="../images/marketing/icon_tracetitle.png" />
-				<div id="trace-phase0" class="phase-row" data-title="Illustrations" data-coloroverlap="light">
-					<div id="trace-slider0" class="sky-carousel sc-no-select">
-						<div class="sky-carousel-wrapper">
-							<ul class="sky-carousel-container">
-								<li>
-									<img src="../images/marketing/temp_trace4.jpg" alt="" class="sc-image">
-									<div class="sc-content">
-										<h2>图1</h2>
-										<p>可溶性固形物11.8%，果肉较细，甜酸适口，香气浓郁。</p>
-									</div>
-								</li>
-								<li>
-									<img src="../images/marketing/temp_honor2.jpg" alt="" class="sc-image">
-									<div class="sc-content">
-										<h2>图2</h2>
-										<p>22</p>
-									</div>
-								</li>
-								<li>
-									<img src="../images/marketing/temp_honor3.jpg" alt="" class="sc-image">
-									<div class="sc-content">
-										<h2>图3</h2>
-										<p>33</p>
-									</div>
-								</li>
-								<li>
-									<img src="../images/marketing/temp_trace1.jpg" alt="" class="sc-image">
-									<div class="sc-content">
-										<h2>图4</h2>
-										<p>44</p>
-									</div>
-								</li>
-								<li>
-									<img src="../images/marketing/temp_trace2.jpg" alt="" class="sc-image">
-									<div class="sc-content">
-										<h2>图5</h2>
-										<p>55</p>
-									</div>
-								</li>
-								<li>
-									<img src="../images/marketing/temp_trace3.jpg" alt="" class="sc-image">
-									<div class="sc-content">
-										<h2>图6</h2>
-										<p>66</p>
-									</div>
-								</li>
-							</ul>
-						</div>
-						<canvas class="sc-overlay sc-overlay-left" width="300" height="1"></canvas>
-						<canvas class="sc-overlay sc-overlay-right" width="300" height="1"></canvas>
-					</div>
-				</div>
-				<div class="trace_timeline">
-					<p class="trace_signtxt trace_signtxt0"></p>
-					<div class="trace_datelist trace_datelist0">
-					<ol>
-						<li>
-							<p><span>2016年</span>12月02日</p>
-						</li>
-						<li>
-							<p><span>2017年</span>01月15日</p>
-						</li>
-						<li>
-							<p><span>2017年</span>02月08日</p>
-						</li>
-						<li>
-							<p><span>2017年</span>05月02日</p>
-						</li>
-						<li>
-							<p><span>2017年</span>06月15日</p>
-						</li>
-						<li>
-							<p><span>2017年</span>08月08日</p>
-						</li>
-					</ol>
-					</div>
-					<p class="trace_txtdetail trace_txtdetail0"></p>
-				</div>
-				<!--农场风光轮播结束-->
-			</dd>
-		</dl>
-		<dl class="supply_box supply_box1">
-			<dt>
-				<div class="crop_pic">
-					<!--<img src="../images/marketing/temp_supply_crop.png@126w_126h_1e_1c.src" />-->
-					<img src="../images/marketing/temp_supply_crop.png" />
-					<p>有机</p>
-				</div>
-				<a class="buy_link" href="javascript:;">购买</a>
-				<div class="txt_cropname"><span class="txt_name ellipsis">车厘子车厘子车厘子车厘子</span><span class="txt_miaoshu">5cm中果</span></div>
-				<div class="txt_total">
-					<p><span>供应量</span><strong>1000kg</strong></p>
-					<p><span>供应时间</span> <strong>2017.01.10 - 2017.05.30</strong></p>
-				</div>
-				<i class="btn_down btn_up" onclick="ViewMoreFn(this,'btn_up','.supply_box1 dd')"></i>
-			</dt>
-			<dd style="display: block;">
-				<img class="trace_sign" src="../images/marketing/icon_tracetitle.png" />
-				<div id="trace-phase1" class="phase-row" data-title="Illustrations" data-coloroverlap="light">
-					<div id="trace-slider1" class="sky-carousel sc-no-select">
-						<div class="sky-carousel-wrapper">
-							<ul class="sky-carousel-container">
-								<li>
-									<img src="../images/marketing/temp_trace4.jpg" alt="" class="sc-image">
-									<div class="sc-content">
-										<h2>图1</h2>
-										<p>可溶性固形物11.8%，果肉较细，甜酸适口，香气浓郁。</p>
-									</div>
-								</li>
-								<li>
-									<img src="../images/marketing/temp_honor2.jpg" alt="" class="sc-image">
-									<div class="sc-content">
-										<h2>图2</h2>
-										<p>22</p>
-									</div>
-								</li>
-								<li>
-									<img src="../images/marketing/temp_honor3.jpg" alt="" class="sc-image">
-									<div class="sc-content">
-										<h2>图3</h2>
-										<p>33</p>
-									</div>
-								</li>
-								<li>
-									<img src="../images/marketing/temp_trace1.jpg" alt="" class="sc-image">
-									<div class="sc-content">
-										<h2>图4</h2>
-										<p>44</p>
-									</div>
-								</li>
-								<li>
-									<img src="../images/marketing/temp_trace2.jpg" alt="" class="sc-image">
-									<div class="sc-content">
-										<h2>图5</h2>
-										<p>55</p>
-									</div>
-								</li>
-								<li>
-									<img src="../images/marketing/temp_trace3.jpg" alt="" class="sc-image">
-									<div class="sc-content">
-										<h2>图6</h2>
-										<p>66</p>
-									</div>
-								</li>
-							</ul>
-						</div>
-						<canvas class="sc-overlay sc-overlay-left" width="300" height="1"></canvas>
-						<canvas class="sc-overlay sc-overlay-right" width="300" height="1"></canvas>
-					</div>
-				</div>
-				<div class="trace_timeline">
-					<p class="trace_signtxt trace_signtxt1"></p>
-					<div class="trace_datelist trace_datelist1">
-					<ol>
-						<li>
-							<p><span>2016年</span>12月02日</p>
-						</li>
-						<li>
-							<p><span>2017年</span>01月15日</p>
-						</li>
-						<li>
-							<p><span>2017年</span>02月08日</p>
-						</li>
-						<li>
-							<p><span>2017年</span>05月02日</p>
-						</li>
-						<li>
-							<p><span>2017年</span>06月15日</p>
-						</li>
-						<li>
-							<p><span>2017年</span>08月08日</p>
-						</li>
-					</ol>
-					</div>
-					<p class="trace_txtdetail trace_txtdetail1"></p>
-				</div>
-				<!--农场风光轮播结束-->
-			</dd>
-		</dl>
-	</div>
-	<!--荣誉-->
-	<div class="farm_honor">
-		<h2 class="title_honor">
-			<img src="../images/marketing/icon_honor.png"/>
-		</h2>
-		<div id="honor-phase" class="phase-row" data-title="Illustrations" data-coloroverlap="light">
-			<div id="honor-slider" class="sky-carousel sc-no-select">
-				<div class="sky-carousel-wrapper">
-					<ul class="sky-carousel-container">
-						<li>
-							<img src="../images/marketing/temp_honor1.jpg" alt="" class="sc-image">
-							<div class="sc-content">
-								<h2>图一</h2>
-							</div>
-						</li>
-						<li>
-							<img src="../images/marketing/temp_honor2.jpg" alt="" class="sc-image">
-							<div class="sc-content">
-								<h2>图二</h2>
-							</div>
-						</li>
-						<li>
-							<img src="../images/marketing/temp_honor3.jpg" alt="" class="sc-image">
-							<div class="sc-content">
-								<h2>图三</h2>
-							</div>
-						</li>
-					</ul>
-				</div>
-				<div class="sc-content-wrapper">
-					<div class="sc-content-container">
-						<div class="sc-content">
-							<h2>Thinker</h2>
-						</div>
-					</div>
-				</div>
-				<canvas class="sc-overlay sc-overlay-left" width="300" height="1"></canvas>
-				<canvas class="sc-overlay sc-overlay-right" width="300" height="1"></canvas>
-			</div>
-		</div>
-		<!--荣誉轮播结束-->
-		<div class="honor_signtxt"></div>
-	</div>
-	<!--底部信息-->
-	<div class="farm_nowsite">
-		<p class="txt_company"><img src="../images/marketing/icon_site.png" />北京延庆八达岭经济开发区</p>
-		<p class="txt_contact"><img src="../images/marketing/icon_people.png" />刘一 <span class="txt_line"></span><img src="../images/marketing/icon_phone.png" />1300138000</p>
-		<a class="hereto_link" href="javascript:;"></a>
-	</div>
-	<!--底部信息-->
-	<!--农场风光swipper-->
-	<!--<div class="swiper-container">
-		<div class="swiper-wrapper">
-			<div class="swiper-slide blue-slide">slider1</div>
-			<div class="swiper-slide red-slide">slider2</div>
-			<div class="swiper-slide orange-slide">slider3</div>
-		</div>
-	</div>-->
-	<!--农场风光swipper-->
-</div>
 
 
 <script type="text/javascript" src="../js/commons/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="../js/swiper/swiper-3.4.0.min.js"></script>
-<script type="text/javascript" src="../js/marketing/jquery.sky.carousel-1.0.2.min.js"></script>
-<script type="text/javascript" src="../js/marketing/Card.js"></script>
+<script type="text/javascript" src="../js/marketing/CardAddlist.js"></script>
 </body>
 </html>

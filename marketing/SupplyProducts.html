@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="initial-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
+<meta name="format-detection" content="telephone=no" />
+	<title>数字名片</title>
+	<script type="text/javascript">
+	var ResizeSize = function (){
+			var _html = document.documentElement;
+			var _width = _html.getBoundingClientRect().width;
+			//var _width = document.body.clientWidth;
+			if(_width>=640){
+				_width=640
+			}
+			var _scale = _width/6.4 +'px';
+			_html.style.fontSize = _scale;
+		}
+	ResizeSize();
+	window.onresize = function (){
+		ResizeSize();
+	}
+	</script>
+	<link type="text/css" rel="stylesheet" href="../style/bootstrap/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="../style/bootstrap/bootstrap-select.min.css">
+    <link type="text/css" rel="stylesheet" href="../style/bootstrap/bootstrap-datetimepicker.css">
+	<link type="text/css" rel="stylesheet" href="../style/commons/commons.css" />
+	<link type="text/css" rel="stylesheet" href="../style/marketing/SupplyProducts.css" />
+</head>
+<body class="supply_body">
+	<div class="supply_main">
+		<!--基地供应产品-->
+		<ul class="card_box" style="margin-bottom: 0;">
+			<li class="clear">
+				<img class="icon28" src="../images/marketing/icon_productname.png" />
+				<div class="con_right">
+					<p class="txt_name">产品名称</p>
+					<input class="txt_ipt" type="text" value="请填写" />
+				</div>
+			</li>
+			<li class="clear">
+				<img class="icon28" src="../images/marketing/icon_cropname.png" />
+				<div class="con_right">
+					<p class="txt_name">作物名称</p>
+					<p class="select_cropname" id="select_cropname" onclick="SelectCropnameFn()">请选择&nbsp;&gt;</p>
+				</div>
+			</li>
+			<li class="clear">
+				<img class="icon28" src="../images/marketing/icon_supplytime.png" />
+				<div class="con_right">
+					<p class="txt_name">供货时间</p>
+					<div class="fr">
+						<div class="input-append date form_datetime iStarTime" id="iStarTime" >
+				            <input size="26" type="text" value="" readonly />
+				            <span class="add-on"><i class="icon-th"></i></span>
+				        </div>
+				        <span class="txt_line">-</span>
+				        <div class="input-append date form_datetime iEndTime" id="iEndTime" >
+				            <input size="26" type="text" value="" readonly />
+				            <span class="add-on"><i class="icon-th"></i></span>
+				        </div>
+					</div>
+				</div>
+			</li>
+			<li class="clear">
+				<img class="icon28" src="../images/marketing/icon_productpic.png" />
+				<div class="con_right" style="border: 0;">
+					<p class="txt_name">产品图片</p>
+				</div>
+				<div class="file_dd clear">
+					<div class="upload">
+						<ul class="uploadProduct_list" id="uploadProduct_list">
+							
+						</ul>
+						<div class="file_block">
+							<div class="upload_pictures" id="container">
+								<div id="selectfiles" class="fileBtn" style="width: 85px">选择文件</div>
+								<!--上传图片的存储及请求事件-->
+								<div id="ossfile1"></div>
+								<a style="display: none" id="postfiles1" href="javascript:void(0);" class='btn' onclick="apply(18);"></a>
+								<a style="display: none" id="callback" href="javascript:void(0);" class='btn' onclick="callback();"></a>
+								<input type="hidden" id="commentFileUrl" name="commentFileUrl" />
+								<!--上传图片的存储及请求事件-->
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<!--产品追溯-->
+		<h3 class="trace_titleh3">产品追溯</h3>
+		<ul class="trace_cont_list">
+			<li class="t_item">
+				<div class="trace_cont_box">
+					<i class="btn_delete" onclick="DeleteProductTrace(this)"></i>
+					<dl class="clear">
+						<dt>追溯时间</dt>
+						<dd>
+							<input class="input_text" type="text" value="2017年1月3日" />
+						</dd>
+					</dl>
+					<dl class="clear">
+						<dt>追溯内容</dt>
+						<dd>
+							<input class="input_text" type="text" value="施肥" />
+						</dd>
+					</dl>
+					<dl class="clear">
+						<dt>追溯图片</dt>
+						<dd>
+							<div class="upload">
+								<ul class="uploadTrace_list" id="uploadTrace_list">
+									
+								</ul>
+								<div class="file_block">
+									<div class="upload_pictures" id="container">
+										<div id="selectfiles" class="fileBtn" style="width: 85px">选择文件</div>
+										<!--上传图片的存储及请求事件-->
+										<div id="ossfile1"></div>
+										<a style="display: none" id="postfiles1" href="javascript:void(0);" class='btn' onclick="apply(18);"></a>
+										<a style="display: none" id="callback" href="javascript:void(0);" class='btn' onclick="callbackTrace();"></a>
+										<input type="hidden" id="commentFileUrl" name="commentFileUrl" />
+										<!--上传图片的存储及请求事件-->
+									</div>
+								</div>
+							</div>
+						</dd>
+					</dl>
+				</div>
+			</li>
+			<li class="t_item">
+				<div class="trace_cont_box">
+					<i class="btn_delete" onclick="DeleteProductTrace(this)"></i>
+					<dl class="clear">
+						<dt>追溯时间</dt>
+						<dd>
+							<input class="input_text" type="text" value="2017年1月3日" />
+						</dd>
+					</dl>
+					<dl class="clear">
+						<dt>追溯内容</dt>
+						<dd>
+							<input class="input_text" type="text" value="施肥" />
+						</dd>
+					</dl>
+					<dl class="clear">
+						<dt>追溯图片</dt>
+						<dd>
+							
+						</dd>
+					</dl>
+				</div>
+			</li>
+		</ul>
+		<div class="newtrace_box">
+			<button class="btn_newtrace">新增产品追溯</button>
+		</div>
+		<!--生成我的数字名片-->
+		<div class="mycard_box">
+			<div class="btn_mycard">保存</div>
+		</div>
+	</div>
+	<!--主体结束-->
+	<!--实时预览板块-->
+	<div class="fixed_preview" id="fixed_preview">
+		<img src="../images/marketing/fixed_preview.png"/>
+	</div>
+	<div class="mark_w50"></div>
+	<div class="live_preview" id="live_preview">
+		<img class="icon_title" src="../images/marketing/icon_preview.png" />
+		<span class="close_view"></span>
+		<span class="view_screen view_small" onoff="small"></span>
+		<div class="preview_body">
+			<iframe frameborder="0" framespacing="0" width="100%" height="100%" scrolling="no" src="Card.html"></iframe>
+		</div>
+	</div>
+	<!--作物种类板块-->
+	<div class="crop_species_box" style="display: none;">
+		<ul class="species_list">
+			<li class="level1" onclick="SelectLevel1()">
+				<img class="icon56" src="../images/marketing/icon_vegetables.png" />蔬菜
+				<i class="arrow_rt"></i>
+			</li>
+			<li class="level1" onclick="SelectLevel1()">
+				<img class="icon56" src="../images/marketing/icon_fruit.png" />水果
+				<i class="arrow_rt"></i>
+			</li>
+			<li class="level1" onclick="SelectLevel1()">
+				<img class="icon56" src="../images/marketing/icon_food.png" />粮食作物
+				<i class="arrow_rt"></i>
+			</li>
+			<li class="level1" onclick="SelectLevel1()">
+				<img class="icon56" src="../images/marketing/icon_income.png" />经济作物
+				<i class="arrow_rt"></i>
+			</li>
+			<li class="level1" onclick="SelectLevel1()">
+				<img class="icon56" src="../images/marketing/icon_tea.png" />茶叶
+				<i class="arrow_rt"></i>
+			</li>
+			<li class="level1" onclick="SelectLevel1()">
+				<img class="icon56" src="../images/marketing/icon_plant.png" />绿化植物
+				<i class="arrow_rt"></i>
+			</li>
+			<li class="level1" onclick="SelectLevel1()">
+				<img class="icon56" src="../images/marketing/icon_herbal.png" />中草药
+				<i class="arrow_rt"></i>
+			</li>
+			<li class="level1" onclick="SelectLevel1()">
+				<img class="icon56" src="../images/marketing/icon_culture.png" />养殖
+				<i class="arrow_rt"></i>
+			</li>
+		</ul>
+	</div>
+	<!--作物搜索及按拼音排序-->
+	<div class="crop_sort_box" style="display: none;">
+		<div class="serach_box clear">
+			<div class="form_search">
+				<span class="os_iocn"></span>
+				<input type="text" value="搜索品种" />
+			</div>
+		</div>
+		<div id="letter" ></div>
+		<div class="sort_box">
+			<div class="sort_list" onclick="SelectLevel2(this)">
+				<div class="num_logo">
+					<img src="../images/marketing/temp_supply_crop.png" alt="">
+				</div>
+				<p class="num_name ellipsis">张三</p>
+				<p class="name_pinyin">zhang san</p>
+			</div>
+			<div class="sort_list" onclick="SelectLevel2(this)">
+				<div class="num_logo">
+					<img src="../images/marketing/temp_supply_crop.png" alt="">
+				</div>
+				<div class="num_name ellipsis">李四</div>
+				<p class="name_pinyin">zhang san</p>
+			</div>
+			<div class="sort_list" onclick="SelectLevel2(this)">
+				<div class="num_logo">
+					<img src="../images/marketing/temp_supply_crop.png" alt="">
+				</div>
+				<div class="num_name ellipsis">王五</div>
+				<p class="name_pinyin">zhang san</p>
+			</div>
+			<div class="sort_list" onclick="SelectLevel2(this)">
+				<div class="num_logo">
+					<img src="../images/marketing/temp_supply_crop.png" alt="">
+				</div>
+				<div class="num_name ellipsis">刘六</div>
+				<p class="name_pinyin">zhang san</p>
+			</div>
+			<div class="sort_list" onclick="SelectLevel2(this)">
+				<div class="num_logo">
+					<img src="../images/marketing/temp_supply_crop.png" alt="">
+				</div>
+				<div class="num_name ellipsis">刘六</div>
+				<p class="name_pinyin">zhang san</p>
+			</div>
+			<div class="sort_list" onclick="SelectLevel2(this)">
+				<div class="num_logo">
+					<img src="../images/marketing/temp_supply_crop.png" alt="">
+				</div>
+				<div class="num_name ellipsis">刘六</div>
+				<p class="name_pinyin">zhang san</p>
+			</div>
+			<div class="sort_list" onclick="SelectLevel2(this)">
+				<div class="num_logo">
+					<img src="../images/marketing/temp_supply_crop.png" alt="">
+				</div>
+				<div class="num_name ellipsis">刘六</div>
+				<p class="name_pinyin">zhang san</p>
+			</div>
+			<div class="sort_list" onclick="SelectLevel2(this)">
+				<div class="num_logo">
+					<img src="../images/marketing/temp_supply_crop.png" alt="">
+				</div>
+				<div class="num_name ellipsis">刘六</div>
+				<p class="name_pinyin">zhang san</p>
+			</div>
+			<div class="sort_list" onclick="SelectLevel2(this)">
+				<div class="num_logo">
+					<img src="../images/marketing/temp_supply_crop.png" alt="">
+				</div>
+				<div class="num_name ellipsis">莫九</div>
+				<p class="name_pinyin">zhang san</p>
+			</div>
+			<div class="sort_list" onclick="SelectLevel2(this)">
+				<div class="num_logo">
+					<img src="../images/marketing/temp_supply_crop.png" alt="">
+				</div>
+				<div class="num_name ellipsis">陈十</div>
+				<p class="name_pinyin">zhang san</p>
+			</div>
+			<div class="sort_list" onclick="SelectLevel2(this)">
+				<div class="num_logo">
+					<img src="../images/marketing/temp_supply_crop.png" alt="">
+				</div>
+				<div class="num_name ellipsis">a九</div>
+				<p class="name_pinyin">zhang san</p>
+			</div>
+		</div>
+		<div class="initials">
+			<ul>
+				<!--<li><img src="../images/marketing/068.png"></li>-->
+			</ul>
+		</div>
+	</div>
+	
+
+<script type="text/javascript" src="../js/commons/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap/bootstrap.min.js"></script>
+<scripttype="text/javascript" src="../js/bootstrap/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="../js/bootstrap/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="../js/marketing/jquery.charfirst.pinyin.js"></script>
+<script type="text/javascript" src="../js/marketing/sort.js"></script>
+<!--<script type="text/javascript" src="../js/oss_fileimg/lib/plupload-2.1.2/js/plupload.full.min.js"></script>-->
+<script type="text/javascript" src="../js/marketing/SupplyProducts.js"></script>
+<!--<script type="text/javascript" src="../js/oss_fileimg/CardPicUpload.js"></script>	-->
+<!--##   krpanoPicUpload.js是一定要放在最下面的      ##-->
+</body>
+</html>

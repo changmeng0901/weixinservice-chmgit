@@ -180,9 +180,9 @@ var uploader1 = new plupload.Uploader({
 	//展示上传文件列表的容器
 	container: document.getElementById('container'),
 	//flash文件地址
-	flash_swf_url : '../js/oss_fileimg/lib/plupload-2.1.2/js/Moxie.swf',
+	flash_swf_url : 'lib/plupload-2.1.2/js/Moxie.swf',
 	//silverlight文件地址
-	silverlight_xap_url : '../js/oss_fileimg/lib/plupload-2.1.2/js/Moxie.xap',
+	silverlight_xap_url : 'lib/plupload-2.1.2/js/Moxie.xap',
 	//上传服务器地址
     url : 'http://oss.aliyuncs.com',
     //选择文件扩展名的过滤器，每个过滤规则只有title和ext两项[{title:}]
