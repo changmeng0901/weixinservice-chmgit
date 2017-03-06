@@ -142,6 +142,7 @@ body {
 }
 .card_list dt{
 	display:table-cell; 
+	width: 2.26rem;
 	padding-right: 0.2rem;
 }
 .card_list dd{
