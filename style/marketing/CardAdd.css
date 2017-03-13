@@ -481,3 +481,104 @@ html,body {
 	width: 0.28rem;
 	height: 0.28rem;
 }
+
+/*添加基地荣誉样式*/
+.honor_filebtn,
+.h_filebtn{
+	display: block;
+	width: 1.26rem;
+	height: 1.26rem;
+}
+.honor_filebtn img,
+.h_filebtn img{
+	width: 100%;
+	height: 100%;
+}
+.HonorFileModal{
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 10;
+	display: none;
+	width: 100%;
+	height: 100%;
+	padding-top: 0.2rem;
+	box-sizing: border-box;
+	background: #f7f7f7;
+	overflow: auto;
+}
+.modal_box{
+	width: 6.0rem;
+	margin: 0 auto 0.2rem;
+	padding: 0.2rem 0.2rem 0.3rem;
+	border-radius: 0.1rem;
+	box-shadow: 0 0 5px #f1f1f1;
+	background-color: #fff;
+}
+.modal_box .w50{
+	float: left;
+	width: 50%;
+}
+.modal_box .title_name{
+	height: 0.46rem;
+	line-height: 0.46rem;
+	margin-bottom: 0.25rem;
+	font-size: 0.26rem;
+	color: #4c4c4c;
+}
+.modal_box .title_name img{
+	width: 0.3rem;
+	height: 0.3rem;
+	margin: 0.08rem 0.1rem 0 0;
+	vertical-align: top;
+}
+.modal_box .h_filebtn{
+	display: inline-block;
+	vertical-align: top;
+}
+.modal_box .h_filebtn .h_item{
+	
+}
+.modal_footer{
+	padding: 0.15rem 0.4rem;
+	border-top: 1px solid #f0f0f0;
+	background-color: #fcfcfc;
+}
+.modal_footer .sbtn{
+	width: 2.6rem;
+	height: 0.7rem;
+	line-height: 0.7rem;
+	border-radius: 0.1rem;
+	font-size: 0.3rem;
+	text-align: center;
+	color: #fff;
+}
+.modal_footer .btn_success{
+	background-color: #39c553;
+}
+.modal_footer .btn_default{
+	background-color: #f5f5f5;
+}
+.h_file_list{
+	display: inline-block;
+	vertical-align: top;
+}
+.h_file_list li{
+	position: relative;
+	float: left;
+	margin: 0 0.08rem 0.08rem 0;
+}
+.h_file_list .pic{
+	width: 1.26rem;
+	height: 1.26rem;
+}
+.h_file_list .h_close{
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 1;
+	width: 0.28rem;
+	height: 0.28rem;
+	background: url(../../images/marketing/btn_close28.png);
+	background-size: 100% 100%;
+}

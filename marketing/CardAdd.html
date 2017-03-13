@@ -112,24 +112,9 @@
 					<p class="txt_tip">（上传您的营业执照、公众号、企业荣誉、产品认证、产品检测图片）</p>
 				</dt>
 				<dd class="file_dd">
-					<div class="upload">
-						<ul class="uploadhonor_list" id="uploadhonor_list">
-							
-						</ul>
-						<div class="file_block">
-							<div class="upload_pictures" id="container">
-								<div id="selectfiles" class="fileBtn" style="width: 85px">选择文件</div>
-								<!--上传图片的存储及请求事件-->
-								<div id="ossfile1"></div>
-								<a style="display: none" id="postfiles1" href="javascript:void(0);" class='btn' onclick="apply(18);"></a>
-								<a style="display: none" id="callback" href="javascript:void(0);" class='btn' onclick="callbackHonor();"></a>
-								<input type="hidden" id="commentFileUrl" name="commentFileUrl" />
-								<!--上传图片的存储及请求事件-->
-							</div>
-							<p class="text_upload">图片标准：200x296（像素）</p>
-							<p class="text_upload">支持格式：jpg,png,jpeg,bmp,3gp</p>
-						</div>
-					</div>
+					<a class="honor_filebtn" onclick="HonorFileModal()" href="javascript:;">
+						<img src="../images/marketing/btn_file.jpg"/>
+					</a>
 				</dd>
 			</dl>
 		</div>
@@ -195,6 +180,55 @@
 		<span class="view_screen view_small" onoff="small"></span>
 		<div class="preview_body">
 			<iframe frameborder="0" framespacing="0" width="100%" height="100%" scrolling="no" src="Card.html"></iframe>
+		</div>
+	</div>
+	<!--添加基地荣誉模态框-->
+	<div class="HonorFileModal" id="HonorFileModal">
+		<div class="modal_box clear">
+			<div class="w50">
+				<h3 class="title_name"><img src="../images/marketing/icon_business_license.png" />营业执照</h3>
+				<div class="honor_filebtn">
+					<img src="../images/marketing/btn_file.jpg"/>
+				</div>
+			</div>
+			<div class="w50">
+				<h3 class="title_name"><img src="../images/marketing/icon_public.png" />公众号</h3>
+				<div class="honor_filebtn">
+					<img src="../images/marketing/btn_file.jpg"/>
+				</div>
+			</div>
+		</div>
+		<div class="modal_box">
+			<h3 class="title_name"><img src="../images/marketing/icon_enterprise_honor.png" />企业荣誉</h3>
+			<div class="honor_filebtn">
+				<img src="../images/marketing/btn_file.jpg"/>
+			</div>
+		</div>
+		<div class="modal_box">
+			<h3 class="title_name"><img src="../images/marketing/icon_product_certif2.png" />产品认证</h3>
+			<div class="honor_filebtn">
+				<img src="../images/marketing/btn_file.jpg"/>
+			</div>
+		</div>
+		<div class="modal_box">
+			<h3 class="title_name"><img src="../images/marketing/icon_product_test.png" />产品检测</h3>
+			<ul class="h_file_list clear">
+				<li class="sitem">
+					<i class="h_close" onclick="DeleteUploadImg(this)"></i>
+					<img class="pic" src="../images/marketing/temp_honor1.jpg"/>
+				</li>
+				<li class="sitem">
+					<i class="h_close" onclick="DeleteUploadImg(this)"></i>
+					<img class="pic" src="../images/marketing/temp_honor1.jpg"/>
+				</li>
+				<li class="h_filebtn">
+					<img src="../images/marketing/btn_file.jpg"/>
+				</li>
+			</ul>
+		</div>
+		<div class="modal_footer clear">
+			<a class="sbtn btn_success fl" href="javascript:;" onclick="HonorModalSubmit()">提&nbsp;交</a>
+			<a class="sbtn btn_default fr" href="javascript:;" onclick="HonorModalDefault()">取&nbsp;消</a>
 		</div>
 	</div>
 	
