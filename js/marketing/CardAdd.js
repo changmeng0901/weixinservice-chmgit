@@ -117,6 +117,20 @@ function callbackHonor() {
 };
 
 
+//添加基地荣誉
+function HonorFileModal(){
+	$('#HonorFileModal').show();
+}
+function HonorModalSubmit(){
+	//提交，则关闭
+	$('#HonorFileModal').hide();
+}
+function HonorModalDefault(){
+	//取消，则关闭
+	$('#HonorFileModal').hide();
+}
+
+
 
 
 

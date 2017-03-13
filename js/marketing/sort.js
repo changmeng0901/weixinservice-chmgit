@@ -55,7 +55,9 @@ Initials.find('ul').append('<li id="A">A</li><li id="B">B</li><li id="C">C</li><
 			var search_h = $('.serach_box').height()-2;
 			var crop_sort_box_h = $('.crop_sort_box').height();
 			//if(aTtlH3.eq(index).offset().top<scrollT && aTtlH3.eq(index+1).offset().top>scrollT){
-			if(aTtlH3.eq(index).offset().top<scrollT+search_h && aTtlH3.eq(index+1).offset().top>scrollT+search_h){
+			//if(aTtlH3.eq(index).offset().top<scrollT+search_h && aTtlH3.eq(index+1).offset().top>scrollT+search_h){
+			if(aTtlH3.eq(index).offset().top<scrollT+search_h && (index==$('.sort_letter').length-1 || aTtlH3.eq(index+1).offset().top>scrollT+search_h)){
+
 				//console.log(search_h)
 				var aa = aTtlH3.eq(index).attr('nindex');
 				$('.initials li').eq(aa).addClass('cur').siblings().removeClass('cur')
